@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GlobalTrade B2B — Cross-Border Supplier Portal & Interactive Demo</title>
+  <title>GlobalTrade — Cross-Border Supplier Portal & Interactive Demo</title>
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Lucide Icons -->
@@ -28,21 +28,40 @@
   </script>
   <style>
     .badge-tab { transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); }
-    .glassmorphism { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); }
     .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
     .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
   </style>
 </head>
 <body class="bg-[#F4F6F9] text-slate-800 font-sans antialiased min-h-screen flex flex-col">
 
+  <!-- ================= NOTIFY MODAL ================= -->
+  <div id="notifyModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4">
+    <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-200 animate-in fade-in zoom-in duration-200">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+        <h3 class="text-base font-extrabold text-slate-900">Notify</h3>
+        <button onclick="closeNotifyModal()" class="text-slate-400 hover:text-slate-600">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+      <div class="py-4 text-xs text-slate-600 leading-relaxed" id="notifyContent">
+        Product SKU successfully published to the global catalog with Tiered Pricing & Sample Request parameters.
+      </div>
+      <div class="pt-2 flex justify-end">
+        <button onclick="confirmNotifyModal()" class="px-5 py-2 bg-brand-600 hover:bg-brand-700 text-white text-xs font-bold rounded-xl transition">
+          OK
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- ================= TOP WIZARD PRESENTATION BAR ================= -->
-  <aside aria-label="Demo Presentation Controller" class="bg-slate-900 text-white border-b border-slate-800 px-4 py-3 sticky top-0 z-50 shadow-lg">
+  <aside aria-label="Demo Presentation Controller" class="bg-slate-900 text-white border-b border-slate-800 px-4 py-3 sticky top-0 z-40 shadow-lg">
     <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3">
       <div class="flex items-center gap-3">
         <span class="inline-flex items-center px-2.5 py-1 rounded text-xs font-bold bg-brand-600 text-white tracking-wider uppercase">
           Demo Presentation
         </span>
-        <span class="text-xs text-slate-300 font-medium hidden sm:inline" id="tourStepLabel">Step 1 of 5: Platform Overview</span>
+        <span class="text-xs text-slate-300 font-medium hidden sm:inline" id="tourStepLabel">Step 1 of 5: Platform Authentication</span>
       </div>
 
       <!-- Steps Controller -->
@@ -68,7 +87,7 @@
       <div class="flex items-center gap-2 text-xs">
         <span class="text-slate-400">Role:</span>
         <select id="roleSelect" onchange="changeRole(this.value)" class="bg-slate-800 border border-slate-700 text-white rounded px-2.5 py-1 text-xs focus:ring-1 focus:ring-brand-500 outline-none cursor-pointer">
-          <option value="supplier">🇹🇷 Turkey Shoes (Supplier)</option>
+          <option value="supplier">🇮🇳 Leather Manufactories Group (Supplier)</option>
           <option value="buyer">🇷🇺 EastImport LLC (Buyer)</option>
           <option value="moderator">🛡️ Platform Arbitrator</option>
         </select>
@@ -77,13 +96,12 @@
   </aside>
 
   <!-- ================= MAIN HEADER ================= -->
-  <header class="bg-white border-b border-slate-200 sticky top-[53px] z-40">
+  <header class="bg-white border-b border-slate-200 sticky top-[53px] z-30">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
       <div class="flex items-center gap-8">
         <a href="#" onclick="goToStep(3)" class="flex items-center gap-2 text-xl font-extrabold tracking-tight text-slate-900">
           <div class="w-8 h-8 rounded-lg bg-brand-600 flex items-center justify-center text-white font-bold text-lg shadow-sm">G</div>
           <span>Global<span class="text-brand-600">Trade</span></span>
-          <span class="text-[10px] font-semibold bg-slate-100 text-slate-600 px-2 py-0.5 rounded ml-1 border border-slate-200">B2B Core</span>
         </a>
 
         <!-- Main Nav (Only visible after auth/onboarding) -->
@@ -98,15 +116,15 @@
         <!-- Currency -->
         <select class="bg-slate-50 border border-slate-200 text-xs font-semibold text-slate-700 rounded-lg px-2.5 py-1.5 outline-none cursor-pointer">
           <option>USD ($)</option>
+          <option>INR (₹)</option>
           <option>CNY (¥)</option>
-          <option>TRY (₺)</option>
           <option>RUB (₽)</option>
         </select>
 
         <!-- Language Switcher -->
         <select class="bg-slate-50 border border-slate-200 text-xs font-semibold text-slate-700 rounded-lg px-2.5 py-1.5 outline-none cursor-pointer">
           <option>🇬🇧 English</option>
-          <option>🇹🇷 Türkçe</option>
+          <option>🇮🇳 हिन्दी</option>
           <option>🇨🇳 中文</option>
           <option>🇷🇺 Русский</option>
         </select>
@@ -114,14 +132,14 @@
         <!-- Profile / Status -->
         <div id="headerProfile" class="flex items-center gap-3 pl-2 border-l border-slate-200">
           <div class="w-8 h-8 rounded-full bg-emerald-100 text-emerald-800 font-bold text-xs flex items-center justify-center border border-emerald-300" title="Verified Exporter">
-            TS
+            LM
           </div>
           <div class="hidden sm:block text-left text-xs leading-tight">
             <div class="font-bold text-slate-900 flex items-center gap-1">
-              Turkey Shoes A.Ş.
+              Leather Manufactories Group
               <i data-lucide="shield-check" class="w-3.5 h-3.5 text-emerald-600 inline"></i>
             </div>
-            <span class="text-[11px] text-slate-500">VKN: 9847192841</span>
+            <span class="text-[11px] text-slate-500">GSTIN: 09AAACL1234M1Z5</span>
           </div>
         </div>
       </div>
@@ -131,39 +149,47 @@
   <!-- ================= BODY CONTENT CONTAINERS ================= -->
   <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
 
-    <!-- ================= STEP 1: AUTHENTICATION & CONSENTS ================= -->
+    <!-- ================= STEP 1: AUTHENTICATION (EMAIL + PASSWORD -> OTP) ================= -->
     <section id="stepContainer-1" class="max-w-xl mx-auto my-8 bg-white rounded-2xl border border-slate-200 p-8 shadow-sm">
       <div class="text-center mb-6">
         <div class="w-12 h-12 bg-brand-50 text-brand-600 rounded-2xl flex items-center justify-center mx-auto mb-3 shadow-sm border border-brand-100">
           <i data-lucide="lock" class="w-6 h-6"></i>
         </div>
         <h1 class="text-2xl font-extrabold text-slate-900">Sign in to GlobalTrade Portal</h1>
-        <!-- <p class="text-sm text-slate-500 mt-1">Cross-Border B2B Access with zero bank lock-in</p> -->
       </div>
 
-      <form id="authFormStep1" onsubmit="handleAuthSubmitStep1(event)" class="space-y-4">
+      <!-- Stage 1A: Email & Password -->
+      <form id="authFormStage1" onsubmit="handleAuthStage1(event)" class="space-y-4">
         <div>
           <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Corporate Email / ID</label>
-          <input type="email" value="export@turkeyshoes.com" required class="w-full px-3.5 py-2.5 rounded-lg border border-slate-200 text-sm font-medium focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none">
+          <input type="email" value="export@leathermanufactories.in" required class="w-full px-3.5 py-2.5 rounded-lg border border-slate-200 text-sm font-medium focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none">
+        </div>
+        <div>
+          <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Password</label>
+          <input type="password" value="TradeSecurity2025!" required class="w-full px-3.5 py-2.5 rounded-lg border border-slate-200 text-sm font-medium focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none">
         </div>
         
         <button type="submit" class="w-full py-3 px-4 bg-brand-600 hover:bg-brand-700 text-white font-bold rounded-xl shadow-md transition flex items-center justify-center gap-2">
-          <span>Continue with Email</span>
+          <span>Continue</span>
           <i data-lucide="arrow-right" class="w-4 h-4"></i>
         </button>
       </form>
 
-      <!-- OTP Field - Initially Hidden -->
-      <form id="authFormStep2" onsubmit="handleAuthSubmitStep2(event)" class="mt-4 space-y-4 hidden">
-        <div>
-          <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">One-Time Password (OTP)</label>
-          <input type="text" required class="w-full px-3.5 py-2.5 rounded-lg border border-slate-200 text-sm font-medium focus:ring-2 focus:ring-brand-500 outline-none text-center tracking-widest" maxlength="6">
+      <!-- Stage 1B: OTP Verification & Legal Consents -->
+      <form id="authFormStage2" onsubmit="handleAuthStage2(event)" class="space-y-4 hidden">
+        <div class="p-3 bg-blue-50 border border-blue-100 rounded-xl text-xs text-blue-900">
+          A 6-digit confirmation code was sent to <b>export@leathermanufactories.in</b>.
         </div>
 
-        <div class="p-3 bg-slate-50 rounded-lg border border-slate-100 text-xs text-slate-600">
+        <div>
+          <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">One-Time Password (OTP)</label>
+          <input type="text" value="739201" required maxlength="6" class="w-full px-3.5 py-2.5 rounded-lg border border-slate-200 text-sm font-bold text-center tracking-widest focus:ring-2 focus:ring-brand-500 outline-none">
+        </div>
+
+        <div class="p-3 bg-slate-50 rounded-lg border border-slate-100 space-y-2 text-xs text-slate-600">
           <label class="flex items-start gap-2 cursor-pointer">
             <input type="checkbox" checked required class="mt-0.5 rounded text-brand-600 focus:ring-brand-500">
-            <span>I accept the <b>Terms of Service</b> and <b>Cross-Border Data Transfer Policy</b> (GDPR / KVKK / PIPL compliant).</span>
+            <span>I accept the <b>Terms of Service</b> and <b>Cross-Border Data Transfer Policy</b> (GDPR / Digital Personal Data Protection Act).</span>
           </label>
           <label class="flex items-start gap-2 cursor-pointer">
             <input type="checkbox" checked required class="mt-0.5 rounded text-brand-600 focus:ring-brand-500">
@@ -171,12 +197,14 @@
           </label>
         </div>
 
-        <div class="flex items-center justify-between pt-2">
-            <button type="button" onclick="showAuthStep1()" class="text-xs font-semibold text-slate-500 hover:text-slate-800">← Back</button>
-            <button type="submit" class="w-full py-3 px-4 bg-brand-600 hover:bg-brand-700 text-white font-bold rounded-xl shadow-md transition flex items-center justify-center gap-2">
-              <span>Sign in</span>
-              <i data-lucide="arrow-right" class="w-4 h-4"></i>
-            </button>
+        <div class="flex items-center gap-3 pt-2">
+          <button type="button" onclick="showAuthStage1()" class="px-4 py-3 border border-slate-200 rounded-xl text-xs font-bold text-slate-600 hover:bg-slate-50 transition">
+            ← Back
+          </button>
+          <button type="submit" class="flex-1 py-3 px-4 bg-brand-600 hover:bg-brand-700 text-white font-bold rounded-xl shadow-md transition flex items-center justify-center gap-2">
+            <span>Sign in</span>
+            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </button>
         </div>
       </form>
     </section>
@@ -199,21 +227,21 @@
           <div>
             <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Country of Incorporation</label>
             <select id="kybCountry" onchange="updateTaxLabel(this.value)" class="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm font-medium bg-white outline-none">
-              <option value="TR">🇹🇷 Turkey</option>
+              <option value="IN" selected>🇮🇳 India</option>
               <option value="CN">🇨🇳 China</option>
-              <option value="IN">🇮🇳 India</option>
+              <option value="TR">🇹🇷 Turkey</option>
             </select>
           </div>
           <div>
             <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Company Legal Name</label>
-            <input type="text" id="kybName" value="Turkey Shoes Deri Sanayi ve Ticaret A.Ş." class="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm font-medium outline-none">
+            <input type="text" id="kybName" value="Leather Manufactories Group Pvt. Ltd." class="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm font-medium outline-none">
           </div>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label id="kybCodeLabel" class="block text-xs font-bold uppercase text-slate-600 mb-1">Tax Code (VKN / MERSIS)</label>
-            <input type="text" id="kybCode" value="9847192841" class="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm font-medium outline-none">
+            <label id="kybCodeLabel" class="block text-xs font-bold uppercase text-slate-600 mb-1">Tax Code (GSTIN / IEC)</label>
+            <input type="text" id="kybCode" value="09AAACL1234M1Z5" class="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm font-medium outline-none">
           </div>
           <div>
             <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Primary HS Code</label>
@@ -225,7 +253,7 @@
           <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Export Certificate / License Document</label>
           <div class="border-2 border-dashed border-slate-200 rounded-xl p-4 text-center hover:border-brand-500 transition cursor-pointer bg-slate-50">
             <i data-lucide="file-check" class="w-7 h-7 text-slate-400 mx-auto mb-1"></i>
-            <span class="text-xs font-medium text-slate-700">Official_Export_License_2025.pdf (1.8 MB)</span>
+            <span class="text-xs font-medium text-slate-700">India_DGFT_Export_License_2025.pdf (1.9 MB)</span>
             <span class="block text-[11px] text-emerald-600 font-semibold mt-0.5">✓ Uploaded & Ready for Registry Match</span>
           </div>
         </div>
@@ -240,7 +268,7 @@
       </form>
     </section>
 
-    <!-- ================= STEP 3: ORDERS DASHBOARD (ALL TABS POPULATED) ================= -->
+    <!-- ================= STEP 3: ORDERS DASHBOARD ================= -->
     <section id="stepContainer-3" class="hidden space-y-6">
 
       <!-- Supplier Stats Header -->
@@ -250,7 +278,7 @@
             <h2 class="text-xl font-bold text-slate-900">Orders & Inquiries Hub</h2>
             <span class="px-2 py-0.5 rounded text-xs font-bold bg-emerald-100 text-emerald-800 border border-emerald-200">Verified Supplier 🛡️</span>
           </div>
-          <p class="text-xs text-slate-500 mt-0.5">Manage RFQs, active shipments, smart contracts and dispute arbitrations</p>
+          <p class="text-xs text-slate-500 mt-0.5">Leather Manufactories Group • Manage RFQs, active shipments, smart contracts and dispute arbitrations</p>
         </div>
         <div class="flex items-center gap-3">
           <button onclick="goToStep(4)" class="px-4 py-2 bg-brand-600 hover:bg-brand-700 text-white text-xs font-bold rounded-xl shadow transition flex items-center gap-1.5">
@@ -285,17 +313,15 @@
       </nav>
 
       <!-- Orders List Container -->
-      <div id="ordersList" class="space-y-3">
-        <!-- Javascript will populate orders here based on selected tab -->
-      </div>
+      <div id="ordersList" class="space-y-3"></div>
     </section>
 
-    <!-- ================= STEP 4: ADD / EDIT PRODUCT CARD (FULL SPECS) ================= -->
+    <!-- ================= STEP 4: ADD / EDIT PRODUCT CARD ================= -->
     <section id="stepContainer-4" class="hidden max-w-3xl mx-auto my-4 bg-white rounded-2xl border border-slate-200 p-8 shadow-sm">
       <div class="flex items-center justify-between pb-4 border-b border-slate-100 mb-6">
         <div>
           <span class="text-xs font-bold text-brand-600 uppercase tracking-wider">Step 4 / Product Catalog Specification</span>
-          <h2 class="text-xl font-bold text-slate-900 mt-0.5">Publish New B2B SKU</h2>
+          <h2 class="text-xl font-bold text-slate-900 mt-0.5">Publish New SKU</h2>
         </div>
         <button onclick="goToStep(3)" class="text-xs font-semibold text-slate-500 hover:text-slate-800">✕ Cancel</button>
       </div>
@@ -307,10 +333,10 @@
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div class="sm:col-span-2">
               <label class="block text-xs font-bold text-slate-700 mb-1">Product Title</label>
-              <input type="text" id="prodTitle" value="Genuine Leather Women Classic Pumps Elegance 2025" required class="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm font-medium outline-none">
+              <input type="text" id="prodTitle" value="Handmade Genuine Leather Classic Derby Shoes" required class="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm font-medium outline-none">
             </div>
             <div>
-              <label class="block text-xs font-bold text-slate-700 mb-1">HS Code (ТН ВЭД)</label>
+              <label class="block text-xs font-bold text-slate-700 mb-1">HS Code</label>
               <input type="text" id="prodHS" value="6403.59.99" required class="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm font-medium outline-none">
             </div>
           </div>
@@ -345,450 +371,9 @@
                 <input type="checkbox" checked class="rounded text-brand-600">
                 <span class="text-xs font-bold text-slate-800">Sample Ordering Available</span>
               </label>
-              <div class="text-[11px] text-slate-500">Sample Price: <b>$45.00 / pair</b> (Express DHL/FedEx excluded). Dispatched in 3 working days.</div>
+              <div class="text-[11px] text-slate-500">Sample Price: <b>$45.00 / pair</b> (Express DHL/FedEx). Dispatched in 3 working days.</div>
             </div>
 
             <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
               <label class="block text-xs font-bold text-slate-700">Default Incoterms & Port</label>
-              <div class="text-xs font-semibold text-slate-800">FOB Istanbul Terminal / EXW Ankara</div>
-              <div class="text-[11px] text-slate-500">Production Lead Time: <b>25 Calendar Days</b></div>
-            </div>
-          </div>
-
-          <div class="grid grid-cols-3 gap-3">
-            <div>
-              <label class="block text-[11px] font-bold text-slate-600 mb-1">Master Box CBM</label>
-              <input type="text" value="0.085 m³ (12 pairs)" class="w-full px-3 py-1.5 border border-slate-200 rounded-lg text-xs font-semibold outline-none bg-slate-50">
-            </div>
-            <div>
-              <label class="block text-[11px] font-bold text-slate-600 mb-1">Gross Weight / Box</label>
-              <input type="text" value="11.4 kg" class="w-full px-3 py-1.5 border border-slate-200 rounded-lg text-xs font-semibold outline-none bg-slate-50">
-            </div>
-            <div>
-              <label class="block text-[11px] font-bold text-slate-600 mb-1">Pallet Fit</label>
-              <input type="text" value="24 Boxes / Pallet" class="w-full px-3 py-1.5 border border-slate-200 rounded-lg text-xs font-semibold outline-none bg-slate-50">
-            </div>
-          </div>
-        </div>
-
-        <div class="pt-4 flex items-center justify-between border-t border-slate-100">
-          <button type="button" onclick="goToStep(3)" class="text-xs font-semibold text-slate-500 hover:text-slate-800">← Back</button>
-          <button type="submit" class="py-2.5 px-6 bg-brand-600 hover:bg-brand-700 text-white font-bold rounded-xl shadow-md transition text-sm">
-            Save SKU & Publish to Catalog
-          </button>
-        </div>
-      </form>
-    </section>
-
-    <!-- ================= STEP 5: ACTIVE DEAL ROOM & ESCROW ================= -->
-    <section id="stepContainer-5" class="hidden space-y-6">
-      
-      <!-- Deal Header -->
-      <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-        <div>
-          <div class="flex items-center gap-3">
-            <span class="px-2.5 py-1 bg-blue-100 text-blue-800 text-xs font-bold rounded-lg">Deal #46560</span>
-            <h2 class="text-xl font-bold text-slate-900">Contract Negotiation & E-Sign</h2>
-            <span class="px-2 py-0.5 bg-amber-100 text-amber-800 text-xs font-semibold rounded">30% Escrow Hold</span>
-          </div>
-          <p class="text-xs text-slate-500 mt-1">
-            Buyer: <b class="text-slate-700">Buyer ID #RU-7704 (Verified Importer)</b> | Basis: <b class="text-slate-700">FOB Port of Istanbul</b>
-          </p>
-        </div>
-
-        <div class="flex items-center gap-2">
-          <button onclick="triggerDownloadPI()" class="px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold rounded-xl border border-slate-200 transition">
-            <i data-lucide="download" class="w-4 h-4"></i>
-            <span>Download Proforma Invoice (PI)</span>
-          </button>
-          <button onclick="signDealAction()" id="esignBtn" class="px-4 py-2 bg-brand-600 hover:bg-brand-700 text-white text-xs font-bold rounded-xl shadow transition flex items-center gap-1.5">
-            <i data-lucide="file-signature" class="w-4 h-4"></i>
-            <span>Sign Smart Contract (E-Sign)</span>
-          </button>
-        </div>
-      </div>
-
-      <!-- 2-Columns: Structured Deal Terms vs Anti-Fraud Live Chat -->
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-        
-        <!-- Left 7 Cols: Structured Terms -->
-        <div class="lg:col-span-7 bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-6">
-          <h3 class="text-sm font-extrabold uppercase tracking-wider text-slate-700 flex items-center justify-between">
-            <span>Agreed Commercial Terms</span>
-            <span class="text-xs font-normal text-emerald-600 font-semibold">Ready for E-Sign</span>
-          </h3>
-
-          <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 p-4 bg-slate-50 rounded-xl border border-slate-100 text-center">
-            <div>
-              <span class="text-[11px] text-slate-500 block">Total Volume</span>
-              <span class="text-base font-extrabold text-slate-900">12,000 pairs</span>
-            </div>
-            <div>
-              <span class="text-[11px] text-slate-500 block">Unit FOB Price</span>
-              <span class="text-base font-extrabold text-brand-600">$18.50</span>
-            </div>
-            <div>
-              <span class="text-[11px] text-slate-500 block">Total Amount</span>
-              <span class="text-base font-extrabold text-slate-900">$222,000</span>
-            </div>
-            <div>
-              <span class="text-[11px] text-slate-500 block">Lead Time</span>
-              <span class="text-base font-extrabold text-slate-900">25 Days</span>
-            </div>
-          </div>
-
-          <!-- Milestones & Payment Schedule -->
-          <div class="space-y-3">
-            <h4 class="text-xs font-bold text-slate-700 uppercase">Payment Schedule & Escrow Protection</h4>
-            
-            <div class="flex items-center justify-between p-3.5 bg-emerald-50 border border-emerald-200 rounded-xl text-xs">
-              <div class="flex items-center gap-3">
-                <i data-lucide="shield-alert" class="w-5 h-5 text-emerald-600"></i>
-                <div>
-                  <span class="font-bold text-emerald-900">30% Advance Escrow Deposit ($66,600)</span>
-                  <p class="text-[11px] text-emerald-700">Secured on platform account. Released when production commences.</p>
-                </div>
-              </div>
-              <span class="px-2 py-1 bg-emerald-200 text-emerald-900 font-bold rounded">Secured</span>
-            </div>
-
-            <div class="flex items-center justify-between p-3.5 bg-slate-50 border border-slate-200 rounded-xl text-xs">
-              <div class="flex items-center gap-3">
-                <i data-lucide="clock" class="w-5 h-5 text-slate-400"></i>
-                <div>
-                  <span class="font-bold text-slate-800">70% Balance ($155,400) upon Bill of Lading (B/L)</span>
-                  <p class="text-[11px] text-slate-500">Triggered upon digital customs clearance and B/L upload.</p>
-                </div>
-              </div>
-              <span class="px-2 py-1 bg-slate-200 text-slate-700 font-semibold rounded">Pending Shipment</span>
-            </div>
-          </div>
-
-          <!-- E-Sign Status Box -->
-          <div id="esignStatusBox" class="p-4 bg-slate-50 border border-slate-200 rounded-xl text-xs space-y-2">
-            <div class="flex items-center justify-between">
-              <span class="font-bold text-slate-700">Digital Signatures Log:</span>
-              <span id="esignBadge" class="text-amber-600 font-semibold">1/2 Signatures Completed</span>
-            </div>
-            <div class="space-y-1 text-[11px] text-slate-600">
-              <div class="flex items-center justify-between">
-                <span>Buyer (EastImport LLC): <b class="text-emerald-600">Signed via GOST Key (2025-05-10 14:22)</b></span>
-                <span>✓</span>
-              </div>
-              <div class="flex items-center justify-between">
-                <span>Supplier (Turkey Shoes A.Ş.): <b id="supplierSignState" class="text-amber-600">Awaiting Signature</b></span>
-                <span id="supplierSignCheck">⏳</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Right 5 Cols: Secure Chat with Anti-Circumvention -->
-        <div class="lg:col-span-5 bg-white border border-slate-200 rounded-2xl p-5 shadow-sm flex flex-col h-[520px]">
-          <div class="pb-3 border-b border-slate-100 flex items-center justify-between">
-            <div class="flex items-center gap-2">
-              <div class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping"></div>
-              <span class="text-xs font-bold text-slate-900">Encrypted Deal Chat</span>
-            </div>
-            <span class="text-[10px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-semibold">Auto-Translate: EN ↔ RU</span>
-          </div>
-
-          <!-- Messages -->
-          <div id="chatMessages" class="flex-1 overflow-y-auto py-3 space-y-3 custom-scrollbar text-xs">
-            <div class="bg-slate-100 text-slate-800 p-3 rounded-xl max-w-[85%] space-y-1">
-              <span class="text-[10px] font-bold text-slate-500 block">Buyer ID #RU-7704</span>
-              <p>We accept FOB Istanbul terms at $18.50 for 12,000 units. Please sign the contract so escrow deposit can be locked.</p>
-              <span class="text-[9px] text-slate-400 block text-right">10:45 AM</span>
-            </div>
-
-            <div class="bg-brand-50 text-brand-900 p-3 rounded-xl max-w-[85%] ml-auto space-y-1 border border-brand-100">
-              <span class="text-[10px] font-bold text-brand-700 block">Turkey Shoes (You)</span>
-              <p>Production line is booked for May 20th. Sample batch passed lab tests.</p>
-              <span class="text-[9px] text-brand-400 block text-right">10:48 AM</span>
-            </div>
-
-            <!-- Anti-Fraud Warning simulation -->
-            <div class="p-2.5 bg-amber-50 rounded-lg border border-amber-200 text-[11px] text-amber-800 flex items-start gap-2">
-              <i data-lucide="shield-alert" class="w-4 h-4 text-amber-600 shrink-0 mt-0.5"></i>
-              <span><b>Privacy Guard:</b> Direct phone numbers, emails, and telegram handles are masked to guarantee escrow protection.</span>
-            </div>
-          </div>
-
-          <!-- Chat Input -->
-          <form onsubmit="handleSendMessage(event)" class="pt-3 border-t border-slate-100 flex items-center gap-2">
-            <input type="text" id="chatInput" placeholder="Type message (e.g. will ship via Maersk)..." class="flex-1 px-3 py-2 border border-slate-200 rounded-lg text-xs outline-none focus:ring-1 focus:ring-brand-500">
-            <button type="submit" class="p-2 bg-brand-600 hover:bg-brand-700 text-white rounded-lg transition">
-              <i data-lucide="send" class="w-4 h-4"></i>
-            </button>
-          </form>
-        </div>
-
-      </div>
-    </section>
-
-  </main>
-
-  <!-- ================= FOOTER ================= -->
-  <footer class="bg-white border-t border-slate-200 py-4 mt-auto">
-    <div class="max-w-7xl mx-auto px-4 text-center text-xs text-slate-500">
-      GlobalTrade Portal • Cross-Border Target 2.0 Architectural Prototype • Ready for GitHub Pages
-    </div>
-  </footer>
-
-  <!-- ================= JAVASCRIPT LOGIC ================= -->
-  <script>
-    // --- Sample Database for all Tabs ---
-    const ordersDB = {
-      review: [
-        { id: "RFQ-46578", title: "Women Leather Boots Autumn Collection", qty: "12,000 pairs", est: "$120,000", buyer: "Buyer #RU-7704", date: "2025-05-11", status: "RFQ Received", action: "Review & Quote" },
-        { id: "RFQ-46582", title: "Handcrafted Leather Tote Bags", qty: "3,000 pcs", est: "$45,000", buyer: "Buyer #RU-4190", date: "2025-05-10", status: "Sample Requested", action: "Accept Sample Order" }
-      ],
-      active: [
-        { id: "DEAL-46560", title: "Women Classic Pumps Elegance 2025", qty: "12,000 pairs", est: "$222,000", buyer: "Buyer #RU-7704", date: "2025-05-09", status: "Pending E-Sign & Escrow", action: "Open Deal Room" },
-        { id: "DEAL-46555", title: "Men Oxford Leather Shoes", qty: "5,000 pairs", est: "$115,000", buyer: "Buyer #RU-3312", date: "2025-05-08", status: "Incoterms FOB Negotiation", action: "Open Deal Room" }
-      ],
-      escrow: [
-        { id: "ORD-46510", title: "Children Athletic Sneakers Batch A", qty: "8,000 pairs", est: "$96,000", buyer: "Buyer #RU-1092", date: "2025-05-01", status: "30% Escrow Funded • In Production", action: "Upload Dispatch B/L" },
-        { id: "ORD-46499", title: "Orthopedic Insoles Bulk", qty: "20,000 pairs", est: "$38,000", buyer: "Buyer #RU-8821", date: "2025-04-28", status: "Customs Clearance Istanbul", action: "View Customs Dec" }
-      ],
-      completed: [
-        { id: "ORD-45990", title: "Winter Boots Fur Lined", qty: "15,000 pairs", est: "$310,000", buyer: "Buyer #RU-7704", date: "2025-03-15", status: "Delivered & Funds Released", action: "View Feedback (5.0 ★)" },
-        { id: "ORD-45812", title: "Casual Slip-On Loafers", qty: "6,000 pairs", est: "$84,000", buyer: "Buyer #RU-2005", date: "2025-02-20", status: "Delivered & Funds Released", action: "Repeat Deal" }
-      ],
-      dispute: [
-        { id: "DISP-46412", title: "Packaging Standard Specification Claim", qty: "4,000 pairs", est: "$62,000", buyer: "Buyer #RU-5519", date: "2025-05-02", status: "Under Platform Arbitration", action: "Join Arbitrator Room" }
-      ]
-    };
-
-    let currentStep = 1;
-    let currentTab = 'review';
-
-    function init() {
-      lucide.createIcons();
-      filterOrders('review');
-      // Initially show only Step 1
-      goToStep(1);
-    }
-
-    // --- Auth Form Steps ---
-    function showAuthStep1() {
-      document.getElementById('authFormStep1').classList.remove('hidden');
-      document.getElementById('authFormStep2').classList.add('hidden');
-    }
-    function showAuthStep2() {
-      document.getElementById('authFormStep1').classList.add('hidden');
-      document.getElementById('authFormStep2').classList.remove('hidden');
-    }
-    function handleAuthSubmitStep1(e) {
-      e.preventDefault();
-      showAuthStep2();
-    }
-    function handleAuthSubmitStep2(e) {
-      e.preventDefault();
-      goToStep(2); // Proceed to Step 2 after OTP and consents
-    }
-
-    // Wizard Step Controller
-    function goToStep(step) {
-      currentStep = step;
-      
-      // Update wizard nav styling
-      for (let i = 1; i <= 5; i++) {
-        const btn = document.getElementById(`stepBtn-${i}`);
-        const container = document.getElementById(`stepContainer-${i}`);
-        
-        if (i === step) {
-          btn.className = "px-3 py-1.5 rounded-lg text-xs font-semibold bg-brand-600 text-white transition flex items-center gap-1.5 shadow-sm";
-          container.classList.remove('hidden');
-        } else {
-          btn.className = "px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 hover:bg-slate-800 transition flex items-center gap-1.5";
-          container.classList.add('hidden');
-        }
-      }
-
-      // Step description label
-      const labels = {
-        1: "Step 1 of 5: Platform Authentication & Legal Consents",
-        2: "Step 2 of 5: Fast KYB Business Registry Verification",
-        3: "Step 3 of 5: Orders & Inquiries Hub (All Tabs Active)",
-        4: "Step 4 of 5: Multi-Tier Product Creation & Logistics Specs",
-        5: "Step 5 of 5: Deal Room, Smart Contract & Escrow"
-      };
-      document.getElementById('tourStepLabel').innerText = labels[step];
-
-      // Show/Hide top nav links
-      if (step >= 3) {
-        document.getElementById('topNavLinks').classList.remove('hidden');
-      } else {
-         document.getElementById('topNavLinks').classList.add('hidden');
-      }
-
-      lucide.createIcons();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    // Step 2 Form
-    function handleKYBSubmit(e) {
-      e.preventDefault();
-      goToStep(3);
-    }
-
-    // Dynamic KYB Country Form Change
-    function updateTaxLabel(country) {
-      const codeLabel = document.getElementById('kybCodeLabel');
-      const codeInput = document.getElementById('kybCode');
-      const nameInput = document.getElementById('kybName');
-
-      if (country === 'CN') {
-        codeLabel.innerText = "Tax Code (USCC - 18 digits)";
-        codeInput.value = "91330100MA28XXXXXX";
-        nameInput.value = "Zhejiang Footwear Export Co., Ltd.";
-      } else if (country === 'IN') {
-        codeLabel.innerText = "Tax Code (GSTIN / IEC)";
-        codeInput.value = "07AAAAA0000A1Z5";
-        nameInput.value = "Mumbai Leather Crafts Private Limited";
-      } else {
-        codeLabel.innerText = "Tax Code (VKN / MERSIS)";
-        codeInput.value = "9847192841";
-        nameInput.value = "Turkey Shoes Deri Sanayi ve Ticaret A.Ş.";
-      }
-    }
-
-    // Filter Orders Tab
-    function filterOrders(tabKey) {
-      currentTab = tabKey;
-      
-      const tabKeys = ['review', 'active', 'escrow', 'completed', 'dispute'];
-      tabKeys.forEach(key => {
-        const btn = document.getElementById(`orderTab-${key}`);
-        if (key === tabKey) {
-          btn.className = "badge-tab px-4 py-2 rounded-xl text-xs font-bold bg-slate-900 text-white flex items-center gap-2 shadow-sm shrink-0";
-        } else {
-          btn.className = "badge-tab px-4 py-2 rounded-xl text-xs font-semibold bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 flex items-center gap-2 shrink-0";
-        }
-      });
-
-      const listContainer = document.getElementById('ordersList');
-      const data = ordersDB[tabKey] || [];
-
-      if (data.length === 0) {
-        listContainer.innerHTML = `<div class="p-8 text-center text-xs text-slate-400 bg-white rounded-xl border border-slate-200">No orders currently in this status.</div>`;
-        return;
-      }
-
-      listContainer.innerHTML = data.map(item => `
-        <div class="bg-white border border-slate-200 rounded-xl p-4 hover:border-slate-300 transition flex flex-col md:flex-row items-start md:items-center justify-between gap-4 shadow-sm">
-          <div class="space-y-1">
-            <div class="flex items-center gap-2">
-              <span class="font-mono text-xs font-bold text-brand-600 bg-brand-50 px-2 py-0.5 rounded">${item.id}</span>
-              <h3 class="text-sm font-bold text-slate-900">${item.title}</h3>
-            </div>
-            <div class="flex items-center gap-4 text-xs text-slate-500">
-              <span>Qty: <b class="text-slate-800">${item.qty}</b></span>
-              <span>Est. Value: <b class="text-slate-800">${item.est}</b></span>
-              <span>${item.buyer}</span>
-              <span>Date: ${item.date}</span>
-            </div>
-          </div>
-
-          <div class="flex items-center gap-3 w-full md:w-auto justify-between md:justify-end">
-            <span class="text-xs font-semibold px-2.5 py-1 rounded-full ${
-              tabKey === 'review' ? 'bg-amber-100 text-amber-800' :
-              tabKey === 'active' ? 'bg-blue-100 text-blue-800' :
-              tabKey === 'escrow' ? 'bg-purple-100 text-purple-800' :
-              tabKey === 'dispute' ? 'bg-red-100 text-red-800' : 'bg-emerald-100 text-emerald-800'
-            }">${item.status}</span>
-
-            <button onclick="goToStep(5)" class="px-3.5 py-1.5 bg-slate-900 hover:bg-brand-600 text-white text-xs font-bold rounded-lg transition">
-              ${item.action} →
-            </button>
-          </div>
-        </div>
-      `).join('');
-
-      lucide.createIcons();
-    }
-
-    // Step 4 Product Form
-    function handleProductSubmit(e) {
-      e.preventDefault();
-      alert("Product published successfully to Target 2.0 Global Catalog with Tiered Pricing & Sample Order policy!");
-      goToStep(3);
-    }
-
-    // Step 5 E-Sign Action
-    function signDealAction() {
-      const btn = document.getElementById('esignBtn');
-      const state = document.getElementById('supplierSignState');
-      const check = document.getElementById('supplierSignCheck');
-      const badge = document.getElementById('esignBadge');
-
-      btn.className = "px-4 py-2 bg-emerald-600 text-white text-xs font-bold rounded-xl shadow transition flex items-center gap-1.5 cursor-default";
-      btn.innerHTML = `<i data-lucide="check-check" class="w-4 h-4"></i><span>Contract Fully Signed</span>`;
-      
-      state.innerHTML = "Signed via International E-Sign (Done)";
-      state.className = "text-emerald-600 font-bold";
-      check.innerHTML = "✓";
-      badge.innerHTML = "2/2 Both Parties Signed (Active Escrow Locked)";
-      badge.className = "text-emerald-600 font-bold";
-
-      lucide.createIcons();
-      alert("Smart Contract E-Signed by Supplier! 30% Escrow deposit is now officially locked in the Platform Escrow Vault.");
-    }
-
-    function triggerDownloadPI() {
-      alert("Downloading auto-generated Proforma Invoice PI-46560.pdf with customs HS codes and seller banking details...");
-    }
-
-    // Secure Chat with Masking
-    function handleSendMessage(e) {
-      e.preventDefault();
-      const input = document.getElementById('chatInput');
-      let text = input.value.trim();
-      if (!text) return;
-
-      // Privacy guard regex simulation for phone numbers & emails
-      const phoneRegex = /\+?[0-9\s-]{8,}/g;
-      const emailRegex = /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/g;
-
-      text = text.replace(phoneRegex, "[🔒 Phone masked by Privacy Guard]");
-      text = text.replace(emailRegex, "[🔒 Email masked by Privacy Guard]");
-
-      const container = document.getElementById('chatMessages');
-      const msgDiv = document.createElement('div');
-      msgDiv.className = "bg-brand-50 text-brand-900 p-3 rounded-xl max-w-[85%] ml-auto space-y-1 border border-brand-100 text-xs";
-      msgDiv.innerHTML = `
-        <span class="text-[10px] font-bold text-brand-700 block">Turkey Shoes (You)</span>
-        <p>${text}</p>
-        <span class="text-[9px] text-brand-400 block text-right">Just now</span>
-      `;
-      container.appendChild(msgDiv);
-      input.value = "";
-      container.scrollTop = container.scrollHeight;
-    }
-
-    // Role Switcher Simulator
-    function changeRole(role) {
-      if (role === 'moderator') {
-        alert("Switched to Arbitrator / Moderator View: You can now review disputes, unlock held escrow funds, and moderate chat participants.");
-        goToStep(3);
-        filterOrders('dispute');
-      } else if (role === 'buyer') {
-        alert("Switched to Buyer Mode: View catalog from Russian Importer perspective.");
-        goToStep(3);
-      } else {
-        goToStep(3); // Back to Supplier view
-      }
-    }
-
-    // Main header tab switch
-    function switchMainTab(tab) {
-      if (tab === 'orders') goToStep(3);
-      if (tab === 'catalog') goToStep(4);
-      if (tab === 'company') goToStep(2);
-    }
-
-    window.onload = init;
-  </script>
-</body>
-</html>
+              <div class="text-xs font-semibold text-slate-800">FOB Port of Nhava
