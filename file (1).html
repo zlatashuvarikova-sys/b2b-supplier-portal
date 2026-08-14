@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GlobalTrade B2B — Cross-Border Supplier Portal & Interactive Demo</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Google Fonts Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'sans-serif'] },
+          colors: {
+            brand: { 50: '#fef2f2', 100: '#fee2e2', 500: '#ef4444', 600: '#dc2626', 700: '#b91c1c' },
+            slate: { 850: '#151f32' }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .badge-tab { transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); }
+    .glassmorphism { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); }
+    .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+  </style>
+</head>
+<body class="bg-[#F4F6F9] text-slate-800 font-sans antialiased min-h-screen flex flex-col">
+
+  <!-- ================= TOP WIZARD PRESENTATION BAR ================= -->
+  <aside aria-label="Demo Presentation Controller" class="bg-slate-900 text-white border-b border-slate-800 px-4 py-3 sticky top-0 z-50 shadow-lg">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3">
+      <div class="flex items-center gap-3">
+        <span class="inline-flex items-center px-2.5 py-1 rounded text-xs font-bold bg-brand-600 text-white tracking-wider uppercase">
+          Demo Presentation
+        </span>
+        <span class="text-xs text-slate-300 font-medium hidden sm:inline" id="tourStepLabel">Step 1 of 5: Platform Overview</span>
+      </div>
+
+      <!-- Steps Controller -->
+      <nav aria-label="Step Navigation" class="flex items-center gap-1.5 overflow-x-auto max-w-full pb-1 md:pb-0">
+        <button onclick="goToStep(1)" id="stepBtn-1" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-brand-600 text-white transition flex items-center gap-1.5 shadow-sm">
+          <span>1. Auth</span>
+        </button>
+        <button onclick="goToStep(2)" id="stepBtn-2" class="px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 hover:bg-slate-800 transition flex items-center gap-1.5">
+          <span>2. KYB Onboarding</span>
+        </button>
+        <button onclick="goToStep(3)" id="stepBtn-3" class="px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 hover:bg-slate-800 transition flex items-center gap-1.5">
+          <span>3. Orders Hub</span>
+        </button>
+        <button onclick="goToStep(4)" id="stepBtn-4" class="px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 hover:bg-slate-800 transition flex items-center gap-1.5">
+          <span>4. Add Product</span>
+        </button>
+        <button onclick="goToStep(5)" id="stepBtn-5" class="px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 hover:bg-slate-800 transition flex items-center gap-1.5">
+          <span>5. Deal & Escrow</span>
+        </button>
+      </nav>
+
+      <!-- Quick Role Switcher -->
+      <div class="flex items-center gap-2 text-xs">
+        <span class="text-slate-400">Role:</span>
+        <select id="roleSelect" onchange="changeRole(this.value)" class="bg-slate-800 border border-slate-700 text-white rounded px-2.5 py-1 text-xs focus:ring-1 focus:ring-brand-500 outline-none cursor-pointer">
+          <option value="supplier">🇹🇷 Turkey Shoes (Supplier)</option>
+          <option value="buyer">🇷🇺 EastImport LLC (Buyer)</option>
+          <option value="moderator">🛡️ Platform Arbitrator</option>
+        </select>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ================= MAIN HEADER ================= -->
+  <header class="bg-white border-b border-slate-200 sticky top-[53px] z-40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-8">
+        <a href="#" onclick="goToStep(3)" class="flex items-center gap-2 text-xl font-extrabold tracking-tight text-slate-900">
+          <div class="w-8 h-8 rounded-lg bg-brand-600 flex items-center justify-center text-white font-bold text-lg shadow-sm">G</div>
+          <span>Global<span class="text-brand-600">Trade</span></span>
+          <span class="text-[10px] font-semibold bg-slate-100 text-slate-600 px-2 py-0.5 rounded ml-1 border border-slate-200">B2B Core</span>
+        </a>
+
+        <!-- Main Nav (Only visible after auth/onboarding) -->
+        <nav id="topNavLinks" class="hidden md:flex items-center gap-1">
+          <button onclick="switchMainTab('orders')" id="nav-orders" class="px-3.5 py-2 rounded-lg text-sm font-semibold text-brand-600 bg-brand-50 transition">Orders & Inquiries</button>
+          <button onclick="switchMainTab('catalog')" id="nav-catalog" class="px-3.5 py-2 rounded-lg text-sm font-medium text-slate-600 hover:text-slate-900 transition">Products Catalog</button>
+          <button onclick="switchMainTab('company')" id="nav-company" class="px-3.5 py-2 rounded-lg text-sm font-medium text-slate-600 hover:text-slate-900 transition">Company & KYB</button>
+        </nav>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <!-- Currency -->
+        <select class="bg-slate-50 border border-slate-200 text-xs font-semibold text-slate-700 rounded-lg px-2.5 py-1.5 outline-none cursor-pointer">
+          <option>USD ($)</option>
+          <option>CNY (¥)</option>
+          <option>TRY (₺)</option>
+          <option>RUB (₽)</option>
+        </select>
+
+        <!-- Language Switcher -->
+        <select class="bg-slate-50 border border-slate-200 text-xs font-semibold text-slate-700 rounded-lg px-2.5 py-1.5 outline-none cursor-pointer">
+          <option>🇬🇧 English</option>
+          <option>🇹🇷 Türkçe</option>
+          <option>🇨🇳 中文</option>
+          <option>🇷🇺 Русский</option>
+        </select>
+
+        <!-- Profile / Status -->
+        <div id="headerProfile" class="flex items-center gap-3 pl-2 border-l border-slate-200">
+          <div class="w-8 h-8 rounded-full bg-emerald-100 text-emerald-800 font-bold text-xs flex items-center justify-center border border-emerald-300" title="Verified Exporter">
+            TS
+          </div>
+          <div class="hidden sm:block text-left text-xs leading-tight">
+            <div class="font-bold text-slate-900 flex items-center gap-1">
+              Turkey Shoes A.Ş.
+              <i data-lucide="shield-check" class="w-3.5 h-3.5 text-emerald-600 inline"></i>
+            </div>
+            <span class="text-[11px] text-slate-500">VKN: 9847192841</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= BODY CONTENT CONTAINERS ================= -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+
+    <!-- ================= STEP 1: AUTHENTICATION & CONSENTS ================= -->
+    <section id="stepContainer-1" class="max-w-xl mx-auto my-8 bg-white rounded-2xl border border-slate-200 p-8 shadow-sm">
+      <div class="text-center mb-6">
+        <div class="w-12 h-12 bg-brand-50 text-brand-600 rounded-2xl flex items-center justify-center mx-auto mb-3 shadow-sm border border-brand-100">
+          <i data-lucide="lock" class="w-6 h-6"></i>
+        </div>
+        <h1 class="text-2xl font-extrabold text-slate-900">Sign in to GlobalTrade Portal</h1>
+        <p class="text-sm text-slate-500 mt-1">Cross-Border B2B Access with zero bank lock-in</p>
+      </div>
+
+      <form onsubmit="handleAuthSubmit(event)" class="space-y-4">
+        <div>
+          <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Corporate Email / ID</label>
+          <input type="email" value="export@turkeyshoes.com" required class="w-full px-3.5 py-2.5 rounded-lg border border-slate-200 text-sm font-medium focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none">
+        </div>
+        <div>
+          <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Password / OTP Key</label>
+          <input type="password" value="••••••••••••" required class="w-full px-3.5 py-2.5 rounded-lg border border-slate-200 text-sm font-medium focus:ring-2 focus:ring-brand-500 outline-none">
+        </div>
+
+        <div class="p-3 bg-slate-50 rounded-lg border border-slate-100 space-y-2 text-xs text-slate-600">
+          <label class="flex items-start gap-2 cursor-pointer">
+            <input type="checkbox" checked required class="mt-0.5 rounded text-brand-600 focus:ring-brand-500">
+            <span>I accept the <b>Terms of Service</b> and <b>Cross-Border Data Transfer Policy</b> (GDPR / KVKK / PIPL compliant).</span>
+          </label>
+          <label class="flex items-start gap-2 cursor-pointer">
+            <input type="checkbox" checked required class="mt-0.5 rounded text-brand-600 focus:ring-brand-500">
+            <span>I consent to automated <b>KYB identity check</b> via national commercial registries.</span>
+          </label>
+        </div>
+
+        <button type="submit" class="w-full py-3 px-4 bg-brand-600 hover:bg-brand-700 text-white font-bold rounded-xl shadow-md transition flex items-center justify-center gap-2">
+          <span>Continue to KYB Verification</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </button>
+      </form>
+    </section>
+
+    <!-- ================= STEP 2: KYB REGISTRY VERIFICATION ================= -->
+    <section id="stepContainer-2" class="hidden max-w-2xl mx-auto my-6 bg-white rounded-2xl border border-slate-200 p-8 shadow-sm">
+      <div class="flex items-center justify-between pb-5 border-b border-slate-100 mb-6">
+        <div>
+          <span class="text-xs font-bold text-brand-600 uppercase tracking-wider">Step 2 / KYB Verification</span>
+          <h2 class="text-xl font-bold text-slate-900 mt-0.5">Company Legal Identity</h2>
+        </div>
+        <div class="px-3 py-1 bg-amber-50 text-amber-700 border border-amber-200 rounded-full text-xs font-semibold flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
+          Pending Verification
+        </div>
+      </div>
+
+      <form onsubmit="handleKYBSubmit(event)" class="space-y-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Country of Incorporation</label>
+            <select id="kybCountry" onchange="updateTaxLabel(this.value)" class="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm font-medium bg-white outline
