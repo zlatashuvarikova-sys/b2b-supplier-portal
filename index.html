@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GlobalTrade — Cross-Border Supplier Portal & Interactive Demo</title>
+  <title>GlobalTrade — Cross-Border Supplier Portal</title>
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Lucide Icons -->
@@ -34,20 +34,20 @@
 </head>
 <body class="bg-[#F4F6F9] text-slate-800 font-sans antialiased min-h-screen flex flex-col">
 
-  <!-- ================= NOTIFY MODAL COMPONENT ================= -->
+  <!-- ================= NOTIFY MODAL COMPONENT (STRICT TITLE: Notify) ================= -->
   <div id="notifyModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4">
     <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-200">
       <div class="flex items-center justify-between pb-3 border-b border-slate-100">
-        <h3 class="text-base font-extrabold text-slate-900">Notify</h3>
-        <button onclick="closeNotifyModal()" class="text-slate-400 hover:text-slate-600">
+        <h3 class="text-base font-extrabold text-slate-900 tracking-wide">Notify</h3>
+        <button onclick="closeNotifyModal()" class="text-slate-400 hover:text-slate-600 transition">
           <i data-lucide="x" class="w-5 h-5"></i>
         </button>
       </div>
-      <div class="py-4 text-xs text-slate-600 leading-relaxed" id="notifyContent">
-        Notification content
+      <div class="py-4 text-xs text-slate-600 leading-relaxed font-medium" id="notifyContent">
+        Notification message
       </div>
       <div class="pt-2 flex justify-end">
-        <button onclick="confirmNotifyModal()" class="px-5 py-2 bg-brand-600 hover:bg-brand-700 text-white text-xs font-bold rounded-xl transition">
+        <button onclick="confirmNotifyModal()" class="px-5 py-2 bg-brand-600 hover:bg-brand-700 text-white text-xs font-bold rounded-xl transition shadow-sm">
           OK
         </button>
       </div>
@@ -61,10 +61,10 @@
         <span class="inline-flex items-center px-2.5 py-1 rounded text-xs font-bold bg-brand-600 text-white tracking-wider uppercase">
           Demo Presentation
         </span>
-        <span class="text-xs text-slate-300 font-medium hidden sm:inline" id="tourStepLabel">Step 1 of 5: Platform Authentication (Email, Password & OTP)</span>
+        <span class="text-xs text-slate-300 font-medium hidden sm:inline" id="tourStepLabel">Step 1 of 5: Platform Authentication</span>
       </div>
 
-      <!-- Steps Controller Buttons -->
+      <!-- Steps Controller Navigation -->
       <nav aria-label="Step Navigation" class="flex items-center gap-1.5 overflow-x-auto max-w-full pb-1 md:pb-0">
         <button onclick="goToStep(1)" id="stepBtn-1" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-brand-600 text-white transition flex items-center gap-1.5 shadow-sm">
           <span>1. Auth</span>
@@ -83,9 +83,9 @@
         </button>
       </nav>
 
-      <!-- Quick Role Switcher (Buyer removed) -->
+      <!-- Quick Role Switcher (ONLY SUPPLIER & ARBITRATOR) -->
       <div class="flex items-center gap-2 text-xs">
-        <span class="text-slate-400">Role:</span>
+        <span class="text-slate-400 font-medium">Role:</span>
         <select id="roleSelect" onchange="changeRole(this.value)" class="bg-slate-800 border border-slate-700 text-white rounded px-2.5 py-1 text-xs focus:ring-1 focus:ring-brand-500 outline-none cursor-pointer">
           <option value="supplier">🇮🇳 Leather Manufactories Group (Supplier)</option>
           <option value="moderator">🛡️ Platform Arbitrator</option>
@@ -95,7 +95,7 @@
   </aside>
 
   <!-- ================= MAIN HEADER ================= -->
-  <header class="bg-white border-b border-slate-200 sticky top-[53px] z-30">
+  <header class="bg-white border-b border-slate-200 sticky top-[53px] z-30 shadow-xs">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
       <div class="flex items-center gap-8">
         <a href="#" onclick="goToStep(3)" class="flex items-center gap-2 text-xl font-extrabold tracking-tight text-slate-900">
@@ -105,9 +105,9 @@
 
         <!-- Main Nav -->
         <nav id="topNavLinks" class="hidden md:flex items-center gap-1">
-          <button onclick="switchMainTab('orders')" id="nav-orders" class="px-3.5 py-2 rounded-lg text-sm font-semibold text-brand-600 bg-brand-50 transition">Orders & Inquiries</button>
-          <button onclick="switchMainTab('catalog')" id="nav-catalog" class="px-3.5 py-2 rounded-lg text-sm font-medium text-slate-600 hover:text-slate-900 transition">Products Catalog</button>
-          <button onclick="switchMainTab('company')" id="nav-company" class="px-3.5 py-2 rounded-lg text-sm font-medium text-slate-600 hover:text-slate-900 transition">Company & KYB</button>
+          <button onclick="goToStep(3)" id="nav-orders" class="px-3.5 py-2 rounded-lg text-sm font-semibold text-brand-600 bg-brand-50 transition">Orders & Inquiries</button>
+          <button onclick="goToStep(4)" id="nav-catalog" class="px-3.5 py-2 rounded-lg text-sm font-medium text-slate-600 hover:text-slate-900 transition">Products Catalog</button>
+          <button onclick="goToStep(2)" id="nav-company" class="px-3.5 py-2 rounded-lg text-sm font-medium text-slate-600 hover:text-slate-900 transition">Company & KYB</button>
         </nav>
       </div>
 
@@ -145,10 +145,10 @@
     </div>
   </header>
 
-  <!-- ================= MAIN CONTENT ================= -->
+  <!-- ================= BODY CONTENT CONTAINERS ================= -->
   <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
 
-    <!-- ================= STEP 1: AUTHENTICATION (EMAIL + PASSWORD -> OTP) ================= -->
+    <!-- ================= STEP 1: AUTHENTICATION ================= -->
     <section id="stepContainer-1" class="max-w-xl mx-auto my-8 bg-white rounded-2xl border border-slate-200 p-8 shadow-sm">
       <div class="text-center mb-6">
         <div class="w-12 h-12 bg-brand-50 text-brand-600 rounded-2xl flex items-center justify-center mx-auto mb-3 shadow-sm border border-brand-100">
@@ -161,14 +161,14 @@
       <form id="authFormStage1" onsubmit="handleAuthStage1(event)" class="space-y-4">
         <div>
           <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Corporate Email / ID</label>
-          <input type="email" value="export@leathermanufactories.in" required class="w-full px-3.5 py-2.5 rounded-lg border border-slate-200 text-sm font-medium focus:ring-2 focus:ring-brand-500 outline-none">
+          <input type="email" value="export@leathermanufactories.in" required class="w-full px-3.5 py-2.5 rounded-lg border border-slate-200 text-sm font-medium focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none">
         </div>
         <div>
           <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Password</label>
-          <input type="password" value="TradeSecurity2025!" required class="w-full px-3.5 py-2.5 rounded-lg border border-slate-200 text-sm font-medium focus:ring-2 focus:ring-brand-500 outline-none">
+          <input type="password" value="TradeSecurity2025!" required class="w-full px-3.5 py-2.5 rounded-lg border border-slate-200 text-sm font-medium focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none">
         </div>
         
-        <button type="submit" class="w-full py-3 px-4 bg-brand-600 hover:bg-brand-700 text-white font-bold rounded-xl shadow-md transition flex items-center justify-center gap-2">
+        <button type="submit" class="w-full py-3 px-4 bg-brand-600 hover:bg-brand-700 text-white font-bold rounded-xl shadow-md transition flex items-center justify-center gap-2 text-sm">
           <span>Continue</span>
           <i data-lucide="arrow-right" class="w-4 h-4"></i>
         </button>
@@ -200,7 +200,7 @@
           <button type="button" onclick="showAuthStage1()" class="px-4 py-3 border border-slate-200 rounded-xl text-xs font-bold text-slate-600 hover:bg-slate-50 transition">
             ← Back
           </button>
-          <button type="submit" class="flex-1 py-3 px-4 bg-brand-600 hover:bg-brand-700 text-white font-bold rounded-xl shadow-md transition flex items-center justify-center gap-2">
+          <button type="submit" class="flex-1 py-3 px-4 bg-brand-600 hover:bg-brand-700 text-white font-bold rounded-xl shadow-md transition flex items-center justify-center gap-2 text-sm">
             <span>Sign in</span>
             <i data-lucide="arrow-right" class="w-4 h-4"></i>
           </button>
@@ -270,7 +270,7 @@
     <!-- ================= STEP 3: ORDERS DASHBOARD ================= -->
     <section id="stepContainer-3" class="hidden space-y-6">
 
-      <!-- Supplier Stats Header -->
+      <!-- Stats Header -->
       <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
         <div>
           <div class="flex items-center gap-2">
@@ -311,11 +311,11 @@
         </button>
       </nav>
 
-      <!-- Orders List Container -->
+      <!-- Orders List Dynamic Container -->
       <div id="ordersList" class="space-y-3"></div>
     </section>
 
-    <!-- ================= STEP 4: ADD / EDIT PRODUCT CARD ================= -->
+    <!-- ================= STEP 4: ADD PRODUCT ================= -->
     <section id="stepContainer-4" class="hidden max-w-3xl mx-auto my-4 bg-white rounded-2xl border border-slate-200 p-8 shadow-sm">
       <div class="flex items-center justify-between pb-4 border-b border-slate-100 mb-6">
         <div>
@@ -564,23 +564,23 @@
   <script>
     const ordersDB = {
       review: [
-        { id: "RFQ-46578", title: "Handmade Leather Derby Shoes (Classic Series)", qty: "12,000 pairs", est: "$120,000", buyer: "Buyer #RU-7704", date: "2025-05-11", status: "RFQ Received", action: "Review & Quote" },
-        { id: "RFQ-46582", title: "Vegetable Tanned Leather Messenger Bags", qty: "3,000 pcs", est: "$45,000", buyer: "Buyer #RU-4190", date: "2025-05-10", status: "Sample Requested", action: "Accept Sample Order" }
+        { id: "RFQ-46578", title: "Handmade Leather Derby Shoes (Classic Series)", qty: "12,000 pairs", est: "$120,000", buyer: "Buyer #RU-7704", date: "2025-05-11", status: "RFQ Received", action: "Review & Quote", targetStep: 4 },
+        { id: "RFQ-46582", title: "Vegetable Tanned Leather Messenger Bags", qty: "3,000 pcs", est: "$45,000", buyer: "Buyer #RU-4190", date: "2025-05-10", status: "Sample Requested", action: "Accept Sample Order", targetStep: 5 }
       ],
       active: [
-        { id: "DEAL-46560", title: "Handmade Genuine Leather Classic Derby Shoes", qty: "12,000 pairs", est: "$222,000", buyer: "Buyer #RU-7704", date: "2025-05-09", status: "Pending E-Sign & Escrow", action: "Open Deal Room" },
-        { id: "DEAL-46555", title: "Men Oxford Leather Shoes (Export Grade)", qty: "5,000 pairs", est: "$115,000", buyer: "Buyer #RU-3312", date: "2025-05-08", status: "Incoterms FOB Negotiation", action: "Open Deal Room" }
+        { id: "DEAL-46560", title: "Handmade Genuine Leather Classic Derby Shoes", qty: "12,000 pairs", est: "$222,000", buyer: "Buyer #RU-7704", date: "2025-05-09", status: "Pending E-Sign & Escrow", action: "Open Deal Room", targetStep: 5 },
+        { id: "DEAL-46555", title: "Men Oxford Leather Shoes (Export Grade)", qty: "5,000 pairs", est: "$115,000", buyer: "Buyer #RU-3312", date: "2025-05-08", status: "Incoterms FOB Negotiation", action: "Open Deal Room", targetStep: 5 }
       ],
       escrow: [
-        { id: "ORD-46510", title: "Leather Belts and Accessories Batch A", qty: "8,000 pairs", est: "$96,000", buyer: "Buyer #RU-1092", date: "2025-05-01", status: "30% Escrow Funded • In Production", action: "Upload Dispatch B/L" },
-        { id: "ORD-46499", title: "Orthopedic Leather Insoles Bulk", qty: "20,000 pairs", est: "$38,000", buyer: "Buyer #RU-8821", date: "2025-04-28", status: "Customs Clearance Mumbai", action: "View Customs Dec" }
+        { id: "ORD-46510", title: "Leather Belts and Accessories Batch A", qty: "8,000 pairs", est: "$96,000", buyer: "Buyer #RU-1092", date: "2025-05-01", status: "30% Escrow Funded • In Production", action: "Upload Dispatch B/L", targetStep: 5 },
+        { id: "ORD-46499", title: "Orthopedic Leather Insoles Bulk", qty: "20,000 pairs", est: "$38,000", buyer: "Buyer #RU-8821", date: "2025-04-28", status: "Customs Clearance Mumbai", action: "View Customs Dec", targetStep: 5 }
       ],
       completed: [
-        { id: "ORD-45990", title: "Winter Leather Lined Boots", qty: "15,000 pairs", est: "$310,000", buyer: "Buyer #RU-7704", date: "2025-03-15", status: "Delivered & Funds Released", action: "View Feedback (5.0 ★)" },
-        { id: "ORD-45812", title: "Casual Leather Loafers", qty: "6,000 pairs", est: "$84,000", buyer: "Buyer #RU-2005", date: "2025-02-20", status: "Delivered & Funds Released", action: "Repeat Deal" }
+        { id: "ORD-45990", title: "Winter Leather Lined Boots", qty: "15,000 pairs", est: "$310,000", buyer: "Buyer #RU-7704", date: "2025-03-15", status: "Delivered & Funds Released", action: "View Feedback (5.0 ★)", targetStep: 5 },
+        { id: "ORD-45812", title: "Casual Leather Loafers", qty: "6,000 pairs", est: "$84,000", buyer: "Buyer #RU-2005", date: "2025-02-20", status: "Delivered & Funds Released", action: "Repeat Deal", targetStep: 4 }
       ],
       dispute: [
-        { id: "DISP-46412", title: "Packaging Standard Specification Claim", qty: "4,000 pairs", est: "$62,000", buyer: "Buyer #RU-5519", date: "2025-05-02", status: "Under Platform Arbitration", action: "Join Arbitrator Room" }
+        { id: "DISP-46412", title: "Packaging Standard Specification Claim", qty: "4,000 pairs", est: "$62,000", buyer: "Buyer #RU-5519", date: "2025-05-02", status: "Under Platform Arbitration", action: "Join Arbitrator Room", targetStep: 5 }
       ]
     };
 
@@ -594,7 +594,7 @@
       goToStep(1);
     }
 
-    // Modal popup system (Strict title: "Notify")
+    // Modal Notification helper (Title strictly "Notify")
     function showNotify(message, callback) {
       document.getElementById('notifyContent').innerText = message;
       document.getElementById('notifyModal').classList.remove('hidden');
@@ -614,7 +614,7 @@
       }
     }
 
-    // Auth Form Navigation
+    // --- Step 1: 2-Stage Auth logic ---
     function showAuthStage1() {
       document.getElementById('authFormStage1').classList.remove('hidden');
       document.getElementById('authFormStage2').classList.add('hidden');
@@ -628,10 +628,10 @@
 
     function handleAuthStage2(e) {
       e.preventDefault();
-      goToStep(2);
+      goToStep(2); // Goes to KYB Onboarding
     }
 
-    // Wizard Step Controller
+    // --- Step Controller (Steps 1 to 5) ---
     function goToStep(step) {
       currentStep = step;
       
@@ -667,13 +667,13 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // Step 2 Form Handler
+    // --- Step 2: KYB Submit ---
     function handleKYBSubmit(e) {
       e.preventDefault();
-      goToStep(3);
+      goToStep(3); // Goes to Orders Hub
     }
 
-    // KYB Country Selector
+    // Country registry changer
     function updateTaxLabel(country) {
       const codeLabel = document.getElementById('kybCodeLabel');
       const codeInput = document.getElementById('kybCode');
@@ -694,7 +694,7 @@
       }
     }
 
-    // Filter Orders Tab
+    // --- Step 3: Orders Filter ---
     function filterOrders(tabKey) {
       currentTab = tabKey;
       
@@ -739,7 +739,7 @@
               tabKey === 'dispute' ? 'bg-red-100 text-red-800' : 'bg-emerald-100 text-emerald-800'
             }">${item.status}</span>
 
-            <button onclick="goToStep(5)" class="px-3.5 py-1.5 bg-slate-900 hover:bg-brand-600 text-white text-xs font-bold rounded-lg transition">
+            <button onclick="goToStep(${item.targetStep})" class="px-3.5 py-1.5 bg-slate-900 hover:bg-brand-600 text-white text-xs font-bold rounded-lg transition">
               ${item.action} →
             </button>
           </div>
@@ -749,15 +749,15 @@
       lucide.createIcons();
     }
 
-    // Step 4 Product Submit
+    // --- Step 4: Publish Product ---
     function handleProductSubmit(e) {
       e.preventDefault();
-      showNotify("Product SKU successfully published to Global Catalog with Tiered Pricing and Sample Request terms.", () => {
-        goToStep(3);
+      showNotify("Product SKU successfully published to the global catalog with Tiered Pricing & Sample Request parameters.", () => {
+        goToStep(5); // Progresses directly to Deal Room demonstration
       });
     }
 
-    // Step 5 E-Sign Action
+    // --- Step 5: Deal Room & E-Sign ---
     function signDealAction() {
       const btn = document.getElementById('esignBtn');
       const state = document.getElementById('supplierSignState');
@@ -781,7 +781,7 @@
       showNotify("Generating and downloading Proforma Invoice PI-46560.pdf with HS customs codes and exporter banking credentials.");
     }
 
-    // Secure Chat with Masking
+    // Anti-fraud chat with masking
     function handleSendMessage(e) {
       e.preventDefault();
       const input = document.getElementById('chatInput');
@@ -807,22 +807,16 @@
       container.scrollTop = container.scrollHeight;
     }
 
-    // Role Switcher (Buyer removed)
+    // Quick Role Switcher (Buyer removed)
     function changeRole(role) {
       if (role === 'moderator') {
-        showNotify("Switched to Arbitrator Mode: You can manage dispute resolutions and unlock escrow payments.", () => {
+        showNotify("Switched to Arbitrator Mode: You can manage dispute arbitrations and unlock escrow payments.", () => {
           goToStep(3);
           filterOrders('dispute');
         });
       } else {
         goToStep(3);
       }
-    }
-
-    function switchMainTab(tab) {
-      if (tab === 'orders') goToStep(3);
-      if (tab === 'catalog') goToStep(4);
-      if (tab === 'company') goToStep(2);
     }
 
     window.onload = init;
