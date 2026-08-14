@@ -83,7 +83,7 @@
         </button>
       </nav>
 
-      <!-- Fixed Exporter Badge -->
+      <!-- Verified Exporter Status -->
       <div class="flex items-center gap-2 text-xs bg-slate-800/80 px-3 py-1 rounded-lg border border-slate-700 text-slate-300">
         <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
         <span>🇮🇳 Leather Manufactories Group</span>
@@ -274,7 +274,7 @@
             <h2 class="text-xl font-bold text-slate-900">Orders & Inquiries Hub</h2>
             <span class="px-2 py-0.5 rounded text-xs font-bold bg-emerald-100 text-emerald-800 border border-emerald-200">Verified Supplier 🛡️</span>
           </div>
-          <p class="text-xs text-slate-500 mt-0.5">Leather Manufactories Group • Manage RFQs, active shipments, smart contracts and claims</p>
+          <p class="text-xs text-slate-500 mt-0.5">Leather Manufactories Group • Manage incoming RFQs, contract pipeline, production batches and fulfillment</p>
         </div>
         <div class="flex items-center gap-3">
           <button onclick="goToStep(4)" class="px-4 py-2 bg-brand-600 hover:bg-brand-700 text-white text-xs font-bold rounded-xl shadow transition flex items-center gap-1.5">
@@ -284,7 +284,7 @@
         </div>
       </div>
 
-      <!-- Orders Sub-Tabs Bar -->
+      <!-- Orders Sub-Tabs Bar (4 Clean Supplier Tabs) -->
       <nav aria-label="Orders Status Filter" class="flex items-center gap-2 overflow-x-auto pb-1 custom-scrollbar">
         <button onclick="filterOrders('review')" id="orderTab-review" class="badge-tab px-4 py-2 rounded-xl text-xs font-bold bg-slate-900 text-white flex items-center gap-2 shadow-sm shrink-0">
           <span>In Review (RFQs)</span>
@@ -301,10 +301,6 @@
         <button onclick="filterOrders('completed')" id="orderTab-completed" class="badge-tab px-4 py-2 rounded-xl text-xs font-semibold bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 flex items-center gap-2 shrink-0">
           <span>Completed Orders</span>
           <span class="bg-emerald-100 text-emerald-700 text-[11px] px-1.5 py-0.2 rounded-full font-bold">42</span>
-        </button>
-        <button onclick="filterOrders('dispute')" id="orderTab-dispute" class="badge-tab px-4 py-2 rounded-xl text-xs font-semibold bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 flex items-center gap-2 shrink-0">
-          <span>Arbitration & Claims</span>
-          <span class="bg-red-100 text-red-700 text-[11px] px-1.5 py-0.2 rounded-full font-bold">1</span>
         </button>
       </nav>
 
@@ -465,7 +461,7 @@
             
             <div class="flex items-center justify-between p-3.5 bg-emerald-50 border border-emerald-200 rounded-xl text-xs">
               <div class="flex items-center gap-3">
-                <i data-lucide="shield-alert" class="w-5 h-5 text-emerald-600"></i>
+                <i data-lucide="shield-check" class="w-5 h-5 text-emerald-600"></i>
                 <div>
                   <span class="font-bold text-emerald-900">30% Advance Escrow Deposit ($66,600)</span>
                   <p class="text-[11px] text-emerald-700">Secured on platform account. Released when production commences.</p>
@@ -575,9 +571,6 @@
       completed: [
         { id: "ORD-45990", title: "Winter Leather Lined Boots", qty: "15,000 pairs", est: "$310,000", buyer: "Buyer #RU-7704", date: "2025-03-15", status: "Delivered & Funds Released", action: "View Feedback (5.0 ★)", targetStep: 5 },
         { id: "ORD-45812", title: "Casual Leather Loafers", qty: "6,000 pairs", est: "$84,000", buyer: "Buyer #RU-2005", date: "2025-02-20", status: "Delivered & Funds Released", action: "Repeat Deal", targetStep: 4 }
-      ],
-      dispute: [
-        { id: "DISP-46412", title: "Packaging Standard Specification Claim", qty: "4,000 pairs", est: "$62,000", buyer: "Buyer #RU-5519", date: "2025-05-02", status: "Under Review", action: "View Dispute Details", targetStep: 5 }
       ]
     };
 
@@ -691,17 +684,19 @@
       }
     }
 
-    // --- Step 3: Orders Filter ---
+    // --- Step 3: Orders Filter (4 Clean Tabs) ---
     function filterOrders(tabKey) {
       currentTab = tabKey;
       
-      const tabKeys = ['review', 'active', 'escrow', 'completed', 'dispute'];
+      const tabKeys = ['review', 'active', 'escrow', 'completed'];
       tabKeys.forEach(key => {
         const btn = document.getElementById(`orderTab-${key}`);
-        if (key === tabKey) {
-          btn.className = "badge-tab px-4 py-2 rounded-xl text-xs font-bold bg-slate-900 text-white flex items-center gap-2 shadow-sm shrink-0";
-        } else {
-          btn.className = "badge-tab px-4 py-2 rounded-xl text-xs font-semibold bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 flex items-center gap-2 shrink-0";
+        if (btn) {
+          if (key === tabKey) {
+            btn.className = "badge-tab px-4 py-2 rounded-xl text-xs font-bold bg-slate-900 text-white flex items-center gap-2 shadow-sm shrink-0";
+          } else {
+            btn.className = "badge-tab px-4 py-2 rounded-xl text-xs font-semibold bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 flex items-center gap-2 shrink-0";
+          }
         }
       });
 
@@ -732,8 +727,7 @@
             <span class="text-xs font-semibold px-2.5 py-1 rounded-full ${
               tabKey === 'review' ? 'bg-amber-100 text-amber-800' :
               tabKey === 'active' ? 'bg-blue-100 text-blue-800' :
-              tabKey === 'escrow' ? 'bg-purple-100 text-purple-800' :
-              tabKey === 'dispute' ? 'bg-red-100 text-red-800' : 'bg-emerald-100 text-emerald-800'
+              tabKey === 'escrow' ? 'bg-purple-100 text-purple-800' : 'bg-emerald-100 text-emerald-800'
             }">${item.status}</span>
 
             <button onclick="goToStep(${item.targetStep})" class="px-3.5 py-1.5 bg-slate-900 hover:bg-brand-600 text-white text-xs font-bold rounded-lg transition">
