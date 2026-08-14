@@ -61,7 +61,7 @@
         <span class="inline-flex items-center px-2.5 py-1 rounded text-xs font-bold bg-brand-600 text-white tracking-wider uppercase">
           Demo Presentation
         </span>
-        <span class="text-xs text-slate-300 font-medium hidden sm:inline" id="tourStepLabel">Step 1 of 5: Platform Authentication</span>
+        <span class="text-xs text-slate-300 font-medium hidden sm:inline" id="tourStepLabel">Step 1 of 5: Platform Authentication (Email, Password & OTP)</span>
       </div>
 
       <!-- Steps Controller Navigation -->
@@ -83,13 +83,10 @@
         </button>
       </nav>
 
-      <!-- Quick Role Switcher (ONLY SUPPLIER & ARBITRATOR) -->
-      <div class="flex items-center gap-2 text-xs">
-        <span class="text-slate-400 font-medium">Role:</span>
-        <select id="roleSelect" onchange="changeRole(this.value)" class="bg-slate-800 border border-slate-700 text-white rounded px-2.5 py-1 text-xs focus:ring-1 focus:ring-brand-500 outline-none cursor-pointer">
-          <option value="supplier">🇮🇳 Leather Manufactories Group (Supplier)</option>
-          <option value="moderator">🛡️ Platform Arbitrator</option>
-        </select>
+      <!-- Fixed Exporter Badge -->
+      <div class="flex items-center gap-2 text-xs bg-slate-800/80 px-3 py-1 rounded-lg border border-slate-700 text-slate-300">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span>🇮🇳 Leather Manufactories Group</span>
       </div>
     </div>
   </aside>
@@ -277,7 +274,7 @@
             <h2 class="text-xl font-bold text-slate-900">Orders & Inquiries Hub</h2>
             <span class="px-2 py-0.5 rounded text-xs font-bold bg-emerald-100 text-emerald-800 border border-emerald-200">Verified Supplier 🛡️</span>
           </div>
-          <p class="text-xs text-slate-500 mt-0.5">Leather Manufactories Group • Manage RFQs, active shipments, smart contracts and dispute arbitrations</p>
+          <p class="text-xs text-slate-500 mt-0.5">Leather Manufactories Group • Manage RFQs, active shipments, smart contracts and claims</p>
         </div>
         <div class="flex items-center gap-3">
           <button onclick="goToStep(4)" class="px-4 py-2 bg-brand-600 hover:bg-brand-700 text-white text-xs font-bold rounded-xl shadow transition flex items-center gap-1.5">
@@ -580,7 +577,7 @@
         { id: "ORD-45812", title: "Casual Leather Loafers", qty: "6,000 pairs", est: "$84,000", buyer: "Buyer #RU-2005", date: "2025-02-20", status: "Delivered & Funds Released", action: "Repeat Deal", targetStep: 4 }
       ],
       dispute: [
-        { id: "DISP-46412", title: "Packaging Standard Specification Claim", qty: "4,000 pairs", est: "$62,000", buyer: "Buyer #RU-5519", date: "2025-05-02", status: "Under Platform Arbitration", action: "Join Arbitrator Room", targetStep: 5 }
+        { id: "DISP-46412", title: "Packaging Standard Specification Claim", qty: "4,000 pairs", est: "$62,000", buyer: "Buyer #RU-5519", date: "2025-05-02", status: "Under Review", action: "View Dispute Details", targetStep: 5 }
       ]
     };
 
@@ -805,18 +802,6 @@
       container.appendChild(msgDiv);
       input.value = "";
       container.scrollTop = container.scrollHeight;
-    }
-
-    // Quick Role Switcher (Buyer removed)
-    function changeRole(role) {
-      if (role === 'moderator') {
-        showNotify("Switched to Arbitrator Mode: You can manage dispute arbitrations and unlock escrow payments.", () => {
-          goToStep(3);
-          filterOrders('dispute');
-        });
-      } else {
-        goToStep(3);
-      }
     }
 
     window.onload = init;
