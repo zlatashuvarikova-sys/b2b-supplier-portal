@@ -28,6 +28,7 @@
     #side-drawer { transition: transform 0.3s cubic-bezier(0.16,1,0.3,1); transform: translateX(100%); }
     #side-drawer.open { transform: translateX(0); }
     #drawer-overlay { transition: opacity 0.25s; }
+    #float-chat-box { transition: all 0.25s cubic-bezier(0.16,1,0.3,1); }
   </style>
 </head>
 <body class="font-sans antialiased min-h-screen flex flex-col text-slate-800">
@@ -88,6 +89,54 @@
 <div id="drawer-overlay" class="hidden fixed inset-0 z-40 bg-slate-900/50 opacity-0" onclick="closeDrawer()"></div>
 <div id="side-drawer" class="fixed top-0 right-0 h-full w-full max-w-lg bg-white z-50 shadow-2xl flex flex-col overflow-hidden">
   <div id="drawer-content" class="flex flex-col h-full overflow-y-auto scrollbar-thin"></div>
+</div>
+
+<!-- ======= FLOATING DEAL MESSENGER (BOTTOM RIGHT) ======= -->
+<div id="float-chat-container" class="hidden fixed bottom-6 right-6 z-40 flex flex-col items-end">
+  
+  <!-- Chat Popup Window -->
+  <div id="float-chat-box" class="hidden mb-3 w-[360px] sm:w-[400px] h-[520px] bg-white rounded-2xl shadow-2xl border border-slate-200 flex flex-col overflow-hidden">
+    
+    <!-- Header -->
+    <div class="px-4 py-3 bg-slate-900 text-white flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <button id="fc-back-btn" onclick="renderFloatInbox()" class="hidden text-slate-300 hover:text-white mr-1"><i data-lucide="arrow-left" class="w-4 h-4"></i></button>
+        <div>
+          <h4 id="fc-header-title" class="text-xs font-bold leading-tight">Deal Messages</h4>
+          <p id="fc-header-sub" class="text-[10px] text-slate-400">Select an active deal thread</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-2">
+        <span class="text-[10px] bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 px-2 py-0.5 rounded font-semibold flex items-center gap-1">
+          <i data-lucide="shield-check" class="w-2.5 h-2.5"></i>Privacy Guard
+        </span>
+        <button onclick="toggleFloatChat()" class="text-slate-400 hover:text-white"><i data-lucide="x" class="w-4 h-4"></i></button>
+      </div>
+    </div>
+
+    <!-- View A: Threads List -->
+    <div id="fc-threads-list" class="flex-1 overflow-y-auto divide-y divide-slate-100 scrollbar-thin"></div>
+
+    <!-- View B: Active Chat -->
+    <div id="fc-active-chat" class="hidden flex-1 flex flex-col bg-slate-50 overflow-hidden">
+      <div id="fc-context-bar" class="px-3.5 py-2 bg-amber-50 border-b border-amber-200/70 text-[11px] text-amber-900 flex items-center justify-between shrink-0">
+        <span id="fc-context-text" class="truncate font-medium"></span>
+        <button id="fc-context-action" class="ml-2 font-bold text-brand hover:underline shrink-0 text-[10px]">Open Step →</button>
+      </div>
+      <div id="fc-msg-body" class="flex-1 overflow-y-auto p-3.5 space-y-2.5 text-xs scrollbar-thin"></div>
+      <form onsubmit="sendFloatMsg(event)" class="p-2.5 bg-white border-t border-slate-200 flex gap-1.5">
+        <input type="text" id="fc-input" placeholder="Type message..." class="flex-1 px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-xl text-xs outline-none focus:ring-1 focus:ring-brand/40">
+        <button type="submit" class="p-2 bg-brand hover:bg-brand-hover text-white rounded-xl transition"><i data-lucide="send" class="w-3.5 h-3.5"></i></button>
+      </form>
+    </div>
+
+  </div>
+
+  <!-- Trigger FAB Button -->
+  <button id="float-chat-btn" onclick="toggleFloatChat()" class="relative w-14 h-14 rounded-full bg-brand hover:bg-brand-hover text-white shadow-xl flex items-center justify-center transition-transform hover:scale-105 active:scale-95">
+    <i data-lucide="message-square" class="w-6 h-6"></i>
+    <span id="float-chat-badge" class="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-amber-400 text-slate-900 text-[10px] font-extrabold flex items-center justify-center border-2 border-white shadow-sm">3</span>
+  </button>
 </div>
 
 <!-- ======= HEADER ======= -->
@@ -356,7 +405,7 @@
       <div>
         <span class="text-xs font-bold text-brand uppercase tracking-wider">Step 5 / Deal Room</span>
         <h1 class="text-2xl font-extrabold text-slate-900 mt-0.5" data-i18n="deal.title">Contract Negotiation & E-Sign</h1>
-        <p class="text-xs text-slate-500 mt-0.5" data-i18n="deal.subtitle">Order GT-2025-0312 · Buyer #RU-4471</p>
+        <p class="text-xs text-slate-500 mt-0.5" data-i18n="deal.subtitle">Order CT-2025-0312 · Buyer #RU-4471</p>
       </div>
       <button onclick="goStep(3)" class="px-3 py-2 text-xs font-bold text-slate-600 border border-slate-200 rounded-xl hover:bg-slate-50 transition flex items-center gap-1.5">
         <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i><span data-i18n="deal.back">Back to Orders</span>
@@ -468,7 +517,6 @@ const RATES = {
   RUB: { s:'₽', r:1.08 }
 };
 
-// Clean inline SVG icons
 const SVG_ICONS = {
   fertilizer: `<svg class="w-14 h-14 text-emerald-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>`,
   seeds: `<svg class="w-14 h-14 text-amber-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 0 0-10 10c0 5.523 4.477 10 10 10s10-4.477 10-10A10 10 0 0 0 12 2Z"/><path d="m4.93 4.93 4.24 4.24"/><path d="m14.83 9.17 4.24-4.24"/><path d="m14.83 14.83 4.24 4.24"/><path d="m9.17 14.83-4.24 4.24"/></svg>`,
@@ -483,7 +531,6 @@ const CATALOG_DATA = [
   { id:'IMG-PK-004', name:'Food-Grade Jute Bags Hydrocarbon-Free', category:'Packaging & Paper Products', hs:'6305.10.00', unit:'pcs', priceInr:38, moq:5000, certs:['RHP Certified','OMRI Listed'], iconSvg:SVG_ICONS.media, bgCls:'bg-amber-100/40' }
 ];
 
-// All 7 distinct statuses with anonymous Airbnb-style buyers
 const ORDERS_DATA = [
   { id:'RFQ-2025-0891', product:'NPK 20-20-20 Fertilizer', buyer:'Buyer #RU-3129', qty:'100 MT', valInr:4150000, status:'RFQ', badgeCls:'bg-amber-100 text-amber-800', needsAction:true },
   { id:'QT-2025-0445', product:'Basmati Rice 1121 (24 MT)', buyer:'Buyer #RU-8842', qty:'24 MT', valInr:2364000, status:'QUOTE_SENT', badgeCls:'bg-blue-100 text-blue-800', needsAction:false },
@@ -494,10 +541,51 @@ const ORDERS_DATA = [
   { id:'CM-2024-1044', product:'Hybrid Maize Seeds', buyer:'Buyer #RU-0512', qty:'1,000 KG', valInr:242000, status:'COMPLETED', badgeCls:'bg-emerald-100 text-emerald-800', needsAction:false }
 ];
 
+const CHAT_THREADS = {
+  'RFQ-2025-0891': {
+    dealId: 'RFQ-2025-0891',
+    buyer: 'Buyer #RU-3129',
+    product: 'NPK 20-20-20 (100 MT)',
+    status: 'RFQ',
+    statusBadge: 'bg-amber-100 text-amber-800',
+    stepTarget: 3,
+    drawerType: 'rfq-quote',
+    messages: [
+      { sender: 'Buyer #RU-3129', isMe: false, text: 'Please send FOB quote for 100 MT NPK with NPOP organic certification.', time: '09:15 AM' }
+    ]
+  },
+  'CT-2025-0312': {
+    dealId: 'CT-2025-0312',
+    buyer: 'Buyer #RU-4471',
+    product: 'NPK 20-20-20 (50 MT)',
+    status: 'CONTRACT',
+    statusBadge: 'bg-indigo-100 text-indigo-800',
+    stepTarget: 5,
+    drawerType: 'sign-contract',
+    messages: [
+      { sender: 'Buyer #RU-4471', isMe: false, text: 'We confirm FOB Nhava Sheva terms for 50 MT NPK 20-20-20. Please e-sign the contract.', time: '10:45 AM' },
+      { sender: 'Indian Manufactories Group (You)', isMe: true, text: 'Batch production scheduled at Pune facility. SGS certificate ready.', time: '10:48 AM' }
+    ]
+  },
+  'ES-2025-0201': {
+    dealId: 'ES-2025-0201',
+    buyer: 'Buyer #DE-5231',
+    product: 'NPK 20-20-20 (100 MT)',
+    status: 'ESCROW_HELD',
+    statusBadge: 'bg-purple-100 text-purple-800',
+    stepTarget: 3,
+    drawerType: 'upload-bl',
+    messages: [
+      { sender: 'Buyer #DE-5231', isMe: false, text: 'Escrow deposit of ₹42,85,000 locked. Awaiting your B/L upload after JNPT dispatch.', time: 'Yesterday' }
+    ]
+  }
+};
+
+let ACTIVE_CHAT_DEAL_ID = null;
 const STATUS_LIST = ['ALL','RFQ','QUOTE_SENT','CONTRACT','PRODUCTION','ESCROW_HELD','SHIPPED','COMPLETED'];
 
 // ============================================================
-//  I18N DICTIONARY
+//  I18N
 // ============================================================
 const T = {
 en: {
@@ -642,9 +730,6 @@ zh: {
 }
 };
 
-// ============================================================
-//  STATE
-// ============================================================
 let LANG = 'en';
 let CURR = 'INR';
 let CURR_STEP = 1;
@@ -733,6 +818,15 @@ function goStep(n){
     if(s) s.classList.toggle('hidden', i !== n);
   }
   const pb = document.getElementById('profile-btn');
+  const chatFab = document.getElementById('float-chat-container');
+
+  if(n >= 2){
+    chatFab.classList.remove('hidden');
+  } else {
+    chatFab.classList.add('hidden');
+    document.getElementById('float-chat-box').classList.add('hidden');
+  }
+
   if(n >= 3){ pb.classList.remove('hidden'); pb.classList.add('inline-flex'); }
   else { pb.classList.add('hidden'); pb.classList.remove('inline-flex'); }
 
@@ -883,7 +977,7 @@ function renderCatalog(){
 }
 
 // ============================================================
-//  E-SIGN & CHAT
+//  E-SIGN & SCREEN 5 CHAT
 // ============================================================
 function signContract(){
   const btn = document.getElementById('esign-btn');
@@ -902,14 +996,18 @@ function signContract(){
   showNotify('Smart Contract E-Signed! 30% Escrow deposit is now locked in the Platform Vault.');
 }
 
+function maskPrivacy(str){
+  return str.replace(/(\+?\d[\d\s\-]{7,})/g, '[🔒 Phone masked]')
+            .replace(/[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}/g, '[🔒 Email masked]')
+            .replace(/@[\w]+/g, '[🔒 Handle masked]');
+}
+
 function sendChatMsg(e){
   e.preventDefault();
   const inp = document.getElementById('chat-input');
   let txt = inp.value.trim();
   if(!txt) return;
-  txt = txt.replace(/(\+?\d[\d\s\-]{7,})/g, '[🔒 Phone masked]')
-           .replace(/[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}/g, '[🔒 Email masked]')
-           .replace(/@[\w]+/g, '[🔒 Handle masked]');
+  txt = maskPrivacy(txt);
   const msgs = document.getElementById('chat-messages');
   const d = document.createElement('div');
   d.className = 'flex justify-end';
@@ -924,7 +1022,136 @@ function sendChatMsg(e){
 }
 
 // ============================================================
-//  DRAWERS (FULL INTERACTIVE PANELS)
+//  FLOATING MESSENGER LOGIC
+// ============================================================
+function toggleFloatChat(){
+  const box = document.getElementById('float-chat-box');
+  const isHidden = box.classList.contains('hidden');
+  if(isHidden){
+    box.classList.remove('hidden');
+    renderFloatInbox();
+  } else {
+    box.classList.add('hidden');
+  }
+}
+
+function openFloatDealChat(dealId){
+  const box = document.getElementById('float-chat-box');
+  box.classList.remove('hidden');
+  selectChatThread(dealId);
+}
+
+function renderFloatInbox(){
+  ACTIVE_CHAT_DEAL_ID = null;
+  document.getElementById('fc-threads-list').classList.remove('hidden');
+  document.getElementById('fc-active-chat').classList.add('hidden');
+  document.getElementById('fc-back-btn').classList.add('hidden');
+  document.getElementById('fc-header-title').textContent = 'Deal Messages';
+  document.getElementById('fc-header-sub').textContent = 'Select an active deal thread';
+
+  const list = document.getElementById('fc-threads-list');
+  const threads = Object.values(CHAT_THREADS);
+
+  list.innerHTML = threads.map(t => {
+    const lastMsg = t.messages[t.messages.length - 1];
+    return `
+      <div onclick="selectChatThread('${t.dealId}')" class="p-3.5 hover:bg-slate-50 cursor-pointer transition flex items-start gap-3">
+        <div class="w-8 h-8 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center shrink-0 font-bold text-xs text-slate-700">💬</div>
+        <div class="flex-1 min-w-0">
+          <div class="flex items-center justify-between gap-1 mb-0.5">
+            <span class="font-bold text-xs text-slate-900 truncate">${t.buyer}</span>
+            <span class="text-[10px] px-1.5 py-0.5 rounded font-bold shrink-0 ${t.statusBadge}">${t.status}</span>
+          </div>
+          <p class="text-[11px] font-semibold text-brand truncate mb-0.5">${t.dealId} · ${t.product}</p>
+          <p class="text-[11px] text-slate-500 truncate">${lastMsg ? lastMsg.text : 'No messages yet'}</p>
+        </div>
+      </div>
+    `;
+  }).join('');
+  lucide.createIcons();
+}
+
+function selectChatThread(dealId){
+  ACTIVE_CHAT_DEAL_ID = dealId;
+  const thread = CHAT_THREADS[dealId];
+  if(!thread) return;
+
+  document.getElementById('fc-threads-list').classList.add('hidden');
+  document.getElementById('fc-active-chat').classList.remove('hidden');
+  document.getElementById('fc-back-btn').classList.remove('hidden');
+
+  document.getElementById('fc-header-title').textContent = thread.buyer;
+  document.getElementById('fc-header-sub').textContent = `${thread.dealId} · ${thread.product}`;
+
+  const contextText = document.getElementById('fc-context-text');
+  contextText.textContent = `Linked Deal: ${thread.dealId} (${thread.status})`;
+
+  const actBtn = document.getElementById('fc-context-action');
+  actBtn.onclick = () => {
+    if(thread.stepTarget === 5){
+      goStep(5);
+    } else {
+      goStep(3);
+      openDrawer(thread.drawerType);
+    }
+    toggleFloatChat();
+  };
+
+  renderThreadMessages();
+  lucide.createIcons();
+}
+
+function renderThreadMessages(){
+  const thread = CHAT_THREADS[ACTIVE_CHAT_DEAL_ID];
+  if(!thread) return;
+  const body = document.getElementById('fc-msg-body');
+  
+  body.innerHTML = thread.messages.map(m => {
+    if(m.isMe){
+      return `
+        <div class="flex justify-end">
+          <div class="bg-brand text-white p-2.5 rounded-xl max-w-[85%] space-y-0.5">
+            <p class="text-xs leading-relaxed">${m.text}</p>
+            <span class="text-[9px] text-white/70 block text-right">${m.time}</span>
+          </div>
+        </div>
+      `;
+    } else {
+      return `
+        <div class="flex justify-start">
+          <div class="bg-white border border-slate-200 text-slate-800 p-2.5 rounded-xl max-w-[85%] space-y-0.5">
+            <span class="text-[10px] font-bold text-slate-500 block">${m.sender}</span>
+            <p class="text-xs leading-relaxed">${m.text}</p>
+            <span class="text-[9px] text-slate-400 block text-right">${m.time}</span>
+          </div>
+        </div>
+      `;
+    }
+  }).join('');
+  body.scrollTop = body.scrollHeight;
+}
+
+function sendFloatMsg(e){
+  e.preventDefault();
+  if(!ACTIVE_CHAT_DEAL_ID) return;
+  const inp = document.getElementById('fc-input');
+  let txt = inp.value.trim();
+  if(!txt) return;
+  txt = maskPrivacy(txt);
+
+  CHAT_THREADS[ACTIVE_CHAT_DEAL_ID].messages.push({
+    sender: 'Indian Manufactories Group (You)',
+    isMe: true,
+    text: txt,
+    time: 'Just now'
+  });
+
+  renderThreadMessages();
+  inp.value = '';
+}
+
+// ============================================================
+//  DRAWERS (FULL INTERACTIVE PANELS WITH CHAT TRIGGERS)
 // ============================================================
 function openDrawer(type, contextId){
   const overlay = document.getElementById('drawer-overlay');
@@ -955,9 +1182,14 @@ function openDrawer(type, contextId){
         </div>
         <div><label class="block text-xs font-bold text-slate-700 mb-1">Notes for Buyer</label><textarea rows="2" placeholder="Custom packaging or palletizing details..." class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs outline-none resize-none"></textarea></div>
       </div>
-      <div class="px-6 py-4 border-t border-slate-100 bg-white flex gap-3">
-        <button onclick="closeDrawer()" class="px-4 py-2.5 border border-slate-200 text-slate-600 text-xs font-bold rounded-xl hover:bg-slate-50">Cancel</button>
-        <button onclick="drawerSuccess('Quote submitted to Buyer #RU-3129! Status updated to Quote Sent.')" class="flex-1 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-xl">Send Quote →</button>
+      <div class="px-6 py-4 border-t border-slate-100 bg-white space-y-2">
+        <div class="flex gap-3">
+          <button onclick="closeDrawer()" class="px-4 py-2.5 border border-slate-200 text-slate-600 text-xs font-bold rounded-xl hover:bg-slate-50">Cancel</button>
+          <button onclick="drawerSuccess('Quote submitted to Buyer #RU-3129! Status updated to Quote Sent.')" class="flex-1 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-xl">Send Quote →</button>
+        </div>
+        <button onclick="closeDrawer(); openFloatDealChat('RFQ-2025-0891');" class="w-full py-2 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl text-xs font-bold text-slate-700 flex items-center justify-center gap-1.5 transition">
+          <i data-lucide="message-square" class="w-3.5 h-3.5 text-slate-500"></i><span>Discuss Quote with Buyer in Chat</span>
+        </button>
       </div>`,
 
     // 2. View Quote
@@ -1012,9 +1244,14 @@ function openDrawer(type, contextId){
           <span class="text-xs text-amber-900 font-medium">I confirm the commercial terms and agree to sign this B2B export agreement.</span>
         </label>
       </div>
-      <div class="px-6 py-4 border-t border-slate-100 bg-white flex gap-3">
-        <button onclick="closeDrawer()" class="px-4 py-2.5 border border-slate-200 text-slate-600 text-xs font-bold rounded-xl hover:bg-slate-50">Cancel</button>
-        <button id="sign-now-btn" disabled onclick="goStep(5); closeDrawer();" class="flex-1 py-2.5 bg-slate-300 text-white text-xs font-bold rounded-xl cursor-not-allowed">Open Deal Room & Sign →</button>
+      <div class="px-6 py-4 border-t border-slate-100 bg-white space-y-2">
+        <div class="flex gap-3">
+          <button onclick="closeDrawer()" class="px-4 py-2.5 border border-slate-200 text-slate-600 text-xs font-bold rounded-xl hover:bg-slate-50">Cancel</button>
+          <button id="sign-now-btn" disabled onclick="goStep(5); closeDrawer();" class="flex-1 py-2.5 bg-slate-300 text-white text-xs font-bold rounded-xl cursor-not-allowed">Open Deal Room & Sign →</button>
+        </div>
+        <button onclick="closeDrawer(); openFloatDealChat('CT-2025-0312');" class="w-full py-2 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl text-xs font-bold text-slate-700 flex items-center justify-center gap-1.5 transition">
+          <i data-lucide="message-square" class="w-3.5 h-3.5 text-slate-500"></i><span>Open Deal Chat with Buyer #RU-4471</span>
+        </button>
       </div>`,
 
     // 4. Production Progress
@@ -1067,9 +1304,14 @@ function openDrawer(type, contextId){
           </div>
         </div>
       </div>
-      <div class="px-6 py-4 border-t border-slate-100 bg-white flex gap-3">
-        <button onclick="closeDrawer()" class="px-4 py-2.5 border border-slate-200 text-slate-600 text-xs font-bold rounded-xl hover:bg-slate-50">Cancel</button>
-        <button onclick="drawerSuccess('B/L submitted! 70% balance released from Platform Escrow.')" class="flex-1 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-xl">Submit B/L & Claim Escrow</button>
+      <div class="px-6 py-4 border-t border-slate-100 bg-white space-y-2">
+        <div class="flex gap-3">
+          <button onclick="closeDrawer()" class="px-4 py-2.5 border border-slate-200 text-slate-600 text-xs font-bold rounded-xl hover:bg-slate-50">Cancel</button>
+          <button onclick="drawerSuccess('B/L submitted! 70% balance released from Platform Escrow.')" class="flex-1 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-xl">Submit B/L & Claim Escrow</button>
+        </div>
+        <button onclick="closeDrawer(); openFloatDealChat('ES-2025-0201');" class="w-full py-2 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl text-xs font-bold text-slate-700 flex items-center justify-center gap-1.5 transition">
+          <i data-lucide="message-square" class="w-3.5 h-3.5 text-slate-500"></i><span>Message Buyer #DE-5231 Regarding B/L</span>
+        </button>
       </div>`,
 
     // 6. Track Shipment
