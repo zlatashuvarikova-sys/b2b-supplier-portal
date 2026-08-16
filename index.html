@@ -46,70 +46,39 @@
   </div>
 </div>
 
-<!-- ======= COMPLIANCE MODAL (KYB VAULT) ======= -->
+<!-- ======= COMPLIANCE MODAL ======= -->
 <div id="compliance-modal" class="hidden fixed inset-0 z-[60] flex items-center justify-center bg-slate-900/50 p-4">
-  <div class="bg-white rounded-2xl shadow-2xl w-full max-w-xl border border-slate-200">
+  <div class="bg-white rounded-2xl shadow-2xl w-full max-w-lg border border-slate-200">
     <div class="flex items-center justify-between px-6 py-4 border-b border-slate-100">
       <div>
-        <h3 class="font-bold text-slate-900 text-base" data-i18n="compliance.title">KYB Compliance Vault & Exporter Profile</h3>
-        <p class="text-xs text-emerald-600 font-semibold mt-0.5">Indian Manufactories Group Pvt. Ltd. — Tier-1 Verified Exporter</p>
+        <h3 class="font-bold text-slate-900 text-base" data-i18n="compliance.title">Supplier Compliance Vault</h3>
+        <p class="text-xs text-emerald-600 font-semibold mt-0.5">Indian Manufactories Group Pvt. Ltd. — KYB Verified</p>
       </div>
       <button onclick="closeCompliance()" class="text-slate-400 hover:text-slate-600"><i data-lucide="x" class="w-5 h-5"></i></button>
     </div>
     <div class="p-5 space-y-2.5 max-h-[60vh] overflow-y-auto scrollbar-thin">
       <div class="flex items-center justify-between bg-slate-50 rounded-xl px-4 py-3 border border-slate-100">
-        <div>
-          <p class="text-[10px] text-slate-500 font-bold uppercase">GSTIN (State 27 — Maharashtra)</p>
-          <p class="text-sm font-mono font-bold text-slate-800">27AABCU9603R1ZM</p>
-          <p class="text-[10px] text-slate-400">Real-time verification active via GSTN portal</p>
-        </div>
-        <span class="text-xs font-bold text-emerald-700 bg-emerald-100 px-2.5 py-1 rounded-full">✓ Verified</span>
+        <div><p class="text-[10px] text-slate-500 font-bold uppercase">GSTIN (State 27 — Maharashtra)</p><p class="text-sm font-mono font-bold text-slate-800">27AABCU9603R1ZM</p></div>
+        <span class="text-xs font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-full">✓ Active</span>
       </div>
       <div class="flex items-center justify-between bg-slate-50 rounded-xl px-4 py-3 border border-slate-100">
-        <div>
-          <p class="text-[10px] text-slate-500 font-bold uppercase">DGFT IEC & Corporate PAN</p>
-          <p class="text-sm font-mono font-bold text-slate-800">IEC: 0319842109 · PAN: AABCU9603R</p>
-          <p class="text-[10px] text-slate-400">DGFT Directorate General of Foreign Trade</p>
-        </div>
-        <span class="text-xs font-bold text-emerald-700 bg-emerald-100 px-2.5 py-1 rounded-full">✓ Validated</span>
+        <div><p class="text-[10px] text-slate-500 font-bold uppercase">DGFT IEC / PAN</p><p class="text-sm font-mono font-bold text-slate-800">0319842109 · AABCU9603R</p></div>
+        <span class="text-xs font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-full">✓ Validated</span>
       </div>
       <div class="flex items-center justify-between bg-slate-50 rounded-xl px-4 py-3 border border-slate-100">
-        <div>
-          <p class="text-[10px] text-slate-500 font-bold uppercase">AD Code & Bank Forex Account</p>
-          <p class="text-sm font-bold text-slate-800">HDFC Bank Forex Desk · AD: 6300182</p>
-          <p class="text-[10px] text-slate-400">Nhava Sheva (INNSA1) · EDPMS / IDPMS Integrated</p>
-        </div>
-        <span class="text-xs font-bold text-emerald-700 bg-emerald-100 px-2.5 py-1 rounded-full">✓ Linked</span>
+        <div><p class="text-[10px] text-slate-500 font-bold uppercase">Export Promotion Council</p><p class="text-sm font-bold text-slate-800">APEDA & FIEO (Reg. A/2021/188843)</p></div>
+        <span class="text-xs font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-full">✓ Member</span>
       </div>
       <div class="flex items-center justify-between bg-slate-50 rounded-xl px-4 py-3 border border-slate-100">
-        <div>
-          <p class="text-[10px] text-slate-500 font-bold uppercase">Export Promotion Council (EPC)</p>
-          <p class="text-sm font-bold text-slate-800">APEDA & FIEO (RCMC No. A/2021/188843)</p>
-          <p class="text-[10px] text-slate-400">Valid through: 2027-12-31</p>
-        </div>
-        <span class="text-xs font-bold text-emerald-700 bg-emerald-100 px-2.5 py-1 rounded-full">✓ Active Member</span>
+        <div><p class="text-[10px] text-slate-500 font-bold uppercase">AD Code & Bank Forex</p><p class="text-sm font-bold text-slate-800">HDFC Bank · AD: 6300182 · JNPT INNSA1</p></div>
+        <span class="text-xs font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-full">✓ Linked</span>
       </div>
       <div class="flex items-center justify-between bg-slate-50 rounded-xl px-4 py-3 border border-slate-100">
-        <div>
-          <p class="text-[10px] text-slate-500 font-bold uppercase">Quality & Phytosanitary Accreditations</p>
-          <p class="text-sm font-bold text-slate-800">ISO 9001:2015 · NPOP / USDA / EU Organic</p>
-          <p class="text-[10px] text-slate-400">TÜV SÜD Audited Export Batch Certification</p>
-        </div>
-        <span class="text-xs font-bold text-emerald-700 bg-emerald-100 px-2.5 py-1 rounded-full">✓ Certified</span>
-      </div>
-      <div class="flex items-center justify-between bg-slate-50 rounded-xl px-4 py-3 border border-slate-100">
-        <div>
-          <p class="text-[10px] text-slate-500 font-bold uppercase">Manufacturing Unit & Facility Audit</p>
-          <p class="text-xs font-bold text-slate-800">Plot B-22, MIDC Industrial Area, Pune, MH 411019</p>
-          <p class="text-[10px] text-slate-400">GPS Verified · Last surveyor audit: 2025-03-15</p>
-        </div>
-        <span class="text-xs font-bold text-emerald-700 bg-emerald-100 px-2.5 py-1 rounded-full">✓ Audited</span>
+        <div><p class="text-[10px] text-slate-500 font-bold uppercase">Manufacturing Unit</p><p class="text-xs font-bold text-slate-800">Plot B-22, MIDC Industrial Area, Pune, MH 411019</p></div>
+        <span class="text-xs font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-full">✓ Audited</span>
       </div>
     </div>
-    <div class="px-5 pb-5 pt-3 flex items-center justify-between border-t border-slate-100">
-      <button onclick="showNotify('Downloading Full Official KYB Audit Report (PDF) with DGFT & Bank verifications...');" class="px-4 py-2 bg-emerald-600 text-white text-xs font-bold rounded-xl hover:bg-emerald-700 transition flex items-center gap-1.5">
-        <i data-lucide="download" class="w-3.5 h-3.5"></i><span>Download KYB Audit Report (PDF)</span>
-      </button>
+    <div class="px-5 pb-5 pt-3 flex justify-end border-t border-slate-100">
       <button onclick="closeCompliance()" class="px-5 py-2 bg-slate-100 text-slate-700 text-sm font-semibold rounded-xl hover:bg-slate-200 transition" data-i18n="common.close">Close</button>
     </div>
   </div>
@@ -231,14 +200,14 @@
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div>
-            <label class="block text-xs font-bold uppercase text-slate-600 mb-1" data-i18n="kyb.gstin">GSTIN (State 27 — Maharashtra)</label>
+            <label class="block text-xs font-bold uppercase text-slate-600 mb-1" data-i18n="kyb.gstin">GSTIN (State 27)</label>
             <div class="relative">
               <input type="text" value="27AABCU9603R1ZM" class="w-full px-3 py-2 pr-16 bg-slate-50 border border-slate-200 rounded-lg text-sm font-mono outline-none">
               <span class="absolute right-2 top-2 text-[10px] font-bold text-emerald-600 bg-emerald-100 px-1.5 py-0.5 rounded">✓ Valid</span>
             </div>
           </div>
           <div>
-            <label class="block text-xs font-bold uppercase text-slate-600 mb-1" data-i18n="kyb.iec">DGFT IEC / Corporate PAN</label>
+            <label class="block text-xs font-bold uppercase text-slate-600 mb-1" data-i18n="kyb.iec">DGFT IEC / PAN</label>
             <div class="relative">
               <input type="text" value="0319842109 / AABCU9603R" class="w-full px-3 py-2 pr-20 bg-slate-50 border border-slate-200 rounded-lg text-sm font-mono outline-none">
               <span class="absolute right-2 top-2 text-[10px] font-bold text-emerald-600 bg-emerald-100 px-1.5 py-0.5 rounded">✓ DGFT</span>
@@ -246,13 +215,13 @@
           </div>
           <div>
             <label class="block text-xs font-bold uppercase text-slate-600 mb-1" data-i18n="kyb.council">Export Council</label>
-            <input type="text" value="APEDA & FIEO (RCMC A/2021/188843)" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm font-medium outline-none">
+            <input type="text" value="APEDA & FIEO (APEDA/MH/2021/188843)" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm font-medium outline-none">
           </div>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label class="block text-xs font-bold uppercase text-slate-600 mb-1" data-i18n="kyb.adcode">AD Code & Bank Forex Desk</label>
-            <input type="text" value="HDFC Bank Forex Desk · AD: 6300182 (EDPMS)" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs font-medium outline-none">
+            <label class="block text-xs font-bold uppercase text-slate-600 mb-1" data-i18n="kyb.adcode">AD Code & Bank IFSC</label>
+            <input type="text" value="HDFC Bank · IFSC: HDFC0004021 · AD: 6300182" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs font-medium outline-none">
           </div>
           <div>
             <label class="block text-xs font-bold uppercase text-slate-600 mb-1" data-i18n="kyb.port">Port of Origin</label>
@@ -264,10 +233,10 @@
           <input type="text" value="Plot B-22, MIDC Industrial Area, Pune, Maharashtra 411019" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs font-medium outline-none">
         </div>
         <div>
-          <label class="block text-xs font-bold uppercase text-slate-600 mb-1" data-i18n="kyb.doc">Export Licenses & ISO Certifications</label>
+          <label class="block text-xs font-bold uppercase text-slate-600 mb-1" data-i18n="kyb.doc">Export Licenses & Certifications</label>
           <div class="border-2 border-dashed border-slate-200 rounded-xl p-4 text-center bg-slate-50 hover:border-brand transition cursor-pointer">
             <i data-lucide="file-check" class="w-7 h-7 text-emerald-500 mx-auto mb-1"></i>
-            <p class="text-xs font-medium text-slate-700">DGFT_IEC_APEDA_ISO9001_NPOP_Certificates_2025.pdf <span class="text-emerald-600 font-bold">(3.2 MB · Uploaded)</span></p>
+            <p class="text-xs font-medium text-slate-700">APEDA_IEC_ISO9001_NPOP_Certificates_2025.pdf <span class="text-emerald-600 font-bold">(2.8 MB · Uploaded)</span></p>
           </div>
         </div>
         <div class="flex items-center justify-between pt-2">
@@ -331,7 +300,7 @@
     <div class="flex items-center justify-between">
       <div>
         <h1 class="text-2xl font-extrabold text-slate-900" data-i18n="catalog.title">B2B Export Product Catalog</h1>
-        <p class="text-xs text-slate-500 mt-0.5" data-i18n="catalog.subtitle">Manage product specifications, international ITC-HS codes and export trade listings</p>
+        <p class="text-xs text-slate-500 mt-0.5" data-i18n="catalog.subtitle">Manage product specifications and 15 export category listings</p>
       </div>
       <div class="flex gap-3">
         <button onclick="goStep(3)" class="px-3 py-2 text-xs font-bold text-slate-600 border border-slate-200 rounded-xl hover:bg-slate-50 transition flex items-center gap-1.5">
@@ -341,16 +310,16 @@
       </div>
     </div>
 
-    <!-- Catalog Filters (15 Universal B2B Categories) -->
+    <!-- Catalog Filters (15 Categories) -->
     <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-4 flex flex-wrap items-end gap-4">
       <div class="flex-1 min-w-36">
         <label class="block text-xs font-bold text-slate-600 mb-1" data-i18n="catalog.search">Search</label>
         <input type="text" id="cat-search" oninput="renderCatalog()" placeholder="Product name or SKU..." class="w-full px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-xs outline-none focus:ring-1 focus:ring-brand/40">
       </div>
       <div>
-        <label class="block text-xs font-bold text-slate-600 mb-1" data-i18n="catalog.category">Category (15 B2B Groups):</label>
+        <label class="block text-xs font-bold text-slate-600 mb-1" data-i18n="catalog.category">Category:</label>
         <select id="cat-cat" onchange="renderCatalog()" class="px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-xs outline-none cursor-pointer">
-          <option value="" data-i18n="catalog.allCat">All Categories (15)</option>
+          <option value="" data-i18n="catalog.allCat">All Categories</option>
           <option value="Agriculture & Agro Inputs" data-i18n="cat.1">1. Agriculture & Agro Inputs</option>
           <option value="Food, Grains & Spices" data-i18n="cat.2">2. Food, Grains & Spices</option>
           <option value="Chemicals & Petrochemicals" data-i18n="cat.3">3. Chemicals & Petrochemicals</option>
@@ -499,19 +468,19 @@ const RATES = {
   RUB: { s:'₽', r:1.08 }
 };
 
-// Clean inline SVG icons for instant 100% reliable rendering
+// Clean inline SVG icons
 const SVG_ICONS = {
-  agro: `<svg class="w-14 h-14 text-emerald-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>`,
-  food: `<svg class="w-14 h-14 text-amber-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 0 0-10 10c0 5.523 4.477 10 10 10s10-4.477 10-10A10 10 0 0 0 12 2Z"/><path d="m4.93 4.93 4.24 4.24"/><path d="m14.83 9.17 4.24-4.24"/><path d="m14.83 14.83 4.24 4.24"/><path d="m9.17 14.83-4.24 4.24"/></svg>`,
-  chem: `<svg class="w-14 h-14 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v7.31L4.12 19.6A2 2 0 0 0 5.8 22h12.4a2 2 0 0 0 1.68-2.4L14 9.31V2"/><path d="M8.5 2h7"/><path d="M7 16h10"/></svg>`,
-  pack: `<svg class="w-14 h-14 text-orange-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>`
+  fertilizer: `<svg class="w-14 h-14 text-emerald-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>`,
+  seeds: `<svg class="w-14 h-14 text-amber-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 0 0-10 10c0 5.523 4.477 10 10 10s10-4.477 10-10A10 10 0 0 0 12 2Z"/><path d="m4.93 4.93 4.24 4.24"/><path d="m14.83 9.17 4.24-4.24"/><path d="m14.83 14.83 4.24 4.24"/><path d="m9.17 14.83-4.24 4.24"/></svg>`,
+  organic: `<svg class="w-14 h-14 text-lime-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 20h10"/><path d="M10 20c0-3 1-4 2-7"/><path d="M12 13c1-3 4-5 7-5 0 4-3 7-7 7Z"/><path d="M12 13c-1-2-3-4-6-4 0 3 2 5 6 4Z"/></svg>`,
+  media: `<svg class="w-14 h-14 text-amber-800" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>`
 };
 
 const CATALOG_DATA = [
-  { id:'IMG-AG-001', name:'NPK 20-20-20 Soluble Fertilizer', category:'Agriculture & Agro Inputs', hs:'3105.20.00', unit:'MT', priceInr:41500, moq:5, certs:['ISO 9001','SGS Tested','FSSAI'], iconSvg:SVG_ICONS.agro, bgCls:'bg-emerald-50' },
-  { id:'IMG-FS-002', name:'Basmati Rice 1121 Extra Long Grain', category:'Food, Grains & Spices', hs:'1006.30.20', unit:'MT', priceInr:98500, moq:20, certs:['APEDA Reg','Non-GMO','AGMARK'], iconSvg:SVG_ICONS.food, bgCls:'bg-amber-50' },
-  { id:'IMG-CH-003', name:'Castor Oil First Special Grade (FSG)', category:'Chemicals & Petrochemicals', hs:'1515.30.90', unit:'MT', priceInr:142000, moq:10, certs:['REACH Ready','ISO 9001','TÜV Audited'], iconSvg:SVG_ICONS.chem, bgCls:'bg-blue-50' },
-  { id:'IMG-PK-004', name:'Food-Grade Hydrocarbon-Free Jute Bags', category:'Packaging & Paper Products', hs:'6305.10.00', unit:'pcs', priceInr:38, moq:5000, certs:['Eco-Certified','US FDA Tested'], iconSvg:SVG_ICONS.pack, bgCls:'bg-orange-50' }
+  { id:'IMG-AG-001', name:'NPK 20-20-20 Water Soluble Fertilizer', category:'Agriculture & Agro Inputs', hs:'3105.20.00', unit:'MT', priceInr:41500, moq:5, certs:['ISO 9001','SGS Tested','FSSAI'], iconSvg:SVG_ICONS.fertilizer, bgCls:'bg-emerald-50' },
+  { id:'IMG-FS-002', name:'Basmati Rice 1121 Extra Long Grain', category:'Food, Grains & Spices', hs:'1006.30.20', unit:'MT', priceInr:98500, moq:20, certs:['APEDA Reg','Non-GMO','AGMARK'], iconSvg:SVG_ICONS.seeds, bgCls:'bg-amber-50' },
+  { id:'IMG-AG-003', name:'Organic Vermicompost Premium', category:'Agriculture & Agro Inputs', hs:'3101.00.00', unit:'MT', priceInr:9200, moq:10, certs:['NPOP Organic','EU Organic','USDA NOP'], iconSvg:SVG_ICONS.organic, bgCls:'bg-lime-50' },
+  { id:'IMG-PK-004', name:'Food-Grade Jute Bags Hydrocarbon-Free', category:'Packaging & Paper Products', hs:'6305.10.00', unit:'pcs', priceInr:38, moq:5000, certs:['RHP Certified','OMRI Listed'], iconSvg:SVG_ICONS.media, bgCls:'bg-amber-100/40' }
 ];
 
 // All 7 distinct statuses with anonymous Airbnb-style buyers
@@ -520,7 +489,7 @@ const ORDERS_DATA = [
   { id:'QT-2025-0445', product:'Basmati Rice 1121 (24 MT)', buyer:'Buyer #RU-8842', qty:'24 MT', valInr:2364000, status:'QUOTE_SENT', badgeCls:'bg-blue-100 text-blue-800', needsAction:false },
   { id:'CT-2025-0312', product:'NPK 20-20-20 Fertilizer', buyer:'Buyer #RU-4471', qty:'50 MT', valInr:2075000, status:'CONTRACT', badgeCls:'bg-indigo-100 text-indigo-800', needsAction:true },
   { id:'PR-2025-0278', product:'Jute Bags Hydrocarbon-Free', buyer:'Buyer #RU-7654', qty:'100k pcs', valInr:3800000, status:'PRODUCTION', badgeCls:'bg-sky-100 text-sky-800', needsAction:false },
-  { id:'ES-2025-0201', product:'Castor Oil FSG (20 MT)', buyer:'Buyer #DE-5231', qty:'20 MT', valInr:2840000, status:'ESCROW_HELD', badgeCls:'bg-purple-100 text-purple-800', needsAction:true },
+  { id:'ES-2025-0201', product:'NPK 20-20-20 Fertilizer', buyer:'Buyer #DE-5231', qty:'100 MT', valInr:4285000, status:'ESCROW_HELD', badgeCls:'bg-purple-100 text-purple-800', needsAction:true },
   { id:'SH-2025-0188', product:'Organic Vermicompost', buyer:'Buyer #DE-1198', qty:'200 MT', valInr:1840000, status:'SHIPPED', badgeCls:'bg-teal-100 text-teal-800', needsAction:false },
   { id:'CM-2024-1044', product:'Hybrid Maize Seeds', buyer:'Buyer #RU-0512', qty:'1,000 KG', valInr:242000, status:'COMPLETED', badgeCls:'bg-emerald-100 text-emerald-800', needsAction:false }
 ];
@@ -536,15 +505,15 @@ en: {
   'auth.title':'Sign in to GlobalTrade Portal','auth.email':'Corporate Email','auth.password':'Password',
   'auth.continue':'Continue','auth.otpSent':'A 6-digit confirmation code was sent to your email.',
   'auth.otp':'One-Time Password (OTP)','auth.terms':'I accept the Terms of Service and Cross-Border Data Transfer Policy (GDPR / DPDP).','auth.kyb_consent':'I consent to automated KYB identity check via national registries.','auth.signin':'Sign in','common.back':'← Back','common.close':'Close',
-  'kyb.title':'Exporter Legal Identity & Regulatory Credentials','kyb.subtitle':'Verify your GSTIN, DGFT IEC and APEDA export council memberships.','kyb.pending':'Pending Verification','kyb.companyName':'Company Legal Name','kyb.country':'Country','kyb.gstin':'GSTIN (State 27)','kyb.iec':'DGFT IEC / PAN','kyb.council':'Export Council (APEDA)','kyb.adcode':'AD Code & Bank IFSC','kyb.port':'Port of Origin','kyb.factory':'Factory / Manufacturing Facility','kyb.doc':'Export Licenses & Quality Certifications','kyb.back':'← Back to Auth','kyb.submit':'Verify & Open Dashboard',
-  'compliance.title':'KYB Compliance Vault & Exporter Profile',
+  'kyb.title':'Exporter Legal Identity & Regulatory Credentials','kyb.subtitle':'Verify your GSTIN, DGFT IEC and APEDA export council memberships.','kyb.pending':'Pending Verification','kyb.companyName':'Company Legal Name','kyb.country':'Country','kyb.gstin':'GSTIN (State 27)','kyb.iec':'DGFT IEC / PAN','kyb.council':'Export Council (APEDA)','kyb.adcode':'AD Code & Bank IFSC','kyb.port':'Port of Origin','kyb.factory':'Factory / Manufacturing Facility','kyb.doc':'Export Licenses & Certifications','kyb.back':'← Back to Auth','kyb.submit':'Verify & Open Dashboard',
+  'compliance.title':'Supplier Compliance Vault',
   'kpi.escrow':'Escrow Secured','kpi.action':'Requires Your Action','kpi.action_suffix':'deals','kpi.shipments':'In Transit','kpi.ships_suffix':'shipments','kpi.completed':'Completed','kpi.completed_suffix':'deals',
   'orders.filterLabel':'Filter:','orders.catalog':'Product Catalog →',
   'table.id':'Deal ID','table.product':'Product','table.buyer':'Buyer','table.value':'Value','table.status':'Status','table.action':'Action',
   'st.ALL':'All','st.RFQ':'RFQ','st.QUOTE_SENT':'Quote Sent','st.CONTRACT':'Contract','st.PRODUCTION':'Production','st.ESCROW_HELD':'Escrow Held','st.SHIPPED':'Shipped','st.COMPLETED':'Completed',
   'act.RFQ':'Send Quote','act.QUOTE_SENT':'View Quote','act.CONTRACT':'Sign Contract','act.PRODUCTION':'Production Progress','act.ESCROW_HELD':'Upload B/L','act.SHIPPED':'Track Shipment','act.COMPLETED':'View Details',
-  'catalog.title':'B2B Export Product Catalog','catalog.subtitle':'Manage product specifications, international ITC-HS codes and export trade listings','catalog.back':'Orders Hub','catalog.addSku':'Add New SKU',
-  'catalog.search':'Search','catalog.category':'Category (15 B2B Groups):','catalog.allCat':'All Categories (15)',
+  'catalog.title':'B2B Export Product Catalog','catalog.subtitle':'Manage product specifications and 15 export category listings','catalog.back':'Orders Hub','catalog.addSku':'Add New SKU',
+  'catalog.search':'Search','catalog.category':'Category:','catalog.allCat':'All Categories',
   'cat.1':'1. Agriculture & Agro Inputs','cat.2':'2. Food, Grains & Spices','cat.3':'3. Chemicals & Petrochemicals','cat.4':'4. Metals, Metallurgy & Minerals','cat.5':'5. Textiles, Fabrics & Garments','cat.6':'6. Building & Construction Materials','cat.7':'7. Packaging & Paper Products','cat.8':'8. Automotive Parts & Consumables','cat.9':'9. Consumer Goods & Houseware','cat.10':'10. Plastics & Rubber Products','cat.11':'11. Renewable Energy & Eco-Materials','cat.12':'12. Raw Materials & Commodities','cat.13':'13. Handicrafts & Natural Home Decor','cat.14':'14. Leather, Footwear & Accessories','cat.15':'15. Cosmetics & Herbal Raw Ingredients',
   'catalog.sort':'Sort:','catalog.priceAsc':'Price: Low → High','catalog.priceDesc':'Price: High → Low','catalog.moqAsc':'MOQ: Smallest First',
   'catalog.price':'Price / unit','catalog.moq':'Min. Order (MOQ)','catalog.hs':'HS Code','catalog.offer':'Create Export Offer',
@@ -572,15 +541,15 @@ ru: {
   'auth.continue':'Продолжить','auth.otpSent':'6-значный код подтверждения отправлен на ваш email.',
   'auth.otp':'Одноразовый пароль (OTP)','auth.terms':'Я принимаю Условия обслуживания и Политику трансграничной передачи данных (GDPR / DPDP).','auth.kyb_consent':'Я согласен на автоматическую проверку KYB через государственные реестры.','auth.signin':'Войти','common.back':'← Назад','common.close':'Закрыть',
   'kyb.title':'Юридические данные и регуляторные реквизиты экспортёра','kyb.subtitle':'Верификация GSTIN, DGFT IEC и членства в экспортном совете APEDA.','kyb.pending':'Ожидает верификации','kyb.companyName':'Юридическое название компании','kyb.country':'Страна','kyb.gstin':'GSTIN (Штат 27)','kyb.iec':'DGFT IEC / PAN','kyb.council':'Экспортный совет (APEDA)','kyb.adcode':'AD-код и IFSC банка','kyb.port':'Порт отправления','kyb.factory':'Адрес фабрики / предприятия','kyb.doc':'Экспортные лицензии и сертификаты качества','kyb.back':'← Назад к авторизации','kyb.submit':'Верифицировать и открыть дашборд',
-  'compliance.title':'Сейф комплаенса KYB и профиль экспортёра',
+  'compliance.title':'Центр соответствия поставщика',
   'kpi.escrow':'Средства в эскроу','kpi.action':'Требует вашего действия','kpi.action_suffix':'сделок ждут ответа','kpi.shipments':'В пути','kpi.ships_suffix':'отгрузок','kpi.completed':'Завершено','kpi.completed_suffix':'сделок',
   'orders.filterLabel':'Фильтр:','orders.catalog':'Каталог товаров →',
   'table.id':'ID сделки','table.product':'Товар','table.buyer':'Покупатель','table.value':'Стоимость','table.status':'Статус','table.action':'Действие',
   'st.ALL':'Все','st.RFQ':'RFQ','st.QUOTE_SENT':'КП отправлено','st.CONTRACT':'Контракт','st.PRODUCTION':'Производство','st.ESCROW_HELD':'Эскроу','st.SHIPPED':'Отгружено','st.COMPLETED':'Завершено',
   'act.RFQ':'Отправить КП','act.QUOTE_SENT':'Просмотр КП','act.CONTRACT':'Подписать контракт','act.PRODUCTION':'Ход производства','act.ESCROW_HELD':'Загрузить коносамент','act.SHIPPED':'Отследить груз','act.COMPLETED':'Подробнее',
-  'catalog.title':'Экспортный B2B-каталог продукции','catalog.subtitle':'Управление номенклатурой, кодами ТН ВЭД и международными листингами','catalog.back':'Хаб заказов','catalog.addSku':'Добавить новый SKU',
-  'catalog.search':'Поиск','catalog.category':'Категория (15 B2B-групп):','catalog.allCat':'Все категории (15)',
-  'cat.1':'1. Agriculture & Agro Inputs (Удобрения, семена, торф)','cat.2':'2. Food, Grains & Spices (Зерновые, рис, специи)','cat.3':'3. Chemicals & Petrochemicals (Химия, полимеры)','cat.4':'4. Metals, Metallurgy & Minerals (Металлы, руда)','cat.5':'5. Textiles, Fabrics & Garments (Текстиль, хлопок)','cat.6':'6. Building & Construction Materials (Стройматериалы)','cat.7':'7. Packaging & Paper Products (Упаковка, тара, мешки)','cat.8':'8. Automotive Parts & Consumables (Автокомпоненты)','cat.9':'9. Consumer Goods & Houseware (Потребительские товары)','cat.10':'10. Plastics & Rubber Products (Полимеры, РТИ)','cat.11':'11. Renewable Energy & Eco-Materials (Эко-материалы, пеллеты)','cat.12':'12. Raw Materials & Commodities (Сырьевые товары)','cat.13':'13. Handicrafts & Natural Home Decor (Изделия ручной работы)','cat.14':'14. Leather, Footwear & Accessories (Кожа, обувь)','cat.15':'15. Cosmetics & Herbal Raw Ingredients (Эфирные масла, экстракты)',
+  'catalog.title':'Экспортный B2B-каталог продукции','catalog.subtitle':'Управление номенклатурой и 15 товарными группами','catalog.back':'Хаб заказов','catalog.addSku':'Добавить новый SKU',
+  'catalog.search':'Поиск','catalog.category':'Категория:','catalog.allCat':'Все категории',
+  'cat.1':'1. Agriculture & Agro Inputs (Удобрения, семена)','cat.2':'2. Food, Grains & Spices (Зерно, специи, рис)','cat.3':'3. Chemicals & Petrochemicals (Химия)','cat.4':'4. Metals, Metallurgy & Minerals (Металлы, руда)','cat.5':'5. Textiles, Fabrics & Garments (Текстиль, хлопок)','cat.6':'6. Building & Construction Materials (Стройматериалы)','cat.7':'7. Packaging & Paper Products (Упаковка, тара)','cat.8':'8. Automotive Parts & Consumables (Автокомпоненты)','cat.9':'9. Consumer Goods & Houseware (Хозтовары)','cat.10':'10. Plastics & Rubber Products (Полимеры, РТИ)','cat.11':'11. Renewable Energy & Eco-Materials (Эко-материалы)','cat.12':'12. Raw Materials & Commodities (Сырьевые товары)','cat.13':'13. Handicrafts & Natural Home Decor (Декор, джут)','cat.14':'14. Leather, Footwear & Accessories (Кожа, обувь)','cat.15':'15. Cosmetics & Herbal Raw Ingredients (Экстракты, масла)',
   'catalog.sort':'Сортировка:','catalog.priceAsc':'Цена: по возрастанию','catalog.priceDesc':'Цена: по убыванию','catalog.moqAsc':'MOQ: сначала меньший',
   'catalog.price':'Цена / ед.','catalog.moq':'Мин. партия (MOQ)','catalog.hs':'Код HS','catalog.offer':'Создать экспортное предложение',
   'deal.title':'Согласование условий и E-Sign','deal.subtitle':'Заказ GT-2025-0312 · Покупатель #RU-4471','deal.back':'Назад к заказам','deal.terms':'Согласованные коммерческие условия',
@@ -606,15 +575,15 @@ hi: {
   'auth.title':'GlobalTrade Portal में साइन इन करें','auth.email':'कॉर्पोरेट ईमेल','auth.password':'पासवर्ड',
   'auth.continue':'जारी रखें','auth.otpSent':'आपके ईमेल पर 6-अंकीय कोड भेजा गया।',
   'auth.otp':'वन-टाइम पासवर्ड (OTP)','auth.terms':'मैं सेवा की शर्तें और डेटा नीति स्वीकार करता हूँ।','auth.kyb_consent':'मैं KYB सत्यापन के लिए सहमति देता हूँ।','auth.signin':'साइन इन','common.back':'← वापस','common.close':'बंद करें',
-  'kyb.title':'निर्यातक कानूनी पहचान और नियामक प्रमाण-पत्र','kyb.subtitle':'GSTIN, DGFT IEC और APEDA सदस्यता सत्यापित करें।','kyb.pending':'सत्यापन प्रतीक्षित','kyb.companyName':'कंपनी का कानूनी नाम','kyb.country':'देश','kyb.gstin':'GSTIN (राज्य 27)','kyb.iec':'DGFT IEC / PAN','kyb.council':'निर्यात परिषद (APEDA)','kyb.adcode':'AD कोड और IFSC','kyb.port':'मूल बंदरगाह','kyb.factory':'कारखाना पता','kyb.doc':'निर्यात प्रमाणपत्र और गुणवत्ता लाइसेंस','kyb.back':'← वापस','kyb.submit':'सत्यापित करें और डैशबोर्ड खोलें',
+  'kyb.title':'निर्यातक कानूनी पहचान और नियामक प्रमाण-पत्र','kyb.subtitle':'GSTIN, DGFT IEC और APEDA सदस्यता सत्यापित करें।','kyb.pending':'सत्यापन प्रतीक्षित','kyb.companyName':'कंपनी का कानूनी नाम','kyb.country':'देश','kyb.gstin':'GSTIN (राज्य 27)','kyb.iec':'DGFT IEC / PAN','kyb.council':'निर्यात परिषद (APEDA)','kyb.adcode':'AD कोड और IFSC','kyb.port':'मूल बंदरगाह','kyb.factory':'कारखाना पता','kyb.doc':'निर्यात प्रमाणपत्र और लाइसेंस','kyb.back':'← वापस','kyb.submit':'सत्यापित करें और डैशबोर्ड खोलें',
   'compliance.title':'आपूर्तिकर्ता अनुपालन केंद्र',
   'kpi.escrow':'एस्क्रो सुरक्षित','kpi.action':'आपकी कार्रवाई आवश्यक','kpi.action_suffix':'सौदे उत्तर की प्रतीक्षा में','kpi.shipments':'पारगमन में','kpi.ships_suffix':'शिपमेंट','kpi.completed':'पूर्ण','kpi.completed_suffix':'सौदे',
   'orders.filterLabel':'फ़िल्टर:','orders.catalog':'उत्पाद कैटलॉग →',
   'table.id':'डील आईडी','table.product':'उत्पाद','table.buyer':'खरीदार','table.value':'मूल्य','table.status':'स्थिति','table.action':'कार्रवाई',
   'st.ALL':'सभी','st.RFQ':'RFQ','st.QUOTE_SENT':'उद्धरण भेजा','st.CONTRACT':'अनुबंध','st.PRODUCTION':'उत्पादन','st.ESCROW_HELD':'एस्क्रो','st.SHIPPED':'भेजा गया','st.COMPLETED':'पूर्ण',
   'act.RFQ':'उद्धरण भेजें','act.QUOTE_SENT':'उद्धरण देखें','act.CONTRACT':'अनुबंध पर हस्ताक्षर करें','act.PRODUCTION':'उत्पादन स्थिति','act.ESCROW_HELD':'B/L अपलोड करें','act.SHIPPED':'शिपमेंट ट्रैक करें','act.COMPLETED':'विवरण देखें',
-  'catalog.title':'B2B निर्यात उत्पाद कैटलॉग','catalog.subtitle':'उत्पाद विनिर्देशों और निर्यात लिस्टिंग को प्रबंधित करें','catalog.back':'ऑर्डर हब','catalog.addSku':'नया SKU जोड़ें',
-  'catalog.search':'खोजें','catalog.category':'श्रेणी (15 श्रेणियाँ):','catalog.allCat':'सभी 15 श्रेणियाँ',
+  'catalog.title':'B2B निर्यात उत्पाद कैटलॉग','catalog.subtitle':'उत्पाद विनिर्देशों और 15 निर्यात श्रेणियों को प्रबंधित करें','catalog.back':'ऑर्डर हब','catalog.addSku':'नया SKU जोड़ें',
+  'catalog.search':'खोजें','catalog.category':'श्रेणी:','catalog.allCat':'सभी 15 श्रेणियाँ',
   'cat.1':'1. Agriculture & Agro Inputs','cat.2':'2. Food, Grains & Spices','cat.3':'3. Chemicals & Petrochemicals','cat.4':'4. Metals, Metallurgy & Minerals','cat.5':'5. Textiles, Fabrics & Garments','cat.6':'6. Building & Construction Materials','cat.7':'7. Packaging & Paper Products','cat.8':'8. Automotive Parts & Consumables','cat.9':'9. Consumer Goods & Houseware','cat.10':'10. Plastics & Rubber Products','cat.11':'11. Renewable Energy & Eco-Materials','cat.12':'12. Raw Materials & Commodities','cat.13':'13. Handicrafts & Natural Home Decor','cat.14':'14. Leather, Footwear & Accessories','cat.15':'15. Cosmetics & Herbal Raw Ingredients',
   'catalog.sort':'क्रमबद्ध करें:','catalog.priceAsc':'मूल्य: कम → अधिक','catalog.priceDesc':'मूल्य: अधिक → कम','catalog.moqAsc':'MOQ: सबसे छोटा पहले',
   'catalog.price':'मूल्य/इकाई','catalog.moq':'न्यूनतम ऑर्डर (MOQ)','catalog.hs':'HS कोड','catalog.offer':'निर्यात प्रस्ताव बनाएं',
@@ -648,8 +617,8 @@ zh: {
   'table.id':'交易ID','table.product':'产品','table.buyer':'买家','table.value':'金额','table.status':'状态','table.action':'操作',
   'st.ALL':'全部','st.RFQ':'询价','st.QUOTE_SENT':'已报价','st.CONTRACT':'合同','st.PRODUCTION':'生产中','st.ESCROW_HELD':'托管中','st.SHIPPED':'已发运','st.COMPLETED':'已完成',
   'act.RFQ':'发送报价','act.QUOTE_SENT':'查看报价','act.CONTRACT':'签署合同','act.PRODUCTION':'查看进度','act.ESCROW_HELD':'上传提单','act.SHIPPED':'追踪货运','act.COMPLETED':'查看详情',
-  'catalog.title':'B2B出口产品目录','catalog.subtitle':'管理产品规格、ITC-HS编码及全球贸易列表','catalog.back':'订单中心','catalog.addSku':'添加新SKU',
-  'catalog.search':'搜索','catalog.category':'类别 (15个行业大类):','catalog.allCat':'全部 15 个类别',
+  'catalog.title':'B2B出口产品目录','catalog.subtitle':'管理产品规格与15个行业分类','catalog.back':'订单中心','catalog.addSku':'添加新SKU',
+  'catalog.search':'搜索','catalog.category':'类别:','catalog.allCat':'全部 15 个类别',
   'cat.1':'1. Agriculture & Agro Inputs','cat.2':'2. Food, Grains & Spices','cat.3':'3. Chemicals & Petrochemicals','cat.4':'4. Metals, Metallurgy & Minerals','cat.5':'5. Textiles, Fabrics & Garments','cat.6':'6. Building & Construction Materials','cat.7':'7. Packaging & Paper Products','cat.8':'8. Automotive Parts & Consumables','cat.9':'9. Consumer Goods & Houseware','cat.10':'10. Plastics & Rubber Products','cat.11':'11. Renewable Energy & Eco-Materials','cat.12':'12. Raw Materials & Commodities','cat.13':'13. Handicrafts & Natural Home Decor','cat.14':'14. Leather, Footwear & Accessories','cat.15':'15. Cosmetics & Herbal Raw Ingredients',
   'catalog.sort':'排序:','catalog.priceAsc':'价格: 低 → 高','catalog.priceDesc':'价格: 高 → 低','catalog.moqAsc':'起订量: 最小优先',
   'catalog.price':'价格/单位','catalog.moq':'最小起订量','catalog.hs':'HS编码','catalog.offer':'创建出口报价',
@@ -668,7 +637,7 @@ zh: {
   'step1.title':'登录','step1.sub':'邮箱与OTP验证',
   'step2.title':'企业认证','step2.sub':'法定及出口资质',
   'step3.title':'订单中心','step3.sub':'交易与托管管理',
-  'step4.title':'产品目录','step4.sub':'B2B出口列表',
+  'step4.title':'产品目录','step4.sub':'15大品类列表',
   'step5.title':'谈判室','step5.sub':'合同与电子签署'
 }
 };
@@ -971,20 +940,20 @@ function openDrawer(type, contextId){
       </div>
       <div class="p-6 space-y-4 flex-1">
         <div class="bg-amber-50 border border-amber-200 rounded-xl p-3 text-xs text-amber-900">
-          <b>Buyer Request:</b> 100 MT NPK 20-20-20, CIF St. Petersburg, with ISO & phytosanitary certificates.
+          <b>Buyer Request:</b> 100 MT NPK 20-20-20, CIF Novorossiysk, with NPOP & phytosanitary certificate.
         </div>
         <div class="grid grid-cols-2 gap-4">
-          <div><label class="block text-xs font-bold text-slate-700 mb-1">Price per MT (₹ INR)</label><input type="number" value="41500" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm outline-none font-bold"></div>
+          <div><label class="block text-xs font-bold text-slate-700 mb-1">Price per MT (₹ INR)</label><input type="number" value="41500" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm outline-none"></div>
           <div><label class="block text-xs font-bold text-slate-700 mb-1">Quantity (MT)</label><input type="number" value="100" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm outline-none"></div>
         </div>
         <div class="grid grid-cols-2 gap-4">
-          <div><label class="block text-xs font-bold text-slate-700 mb-1">Incoterms</label><select class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm outline-none"><option>FOB Nhava Sheva</option><option selected>CIF St. Petersburg</option><option>CIF Novorossiysk</option></select></div>
-          <div><label class="block text-xs font-bold text-slate-700 mb-1">Lead Time</label><select class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm outline-none"><option>7 days</option><option selected>14 days</option><option>21 days</option></select></div>
+          <div><label class="block text-xs font-bold text-slate-700 mb-1">Incoterms</label><select class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm outline-none"><option>FOB Nhava Sheva</option><option selected>CIF Novorossiysk</option><option>EXW Factory (Pune)</option></select></div>
+          <div><label class="block text-xs font-bold text-slate-700 mb-1">Lead Time</label><select class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm outline-none"><option>7 days</option><option>14 days</option><option selected>21 days</option></select></div>
         </div>
         <div><label class="block text-xs font-bold text-slate-700 mb-1">Certifications Included</label>
-          <div class="flex flex-wrap gap-2">${['ISO 9001:2015','SGS Pre-Shipment Inspection','Phytosanitary Cert'].map(c => `<label class="flex items-center gap-1.5 text-xs bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5"><input type="checkbox" checked class="accent-brand rounded">${c}</label>`).join('')}</div>
+          <div class="flex flex-wrap gap-2">${['NPOP Organic','EU Organic','USDA NOP','Phytosanitary Cert'].map(c => `<label class="flex items-center gap-1.5 text-xs bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5"><input type="checkbox" checked class="accent-brand rounded">${c}</label>`).join('')}</div>
         </div>
-        <div><label class="block text-xs font-bold text-slate-700 mb-1">Notes for Buyer</label><textarea rows="2" placeholder="Packaging in 50kg bags on shrink-wrapped EUR pallets..." class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs outline-none resize-none"></textarea></div>
+        <div><label class="block text-xs font-bold text-slate-700 mb-1">Notes for Buyer</label><textarea rows="2" placeholder="Custom packaging or palletizing details..." class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs outline-none resize-none"></textarea></div>
       </div>
       <div class="px-6 py-4 border-t border-slate-100 bg-white flex gap-3">
         <button onclick="closeDrawer()" class="px-4 py-2.5 border border-slate-200 text-slate-600 text-xs font-bold rounded-xl hover:bg-slate-50">Cancel</button>
@@ -1000,11 +969,11 @@ function openDrawer(type, contextId){
       <div class="p-6 space-y-4 flex-1">
         <div class="bg-blue-50 border border-blue-200 rounded-xl p-4 space-y-2 text-xs">
           <div class="grid grid-cols-2 gap-3">
-            <div><p class="text-slate-500 uppercase font-bold text-[10px]">Product</p><p class="font-bold text-slate-800">Basmati Rice 1121 Extra Long</p></div>
+            <div><p class="text-slate-500 uppercase font-bold text-[10px]">Product</p><p class="font-bold text-slate-800">Basmati Rice 1121</p></div>
             <div><p class="text-slate-500 uppercase font-bold text-[10px]">Quantity</p><p class="font-bold text-slate-800">24 MT</p></div>
             <div><p class="text-slate-500 uppercase font-bold text-[10px]">Unit Price</p><p class="font-bold text-slate-800">₹98,500 / MT</p></div>
             <div><p class="text-slate-500 uppercase font-bold text-[10px]">Total</p><p class="font-bold text-slate-800">₹23,64,000</p></div>
-            <div><p class="text-slate-500 uppercase font-bold text-[10px]">Incoterms</p><p class="font-bold text-slate-800">CIF St. Petersburg</p></div>
+            <div><p class="text-slate-500 uppercase font-bold text-[10px]">Incoterms</p><p class="font-bold text-slate-800">FOB Nhava Sheva</p></div>
             <div><p class="text-slate-500 uppercase font-bold text-[10px]">Valid Until</p><p class="font-bold text-slate-800">14 Days</p></div>
           </div>
         </div>
@@ -1012,7 +981,7 @@ function openDrawer(type, contextId){
           <p class="text-xs font-bold text-slate-700 mb-2">Deal History:</p>
           <div class="space-y-1.5 text-xs">
             <div class="flex items-center gap-2"><span class="text-emerald-600">✓</span><span class="text-slate-700 font-medium">RFQ Received (24 MT Basmati 1121)</span><span class="ml-auto text-slate-400">May 02</span></div>
-            <div class="flex items-center gap-2"><span class="text-emerald-600">✓</span><span class="text-slate-700 font-medium">CIF St. Petersburg Quote Dispatched</span><span class="ml-auto text-slate-400">May 04</span></div>
+            <div class="flex items-center gap-2"><span class="text-emerald-600">✓</span><span class="text-slate-700 font-medium">FOB Quote Dispatched</span><span class="ml-auto text-slate-400">May 04</span></div>
             <div class="flex items-center gap-2"><span class="text-amber-500">⏳</span><span class="text-amber-700 font-medium">Awaiting Buyer E-Sign Acceptance</span><span class="ml-auto text-slate-400">—</span></div>
           </div>
         </div>
@@ -1072,7 +1041,7 @@ function openDrawer(type, contextId){
         </div>
       </div>
       <div class="px-6 py-4 border-t border-slate-100 bg-white">
-        <button onclick="drawerSuccess('Production batch milestone updated successfully.')" class="w-full py-2.5 bg-brand hover:bg-brand-hover text-white text-xs font-bold rounded-xl">Update Milestone</button>
+        <button onclick="drawerSuccess('Production batch updated successfully.')" class="w-full py-2.5 bg-brand hover:bg-brand-hover text-white text-xs font-bold rounded-xl">Update Milestone</button>
       </div>`,
 
     // 5. Upload B/L (Escrow release)
@@ -1083,15 +1052,15 @@ function openDrawer(type, contextId){
       </div>
       <div class="p-6 space-y-4 flex-1">
         <div class="bg-purple-50 border border-purple-200 rounded-xl p-3 text-xs text-purple-900">
-          🔒 <b>₹28,40,000</b> is locked in HDFC Bank escrow vault. Upload valid B/L to release 70% balance.
+          🔒 <b>₹42,85,000</b> is locked in platform vault. Upload valid B/L to release 70% balance.
         </div>
         <div><label class="block text-xs font-bold text-slate-700 mb-1">B/L Number</label><input type="text" value="MAEU-INNSA-2025-9921" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs font-mono outline-none"></div>
         <div class="grid grid-cols-2 gap-3">
           <div><label class="block text-xs font-bold text-slate-700 mb-1">Vessel Name</label><input type="text" value="MSC Katrina" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs outline-none"></div>
-          <div><label class="block text-xs font-bold text-slate-700 mb-1">Port of Loading</label><input type="text" value="Nhava Sheva (JNPT / INNSA1)" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs outline-none"></div>
+          <div><label class="block text-xs font-bold text-slate-700 mb-1">Port of Loading</label><input type="text" value="Nhava Sheva (JNPT)" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs outline-none"></div>
         </div>
         <div>
-          <label class="block text-xs font-bold text-slate-700 mb-1">Upload Scanned Clean on-board B/L (PDF)</label>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Upload Scanned B/L (PDF)</label>
           <div class="border-2 border-dashed border-slate-200 rounded-xl p-5 text-center bg-slate-50 hover:border-brand cursor-pointer">
             <i data-lucide="upload-cloud" class="w-7 h-7 text-slate-400 mx-auto mb-1"></i>
             <p class="text-xs font-medium text-slate-700">Click to upload original Clean on-board B/L</p>
@@ -1106,14 +1075,14 @@ function openDrawer(type, contextId){
     // 6. Track Shipment
     'shipment': () => `
       <div class="flex items-center justify-between px-6 py-4 border-b border-slate-100 bg-white sticky top-0 z-10">
-        <div><h3 class="font-extrabold text-slate-900">Shipment Tracking</h3><p class="text-xs text-slate-500 mt-0.5">SH-2025-0188 · Buyer #DE-1198 · 200 MT</p></div>
+        <div><h3 class="font-extrabold text-slate-900">Shipment Tracking</h3><p class="text-xs text-slate-500 mt-0.5">SH-2025-0188 · Buyer #DE-1198 · 200 MT Vermicompost</p></div>
         <button onclick="closeDrawer()" class="text-slate-400 hover:text-slate-700"><i data-lucide="x" class="w-5 h-5"></i></button>
       </div>
       <div class="p-6 space-y-4 flex-1">
         <div class="bg-teal-50 border border-teal-200 rounded-xl p-3 text-xs text-teal-950 space-y-1">
           <div class="flex justify-between"><span>Carrier:</span><b>Maersk Line</b></div>
           <div class="flex justify-between"><span>Container No:</span><b class="font-mono">MSKU-489102-1</b></div>
-          <div class="flex justify-between"><span>Origin / Destination:</span><b>Nhava Sheva (JNPT) → Hamburg Port</b></div>
+          <div class="flex justify-between"><span>Origin / Destination:</span><b>JNPT → Port of Hamburg</b></div>
         </div>
         <div class="space-y-2 text-xs">
           <p class="font-bold text-slate-700">Live Logistics Status:</p>
@@ -1161,7 +1130,7 @@ function openDrawer(type, contextId){
           <div><label class="block text-xs font-bold text-slate-700 mb-1">Export FOB Unit Price (₹)</label><input type="number" value="${p.priceInr}" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm outline-none font-bold"></div>
           <div><label class="block text-xs font-bold text-slate-700 mb-1">Minimum Order Qty</label><input type="number" value="${p.moq}" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm outline-none"></div>
         </div>
-        <div><label class="block text-xs font-bold text-slate-700 mb-1">Packaging & Pallet Spec</label><input type="text" value="Export-grade multiwall packaging on EUR pallets" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs outline-none"></div>
+        <div><label class="block text-xs font-bold text-slate-700 mb-1">Packaging & Pallet Spec</label><input type="text" value="25kg export-grade multiwall bags on EUR pallets" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs outline-none"></div>
       </div>
       <div class="px-6 py-4 border-t border-slate-100 bg-white flex gap-3">
         <button onclick="closeDrawer()" class="px-4 py-2.5 border border-slate-200 text-slate-600 text-xs font-bold rounded-xl hover:bg-slate-50">Cancel</button>
@@ -1169,24 +1138,24 @@ function openDrawer(type, contextId){
       </div>`;
     },
 
-    // 9. Add New SKU (with 15 Universal Categories)
+    // 9. Add New SKU (15 Categories)
     'new-sku': () => `
       <div class="flex items-center justify-between px-6 py-4 border-b border-slate-100 bg-white sticky top-0 z-10">
         <div><h3 class="font-extrabold text-slate-900">${t('catalog.addSku')}</h3></div>
         <button onclick="closeDrawer()" class="text-slate-400 hover:text-slate-700"><i data-lucide="x" class="w-5 h-5"></i></button>
       </div>
       <div class="p-6 space-y-4 flex-1 overflow-y-auto scrollbar-thin">
-        <div><label class="block text-xs font-bold text-slate-700 mb-1">Product Name</label><input type="text" id="ns-name" placeholder="e.g. Pure Refined Castor Oil First Special Grade" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm outline-none"></div>
+        <div><label class="block text-xs font-bold text-slate-700 mb-1">Product Name</label><input type="text" id="ns-name" placeholder="e.g. Potassium Humate Organic Soil Conditioner" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm outline-none"></div>
         <div class="grid grid-cols-2 gap-3">
           <div><label class="block text-xs font-bold text-slate-700 mb-1">SKU</label><input type="text" placeholder="IMG-EXP-005" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm outline-none"></div>
-          <div><label class="block text-xs font-bold text-slate-700 mb-1">ITC-HS Code</label><input type="text" value="1515.30.90" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm font-mono outline-none"></div>
+          <div><label class="block text-xs font-bold text-slate-700 mb-1">ITC-HS Code</label><input type="text" value="3105.90.00" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm font-mono outline-none"></div>
         </div>
         <div>
-          <label class="block text-xs font-bold text-slate-700 mb-1">Category (15 Universal B2B Groups)</label>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Category</label>
           <select id="ns-cat" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm outline-none">
             <option value="Agriculture & Agro Inputs">1. Agriculture & Agro Inputs</option>
             <option value="Food, Grains & Spices">2. Food, Grains & Spices</option>
-            <option value="Chemicals & Petrochemicals" selected>3. Chemicals & Petrochemicals</option>
+            <option value="Chemicals & Petrochemicals">3. Chemicals & Petrochemicals</option>
             <option value="Metals, Metallurgy & Minerals">4. Metals, Metallurgy & Minerals</option>
             <option value="Textiles, Fabrics & Garments">5. Textiles, Fabrics & Garments</option>
             <option value="Building & Construction Materials">6. Building & Construction Materials</option>
@@ -1202,7 +1171,7 @@ function openDrawer(type, contextId){
           </select>
         </div>
         <div class="grid grid-cols-2 gap-3">
-          <div><label class="block text-xs font-bold text-slate-700 mb-1">Price per MT / Unit (₹ INR)</label><input type="number" id="ns-price" placeholder="142000" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm outline-none font-bold"></div>
+          <div><label class="block text-xs font-bold text-slate-700 mb-1">Price per MT / Unit (₹ INR)</label><input type="number" id="ns-price" placeholder="38000" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm outline-none"></div>
           <div><label class="block text-xs font-bold text-slate-700 mb-1">MOQ</label><input type="number" id="ns-moq" placeholder="10" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm outline-none"></div>
         </div>
       </div>
@@ -1234,8 +1203,8 @@ function drawerSuccess(msg){
 
 function drawerAddSku(){
   const name = document.getElementById('ns-name')?.value.trim();
-  const cat = document.getElementById('ns-cat')?.value || 'Chemicals & Petrochemicals';
-  const price = parseFloat(document.getElementById('ns-price')?.value) || 142000;
+  const cat = document.getElementById('ns-cat')?.value || 'Agriculture & Agro Inputs';
+  const price = parseFloat(document.getElementById('ns-price')?.value) || 38000;
   const moq = parseInt(document.getElementById('ns-moq')?.value) || 10;
 
   if(name){
@@ -1243,13 +1212,13 @@ function drawerAddSku(){
       id: 'IMG-EXP-00' + (CATALOG_DATA.length + 1),
       name,
       category: cat,
-      hs: '1515.30.90',
+      hs: '3105.90.00',
       unit: 'MT',
       priceInr: price,
       moq: moq,
       certs: ['ISO 9001', 'Quality Approved'],
-      iconSvg: SVG_ICONS.chem,
-      bgCls: 'bg-blue-50'
+      iconSvg: SVG_ICONS.fertilizer,
+      bgCls: 'bg-emerald-50'
     });
   }
   closeDrawer();
