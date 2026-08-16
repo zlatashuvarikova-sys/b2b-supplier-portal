@@ -23,17 +23,11 @@
   </script>
   <style>
     body { background: #F8FAFC; }
-    .scrollbar-thin::-webkit-scrollbar { width: 5px; }
+    .scrollbar-thin::-webkit-scrollbar { width: 5px; height: 5px; }
     .scrollbar-thin::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 4px; }
     #side-drawer { transition: transform 0.3s cubic-bezier(0.16,1,0.3,1); transform: translateX(100%); }
     #side-drawer.open { transform: translateX(0); }
     #drawer-overlay { transition: opacity 0.25s; }
-    .star-btn { color: #e2e8f0; font-size: 1.5rem; cursor: pointer; transition: color 0.15s; }
-    .star-btn.active { color: #f59e0b; }
-    .milestone-done { border-color: #10b981; background: #ecfdf5; }
-    .milestone-active { border-color: #6366f1; background: #eef2ff; }
-    .milestone-pending { border-color: #e2e8f0; background: #f8fafc; }
-    .progress-bar { transition: width 0.6s ease; }
   </style>
 </head>
 <body class="font-sans antialiased min-h-screen flex flex-col text-slate-800">
@@ -58,7 +52,7 @@
     <div class="flex items-center justify-between px-6 py-4 border-b border-slate-100">
       <div>
         <h3 class="font-bold text-slate-900 text-base" data-i18n="compliance.title">Supplier Compliance Vault</h3>
-        <p class="text-xs text-emerald-600 font-semibold mt-0.5">Indian Agro Exports Pvt. Ltd. — KYB Verified</p>
+        <p class="text-xs text-emerald-600 font-semibold mt-0.5">Indian Manufactories Group Pvt. Ltd. — KYB Verified</p>
       </div>
       <button onclick="closeCompliance()" class="text-slate-400 hover:text-slate-600"><i data-lucide="x" class="w-5 h-5"></i></button>
     </div>
@@ -68,28 +62,20 @@
         <span class="text-xs font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-full">✓ Active</span>
       </div>
       <div class="flex items-center justify-between bg-slate-50 rounded-xl px-4 py-3 border border-slate-100">
-        <div><p class="text-[10px] text-slate-500 font-bold uppercase">IEC — Import Export Code (DGFT)</p><p class="text-sm font-mono font-bold text-slate-800">AABCI9876M · Exp. Dec 2026</p></div>
+        <div><p class="text-[10px] text-slate-500 font-bold uppercase">DGFT IEC / PAN</p><p class="text-sm font-mono font-bold text-slate-800">AABCI9876M · Valid</p></div>
         <span class="text-xs font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-full">✓ Validated</span>
       </div>
       <div class="flex items-center justify-between bg-slate-50 rounded-xl px-4 py-3 border border-slate-100">
-        <div><p class="text-[10px] text-slate-500 font-bold uppercase">FSSAI License (Food Safety)</p><p class="text-sm font-bold text-slate-800">Lic. No. 10119022000512 · Valid</p></div>
-        <span class="text-xs font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-full">✓ Verified</span>
-      </div>
-      <div class="flex items-center justify-between bg-slate-50 rounded-xl px-4 py-3 border border-slate-100">
-        <div><p class="text-[10px] text-slate-500 font-bold uppercase">Export Council (APEDA)</p><p class="text-sm font-bold text-slate-800">APEDA Reg. No. A/2021/188843</p></div>
+        <div><p class="text-[10px] text-slate-500 font-bold uppercase">Export Promotion Council</p><p class="text-sm font-bold text-slate-800">APEDA (Reg. A/2021/188843)</p></div>
         <span class="text-xs font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-full">✓ Member</span>
       </div>
       <div class="flex items-center justify-between bg-slate-50 rounded-xl px-4 py-3 border border-slate-100">
-        <div><p class="text-[10px] text-slate-500 font-bold uppercase">AD Code & Bank Forex</p><p class="text-sm font-bold text-slate-800">HDFC Bank · IFSC: HDFC0004021 · AD: 0401829</p></div>
+        <div><p class="text-[10px] text-slate-500 font-bold uppercase">AD Code & Bank Forex</p><p class="text-sm font-bold text-slate-800">HDFC Bank · IFSC HDFC0004021 · AD: 0401829</p></div>
         <span class="text-xs font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-full">✓ Linked</span>
       </div>
       <div class="flex items-center justify-between bg-slate-50 rounded-xl px-4 py-3 border border-slate-100">
-        <div><p class="text-[10px] text-slate-500 font-bold uppercase">Factory & Registered Address</p><p class="text-xs font-bold text-slate-800">Plot B-22, Pimpri-Chinchwad MIDC, Pune, Maharashtra 411019</p></div>
+        <div><p class="text-[10px] text-slate-500 font-bold uppercase">Manufacturing Unit</p><p class="text-xs font-bold text-slate-800">Plot B-22, MIDC Industrial Area, Pune, MH 411019</p></div>
         <span class="text-xs font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-full">✓ Audited</span>
-      </div>
-      <div class="flex items-center justify-between bg-slate-50 rounded-xl px-4 py-3 border border-slate-100">
-        <div><p class="text-[10px] text-slate-500 font-bold uppercase">Organic Certification (NPOP + EU)</p><p class="text-sm font-bold text-slate-800">NPOP-MH-2022-0091 · EU Organic 2022-IN-BIO-01</p></div>
-        <span class="text-xs font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-full">✓ Certified</span>
       </div>
     </div>
     <div class="px-5 pb-5 pt-3 flex justify-end border-t border-slate-100">
@@ -100,7 +86,7 @@
 
 <!-- ======= SIDE DRAWER ======= -->
 <div id="drawer-overlay" class="hidden fixed inset-0 z-40 bg-slate-900/50 opacity-0" onclick="closeDrawer()"></div>
-<div id="side-drawer" class="fixed top-0 right-0 h-full w-full max-w-md bg-white z-50 shadow-2xl flex flex-col overflow-hidden">
+<div id="side-drawer" class="fixed top-0 right-0 h-full w-full max-w-lg bg-white z-50 shadow-2xl flex flex-col overflow-hidden">
   <div id="drawer-content" class="flex flex-col h-full overflow-y-auto scrollbar-thin"></div>
 </div>
 
@@ -126,10 +112,10 @@
         <option value="zh">ZH (中文)</option>
       </select>
       <button id="profile-btn" onclick="openCompliance()" class="hidden items-center gap-2 bg-emerald-50 border border-emerald-200 rounded-xl px-3 py-1.5 hover:bg-emerald-100 transition">
-        <div class="w-7 h-7 rounded-full bg-emerald-600 text-white font-bold text-xs flex items-center justify-center">IA</div>
+        <div class="w-7 h-7 rounded-full bg-emerald-600 text-white font-bold text-xs flex items-center justify-center">IMG</div>
         <div class="text-left">
-          <p class="text-xs font-bold text-slate-900 leading-tight">Indian Agro Exports</p>
-          <p class="text-[10px] text-emerald-700 font-semibold leading-tight flex items-center gap-1"><i data-lucide="shield-check" class="w-2.5 h-2.5 inline"></i><span data-i18n="profile.verified">KYB Verified</span></p>
+          <p class="text-xs font-bold text-slate-900 leading-tight">Indian Manufactories Group</p>
+          <p class="text-[10px] text-emerald-700 font-semibold leading-tight flex items-center gap-1"><i data-lucide="shield-check" class="w-2.5 h-2.5"></i><span data-i18n="profile.verified">KYB Verified</span></p>
         </div>
       </button>
     </div>
@@ -139,10 +125,10 @@
 <!-- ======= MAIN ======= -->
 <main class="flex-1 max-w-7xl w-full mx-auto px-4 lg:px-8 py-6">
 
-  <!-- Stepper -->
-  <div class="flex items-start gap-0 mb-8 max-w-2xl mx-auto select-none" id="stepper"></div>
+  <!-- Stepper (Visual Progress with Sub-labels) -->
+  <div class="flex items-start gap-0 mb-8 max-w-3xl mx-auto select-none" id="stepper"></div>
 
-  <!-- STEP 1: AUTH -->
+  <!-- ===== STEP 1: AUTH ===== -->
   <section id="step-1" class="max-w-md mx-auto">
     <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-8">
       <div class="text-center mb-7">
@@ -151,10 +137,11 @@
         </div>
         <h1 class="text-2xl font-extrabold text-slate-900" data-i18n="auth.title">Sign in to GlobalTrade Portal</h1>
       </div>
+      <!-- Stage A -->
       <div id="auth-a" class="space-y-4">
         <div>
           <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" data-i18n="auth.email">Corporate Email</label>
-          <input type="email" value="orders@indiagroexports.in" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium outline-none focus:ring-2 focus:ring-brand/40">
+          <input type="email" value="export@indianmanufactories.in" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium outline-none focus:ring-2 focus:ring-brand/40">
         </div>
         <div>
           <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" data-i18n="auth.password">Password</label>
@@ -164,6 +151,7 @@
           <span data-i18n="auth.continue">Continue</span><i data-lucide="arrow-right" class="w-4 h-4"></i>
         </button>
       </div>
+      <!-- Stage B -->
       <div id="auth-b" class="hidden space-y-4">
         <div class="bg-blue-50 border border-blue-200 rounded-xl p-3 text-xs text-blue-900" data-i18n="auth.otpSent">A 6-digit confirmation code was sent to your email.</div>
         <div>
@@ -172,7 +160,7 @@
         </div>
         <div class="bg-slate-50 border border-slate-100 rounded-xl p-3 space-y-2 text-xs text-slate-600">
           <label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" checked class="mt-0.5 rounded accent-brand"><span data-i18n="auth.terms">I accept the Terms of Service and Cross-Border Data Transfer Policy (GDPR / DPDP).</span></label>
-          <label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" checked class="mt-0.5 rounded accent-brand"><span data-i18n="auth.kyb_consent">I consent to automated KYB identity check via national commercial registries.</span></label>
+          <label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" checked class="mt-0.5 rounded accent-brand"><span data-i18n="auth.kyb_consent">I consent to automated KYB identity check via national registries.</span></label>
         </div>
         <div class="flex gap-3">
           <button onclick="backToEmailPass()" class="px-4 py-3 border border-slate-200 rounded-xl text-xs font-bold text-slate-600 hover:bg-slate-50 transition" data-i18n="common.back">← Back</button>
@@ -184,14 +172,14 @@
     </div>
   </section>
 
-  <!-- STEP 2: KYB -->
+  <!-- ===== STEP 2: KYB ===== -->
   <section id="step-2" class="hidden max-w-3xl mx-auto">
     <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-8">
       <div class="flex items-start justify-between pb-5 border-b border-slate-100 mb-6 gap-4">
         <div>
           <span class="text-xs font-bold text-brand uppercase tracking-wider">Step 2 / KYB Verification</span>
           <h2 class="text-xl font-extrabold text-slate-900 mt-0.5" data-i18n="kyb.title">Exporter Legal Identity & Regulatory Credentials</h2>
-          <p class="text-xs text-slate-500 mt-1" data-i18n="kyb.subtitle">Verify your GSTIN, DGFT IEC and Export Council memberships.</p>
+          <p class="text-xs text-slate-500 mt-1" data-i18n="kyb.subtitle">Verify your GSTIN, DGFT IEC and APEDA council memberships.</p>
         </div>
         <span class="px-3 py-1 bg-amber-50 text-amber-700 border border-amber-200 rounded-full text-xs font-semibold flex items-center gap-1.5 shrink-0 mt-1">
           <span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span><span data-i18n="kyb.pending">Pending Verification</span>
@@ -201,7 +189,7 @@
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div class="sm:col-span-2">
             <label class="block text-xs font-bold uppercase text-slate-600 mb-1" data-i18n="kyb.companyName">Company Legal Name</label>
-            <input type="text" value="Indian Agro Exports Pvt. Ltd." class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm font-medium outline-none">
+            <input type="text" value="Indian Manufactories Group Pvt. Ltd." class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm font-medium outline-none">
           </div>
           <div>
             <label class="block text-xs font-bold uppercase text-slate-600 mb-1" data-i18n="kyb.country">Country</label>
@@ -226,8 +214,8 @@
             </div>
           </div>
           <div>
-            <label class="block text-xs font-bold uppercase text-slate-600 mb-1" data-i18n="kyb.council">Export Council (APEDA)</label>
-            <input type="text" value="APEDA A/2021/188843" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm font-medium outline-none">
+            <label class="block text-xs font-bold uppercase text-slate-600 mb-1" data-i18n="kyb.council">Export Council</label>
+            <input type="text" value="APEDA (APEDA/MH/2021/188843)" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm font-medium outline-none">
           </div>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -241,14 +229,14 @@
           </div>
         </div>
         <div>
-          <label class="block text-xs font-bold uppercase text-slate-600 mb-1" data-i18n="kyb.factory">Factory / Registered Address</label>
+          <label class="block text-xs font-bold uppercase text-slate-600 mb-1" data-i18n="kyb.factory">Factory / Manufacturing Facility</label>
           <input type="text" value="Plot B-22, Pimpri-Chinchwad MIDC, Pune, Maharashtra 411019" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs font-medium outline-none">
         </div>
         <div>
-          <label class="block text-xs font-bold uppercase text-slate-600 mb-1" data-i18n="kyb.doc">Export Certificate / DGFT License + FSSAI</label>
+          <label class="block text-xs font-bold uppercase text-slate-600 mb-1" data-i18n="kyb.doc">Export Licenses & Organic Certifications</label>
           <div class="border-2 border-dashed border-slate-200 rounded-xl p-4 text-center bg-slate-50 hover:border-brand transition cursor-pointer">
             <i data-lucide="file-check" class="w-7 h-7 text-emerald-500 mx-auto mb-1"></i>
-            <p class="text-xs font-medium text-slate-700">APEDA_IEC_FSSAI_Certificates_2025.pdf <span class="text-emerald-600 font-bold">(2.4 MB · Uploaded)</span></p>
+            <p class="text-xs font-medium text-slate-700">APEDA_IEC_NPOP_Certificates_2025.pdf <span class="text-emerald-600 font-bold">(2.8 MB · Uploaded)</span></p>
           </div>
         </div>
         <div class="flex items-center justify-between pt-2">
@@ -261,16 +249,16 @@
     </div>
   </section>
 
-  <!-- STEP 3: ORDERS HUB -->
+  <!-- ===== STEP 3: ORDERS HUB ===== -->
   <section id="step-3" class="hidden space-y-5">
     <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
       <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-4 flex items-center gap-3">
         <div class="w-10 h-10 bg-emerald-100 rounded-xl flex items-center justify-center shrink-0"><i data-lucide="shield-check" class="w-5 h-5 text-emerald-600"></i></div>
-        <div><p class="text-[11px] font-bold text-slate-500 uppercase tracking-wider leading-tight" data-i18n="kpi.escrow">Escrow Secured</p><p class="text-lg font-extrabold text-slate-900 price" data-inr="4285000">₹42,85,000</p></div>
+        <div><p class="text-[11px] font-bold text-slate-500 uppercase tracking-wider leading-tight" data-i18n="kpi.escrow">Escrow Secured</p><p class="text-lg font-extrabold text-slate-900 price" data-inr="7345000">₹73,45,000</p></div>
       </div>
-      <div class="bg-white rounded-2xl border border-amber-200 shadow-sm p-4 flex items-center gap-3">
+      <div class="bg-white rounded-2xl border border-amber-300 shadow-sm p-4 flex items-center gap-3 bg-amber-50/30">
         <div class="w-10 h-10 bg-amber-100 rounded-xl flex items-center justify-center shrink-0"><i data-lucide="alert-circle" class="w-5 h-5 text-amber-600"></i></div>
-        <div><p class="text-[11px] font-bold text-amber-600 uppercase tracking-wider leading-tight" data-i18n="kpi.action">Requires Your Action</p><p class="text-lg font-extrabold text-slate-900">3 <span class="text-xs font-semibold text-slate-500" data-i18n="kpi.action_suffix">deals</span></p></div>
+        <div><p class="text-[11px] font-bold text-amber-700 uppercase tracking-wider leading-tight" data-i18n="kpi.action">Requires Your Action</p><p class="text-lg font-extrabold text-slate-900">3 <span class="text-xs font-semibold text-slate-500" data-i18n="kpi.action_suffix">deals</span></p></div>
       </div>
       <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-4 flex items-center gap-3">
         <div class="w-10 h-10 bg-purple-100 rounded-xl flex items-center justify-center shrink-0"><i data-lucide="ship" class="w-5 h-5 text-purple-600"></i></div>
@@ -281,6 +269,8 @@
         <div><p class="text-[11px] font-bold text-slate-500 uppercase tracking-wider leading-tight" data-i18n="kpi.completed">Completed</p><p class="text-lg font-extrabold text-slate-900">14 <span class="text-xs font-semibold text-slate-500" data-i18n="kpi.completed_suffix">deals</span></p></div>
       </div>
     </div>
+
+    <!-- Orders Filter & Table -->
     <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
       <div class="p-4 border-b border-slate-100 flex flex-wrap items-center gap-2">
         <span class="text-xs font-bold text-slate-600 uppercase tracking-wider mr-1" data-i18n="orders.filterLabel">Filter:</span>
@@ -305,12 +295,12 @@
     </div>
   </section>
 
-  <!-- STEP 4: CATALOG -->
+  <!-- ===== STEP 4: CATALOG ===== -->
   <section id="step-4" class="hidden space-y-5">
     <div class="flex items-center justify-between">
       <div>
-        <h1 class="text-2xl font-extrabold text-slate-900" data-i18n="catalog.title">Product Catalog</h1>
-        <p class="text-xs text-slate-500 mt-0.5" data-i18n="catalog.subtitle">Manage your agro export listings</p>
+        <h1 class="text-2xl font-extrabold text-slate-900" data-i18n="catalog.title">Agro Product Catalog</h1>
+        <p class="text-xs text-slate-500 mt-0.5" data-i18n="catalog.subtitle">Manage your fertilizers, seeds, soil and growing media listings</p>
       </div>
       <div class="flex gap-3">
         <button onclick="goStep(3)" class="px-3 py-2 text-xs font-bold text-slate-600 border border-slate-200 rounded-xl hover:bg-slate-50 transition flex items-center gap-1.5">
@@ -319,10 +309,12 @@
         <button onclick="openDrawer('new-sku')" class="px-4 py-2 bg-brand hover:bg-brand-hover text-white text-xs font-bold rounded-xl shadow-sm transition" data-i18n="catalog.addSku">Add New SKU</button>
       </div>
     </div>
+
+    <!-- Catalog Filters -->
     <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-4 flex flex-wrap items-end gap-4">
       <div class="flex-1 min-w-36">
         <label class="block text-xs font-bold text-slate-600 mb-1" data-i18n="catalog.search">Search</label>
-        <input type="text" id="cat-search" oninput="renderCatalog()" placeholder="Product or SKU..." class="w-full px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-xs outline-none focus:ring-1 focus:ring-brand/40">
+        <input type="text" id="cat-search" oninput="renderCatalog()" placeholder="Product name or SKU..." class="w-full px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-xs outline-none focus:ring-1 focus:ring-brand/40">
       </div>
       <div>
         <label class="block text-xs font-bold text-slate-600 mb-1" data-i18n="catalog.category">Category:</label>
@@ -343,10 +335,11 @@
         </select>
       </div>
     </div>
+    <!-- Cards Grid -->
     <div id="catalog-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5"></div>
   </section>
 
-  <!-- STEP 5: DEAL ROOM -->
+  <!-- ===== STEP 5: DEAL ROOM ===== -->
   <section id="step-5" class="hidden">
     <div class="flex items-center justify-between mb-5">
       <div>
@@ -358,15 +351,17 @@
         <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i><span data-i18n="deal.back">Back to Orders</span>
       </button>
     </div>
+
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+      <!-- Commercial Terms -->
       <div class="lg:col-span-5 space-y-4">
         <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5">
           <h3 class="text-sm font-extrabold uppercase tracking-wider text-slate-700 pb-4 border-b border-slate-100 mb-4" data-i18n="deal.terms">Agreed Commercial Terms</h3>
           <div class="grid grid-cols-2 gap-4 text-center bg-slate-50 rounded-xl p-4 border border-slate-100 mb-4">
             <div><p class="text-[10px] text-slate-500 uppercase font-bold" data-i18n="deal.product">Product</p><p class="text-sm font-extrabold text-slate-900">NPK 20-20-20</p></div>
             <div><p class="text-[10px] text-slate-500 uppercase font-bold" data-i18n="deal.volume">Volume</p><p class="text-sm font-extrabold text-slate-900">50 MT</p></div>
-            <div><p class="text-[10px] text-slate-500 uppercase font-bold" data-i18n="deal.unitPrice">Unit Price (FOB)</p><p class="text-sm font-extrabold text-brand price" data-inr="42500">₹42,500</p></div>
-            <div><p class="text-[10px] text-slate-500 uppercase font-bold" data-i18n="deal.total">Total</p><p class="text-sm font-extrabold text-slate-900 price" data-inr="2125000">₹21,25,000</p></div>
+            <div><p class="text-[10px] text-slate-500 uppercase font-bold" data-i18n="deal.unitPrice">Unit Price (FOB)</p><p class="text-sm font-extrabold text-brand price" data-inr="41500">₹41,500</p></div>
+            <div><p class="text-[10px] text-slate-500 uppercase font-bold" data-i18n="deal.total">Total</p><p class="text-sm font-extrabold text-slate-900 price" data-inr="2075000">₹20,75,000</p></div>
           </div>
           <div class="space-y-2">
             <div class="flex items-start gap-3 p-3 bg-emerald-50 border border-emerald-200 rounded-xl text-xs">
@@ -380,6 +375,8 @@
               <span class="px-2 py-0.5 bg-slate-200 text-slate-700 font-semibold text-[10px] rounded shrink-0" data-i18n="deal.pending">Pending</span>
             </div>
           </div>
+
+          <!-- Digital Signature Block -->
           <div class="mt-5 pt-4 border-t border-slate-100">
             <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs space-y-1.5 mb-4">
               <div class="flex items-center justify-between">
@@ -390,19 +387,20 @@
                 <span><span data-i18n="deal.buyerLabel">Buyer #RU-4471:</span> <b class="text-emerald-600" data-i18n="deal.buyerSigned">Signed (2025-05-10 14:22)</b></span><span>✓</span>
               </div>
               <div class="flex items-center justify-between text-[11px] text-slate-600">
-                <span><span data-i18n="deal.supplierLabel">Indian Agro Exports:</span> <b id="sign-state" class="text-amber-600" data-i18n="deal.awaiting">Awaiting</b></span><span id="sign-icon">⏳</span>
+                <span><span data-i18n="deal.supplierLabel">Indian Manufactories Group:</span> <b id="sign-state" class="text-amber-600" data-i18n="deal.awaiting">Awaiting Signature</b></span><span id="sign-icon">⏳</span>
               </div>
             </div>
             <button id="esign-btn" onclick="signContract()" class="w-full py-3 bg-brand hover:bg-brand-hover text-white font-bold rounded-xl shadow-sm transition text-sm flex items-center justify-center gap-2">
               <i data-lucide="file-signature" class="w-4 h-4"></i><span data-i18n="deal.signBtn">Sign Smart Contract (E-Sign)</span>
             </button>
-            <button onclick="showNotify('Generating Proforma Invoice PI-GT-2025-0312.pdf with ITC-HS customs codes and Nhava Sheva port dispatch details...')" class="w-full mt-2 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl transition text-xs flex items-center justify-center gap-2">
+            <button onclick="showNotify('Generating Proforma Invoice PI-GT-2025-0312.pdf with ITC-HS codes and JNPT port dispatch details...')" class="w-full mt-2 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl transition text-xs flex items-center justify-center gap-2">
               <i data-lucide="download" class="w-3.5 h-3.5"></i><span data-i18n="deal.pi">Download Proforma Invoice (PI)</span>
             </button>
           </div>
         </div>
       </div>
-      <!-- CHAT -->
+
+      <!-- B2B Encrypted Chat -->
       <div class="lg:col-span-7 bg-white rounded-2xl border border-slate-200 shadow-sm flex flex-col" style="height:580px">
         <div class="px-5 py-3.5 border-b border-slate-100 flex items-center justify-between">
           <div class="flex items-center gap-2">
@@ -423,7 +421,7 @@
             <span class="text-[9px] text-slate-400 block text-right">10:45 AM</span>
           </div>
           <div class="bg-brand-light text-brand p-3 rounded-xl max-w-[80%] ml-auto space-y-1 border border-brand-mid">
-            <span class="text-[10px] font-bold text-brand block" data-i18n="chat.supplier">Indian Agro Exports (You)</span>
+            <span class="text-[10px] font-bold text-brand block" data-i18n="chat.supplier">Indian Manufactories Group (You)</span>
             <p data-i18n="chat.msg2">Batch production scheduled at Pune facility. SGS pre-shipment inspection certificate will be provided before dispatch.</p>
             <span class="text-[9px] text-brand/60 block text-right">10:48 AM</span>
           </div>
@@ -442,200 +440,190 @@
 
 </main>
 
+<!-- ======= FOOTER ======= -->
 <footer class="bg-white border-t border-slate-200 py-4 mt-auto">
   <p class="text-center text-xs text-slate-400">GlobalTrade Portal · Cross-Border Supplier Platform · Interactive Demo</p>
 </footer>
 
 <script>
 // ============================================================
-//  RATES & DATA
+//  CURRENCY & DATA
 // ============================================================
 const RATES = {
-  INR:{s:'₹',r:1},
-  USD:{s:'$',r:0.0116},
-  EUR:{s:'€',r:0.011},
-  CNY:{s:'¥',r:0.084},
-  RUB:{s:'₽',r:1.08}
+  INR: { s:'₹', r:1 },
+  USD: { s:'$', r:0.0116 },
+  EUR: { s:'€', r:0.011 },
+  CNY: { s:'¥', r:0.084 },
+  RUB: { s:'₽', r:1.08 }
+};
+
+// Clean inline SVG icons for instant 100% reliable rendering
+const SVG_ICONS = {
+  fertilizer: `<svg class="w-14 h-14 text-emerald-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>`,
+  seeds: `<svg class="w-14 h-14 text-amber-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 0 0-10 10c0 5.523 4.477 10 10 10s10-4.477 10-10A10 10 0 0 0 12 2Z"/><path d="m4.93 4.93 4.24 4.24"/><path d="m14.83 9.17 4.24-4.24"/><path d="m14.83 14.83 4.24 4.24"/><path d="m9.17 14.83-4.24 4.24"/></svg>`,
+  organic: `<svg class="w-14 h-14 text-lime-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 20h10"/><path d="M10 20c0-3 1-4 2-7"/><path d="M12 13c1-3 4-5 7-5 0 4-3 7-7 7Z"/><path d="M12 13c-1-2-3-4-6-4 0 3 2 5 6 4Z"/></svg>`,
+  media: `<svg class="w-14 h-14 text-amber-800" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>`
 };
 
 const CATALOG_DATA = [
-  {
-    id:'P001', name:'NPK 20-20-20 Water Soluble Fertilizer', category:'Fertilizers',
-    hs:'3105.20.00', unit:'MT', priceInr:41500, moq:5,
-    certs:['ISO 9001','SGS Tested','FSSAI'],
-    img:'https://placehold.co/600x380/16a34a/ffffff?text=NPK+Fertilizer'
-  },
-  {
-    id:'P002', name:'Hybrid Maize Seeds (DKC 9081)', category:'Seeds',
-    hs:'1005.10.00', unit:'KG', priceInr:242, moq:500,
-    certs:['ISTA Certified','CSC Approved','Non-GMO'],
-    img:'https://placehold.co/600x380/ca8a04/ffffff?text=Maize+Seeds'
-  },
-  {
-    id:'P003', name:'Organic Vermicompost (Premium Grade)', category:'Organic Inputs',
-    hs:'3101.00.00', unit:'MT', priceInr:9200, moq:10,
-    certs:['NPOP Organic','EU Organic','USDA NOP','COA'],
-    img:'https://placehold.co/600x380/92400e/fef3c7?text=Vermicompost'
-  },
-  {
-    id:'P004', name:'Coconut Coir Pith Grow Blocks (5kg)', category:'Growing Media',
-    hs:'5305.00.00', unit:'block', priceInr:104, moq:200,
-    certs:['RHP Certified','OMRI Listed'],
-    img:'https://placehold.co/600x380/b45309/fffbeb?text=Coir+Grow+Blocks'
-  }
+  { id:'IMG-AG-001', name:'NPK 20-20-20 Water Soluble Fertilizer', category:'Fertilizers', hs:'3105.20.00', unit:'MT', priceInr:41500, moq:5, certs:['ISO 9001','SGS Tested','FSSAI'], iconSvg:SVG_ICONS.fertilizer, bgCls:'bg-emerald-50' },
+  { id:'IMG-AG-002', name:'Hybrid Maize Seeds (DKC 9081)', category:'Seeds', hs:'1005.10.00', unit:'KG', priceInr:242, moq:500, certs:['ISTA Certified','CSC Approved','Non-GMO'], iconSvg:SVG_ICONS.seeds, bgCls:'bg-amber-50' },
+  { id:'IMG-AG-003', name:'Organic Vermicompost Premium', category:'Organic Inputs', hs:'3101.00.00', unit:'MT', priceInr:9200, moq:10, certs:['NPOP Organic','EU Organic','USDA NOP'], iconSvg:SVG_ICONS.organic, bgCls:'bg-lime-50' },
+  { id:'IMG-AG-004', name:'Coconut Coir Pith Grow Blocks (5kg)', category:'Growing Media', hs:'5305.00.00', unit:'block', priceInr:104, moq:200, certs:['RHP Certified','OMRI Listed'], iconSvg:SVG_ICONS.media, bgCls:'bg-amber-100/40' }
 ];
 
+// All 7 distinct statuses with anonymous Airbnb-style buyers
 const ORDERS_DATA = [
-  { id:'RFQ-2025-0891', product:'NPK 20-20-20 Fertilizer', buyer:'Buyer #RU-4471', qty:'20 MT',  valInr:830000,  status:'RFQ',        badgeCls:'bg-amber-100 text-amber-800',    needsAction:true  },
-  { id:'QT-2025-0445',  product:'Organic Vermicompost',     buyer:'Buyer #DE-2209', qty:'25 MT',  valInr:230000,  status:'QUOTE_SENT',  badgeCls:'bg-blue-100 text-blue-800',      needsAction:false },
-  { id:'CT-2025-0312',  product:'Hybrid Maize Seeds',       buyer:'Buyer #BR-8834', qty:'2,000 KG', valInr:484000, status:'CONTRACT',    badgeCls:'bg-indigo-100 text-indigo-800',  needsAction:true  },
-  { id:'PR-2025-0278',  product:'NPK 20-20-20 Fertilizer',  buyer:'Buyer #MX-5567', qty:'50 MT',  valInr:2075000, status:'PRODUCTION',  badgeCls:'bg-sky-100 text-sky-800',        needsAction:false },
-  { id:'ES-2025-0201',  product:'Coir Pith Grow Blocks',    buyer:'Buyer #PL-3391', qty:'1,000 pcs', valInr:104000, status:'ESCROW_HELD', badgeCls:'bg-purple-100 text-purple-800', needsAction:true  },
-  { id:'SH-2025-0188',  product:'Organic Vermicompost',     buyer:'Buyer #AE-7723', qty:'15 MT',  valInr:138000,  status:'SHIPPED',     badgeCls:'bg-teal-100 text-teal-800',      needsAction:false },
-  { id:'CM-2024-1044',  product:'Coir Pith Grow Blocks',    buyer:'Buyer #NL-6612', qty:'500 pcs', valInr:52000,  status:'COMPLETED',   badgeCls:'bg-emerald-100 text-emerald-800', needsAction:false }
+  { id:'RFQ-2025-0891', product:'Organic Vermicompost', buyer:'Buyer #RU-3129', qty:'100 MT', valInr:920000, status:'RFQ', badgeCls:'bg-amber-100 text-amber-800', needsAction:true },
+  { id:'QT-2025-0445', product:'Hybrid Maize Seeds (DKC 9081)', buyer:'Buyer #RU-8842', qty:'500 KG', valInr:121000, status:'QUOTE_SENT', badgeCls:'bg-blue-100 text-blue-800', needsAction:false },
+  { id:'CT-2025-0312', product:'NPK 20-20-20 Fertilizer', buyer:'Buyer #RU-4471', qty:'50 MT', valInr:2075000, status:'CONTRACT', badgeCls:'bg-indigo-100 text-indigo-800', needsAction:true },
+  { id:'PR-2025-0278', product:'Coir Pith Grow Blocks', buyer:'Buyer #RU-7654', qty:'200 pcs', valInr:20800, status:'PRODUCTION', badgeCls:'bg-sky-100 text-sky-800', needsAction:false },
+  { id:'ES-2025-0201', product:'NPK 20-20-20 Fertilizer', buyer:'Buyer #DE-5231', qty:'100 MT', valInr:4285000, status:'ESCROW_HELD', badgeCls:'bg-purple-100 text-purple-800', needsAction:true },
+  { id:'SH-2025-0188', product:'Organic Vermicompost', buyer:'Buyer #DE-1198', qty:'200 MT', valInr:1840000, status:'SHIPPED', badgeCls:'bg-teal-100 text-teal-800', needsAction:false },
+  { id:'CM-2024-1044', product:'Hybrid Maize Seeds', buyer:'Buyer #RU-0512', qty:'1,000 KG', valInr:242000, status:'COMPLETED', badgeCls:'bg-emerald-100 text-emerald-800', needsAction:false }
 ];
 
 const STATUS_LIST = ['ALL','RFQ','QUOTE_SENT','CONTRACT','PRODUCTION','ESCROW_HELD','SHIPPED','COMPLETED'];
 
 // ============================================================
-//  I18N
+//  I18N DICTIONARY
 // ============================================================
 const T = {
-en:{
+en: {
   'profile.verified':'KYB Verified',
   'auth.title':'Sign in to GlobalTrade Portal','auth.email':'Corporate Email','auth.password':'Password',
   'auth.continue':'Continue','auth.otpSent':'A 6-digit confirmation code was sent to your email.',
   'auth.otp':'One-Time Password (OTP)','auth.terms':'I accept the Terms of Service and Cross-Border Data Transfer Policy (GDPR / DPDP).','auth.kyb_consent':'I consent to automated KYB identity check via national registries.','auth.signin':'Sign in','common.back':'← Back','common.close':'Close',
-  'kyb.title':'Exporter Legal Identity & Regulatory Credentials','kyb.subtitle':'Verify your GSTIN, DGFT IEC and APEDA Export Council memberships.','kyb.pending':'Pending Verification','kyb.companyName':'Company Legal Name','kyb.country':'Country','kyb.gstin':'GSTIN (State 27)','kyb.iec':'DGFT IEC / PAN','kyb.council':'Export Council (APEDA)','kyb.adcode':'AD Code & Bank IFSC','kyb.port':'Port of Origin','kyb.factory':'Factory / Registered Address','kyb.doc':'Export Certificates (IEC + FSSAI)','kyb.back':'← Back to Auth','kyb.submit':'Verify & Open Dashboard',
+  'kyb.title':'Exporter Legal Identity & Regulatory Credentials','kyb.subtitle':'Verify your GSTIN, DGFT IEC and APEDA export council memberships.','kyb.pending':'Pending Verification','kyb.companyName':'Company Legal Name','kyb.country':'Country','kyb.gstin':'GSTIN (State 27)','kyb.iec':'DGFT IEC / PAN','kyb.council':'Export Council (APEDA)','kyb.adcode':'AD Code & Bank IFSC','kyb.port':'Port of Origin','kyb.factory':'Factory / Manufacturing Facility','kyb.doc':'Export Licenses & Organic Certifications','kyb.back':'← Back to Auth','kyb.submit':'Verify & Open Dashboard',
   'compliance.title':'Supplier Compliance Vault',
-  'kpi.escrow':'Escrow Secured','kpi.action':'Requires Your Action','kpi.action_suffix':'deals need response','kpi.shipments':'In Transit','kpi.ships_suffix':'shipments','kpi.completed':'Completed','kpi.completed_suffix':'deals',
+  'kpi.escrow':'Escrow Secured','kpi.action':'Requires Your Action','kpi.action_suffix':'deals','kpi.shipments':'In Transit','kpi.ships_suffix':'shipments','kpi.completed':'Completed','kpi.completed_suffix':'deals',
   'orders.filterLabel':'Filter:','orders.catalog':'Product Catalog →',
   'table.id':'Deal ID','table.product':'Product','table.buyer':'Buyer','table.value':'Value','table.status':'Status','table.action':'Action',
   'st.ALL':'All','st.RFQ':'RFQ','st.QUOTE_SENT':'Quote Sent','st.CONTRACT':'Contract','st.PRODUCTION':'Production','st.ESCROW_HELD':'Escrow Held','st.SHIPPED':'Shipped','st.COMPLETED':'Completed',
-  'act.RFQ':'Send Quote','act.QUOTE_SENT':'View Quote','act.CONTRACT':'Sign Contract','act.PRODUCTION':'View Production','act.ESCROW_HELD':'Upload B/L','act.SHIPPED':'Track Shipment','act.COMPLETED':'View Details',
-  'catalog.title':'Product Catalog','catalog.subtitle':'Manage your agro export listings','catalog.back':'Orders Hub','catalog.addSku':'Add New SKU',
+  'act.RFQ':'Send Quote','act.QUOTE_SENT':'View Quote','act.CONTRACT':'Sign Contract','act.PRODUCTION':'Production Progress','act.ESCROW_HELD':'Upload B/L','act.SHIPPED':'Track Shipment','act.COMPLETED':'View Details',
+  'catalog.title':'Agro Product Catalog','catalog.subtitle':'Manage your fertilizers, seeds, soil and growing media listings','catalog.back':'Orders Hub','catalog.addSku':'Add New SKU',
   'catalog.search':'Search','catalog.category':'Category:','catalog.allCat':'All Categories','catalog.catFert':'Fertilizers','catalog.catSeeds':'Seeds','catalog.catOrganic':'Organic Inputs','catalog.catMedia':'Growing Media',
   'catalog.sort':'Sort:','catalog.priceAsc':'Price: Low → High','catalog.priceDesc':'Price: High → Low','catalog.moqAsc':'MOQ: Smallest First',
-  'catalog.price':'Price / unit','catalog.moq':'Min. Order (MOQ)','catalog.hs':'HS Code','catalog.certs':'Certifications','catalog.offer':'Create Export Offer',
+  'catalog.price':'Price / unit','catalog.moq':'Min. Order (MOQ)','catalog.hs':'HS Code','catalog.offer':'Create Export Offer',
   'deal.title':'Contract Negotiation & E-Sign','deal.subtitle':'Order GT-2025-0312 · Buyer #RU-4471','deal.back':'Back to Orders','deal.terms':'Agreed Commercial Terms',
   'deal.product':'Product','deal.volume':'Volume','deal.unitPrice':'Unit Price (FOB)','deal.total':'Total',
   'deal.escrow30':'30% Advance Escrow','deal.escrow30desc':'Locked in Platform Vault. Released on production start.','deal.secured':'Secured',
   'deal.escrow70':'70% on Bill of Lading (B/L)','deal.escrow70desc':'Triggered after customs clearance at Nhava Sheva + B/L upload.','deal.pending':'Pending',
   'deal.sigLog':'Digital Signatures:','deal.sig1of2':'1/2 Completed','deal.buyerLabel':'Buyer #RU-4471:','deal.buyerSigned':'Signed (2025-05-10 14:22)',
-  'deal.supplierLabel':'Indian Agro Exports:','deal.awaiting':'Awaiting Signature',
+  'deal.supplierLabel':'Indian Manufactories Group:','deal.awaiting':'Awaiting Signature',
   'deal.signBtn':'Sign Smart Contract (E-Sign)','deal.pi':'Download Proforma Invoice (PI)',
   'chat.title':'Encrypted Deal Chat','chat.translate':'Auto-Translate: EN ↔ RU','chat.privacy':'Privacy Guard ON',
   'chat.buyer':'Buyer #RU-4471','chat.msg1':'We confirm FOB Nhava Sheva terms for 50 MT NPK 20-20-20. Please e-sign the contract so the escrow deposit can be locked.',
-  'chat.supplier':'Indian Agro Exports (You)','chat.msg2':'Batch production scheduled at Pune facility. SGS pre-shipment inspection certificate will be provided before dispatch.',
+  'chat.supplier':'Indian Manufactories Group (You)','chat.msg2':'Batch production scheduled at Pune facility. SGS pre-shipment inspection certificate will be provided before dispatch.',
   'chat.privacy_note':'<b>Privacy Guard:</b> Phone numbers, emails and messenger handles are automatically masked. All communication stays inside the platform.',
   'chat.placeholder':'Type your message...',
   'step1.title':'Sign In','step1.sub':'Email & OTP auth',
-  'step2.title':'KYB Verify','step2.sub':'Regulatory credentials',
-  'step3.title':'Order Hub','step3.sub':'Manage all deals',
-  'step4.title':'Catalog','step4.sub':'Products & listings',
-  'step5.title':'Deal Room','step5.sub':'Contract & chat'
+  'step2.title':'KYB Verify','step2.sub':'Legal & export licenses',
+  'step3.title':'Order Hub','step3.sub':'Manage deals & escrow',
+  'step4.title':'Catalog','step4.sub':'Agro export listings',
+  'step5.title':'Deal Room','step5.sub':'Contract & e-sign'
 },
-ru:{
+ru: {
   'profile.verified':'KYB Верифицирован',
   'auth.title':'Вход в GlobalTrade Portal','auth.email':'Корпоративный Email','auth.password':'Пароль',
   'auth.continue':'Продолжить','auth.otpSent':'6-значный код подтверждения отправлен на ваш email.',
-  'auth.otp':'Одноразовый пароль (OTP)','auth.terms':'Я принимаю Условия обслуживания и Политику трансграничной передачи данных (GDPR / DPDP).','auth.kyb_consent':'Я даю согласие на автоматическую проверку KYB через государственные реестры.','auth.signin':'Войти','common.back':'← Назад','common.close':'Закрыть',
-  'kyb.title':'Юридические данные и регуляторные реквизиты экспортёра','kyb.subtitle':'Верификация GSTIN, DGFT IEC и членства в экспортном совете APEDA.','kyb.pending':'Ожидает верификации','kyb.companyName':'Юридическое название компании','kyb.country':'Страна','kyb.gstin':'GSTIN (Штат 27)','kyb.iec':'DGFT IEC / PAN','kyb.council':'Экспортный совет (APEDA)','kyb.adcode':'AD-код и IFSC банка','kyb.port':'Порт отправления','kyb.factory':'Адрес фабрики / предприятия','kyb.doc':'Сертификаты экспортёра (IEC + FSSAI)','kyb.back':'← Назад к авторизации','kyb.submit':'Верифицировать и открыть дашборд',
+  'auth.otp':'Одноразовый пароль (OTP)','auth.terms':'Я принимаю Условия обслуживания и Политику трансграничной передачи данных (GDPR / DPDP).','auth.kyb_consent':'Я согласен на автоматическую проверку KYB через государственные реестры.','auth.signin':'Войти','common.back':'← Назад','common.close':'Закрыть',
+  'kyb.title':'Юридические данные и регуляторные реквизиты экспортёра','kyb.subtitle':'Верификация GSTIN, DGFT IEC и членства в экспортном совете APEDA.','kyb.pending':'Ожидает верификации','kyb.companyName':'Юридическое название компании','kyb.country':'Страна','kyb.gstin':'GSTIN (Штат 27)','kyb.iec':'DGFT IEC / PAN','kyb.council':'Экспортный совет (APEDA)','kyb.adcode':'AD-код и IFSC банка','kyb.port':'Порт отправления','kyb.factory':'Адрес фабрики / предприятия','kyb.doc':'Экспортные лицензии и органик-сертификаты','kyb.back':'← Назад к авторизации','kyb.submit':'Верифицировать и открыть дашборд',
   'compliance.title':'Центр соответствия поставщика',
   'kpi.escrow':'Средства в эскроу','kpi.action':'Требует вашего действия','kpi.action_suffix':'сделок ждут ответа','kpi.shipments':'В пути','kpi.ships_suffix':'отгрузок','kpi.completed':'Завершено','kpi.completed_suffix':'сделок',
   'orders.filterLabel':'Фильтр:','orders.catalog':'Каталог товаров →',
   'table.id':'ID сделки','table.product':'Товар','table.buyer':'Покупатель','table.value':'Стоимость','table.status':'Статус','table.action':'Действие',
   'st.ALL':'Все','st.RFQ':'RFQ','st.QUOTE_SENT':'КП отправлено','st.CONTRACT':'Контракт','st.PRODUCTION':'Производство','st.ESCROW_HELD':'Эскроу','st.SHIPPED':'Отгружено','st.COMPLETED':'Завершено',
   'act.RFQ':'Отправить КП','act.QUOTE_SENT':'Просмотр КП','act.CONTRACT':'Подписать контракт','act.PRODUCTION':'Ход производства','act.ESCROW_HELD':'Загрузить коносамент','act.SHIPPED':'Отследить груз','act.COMPLETED':'Подробнее',
-  'catalog.title':'Каталог товаров','catalog.subtitle':'Управление агроэкспортными листингами','catalog.back':'Хаб заказов','catalog.addSku':'Добавить новый SKU',
-  'catalog.search':'Поиск','catalog.category':'Категория:','catalog.allCat':'Все категории','catalog.catFert':'Удобрения','catalog.catSeeds':'Семена','catalog.catOrganic':'Органические удобрения','catalog.catMedia':'Грунт / субстрат',
+  'catalog.title':'Каталог агропродукции','catalog.subtitle':'Управление удобрениями, семенами, грунтом и субстратами','catalog.back':'Хаб заказов','catalog.addSku':'Добавить новый SKU',
+  'catalog.search':'Поиск','catalog.category':'Категория:','catalog.allCat':'Все категории','catalog.catFert':'Удобрения','catalog.catSeeds':'Семена','catalog.catOrganic':'Органика','catalog.catMedia':'Грунт и субстраты',
   'catalog.sort':'Сортировка:','catalog.priceAsc':'Цена: по возрастанию','catalog.priceDesc':'Цена: по убыванию','catalog.moqAsc':'MOQ: сначала меньший',
-  'catalog.price':'Цена / ед.','catalog.moq':'Мин. партия (MOQ)','catalog.hs':'Код HS','catalog.certs':'Сертификаты','catalog.offer':'Создать экспортное предложение',
+  'catalog.price':'Цена / ед.','catalog.moq':'Мин. партия (MOQ)','catalog.hs':'Код HS','catalog.offer':'Создать экспортное предложение',
   'deal.title':'Согласование условий и E-Sign','deal.subtitle':'Заказ GT-2025-0312 · Покупатель #RU-4471','deal.back':'Назад к заказам','deal.terms':'Согласованные коммерческие условия',
   'deal.product':'Товар','deal.volume':'Объём','deal.unitPrice':'Цена ед. (FOB)','deal.total':'Итого',
   'deal.escrow30':'30% Аванс в Эскроу','deal.escrow30desc':'Заблокировано в Platform Vault. Выплачивается при старте производства.','deal.secured':'Зафиксировано',
   'deal.escrow70':'70% по коносаменту (B/L)','deal.escrow70desc':'Разблокируется после таможенной очистки в Nhava Sheva + загрузки B/L.','deal.pending':'Ожидает',
   'deal.sigLog':'Цифровые подписи:','deal.sig1of2':'1/2 Завершено','deal.buyerLabel':'Покупатель #RU-4471:','deal.buyerSigned':'Подписан (10.05.2025 14:22)',
-  'deal.supplierLabel':'Indian Agro Exports:','deal.awaiting':'Ожидает подписи',
+  'deal.supplierLabel':'Indian Manufactories Group:','deal.awaiting':'Ожидает подписи',
   'deal.signBtn':'Подписать смарт-контракт (E-Sign)','deal.pi':'Скачать проформа-инвойс (PI)',
   'chat.title':'Зашифрованный B2B-чат','chat.translate':'Авто-перевод: EN ↔ RU','chat.privacy':'Privacy Guard АКТИВЕН',
   'chat.buyer':'Покупатель #RU-4471','chat.msg1':'Подтверждаем условия FOB Nhava Sheva для 50 МТ NPK 20-20-20. Пожалуйста, подпишите контракт для фиксации аванса в эскроу.',
-  'chat.supplier':'Indian Agro Exports (Вы)','chat.msg2':'Производство на предприятии в Пуне запланировано. Сертификат контроля качества SGS будет предоставлен до отгрузки.',
-  'chat.privacy_note':'<b>Privacy Guard:</b> Телефоны, email и мессенджер-контакты автоматически маскируются. Вся коммуникация — внутри платформы.',
+  'chat.supplier':'Indian Manufactories Group (Вы)','chat.msg2':'Производство на предприятии в Пуне запланировано. Сертификат контроля качества SGS будет предоставлен до отгрузки.',
+  'chat.privacy_note':'<b>Privacy Guard:</b> Телефоны, email и контакты автоматически маскируются. Вся коммуникация остаётся внутри платформы.',
   'chat.placeholder':'Введите сообщение...',
-  'step1.title':'Вход','step1.sub':'Email и OTP',
-  'step2.title':'KYB','step2.sub':'Проверка реквизитов',
-  'step3.title':'Центр заказов','step3.sub':'Все сделки',
-  'step4.title':'Каталог','step4.sub':'Товары и листинги',
-  'step5.title':'Комната сделки','step5.sub':'Контракт и чат'
+  'step1.title':'Вход','step1.sub':'Email и OTP-авторизация',
+  'step2.title':'KYB-проверка','step2.sub':'Регуляторные лицензии',
+  'step3.title':'Центр заказов','step3.sub':'Сделки и эскроу-счета',
+  'step4.title':'Каталог','step4.sub':'Агроэкспортные листинги',
+  'step5.title':'Комната сделки','step5.sub':'Контракт и E-Sign'
 },
-hi:{
+hi: {
   'profile.verified':'KYB सत्यापित',
   'auth.title':'GlobalTrade Portal में साइन इन करें','auth.email':'कॉर्पोरेट ईमेल','auth.password':'पासवर्ड',
   'auth.continue':'जारी रखें','auth.otpSent':'आपके ईमेल पर 6-अंकीय कोड भेजा गया।',
-  'auth.otp':'वन-टाइम पासवर्ड (OTP)','auth.terms':'मैं सेवा शर्तें और डेटा नीति स्वीकार करता/करती हूँ।','auth.kyb_consent':'मैं KYB सत्यापन के लिए सहमत हूँ।','auth.signin':'साइन इन','common.back':'← वापस','common.close':'बंद करें',
-  'kyb.title':'निर्यातक कानूनी पहचान और नियामक प्रमाण-पत्र','kyb.subtitle':'GSTIN, DGFT IEC और APEDA की सदस्यता सत्यापित करें।','kyb.pending':'सत्यापन प्रतीक्षित','kyb.companyName':'कंपनी का कानूनी नाम','kyb.country':'देश','kyb.gstin':'GSTIN (राज्य 27)','kyb.iec':'DGFT IEC / PAN','kyb.council':'निर्यात परिषद (APEDA)','kyb.adcode':'AD कोड और IFSC','kyb.port':'मूल बंदरगाह','kyb.factory':'कारखाना / पंजीकृत पता','kyb.doc':'निर्यात प्रमाणपत्र (IEC + FSSAI)','kyb.back':'← वापस जाएं','kyb.submit':'सत्यापित करें और डैशबोर्ड खोलें',
+  'auth.otp':'वन-टाइम पासवर्ड (OTP)','auth.terms':'मैं सेवा की शर्तें और डेटा नीति स्वीकार करता हूँ।','auth.kyb_consent':'मैं KYB सत्यापन के लिए सहमति देता हूँ।','auth.signin':'साइन इन','common.back':'← वापस','common.close':'बंद करें',
+  'kyb.title':'निर्यातक कानूनी पहचान और नियामक प्रमाण-पत्र','kyb.subtitle':'GSTIN, DGFT IEC और APEDA सदस्यता सत्यापित करें।','kyb.pending':'सत्यापन प्रतीक्षित','kyb.companyName':'कंपनी का कानूनी नाम','kyb.country':'देश','kyb.gstin':'GSTIN (राज्य 27)','kyb.iec':'DGFT IEC / PAN','kyb.council':'निर्यात परिषद (APEDA)','kyb.adcode':'AD कोड और IFSC','kyb.port':'मूल बंदरगाह','kyb.factory':'कारखाना पता','kyb.doc':'निर्यात प्रमाणपत्र और जैविक लाइसेंस','kyb.back':'← वापस','kyb.submit':'सत्यापित करें और डैशबोर्ड खोलें',
   'compliance.title':'आपूर्तिकर्ता अनुपालन केंद्र',
-  'kpi.escrow':'एस्क्रो राशि','kpi.action':'आपकी कार्रवाई आवश्यक','kpi.action_suffix':'सौदे उत्तर की प्रतीक्षा में','kpi.shipments':'पारगमन में','kpi.ships_suffix':'शिपमेंट','kpi.completed':'पूर्ण','kpi.completed_suffix':'सौदे',
+  'kpi.escrow':'एस्क्रो सुरक्षित','kpi.action':'आपकी कार्रवाई आवश्यक','kpi.action_suffix':'सौदे उत्तर की प्रतीक्षा में','kpi.shipments':'पारगमन में','kpi.ships_suffix':'शिपमेंट','kpi.completed':'पूर्ण','kpi.completed_suffix':'सौदे',
   'orders.filterLabel':'फ़िल्टर:','orders.catalog':'उत्पाद कैटलॉग →',
   'table.id':'डील आईडी','table.product':'उत्पाद','table.buyer':'खरीदार','table.value':'मूल्य','table.status':'स्थिति','table.action':'कार्रवाई',
   'st.ALL':'सभी','st.RFQ':'RFQ','st.QUOTE_SENT':'उद्धरण भेजा','st.CONTRACT':'अनुबंध','st.PRODUCTION':'उत्पादन','st.ESCROW_HELD':'एस्क्रो','st.SHIPPED':'भेजा गया','st.COMPLETED':'पूर्ण',
   'act.RFQ':'उद्धरण भेजें','act.QUOTE_SENT':'उद्धरण देखें','act.CONTRACT':'अनुबंध पर हस्ताक्षर करें','act.PRODUCTION':'उत्पादन स्थिति','act.ESCROW_HELD':'B/L अपलोड करें','act.SHIPPED':'शिपमेंट ट्रैक करें','act.COMPLETED':'विवरण देखें',
-  'catalog.title':'उत्पाद कैटलॉग','catalog.subtitle':'कृषि निर्यात लिस्टिंग प्रबंधित करें','catalog.back':'ऑर्डर हब','catalog.addSku':'नया SKU जोड़ें',
-  'catalog.search':'खोजें','catalog.category':'श्रेणी:','catalog.allCat':'सभी श्रेणियाँ','catalog.catFert':'उर्वरक','catalog.catSeeds':'बीज','catalog.catOrganic':'जैविक उत्पाद','catalog.catMedia':'उगाने का माध्यम',
+  'catalog.title':'कृषि उत्पाद कैटलॉग','catalog.subtitle':'उर्वरक, बीज और बढ़ते माध्यमों की लिस्टिंग प्रबंधित करें','catalog.back':'ऑर्डर हब','catalog.addSku':'नया SKU जोड़ें',
+  'catalog.search':'खोजें','catalog.category':'श्रेणी:','catalog.allCat':'सभी श्रेणियाँ','catalog.catFert':'उर्वरक','catalog.catSeeds':'बीज','catalog.catOrganic':'जैविक इनपुट','catalog.catMedia':'बढ़ते माध्यम',
   'catalog.sort':'क्रमबद्ध करें:','catalog.priceAsc':'मूल्य: कम → अधिक','catalog.priceDesc':'मूल्य: अधिक → कम','catalog.moqAsc':'MOQ: सबसे छोटा पहले',
-  'catalog.price':'मूल्य/इकाई','catalog.moq':'न्यूनतम ऑर्डर (MOQ)','catalog.hs':'HS कोड','catalog.certs':'प्रमाणपत्र','catalog.offer':'निर्यात प्रस्ताव बनाएं',
+  'catalog.price':'मूल्य/इकाई','catalog.moq':'न्यूनतम ऑर्डर (MOQ)','catalog.hs':'HS कोड','catalog.offer':'निर्यात प्रस्ताव बनाएं',
   'deal.title':'अनुबंध वार्ता और E-Sign','deal.subtitle':'ऑर्डर GT-2025-0312 · खरीदार #RU-4471','deal.back':'ऑर्डर पर वापस','deal.terms':'सहमत व्यावसायिक शर्तें',
   'deal.product':'उत्पाद','deal.volume':'मात्रा','deal.unitPrice':'इकाई मूल्य (FOB)','deal.total':'कुल',
   'deal.escrow30':'30% अग्रिम एस्क्रो','deal.escrow30desc':'Platform Vault में लॉक। उत्पादन शुरू होने पर जारी।','deal.secured':'सुरक्षित',
   'deal.escrow70':'B/L पर 70% शेष','deal.escrow70desc':'JNPT सीमा शुल्क निकासी + B/L अपलोड पर ट्रिगर।','deal.pending':'प्रतीक्षित',
   'deal.sigLog':'डिजिटल हस्ताक्षर:','deal.sig1of2':'1/2 पूर्ण','deal.buyerLabel':'खरीदार #RU-4471:','deal.buyerSigned':'हस्ताक्षरित (10.05.2025)',
-  'deal.supplierLabel':'Indian Agro Exports:','deal.awaiting':'हस्ताक्षर प्रतीक्षित',
+  'deal.supplierLabel':'Indian Manufactories Group:','deal.awaiting':'हस्ताक्षर प्रतीक्षित',
   'deal.signBtn':'स्मार्ट अनुबंध पर हस्ताक्षर करें (E-Sign)','deal.pi':'प्रोफॉर्मा इनवॉइस (PI) डाउनलोड करें',
   'chat.title':'एन्क्रिप्टेड B2B चैट','chat.translate':'ऑटो-अनुवाद: EN ↔ RU','chat.privacy':'Privacy Guard चालू',
   'chat.buyer':'खरीदार #RU-4471','chat.msg1':'हम 50 MT NPK 20-20-20 के लिए FOB Nhava Sheva शर्तें स्वीकार करते हैं। एस्क्रो लॉक करने के लिए कृपया अनुबंध पर हस्ताक्षर करें।',
-  'chat.supplier':'Indian Agro Exports (आप)','chat.msg2':'पुणे में बैच उत्पादन निर्धारित है। SGS प्रमाणपत्र डिस्पैच से पहले दिया जाएगा।',
+  'chat.supplier':'Indian Manufactories Group (आप)','chat.msg2':'पुणे में बैच उत्पादन निर्धारित है। SGS प्रमाणपत्र डिस्पैच से पहले दिया जाएगा।',
   'chat.privacy_note':'<b>Privacy Guard:</b> फ़ोन, ईमेल और मैसेंजर संपर्क स्वतः मास्क हो जाते हैं।',
   'chat.placeholder':'संदेश टाइप करें...',
-  'step1.title':'साइन इन','step1.sub':'Email और OTP',
-  'step2.title':'KYB सत्यापन','step2.sub':'नियामक प्रमाण-पत्र',
-  'step3.title':'ऑर्डर हब','step3.sub':'सभी सौदे',
-  'step4.title':'कैटलॉग','step4.sub':'उत्पाद और लिस्टिंग',
-  'step5.title':'डील रूम','step5.sub':'अनुबंध और चैट'
+  'step1.title':'साइन इन','step1.sub':'ईमेल और OTP प्रमाणीकरण',
+  'step2.title':'KYB सत्यापन','step2.sub':'कानूनी और निर्यात लाइसेंस',
+  'step3.title':'ऑर्डर हब','step3.sub':'सौदे और एस्क्रो प्रबंधन',
+  'step4.title':'कैटलॉग','step4.sub':'कृषि निर्यात लिस्टिंग',
+  'step5.title':'डील रूम','step5.sub':'अनुबंध और E-Sign'
 },
-zh:{
+zh: {
   'profile.verified':'KYB 已认证',
   'auth.title':'登录 GlobalTrade Portal','auth.email':'企业邮箱','auth.password':'密码',
   'auth.continue':'继续','auth.otpSent':'6位验证码已发送至您的邮箱。',
-  'auth.otp':'一次性密码 (OTP)','auth.terms':'我接受服务条款和跨境数据传输政策 (GDPR / DPDP)。','auth.kyb_consent':'我同意通过国家登记处进行KYB自动身份核查。','auth.signin':'登录','common.back':'← 返回','common.close':'关闭',
-  'kyb.title':'出口商法人身份与监管资质','kyb.subtitle':'验证GSTIN、DGFT IEC及APEDA出口委员会会员资格。','kyb.pending':'待验证','kyb.companyName':'公司法定名称','kyb.country':'国家','kyb.gstin':'GSTIN（第27邦）','kyb.iec':'DGFT IEC / PAN','kyb.council':'出口委员会 (APEDA)','kyb.adcode':'AD代码和银行IFSC','kyb.port':'发货港','kyb.factory':'工厂 / 注册地址','kyb.doc':'出口证书 (IEC + FSSAI)','kyb.back':'← 返回登录','kyb.submit':'验证并进入控制台',
+  'auth.otp':'一次性密码 (OTP)','auth.terms':'我接受服务条款和跨境数据传输政策 (GDPR / DPDP)。','auth.kyb_consent':'我同意通过国家商业登记处进行KYB自动核查。','auth.signin':'登录','common.back':'← 返回','common.close':'关闭',
+  'kyb.title':'出口商法人身份与监管资质','kyb.subtitle':'验证GSTIN、DGFT IEC及APEDA出口委员会会员资格。','kyb.pending':'待验证','kyb.companyName':'公司法定名称','kyb.country':'国家','kyb.gstin':'GSTIN（第27邦）','kyb.iec':'DGFT IEC / PAN','kyb.council':'出口委员会 (APEDA)','kyb.adcode':'AD代码和银行IFSC','kyb.port':'发货港','kyb.factory':'工厂 / 生产基地','kyb.doc':'出口许可及有机认证','kyb.back':'← 返回登录','kyb.submit':'验证并进入控制台',
   'compliance.title':'供应商合规中心',
   'kpi.escrow':'托管保障金额','kpi.action':'需要您处理','kpi.action_suffix':'笔交易待处理','kpi.shipments':'运输中','kpi.ships_suffix':'批','kpi.completed':'已完成','kpi.completed_suffix':'笔交易',
   'orders.filterLabel':'筛选:','orders.catalog':'商品目录 →',
   'table.id':'交易ID','table.product':'产品','table.buyer':'买家','table.value':'金额','table.status':'状态','table.action':'操作',
   'st.ALL':'全部','st.RFQ':'询价','st.QUOTE_SENT':'已报价','st.CONTRACT':'合同','st.PRODUCTION':'生产中','st.ESCROW_HELD':'托管中','st.SHIPPED':'已发运','st.COMPLETED':'已完成',
   'act.RFQ':'发送报价','act.QUOTE_SENT':'查看报价','act.CONTRACT':'签署合同','act.PRODUCTION':'查看进度','act.ESCROW_HELD':'上传提单','act.SHIPPED':'追踪货运','act.COMPLETED':'查看详情',
-  'catalog.title':'商品目录','catalog.subtitle':'管理农产品出口列表','catalog.back':'订单中心','catalog.addSku':'添加新SKU',
+  'catalog.title':'农产品出口目录','catalog.subtitle':'管理化肥、种子、土壤与种植基质列表','catalog.back':'订单中心','catalog.addSku':'添加新SKU',
   'catalog.search':'搜索','catalog.category':'类别:','catalog.allCat':'全部类别','catalog.catFert':'化肥','catalog.catSeeds':'种子','catalog.catOrganic':'有机投入品','catalog.catMedia':'种植基质',
   'catalog.sort':'排序:','catalog.priceAsc':'价格: 低 → 高','catalog.priceDesc':'价格: 高 → 低','catalog.moqAsc':'起订量: 最小优先',
-  'catalog.price':'价格/单位','catalog.moq':'最小起订量','catalog.hs':'HS编码','catalog.certs':'认证','catalog.offer':'创建出口报价',
+  'catalog.price':'价格/单位','catalog.moq':'最小起订量','catalog.hs':'HS编码','catalog.offer':'创建出口报价',
   'deal.title':'合同谈判与电子签章','deal.subtitle':'订单 GT-2025-0312 · 买家 #RU-4471','deal.back':'返回订单','deal.terms':'已约定商业条款',
   'deal.product':'产品','deal.volume':'数量','deal.unitPrice':'单价 (FOB)','deal.total':'总计',
   'deal.escrow30':'30%预付托管','deal.escrow30desc':'锁定在平台托管账户，生产启动后释放。','deal.secured':'已锁定',
   'deal.escrow70':'提单(B/L)后支付70%余款','deal.escrow70desc':'Nhava Sheva完成清关并上传B/L后触发。','deal.pending':'待支付',
   'deal.sigLog':'数字签章记录:','deal.sig1of2':'1/2 已完成','deal.buyerLabel':'买家 #RU-4471:','deal.buyerSigned':'已签署 (2025-05-10 14:22)',
-  'deal.supplierLabel':'Indian Agro Exports:','deal.awaiting':'待签署',
+  'deal.supplierLabel':'Indian Manufactories Group:','deal.awaiting':'待签署',
   'deal.signBtn':'签署智能合约 (E-Sign)','deal.pi':'下载形式发票 (PI)',
   'chat.title':'加密B2B聊天','chat.translate':'自动翻译: EN ↔ RU','chat.privacy':'隐私保护已启用',
   'chat.buyer':'买家 #RU-4471','chat.msg1':'我们确认FOB Nhava Sheva条款，50吨NPK 20-20-20。请签署合同以锁定托管款项。',
-  'chat.supplier':'Indian Agro Exports（您）','chat.msg2':'浦那工厂批次生产已安排。SGS装运前检验证书将在发货前提供。',
+  'chat.supplier':'Indian Manufactories Group（您）','chat.msg2':'浦那工厂批次生产已安排。SGS装运前检验证书将在发货前提供。',
   'chat.privacy_note':'<b>隐私保护:</b> 电话、邮箱及即时通讯联系方式自动屏蔽，所有沟通在平台内进行。',
   'chat.placeholder':'输入消息...',
   'step1.title':'登录','step1.sub':'邮箱与OTP验证',
-  'step2.title':'企业认证','step2.sub':'监管资质核验',
-  'step3.title':'订单中心','step3.sub':'管理所有交易',
-  'step4.title':'产品目录','step4.sub':'产品与报价',
-  'step5.title':'谈判室','step5.sub':'合同与实时沟通'
+  'step2.title':'企业认证','step2.sub':'法定及出口资质',
+  'step3.title':'订单中心','step3.sub':'交易与托管管理',
+  'step4.title':'产品目录','step4.sub':'农产品出口列表',
+  'step5.title':'谈判室','step5.sub':'合同与电子签署'
 }
 };
 
@@ -646,29 +634,27 @@ let LANG = 'en';
 let CURR = 'INR';
 let CURR_STEP = 1;
 let STATUS_FILTER = 'ALL';
-let starRating = 0;
 
-// ============================================================
-//  HELPERS
-// ============================================================
-function t(key){ return (T[LANG]&&T[LANG][key]) || (T['en'][key]) || key; }
+function t(key){ return (T[LANG] && T[LANG][key]) || (T['en'][key]) || key; }
+
 function fmtMoney(inr){
   const cfg = RATES[CURR];
   const v = Math.round(inr * cfg.r);
-  if(CURR==='INR') return cfg.s + v.toLocaleString('en-IN');
-  if(CURR==='RUB') return v.toLocaleString('ru-RU') + '\u202f' + cfg.s;
+  if(CURR === 'INR') return cfg.s + v.toLocaleString('en-IN');
+  if(CURR === 'RUB') return v.toLocaleString('ru-RU') + '\u202f' + cfg.s;
   return cfg.s + v.toLocaleString('en-US');
 }
+
 function applyI18n(){
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const k = el.getAttribute('data-i18n');
-    const v = t(k);
-    el.innerHTML = v;
+    el.innerHTML = t(k);
   });
   document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
     el.placeholder = t(el.getAttribute('data-i18n-placeholder'));
   });
 }
+
 function applyPrices(){
   document.querySelectorAll('.price[data-inr]').forEach(el => {
     el.textContent = fmtMoney(parseFloat(el.dataset.inr));
@@ -681,34 +667,41 @@ function applyPrices(){
 function renderStepper(){
   const stepper = document.getElementById('stepper');
   stepper.innerHTML = '';
-  for(let i=1;i<=5;i++){
+  for(let i=1; i<=5; i++){
     const done = i < CURR_STEP;
     const active = i === CURR_STEP;
+
     const wrap = document.createElement('div');
     wrap.className = 'flex flex-col items-center flex-1';
+
     const circle = document.createElement('div');
-    circle.className = `w-9 h-9 rounded-full text-xs font-extrabold flex items-center justify-center border-2 shrink-0 ${
+    circle.className = `w-9 h-9 rounded-full text-xs font-extrabold flex items-center justify-center border-2 shrink-0 transition ${
       done   ? 'bg-emerald-100 border-emerald-400 text-emerald-700' :
       active ? 'bg-brand border-brand text-white shadow-sm' :
                'bg-white border-slate-300 text-slate-400'
     }`;
     circle.textContent = done ? '✓' : i;
+
     const label = document.createElement('div');
     label.className = 'mt-1 text-center';
+
     const title = document.createElement('p');
-    title.className = `text-[11px] font-bold leading-tight ${active ? 'text-brand' : done ? 'text-emerald-600' : 'text-slate-400'}`;
+    title.className = `text-[11px] font-bold leading-tight ${active ? 'text-brand' : done ? 'text-emerald-700' : 'text-slate-400'}`;
     title.textContent = t(`step${i}.title`);
+
     const sub = document.createElement('p');
     sub.className = `text-[10px] leading-tight ${active ? 'text-slate-600' : 'text-slate-400'}`;
     sub.textContent = t(`step${i}.sub`);
+
     label.appendChild(title);
     label.appendChild(sub);
     wrap.appendChild(circle);
     wrap.appendChild(label);
     stepper.appendChild(wrap);
-    if(i<5){
+
+    if(i < 5){
       const line = document.createElement('div');
-      line.className = `h-0.5 flex-shrink-0 mt-4 ${i<CURR_STEP?'bg-emerald-400':'bg-slate-200'}`;
+      line.className = `h-0.5 flex-shrink-0 mt-4.5 ${i < CURR_STEP ? 'bg-emerald-400' : 'bg-slate-200'}`;
       line.style.width = '24px';
       stepper.appendChild(line);
     }
@@ -720,24 +713,25 @@ function renderStepper(){
 // ============================================================
 function goStep(n){
   CURR_STEP = n;
-  for(let i=1;i<=5;i++){
+  for(let i=1; i<=5; i++){
     const s = document.getElementById('step-'+i);
-    if(s) s.classList.toggle('hidden', i!==n);
+    if(s) s.classList.toggle('hidden', i !== n);
   }
   const pb = document.getElementById('profile-btn');
-  if(n>=3){ pb.classList.remove('hidden'); pb.classList.add('inline-flex'); }
+  if(n >= 3){ pb.classList.remove('hidden'); pb.classList.add('inline-flex'); }
   else { pb.classList.add('hidden'); pb.classList.remove('inline-flex'); }
+
   renderStepper();
   applyI18n();
   applyPrices();
-  if(n===3) renderOrders();
-  if(n===4) renderCatalog();
+  if(n === 3) renderOrders();
+  if(n === 4) renderCatalog();
   lucide.createIcons();
-  window.scrollTo({top:0,behavior:'smooth'});
+  window.scrollTo({top:0, behavior:'smooth'});
 }
 
 // ============================================================
-//  AUTH
+//  AUTH & KYB
 // ============================================================
 function showOtp(){
   document.getElementById('auth-a').classList.add('hidden');
@@ -748,28 +742,27 @@ function backToEmailPass(){
   document.getElementById('auth-b').classList.add('hidden');
   document.getElementById('auth-a').classList.remove('hidden');
 }
+function handleKyb(e){
+  e.preventDefault();
+  goStep(3);
+}
 
 // ============================================================
-//  KYB
-// ============================================================
-function handleKyb(e){ e.preventDefault(); goStep(3); }
-
-// ============================================================
-//  LANG & CURRENCY
+//  LANGUAGE & CURRENCY
 // ============================================================
 function changeLang(v){
   LANG = v;
   applyI18n();
   renderStepper();
-  if(CURR_STEP===3) renderOrders();
-  if(CURR_STEP===4) renderCatalog();
+  if(CURR_STEP === 3) renderOrders();
+  if(CURR_STEP === 4) renderCatalog();
   lucide.createIcons();
 }
 function changeCurrency(v){
   CURR = v;
   applyPrices();
-  if(CURR_STEP===3) renderOrders();
-  if(CURR_STEP===4) renderCatalog();
+  if(CURR_STEP === 3) renderOrders();
+  if(CURR_STEP === 4) renderCatalog();
 }
 
 // ============================================================
@@ -781,31 +774,38 @@ function renderFilters(){
   STATUS_LIST.forEach(s => {
     const b = document.createElement('button');
     const active = s === STATUS_FILTER;
-    b.className = `px-3 py-1 text-xs font-bold rounded-full transition ${active?'bg-brand text-white':'bg-slate-100 text-slate-600 hover:bg-slate-200'}`;
+    b.className = `px-3 py-1 text-xs font-bold rounded-full transition ${active ? 'bg-brand text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}`;
     b.textContent = t('st.'+s);
     b.onclick = () => { STATUS_FILTER = s; renderOrders(); renderFilters(); };
     c.appendChild(b);
   });
 }
+
 function renderOrders(){
   renderFilters();
   const tbody = document.getElementById('orders-tbody');
   if(!tbody) return;
-  const rows = STATUS_FILTER==='ALL' ? ORDERS_DATA : ORDERS_DATA.filter(o=>o.status===STATUS_FILTER);
+  const rows = STATUS_FILTER === 'ALL' ? ORDERS_DATA : ORDERS_DATA.filter(o => o.status === STATUS_FILTER);
   if(!rows.length){
-    tbody.innerHTML = `<tr><td colspan="6" class="px-5 py-8 text-center text-sm text-slate-400">No orders found for this filter.</td></tr>`;
+    tbody.innerHTML = `<tr><td colspan="6" class="px-5 py-8 text-center text-sm text-slate-400">No deals found for this filter.</td></tr>`;
     return;
   }
   tbody.innerHTML = rows.map(o => {
     const actionLabel = t('act.'+o.status);
     const drawerMap = {
-      'RFQ':'rfq-quote','QUOTE_SENT':'view-quote','CONTRACT':'sign-contract',
-      'PRODUCTION':'production','ESCROW_HELD':'upload-bl','SHIPPED':'shipment','COMPLETED':'completed'
+      'RFQ': 'rfq-quote',
+      'QUOTE_SENT': 'view-quote',
+      'CONTRACT': 'sign-contract',
+      'PRODUCTION': 'production',
+      'ESCROW_HELD': 'upload-bl',
+      'SHIPPED': 'shipment',
+      'COMPLETED': 'completed'
     };
     const drawerType = drawerMap[o.status] || 'rfq-quote';
     const btnCls = o.needsAction
       ? 'px-3 py-1.5 bg-amber-500 hover:bg-amber-600 text-white text-xs font-bold rounded-xl transition'
       : 'px-3 py-1.5 bg-slate-800 hover:bg-slate-900 text-white text-xs font-bold rounded-xl transition';
+
     return `<tr class="hover:bg-slate-50 transition">
       <td class="px-5 py-3.5 text-xs font-mono font-bold text-brand">${o.id}</td>
       <td class="px-5 py-3.5 text-sm font-medium text-slate-800">${o.product}</td>
@@ -818,7 +818,6 @@ function renderOrders(){
     </tr>`;
   }).join('');
 }
-function filterOrders(){ renderOrders(); }
 
 // ============================================================
 //  CATALOG
@@ -826,33 +825,37 @@ function filterOrders(){ renderOrders(); }
 function renderCatalog(){
   const grid = document.getElementById('catalog-grid');
   if(!grid) return;
-  const search = (document.getElementById('cat-search')?.value||'').toLowerCase();
+  const search = (document.getElementById('cat-search')?.value || '').toLowerCase();
   const cat = document.getElementById('cat-cat')?.value || '';
   const sort = document.getElementById('cat-sort')?.value || 'price_asc';
-  let items = [...CATALOG_DATA].filter(c=>{
+
+  let items = [...CATALOG_DATA].filter(c => {
     const matchS = c.name.toLowerCase().includes(search) || c.id.toLowerCase().includes(search);
     const matchC = !cat || c.category === cat;
     return matchS && matchC;
   });
-  if(sort==='price_asc') items.sort((a,b)=>a.priceInr-b.priceInr);
-  if(sort==='price_desc') items.sort((a,b)=>b.priceInr-a.priceInr);
-  if(sort==='moq_asc') items.sort((a,b)=>a.moq-b.moq);
+
+  if(sort === 'price_asc') items.sort((a,b) => a.priceInr - b.priceInr);
+  if(sort === 'price_desc') items.sort((a,b) => b.priceInr - a.priceInr);
+  if(sort === 'moq_asc') items.sort((a,b) => a.moq - b.moq);
+
   if(!items.length){
     grid.innerHTML = `<div class="col-span-4 py-12 text-center text-sm text-slate-400">No products match your filter.</div>`;
     return;
   }
-  grid.innerHTML = items.map(p=>`
+
+  grid.innerHTML = items.map(p => `
     <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden flex flex-col hover:border-brand/40 hover:shadow-md transition">
-      <div class="relative">
-        <img src="${p.img}" alt="${p.name}" class="w-full h-40 object-cover" loading="lazy" onerror="this.src='https://placehold.co/600x380/e2e8f0/94a3b8?text=No+Image'">
-        <span class="absolute top-2 left-2 bg-slate-900/80 text-white text-[10px] font-mono font-bold px-1.5 py-0.5 rounded">${p.hs}</span>
-        <span class="absolute top-2 right-2 bg-white/90 text-slate-700 text-[10px] font-bold px-1.5 py-0.5 rounded border border-slate-200">${p.category}</span>
+      <div class="relative h-44 ${p.bgCls} flex items-center justify-center border-b border-slate-100">
+        ${p.iconSvg}
+        <span class="absolute top-2.5 left-2.5 bg-slate-900/80 text-white text-[10px] font-mono font-bold px-2 py-0.5 rounded">${p.hs}</span>
+        <span class="absolute top-2.5 right-2.5 bg-white/95 text-slate-700 text-[10px] font-bold px-2 py-0.5 rounded border border-slate-200">${p.category}</span>
       </div>
       <div class="p-4 flex flex-col flex-1">
         <h3 class="font-bold text-slate-900 text-sm leading-snug mb-1">${p.name}</h3>
         <p class="text-[10px] text-slate-400 font-mono mb-2">${p.id}</p>
         <div class="flex flex-wrap gap-1 mb-3">
-          ${p.certs.map(c=>`<span class="text-[10px] bg-emerald-50 text-emerald-700 border border-emerald-200 px-1.5 py-0.5 rounded font-semibold">${c}</span>`).join('')}
+          ${p.certs.map(c => `<span class="text-[10px] bg-emerald-50 text-emerald-700 border border-emerald-200 px-1.5 py-0.5 rounded font-semibold">${c}</span>`).join('')}
         </div>
         <div class="flex items-end justify-between mt-auto pt-3 border-t border-slate-100">
           <div><p class="text-[10px] text-slate-500 uppercase font-bold">${t('catalog.price')}</p><p class="text-base font-extrabold text-slate-900">${fmtMoney(p.priceInr)}<span class="text-xs font-normal text-slate-500">/${p.unit}</span></p></div>
@@ -865,17 +868,17 @@ function renderCatalog(){
 }
 
 // ============================================================
-//  E-SIGN
+//  E-SIGN & CHAT
 // ============================================================
 function signContract(){
   const btn = document.getElementById('esign-btn');
   if(btn){
     btn.disabled = true;
     btn.className = 'w-full py-3 bg-emerald-600 text-white font-bold rounded-xl text-sm flex items-center justify-center gap-2 cursor-default';
-    btn.innerHTML = '<i data-lucide="check-check" class="w-4 h-4"></i><span data-i18n="deal.signed">Contract Fully Signed ✓</span>';
+    btn.innerHTML = '<i data-lucide="check-check" class="w-4 h-4"></i><span>Contract Fully Signed ✓</span>';
   }
   const badge = document.getElementById('esign-badge');
-  if(badge){ badge.textContent = '2/2 — Escrow Locked'; badge.className = 'text-emerald-600 font-semibold'; }
+  if(badge){ badge.textContent = '2/2 Signed — Escrow Locked'; badge.className = 'text-emerald-600 font-semibold'; }
   const state = document.getElementById('sign-state');
   if(state){ state.innerHTML = '<b class="text-emerald-600">Signed via DSC E-Sign</b>'; }
   const icon = document.getElementById('sign-icon');
@@ -884,22 +887,19 @@ function signContract(){
   showNotify('Smart Contract E-Signed! 30% Escrow deposit is now locked in the Platform Vault.');
 }
 
-// ============================================================
-//  CHAT
-// ============================================================
 function sendChatMsg(e){
   e.preventDefault();
   const inp = document.getElementById('chat-input');
   let txt = inp.value.trim();
   if(!txt) return;
-  txt = txt.replace(/(\+?\d[\d\s\-]{7,})/g,'[🔒 Phone masked]')
-           .replace(/[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}/g,'[🔒 Email masked]')
-           .replace(/@[\w]+/g,'[🔒 Handle masked]');
+  txt = txt.replace(/(\+?\d[\d\s\-]{7,})/g, '[🔒 Phone masked]')
+           .replace(/[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}/g, '[🔒 Email masked]')
+           .replace(/@[\w]+/g, '[🔒 Handle masked]');
   const msgs = document.getElementById('chat-messages');
   const d = document.createElement('div');
   d.className = 'flex justify-end';
   d.innerHTML = `<div class="bg-brand-light text-brand p-3 rounded-xl max-w-[80%] border border-brand-mid">
-    <span class="text-[10px] font-bold block mb-0.5">Indian Agro Exports (You)</span>
+    <span class="text-[10px] font-bold block mb-0.5">Indian Manufactories Group (You)</span>
     <p class="text-xs">${txt}</p>
     <span class="text-[9px] opacity-60 block text-right mt-0.5">Just now</span>
   </div>`;
@@ -909,455 +909,313 @@ function sendChatMsg(e){
 }
 
 // ============================================================
-//  DRAWERS — full functional content
+//  DRAWERS (FULL INTERACTIVE PANELS)
 // ============================================================
 function openDrawer(type, contextId){
   const overlay = document.getElementById('drawer-overlay');
-  const drawer  = document.getElementById('side-drawer');
+  const drawer = document.getElementById('side-drawer');
   const content = document.getElementById('drawer-content');
 
-  const drawerTemplates = {
-
-    // A: SEND QUOTE (from RFQ row)
+  const drawerMap = {
+    // 1. RFQ Send Quote
     'rfq-quote': () => `
       <div class="flex items-center justify-between px-6 py-4 border-b border-slate-100 bg-white sticky top-0 z-10">
-        <div><h3 class="font-extrabold text-slate-900">${t('act.RFQ')}</h3><p class="text-xs text-slate-500 mt-0.5">RFQ-2025-0891 · Buyer #RU-4471 · 20 MT NPK Fertilizer</p></div>
+        <div><h3 class="font-extrabold text-slate-900">${t('act.RFQ')}</h3><p class="text-xs text-slate-500 mt-0.5">RFQ-2025-0891 · Buyer #RU-3129 · 100 MT Organic Vermicompost</p></div>
         <button onclick="closeDrawer()" class="text-slate-400 hover:text-slate-700"><i data-lucide="x" class="w-5 h-5"></i></button>
       </div>
       <div class="p-6 space-y-4 flex-1">
         <div class="bg-amber-50 border border-amber-200 rounded-xl p-3 text-xs text-amber-900">
-          <b>Buyer request:</b> 20 MT NPK 20-20-20, CIF Novorossiysk, with phytosanitary certificate.
+          <b>Buyer Request:</b> 100 MT Organic Vermicompost, CIF Novorossiysk, with NPOP & phytosanitary certificate.
         </div>
         <div class="grid grid-cols-2 gap-4">
-          <div>
-            <label class="block text-xs font-bold text-slate-700 mb-1">Price per MT (USD)</label>
-            <input type="number" value="510" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm outline-none">
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-slate-700 mb-1">Quantity (MT)</label>
-            <input type="number" value="20" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm outline-none">
-          </div>
+          <div><label class="block text-xs font-bold text-slate-700 mb-1">Price per MT (₹ INR)</label><input type="number" value="9200" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm outline-none"></div>
+          <div><label class="block text-xs font-bold text-slate-700 mb-1">Quantity (MT)</label><input type="number" value="100" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm outline-none"></div>
         </div>
         <div class="grid grid-cols-2 gap-4">
-          <div>
-            <label class="block text-xs font-bold text-slate-700 mb-1">Incoterms</label>
-            <select class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm outline-none">
-              <option>EXW Factory</option><option>FOB Nhava Sheva</option><option selected>CIF Destination</option><option>DAP Destination</option>
-            </select>
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-slate-700 mb-1">Lead Time</label>
-            <select class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm outline-none">
-              <option>7 days</option><option>14 days</option><option selected>21 days</option><option>30 days</option>
-            </select>
-          </div>
+          <div><label class="block text-xs font-bold text-slate-700 mb-1">Incoterms</label><select class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm outline-none"><option>FOB Nhava Sheva</option><option selected>CIF Novorossiysk</option><option>EXW Factory (Pune)</option></select></div>
+          <div><label class="block text-xs font-bold text-slate-700 mb-1">Lead Time</label><select class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm outline-none"><option>7 days</option><option>14 days</option><option selected>21 days</option></select></div>
         </div>
-        <div class="grid grid-cols-2 gap-4">
-          <div>
-            <label class="block text-xs font-bold text-slate-700 mb-1">Quote Valid For</label>
-            <select class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm outline-none">
-              <option>7 days</option><option selected>14 days</option><option>30 days</option>
-            </select>
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-slate-700 mb-1">Currency</label>
-            <select class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm outline-none">
-              <option selected>USD ($)</option><option>EUR (€)</option>
-            </select>
-          </div>
+        <div><label class="block text-xs font-bold text-slate-700 mb-1">Certifications Included</label>
+          <div class="flex flex-wrap gap-2">${['NPOP Organic','EU Organic','USDA NOP','Phytosanitary Cert'].map(c => `<label class="flex items-center gap-1.5 text-xs bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5"><input type="checkbox" checked class="accent-brand rounded">${c}</label>`).join('')}</div>
         </div>
-        <div>
-          <label class="block text-xs font-bold text-slate-700 mb-1">Certificates Included</label>
-          <div class="flex flex-wrap gap-2">
-            ${['SGS Test Report','ISO 9001','FSSAI','Phytosanitary Cert'].map(c=>`<label class="flex items-center gap-1.5 text-xs cursor-pointer bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5"><input type="checkbox" checked class="accent-brand rounded">${c}</label>`).join('')}
-          </div>
-        </div>
-        <div>
-          <label class="block text-xs font-bold text-slate-700 mb-1">Notes to Buyer</label>
-          <textarea rows="2" placeholder="e.g. Custom packaging, private label terms..." class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs outline-none resize-none"></textarea>
-        </div>
-        <div>
-          <label class="block text-xs font-bold text-slate-700 mb-1">Attach Spec Sheet (optional)</label>
-          <div class="border-2 border-dashed border-slate-200 rounded-xl p-3 text-center bg-slate-50 hover:border-brand transition cursor-pointer text-xs text-slate-500">
-            <i data-lucide="paperclip" class="w-4 h-4 mx-auto mb-1 text-slate-400"></i>PDF or XLSX · max 10MB
-          </div>
-        </div>
+        <div><label class="block text-xs font-bold text-slate-700 mb-1">Notes for Buyer</label><textarea rows="2" placeholder="Custom packaging or palletizing details..." class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs outline-none resize-none"></textarea></div>
       </div>
       <div class="px-6 py-4 border-t border-slate-100 bg-white flex gap-3">
-        <button onclick="closeDrawer()" class="px-4 py-2.5 border border-slate-200 text-slate-600 text-xs font-bold rounded-xl hover:bg-slate-50 transition">Cancel</button>
-        <button onclick="drawerSuccess('Quote sent to Buyer #RU-4471! Deal status updated to Quote Sent.')" class="flex-1 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-xl transition">Send Quote →</button>
+        <button onclick="closeDrawer()" class="px-4 py-2.5 border border-slate-200 text-slate-600 text-xs font-bold rounded-xl hover:bg-slate-50">Cancel</button>
+        <button onclick="drawerSuccess('Quote submitted to Buyer #RU-3129! Status updated to Quote Sent.')" class="flex-1 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-xl">Send Quote →</button>
       </div>`,
 
-    // B: VIEW QUOTE (QUOTE_SENT)
+    // 2. View Quote
     'view-quote': () => `
       <div class="flex items-center justify-between px-6 py-4 border-b border-slate-100 bg-white sticky top-0 z-10">
-        <div><h3 class="font-extrabold text-slate-900">Quote Details</h3><p class="text-xs text-slate-500 mt-0.5">QT-2025-0445 · Buyer #DE-2209</p></div>
+        <div><h3 class="font-extrabold text-slate-900">Active Quote Details</h3><p class="text-xs text-slate-500 mt-0.5">QT-2025-0445 · Buyer #RU-8842</p></div>
         <button onclick="closeDrawer()" class="text-slate-400 hover:text-slate-700"><i data-lucide="x" class="w-5 h-5"></i></button>
       </div>
       <div class="p-6 space-y-4 flex-1">
         <div class="bg-blue-50 border border-blue-200 rounded-xl p-4 space-y-2 text-xs">
           <div class="grid grid-cols-2 gap-3">
-            <div><p class="text-slate-500 uppercase font-bold text-[10px]">Product</p><p class="font-bold text-slate-800">Organic Vermicompost</p></div>
-            <div><p class="text-slate-500 uppercase font-bold text-[10px]">Quantity</p><p class="font-bold text-slate-800">25 MT</p></div>
-            <div><p class="text-slate-500 uppercase font-bold text-[10px]">Unit Price</p><p class="font-bold text-slate-800">$105 / MT</p></div>
-            <div><p class="text-slate-500 uppercase font-bold text-[10px]">Total</p><p class="font-bold text-slate-800">$2,625</p></div>
+            <div><p class="text-slate-500 uppercase font-bold text-[10px]">Product</p><p class="font-bold text-slate-800">Hybrid Maize Seeds</p></div>
+            <div><p class="text-slate-500 uppercase font-bold text-[10px]">Quantity</p><p class="font-bold text-slate-800">500 KG</p></div>
+            <div><p class="text-slate-500 uppercase font-bold text-[10px]">Unit Price</p><p class="font-bold text-slate-800">₹242 / KG</p></div>
+            <div><p class="text-slate-500 uppercase font-bold text-[10px]">Total</p><p class="font-bold text-slate-800">₹1,21,000</p></div>
             <div><p class="text-slate-500 uppercase font-bold text-[10px]">Incoterms</p><p class="font-bold text-slate-800">FOB Nhava Sheva</p></div>
-            <div><p class="text-slate-500 uppercase font-bold text-[10px]">Lead Time</p><p class="font-bold text-slate-800">10 days</p></div>
+            <div><p class="text-slate-500 uppercase font-bold text-[10px]">Valid Until</p><p class="font-bold text-slate-800">14 Days</p></div>
           </div>
-          <div class="pt-2 border-t border-blue-100"><p class="text-slate-500 uppercase font-bold text-[10px]">Valid Until</p><p class="font-bold text-slate-800">Jan 29, 2025 (14 days)</p></div>
         </div>
         <div>
-          <p class="text-xs font-bold text-slate-700 mb-2">Deal Timeline:</p>
-          <div class="space-y-1.5">
-            ${[['✅','RFQ Received','Jan 13'],['✅','Quote Sent','Jan 15'],['⏳','Awaiting Buyer Acceptance','—'],['○','Contract','—'],['○','Production','—'],['○','Completed','—']].map(([ic,lbl,dt])=>`
-              <div class="flex items-center gap-2.5 text-xs">
-                <span class="text-base w-5 text-center">${ic}</span>
-                <span class="${ic==='✅'?'text-emerald-700 font-semibold':ic==='⏳'?'text-amber-600 font-semibold':'text-slate-400'}">${lbl}</span>
-                ${dt!=='—'?`<span class="ml-auto text-slate-400">${dt}</span>`:''}
-              </div>`).join('')}
+          <p class="text-xs font-bold text-slate-700 mb-2">Deal History:</p>
+          <div class="space-y-1.5 text-xs">
+            <div class="flex items-center gap-2"><span class="text-emerald-600">✓</span><span class="text-slate-700 font-medium">RFQ Received (500 KG Maize Seeds)</span><span class="ml-auto text-slate-400">May 02</span></div>
+            <div class="flex items-center gap-2"><span class="text-emerald-600">✓</span><span class="text-slate-700 font-medium">FOB Quote Dispatched</span><span class="ml-auto text-slate-400">May 04</span></div>
+            <div class="flex items-center gap-2"><span class="text-amber-500">⏳</span><span class="text-amber-700 font-medium">Awaiting Buyer E-Sign Acceptance</span><span class="ml-auto text-slate-400">—</span></div>
           </div>
-        </div>
-        <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs">
-          <p class="font-bold text-slate-700 mb-1">Your Notes to Buyer:</p>
-          <p class="text-slate-600">Organic certified (NPOP + EU). All documents ready upon order confirmation.</p>
         </div>
       </div>
       <div class="px-6 py-4 border-t border-slate-100 bg-white flex gap-3">
-        <button onclick="closeDrawer()" class="px-4 py-2.5 border border-slate-200 text-slate-600 text-xs font-bold rounded-xl hover:bg-slate-50 transition">Close</button>
-        <button onclick="openDrawer('rfq-quote')" class="flex-1 py-2.5 bg-slate-800 hover:bg-slate-900 text-white text-xs font-bold rounded-xl transition">Revise Quote</button>
+        <button onclick="closeDrawer()" class="px-4 py-2.5 border border-slate-200 text-slate-600 text-xs font-bold rounded-xl hover:bg-slate-50">Close</button>
+        <button onclick="openDrawer('rfq-quote')" class="flex-1 py-2.5 bg-slate-800 hover:bg-slate-900 text-white text-xs font-bold rounded-xl">Revise Commercial Offer</button>
       </div>`,
 
-    // C: SIGN CONTRACT
+    // 3. Sign Contract
     'sign-contract': () => `
       <div class="flex items-center justify-between px-6 py-4 border-b border-slate-100 bg-white sticky top-0 z-10">
-        <div><h3 class="font-extrabold text-slate-900">Contract Review & Sign</h3><p class="text-xs text-slate-500 mt-0.5">CT-2025-0312 · Buyer #BR-8834</p></div>
+        <div><h3 class="font-extrabold text-slate-900">Contract Negotiation & E-Sign</h3><p class="text-xs text-slate-500 mt-0.5">CT-2025-0312 · Buyer #RU-4471</p></div>
         <button onclick="closeDrawer()" class="text-slate-400 hover:text-slate-700"><i data-lucide="x" class="w-5 h-5"></i></button>
       </div>
       <div class="p-6 space-y-4 flex-1">
-        <div class="bg-indigo-50 border border-indigo-200 rounded-xl p-4 space-y-2 text-xs">
-          <div class="grid grid-cols-2 gap-3">
-            <div><p class="text-slate-500 uppercase font-bold text-[10px]">Product</p><p class="font-bold text-slate-800">Hybrid Maize Seeds (DKC 9081)</p></div>
-            <div><p class="text-slate-500 uppercase font-bold text-[10px]">Quantity</p><p class="font-bold text-slate-800">2,000 KG</p></div>
-            <div><p class="text-slate-500 uppercase font-bold text-[10px]">Unit Price</p><p class="font-bold text-slate-800">$3.00 / KG</p></div>
-            <div><p class="text-slate-500 uppercase font-bold text-[10px]">Total Value</p><p class="font-bold text-slate-800">$6,000 USD</p></div>
-            <div><p class="text-slate-500 uppercase font-bold text-[10px]">Incoterms</p><p class="font-bold text-slate-800">FOB Nhava Sheva</p></div>
-            <div><p class="text-slate-500 uppercase font-bold text-[10px]">Deadline</p><p class="font-bold text-slate-800">Feb 28, 2025</p></div>
-          </div>
-          <div class="pt-2 border-t border-indigo-100"><p class="text-[10px] text-slate-500 uppercase font-bold">Governing Law</p><p class="font-bold text-slate-800">Singapore (SIAC Arbitration)</p></div>
+        <div class="bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs space-y-2 text-indigo-950">
+          <p class="font-bold">Deal Summary: NPK 20-20-20 Fertilizer (50 MT)</p>
+          <p>Total Contract Value: <b>₹20,75,000</b> (FOB Nhava Sheva). Escrow Split: 30% Advance / 70% B/L presentation.</p>
         </div>
-        <div class="space-y-2">
-          <p class="text-xs font-bold text-slate-700">Key Contract Clauses:</p>
-          <ul class="text-xs text-slate-600 space-y-1">
-            <li class="flex items-start gap-2"><span class="text-emerald-500 mt-0.5">•</span><span><b>Quality:</b> ISTA certified, min 95% germination rate guaranteed</span></li>
-            <li class="flex items-start gap-2"><span class="text-emerald-500 mt-0.5">•</span><span><b>Inspection:</b> SGS pre-shipment inspection required at Nhava Sheva</span></li>
-            <li class="flex items-start gap-2"><span class="text-emerald-500 mt-0.5">•</span><span><b>Payment:</b> 100% via Platform Escrow (30% advance / 70% on B/L)</span></li>
-            <li class="flex items-start gap-2"><span class="text-amber-500 mt-0.5">•</span><span><b>Penalties:</b> 2% per week delay beyond delivery deadline</span></li>
-          </ul>
+        <div class="border border-slate-200 rounded-xl p-3 bg-slate-50 space-y-2 text-xs">
+          <p class="font-bold text-slate-700">Digital Signing Progress:</p>
+          <div class="flex justify-between items-center text-slate-600"><span>Buyer #RU-4471:</span><span class="text-emerald-600 font-bold">✓ Signed (DSC Verified)</span></div>
+          <div class="flex justify-between items-center text-slate-600"><span>Indian Manufactories Group:</span><span class="text-amber-600 font-bold">⏳ Pending Your E-Sign</span></div>
         </div>
-        <button onclick="showNotify('Opening contract PDF preview... CT-2025-0312-MAIZE-SEEDS.pdf')" class="w-full py-2 border border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-700 text-xs font-bold rounded-xl transition flex items-center justify-center gap-2">
-          <i data-lucide="file-text" class="w-3.5 h-3.5"></i> View Full Contract PDF
-        </button>
-        <label id="sign-agree-label" class="flex items-start gap-2.5 cursor-pointer bg-amber-50 border border-amber-200 rounded-xl p-3">
-          <input type="checkbox" id="sign-agree-cb" class="mt-0.5 rounded accent-brand" onchange="document.getElementById('sign-contract-btn').disabled=!this.checked;document.getElementById('sign-contract-btn').className=this.checked?'flex-1 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-xl transition':'flex-1 py-2.5 bg-slate-300 text-white text-xs font-bold rounded-xl cursor-not-allowed'">
-          <span class="text-xs text-amber-900 font-medium">I have read and agree to all terms in this contract</span>
+        <label class="flex items-start gap-2.5 cursor-pointer bg-amber-50 border border-amber-200 rounded-xl p-3">
+          <input type="checkbox" id="contract-agree" class="mt-0.5 rounded accent-brand" onchange="document.getElementById('sign-now-btn').disabled = !this.checked; document.getElementById('sign-now-btn').className = this.checked ? 'flex-1 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-xl transition cursor-pointer' : 'flex-1 py-2.5 bg-slate-300 text-white text-xs font-bold rounded-xl cursor-not-allowed'">
+          <span class="text-xs text-amber-900 font-medium">I confirm the commercial terms and agree to sign this B2B export agreement.</span>
         </label>
       </div>
       <div class="px-6 py-4 border-t border-slate-100 bg-white flex gap-3">
-        <button onclick="closeDrawer()" class="px-4 py-2.5 border border-slate-200 text-slate-600 text-xs font-bold rounded-xl hover:bg-slate-50 transition">Cancel</button>
-        <button id="sign-contract-btn" disabled class="flex-1 py-2.5 bg-slate-300 text-white text-xs font-bold rounded-xl cursor-not-allowed" onclick="drawerSuccess('Contract signed & production phase begins! Escrow 30% advance is now active.')">✍️ Sign & Confirm</button>
+        <button onclick="closeDrawer()" class="px-4 py-2.5 border border-slate-200 text-slate-600 text-xs font-bold rounded-xl hover:bg-slate-50">Cancel</button>
+        <button id="sign-now-btn" disabled onclick="goStep(5); closeDrawer();" class="flex-1 py-2.5 bg-slate-300 text-white text-xs font-bold rounded-xl cursor-not-allowed">Open Deal Room & Sign →</button>
       </div>`,
 
-    // D: PRODUCTION PROGRESS
+    // 4. Production Progress
     'production': () => `
       <div class="flex items-center justify-between px-6 py-4 border-b border-slate-100 bg-white sticky top-0 z-10">
-        <div><h3 class="font-extrabold text-slate-900">Production Progress</h3><p class="text-xs text-slate-500 mt-0.5">PR-2025-0278 · Buyer #MX-5567 · 50 MT NPK</p></div>
+        <div><h3 class="font-extrabold text-slate-900">Production Tracker</h3><p class="text-xs text-slate-500 mt-0.5">PR-2025-0278 · Buyer #RU-7654 · 200 Coir Blocks</p></div>
         <button onclick="closeDrawer()" class="text-slate-400 hover:text-slate-700"><i data-lucide="x" class="w-5 h-5"></i></button>
       </div>
-      <div class="p-6 space-y-5 flex-1">
-        <div>
-          <div class="flex items-center justify-between text-xs mb-2">
-            <span class="font-bold text-slate-700">Overall Progress</span>
-            <span class="font-bold text-indigo-600">65%</span>
-          </div>
-          <div class="w-full bg-slate-200 rounded-full h-2.5">
-            <div class="progress-bar bg-indigo-500 h-2.5 rounded-full" style="width:65%"></div>
-          </div>
-          <p class="text-[11px] text-slate-500 mt-1.5">Target dispatch: Feb 5, 2025</p>
-        </div>
-        <div class="space-y-3">
+      <div class="p-6 space-y-4 flex-1">
+        <div class="flex items-center justify-between text-xs font-bold"><span>Production Status</span><span class="text-indigo-600">65% Completed</span></div>
+        <div class="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden"><div class="bg-indigo-600 h-2.5 rounded-full" style="width:65%"></div></div>
+        <div class="space-y-3 pt-2">
           ${[
-            {done:true,  active:false, label:'Raw Material Sourcing',       date:'Jan 6',  note:'Phosphate rock & urea sourced from approved vendors'},
-            {done:true,  active:false, label:'Blending & Manufacturing',    date:'Jan 12', note:'Batch #NPK-2025-50MT completed'},
-            {done:false, active:true,  label:'Quality Testing (SGS Lab)',   date:'Est. Jan 22', note:'SGS lab samples submitted Jan 18. Results pending.'},
-            {done:false, active:false, label:'Packaging & Labeling',        date:'Est. Jan 25', note:'25kg HDPE bags with private label'},
-            {done:false, active:false, label:'Pre-Shipment Inspection',     date:'Est. Feb 1',  note:'SGS inspector visit scheduled'},
-            {done:false, active:false, label:'Ready for Dispatch at JNPT',  date:'Est. Feb 5',  note:''}
-          ].map((m,i)=>`
-            <div class="flex gap-3">
-              <div class="flex flex-col items-center">
-                <div class="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold shrink-0 ${m.done?'bg-emerald-100 text-emerald-700 border-2 border-emerald-400':m.active?'bg-indigo-100 text-indigo-700 border-2 border-indigo-400':'bg-slate-100 text-slate-400 border-2 border-slate-200'}">
-                  ${m.done?'✓':m.active?'↻':i+1}
-                </div>
-                ${i<5?`<div class="w-0.5 flex-1 min-h-4 mt-1 ${m.done?'bg-emerald-300':'bg-slate-200'}"></div>`:''}
-              </div>
-              <div class="pb-4">
-                <p class="text-xs font-bold ${m.done?'text-emerald-700':m.active?'text-indigo-700':'text-slate-500'}">${m.label}</p>
-                <p class="text-[11px] text-slate-400">${m.date}</p>
-                ${m.note?`<p class="text-[11px] text-slate-500 mt-0.5">${m.note}</p>`:''}
-                ${m.active?`<button onclick="drawerSuccess('Milestone updated: Quality Testing marked as complete!')" class="mt-1.5 px-2.5 py-1 bg-indigo-600 hover:bg-indigo-700 text-white text-[10px] font-bold rounded-lg transition">Mark Complete →</button>`:''}
-              </div>
-            </div>`).join('')}
-        </div>
-        <div>
-          <label class="block text-xs font-bold text-slate-700 mb-1">Upload QC Report (optional)</label>
-          <div class="border-2 border-dashed border-slate-200 rounded-xl p-3 text-center bg-slate-50 cursor-pointer hover:border-brand text-xs text-slate-500 transition">
-            <i data-lucide="upload-cloud" class="w-4 h-4 mx-auto mb-1 text-slate-400"></i>SGS Test Report PDF
-          </div>
+            { done:true, label:'Raw Coir Pith Sourcing & Washing', date:'Completed' },
+            { done:true, label:'Hydraulic Compression into 5kg Blocks', date:'Completed' },
+            { done:false, label:'Palletizing & Moisture QC Inspection', date:'In Progress (Est. 2 days)' },
+            { done:false, label:'Container Dispatch to Nhava Sheva (JNPT)', date:'Scheduled' }
+          ].map((s,i) => `
+            <div class="flex items-start gap-3 text-xs">
+              <div class="w-6 h-6 rounded-full flex items-center justify-center font-bold text-[11px] shrink-0 ${s.done ? 'bg-emerald-100 text-emerald-700 border border-emerald-300' : 'bg-slate-100 text-slate-500 border border-slate-200'}">${s.done ? '✓' : i+1}</div>
+              <div><p class="font-bold ${s.done ? 'text-slate-900' : 'text-slate-600'}">${s.label}</p><p class="text-[11px] text-slate-400">${s.date}</p></div>
+            </div>
+          `).join('')}
         </div>
       </div>
       <div class="px-6 py-4 border-t border-slate-100 bg-white">
-        <button onclick="closeDrawer()" class="w-full py-2.5 border border-slate-200 text-slate-600 text-xs font-bold rounded-xl hover:bg-slate-50 transition">Close</button>
+        <button onclick="drawerSuccess('Production batch updated successfully.')" class="w-full py-2.5 bg-brand hover:bg-brand-hover text-white text-xs font-bold rounded-xl">Update Milestone</button>
       </div>`,
 
-    // E: UPLOAD B/L
+    // 5. Upload B/L (Escrow release)
     'upload-bl': () => `
       <div class="flex items-center justify-between px-6 py-4 border-b border-slate-100 bg-white sticky top-0 z-10">
-        <div><h3 class="font-extrabold text-slate-900">Upload Bill of Lading</h3><p class="text-xs text-slate-500 mt-0.5">ES-2025-0201 · Buyer #PL-3391 · Coir Pith Blocks</p></div>
+        <div><h3 class="font-extrabold text-slate-900">Upload Bill of Lading (B/L)</h3><p class="text-xs text-slate-500 mt-0.5">ES-2025-0201 · Buyer #DE-5231</p></div>
         <button onclick="closeDrawer()" class="text-slate-400 hover:text-slate-700"><i data-lucide="x" class="w-5 h-5"></i></button>
       </div>
       <div class="p-6 space-y-4 flex-1">
-        <div class="bg-amber-50 border border-amber-200 rounded-xl p-3 text-xs text-amber-900 flex items-start gap-2">
-          <i data-lucide="alert-circle" class="w-4 h-4 text-amber-600 shrink-0 mt-0.5"></i>
-          <span><b>$1,040 USD</b> is held in escrow. Upload a valid B/L to trigger payment release within 24 hours.</span>
+        <div class="bg-purple-50 border border-purple-200 rounded-xl p-3 text-xs text-purple-900">
+          🔒 <b>₹42,85,000</b> is locked in platform vault. Upload valid B/L to release 70% balance.
         </div>
-        <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs space-y-1">
-          <div class="flex justify-between"><span class="text-slate-500">Escrow Status:</span><span class="font-bold text-emerald-600">FUNDED ✓</span></div>
-          <div class="flex justify-between"><span class="text-slate-500">Amount:</span><span class="font-bold text-slate-800">$1,040.00 USD</span></div>
-          <div class="flex justify-between"><span class="text-slate-500">Product:</span><span class="font-bold text-slate-800">1,000 Coir Blocks</span></div>
-        </div>
-        <div class="grid grid-cols-2 gap-4">
-          <div>
-            <label class="block text-xs font-bold text-slate-700 mb-1">B/L Number *</label>
-            <input type="text" placeholder="e.g. MAEU2025011801" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs outline-none font-mono">
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-slate-700 mb-1">Shipping Carrier *</label>
-            <input type="text" placeholder="e.g. Maersk Line" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs outline-none">
-          </div>
-        </div>
-        <div class="grid grid-cols-2 gap-4">
-          <div>
-            <label class="block text-xs font-bold text-slate-700 mb-1">Port of Loading *</label>
-            <input type="text" value="Nhava Sheva (INNSA)" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs outline-none">
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-slate-700 mb-1">Port of Discharge *</label>
-            <input type="text" placeholder="e.g. Gdansk, Poland" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs outline-none">
-          </div>
-        </div>
-        <div class="grid grid-cols-2 gap-4">
-          <div>
-            <label class="block text-xs font-bold text-slate-700 mb-1">B/L Issue Date *</label>
-            <input type="date" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs outline-none">
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-slate-700 mb-1">Vessel / Voyage *</label>
-            <input type="text" placeholder="MV Maersk Cairo / VOY 412E" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs outline-none">
-          </div>
+        <div><label class="block text-xs font-bold text-slate-700 mb-1">B/L Number</label><input type="text" value="MAEU-INNSA-2025-9921" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs font-mono outline-none"></div>
+        <div class="grid grid-cols-2 gap-3">
+          <div><label class="block text-xs font-bold text-slate-700 mb-1">Vessel Name</label><input type="text" value="MSC Katrina" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs outline-none"></div>
+          <div><label class="block text-xs font-bold text-slate-700 mb-1">Port of Loading</label><input type="text" value="Nhava Sheva (JNPT)" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs outline-none"></div>
         </div>
         <div>
-          <label class="block text-xs font-bold text-slate-700 mb-1">Upload Signed B/L (PDF) *</label>
-          <div class="border-2 border-dashed border-slate-200 rounded-xl p-6 text-center bg-slate-50 hover:border-brand transition cursor-pointer">
-            <i data-lucide="upload-cloud" class="w-8 h-8 text-slate-400 mx-auto mb-1.5"></i>
-            <p class="text-xs font-medium text-slate-700">Click to upload or drag & drop</p>
-            <p class="text-[11px] text-slate-400 mt-0.5">PDF only · max 10 MB</p>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Upload Scanned B/L (PDF)</label>
+          <div class="border-2 border-dashed border-slate-200 rounded-xl p-5 text-center bg-slate-50 hover:border-brand cursor-pointer">
+            <i data-lucide="upload-cloud" class="w-7 h-7 text-slate-400 mx-auto mb-1"></i>
+            <p class="text-xs font-medium text-slate-700">Click to upload original Clean on-board B/L</p>
           </div>
         </div>
       </div>
       <div class="px-6 py-4 border-t border-slate-100 bg-white flex gap-3">
-        <button onclick="closeDrawer()" class="px-4 py-2.5 border border-slate-200 text-slate-600 text-xs font-bold rounded-xl hover:bg-slate-50 transition">Cancel</button>
-        <button onclick="drawerSuccess('B/L submitted! Escrow release of $1,040 initiated. Funds will arrive within 24h.')" class="flex-1 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-xl transition">Submit B/L & Claim Payment →</button>
+        <button onclick="closeDrawer()" class="px-4 py-2.5 border border-slate-200 text-slate-600 text-xs font-bold rounded-xl hover:bg-slate-50">Cancel</button>
+        <button onclick="drawerSuccess('B/L submitted! 70% balance released from Platform Escrow.')" class="flex-1 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-xl">Submit B/L & Claim Escrow</button>
       </div>`,
 
-    // F: TRACK SHIPMENT
+    // 6. Track Shipment
     'shipment': () => `
       <div class="flex items-center justify-between px-6 py-4 border-b border-slate-100 bg-white sticky top-0 z-10">
-        <div><h3 class="font-extrabold text-slate-900">Shipment Tracker</h3><p class="text-xs text-slate-500 mt-0.5">SH-2025-0188 · Buyer #AE-7723 · Organic Vermicompost</p></div>
+        <div><h3 class="font-extrabold text-slate-900">Shipment Tracking</h3><p class="text-xs text-slate-500 mt-0.5">SH-2025-0188 · Buyer #DE-1198 · 200 MT Vermicompost</p></div>
         <button onclick="closeDrawer()" class="text-slate-400 hover:text-slate-700"><i data-lucide="x" class="w-5 h-5"></i></button>
       </div>
-      <div class="p-6 space-y-5 flex-1">
-        <div class="bg-teal-50 border border-teal-200 rounded-xl p-4 text-xs space-y-1.5">
-          <div class="flex justify-between"><span class="text-teal-700 font-semibold">B/L Number:</span><span class="font-mono font-bold text-slate-800">MAEU2025012201</span></div>
-          <div class="flex justify-between"><span class="text-teal-700 font-semibold">Carrier:</span><span class="font-bold text-slate-800">Maersk Line</span></div>
-          <div class="flex justify-between"><span class="text-teal-700 font-semibold">Container:</span><span class="font-mono font-bold text-slate-800">MSKU4482901 (20' FCL)</span></div>
-          <div class="flex justify-between"><span class="text-teal-700 font-semibold">Vessel:</span><span class="font-bold text-slate-800">MV Maersk Karachi · VOY 318W</span></div>
+      <div class="p-6 space-y-4 flex-1">
+        <div class="bg-teal-50 border border-teal-200 rounded-xl p-3 text-xs text-teal-950 space-y-1">
+          <div class="flex justify-between"><span>Carrier:</span><b>Maersk Line</b></div>
+          <div class="flex justify-between"><span>Container No:</span><b class="font-mono">MSKU-489102-1</b></div>
+          <div class="flex justify-between"><span>Origin / Destination:</span><b>JNPT → Port of Hamburg</b></div>
         </div>
-        <div class="space-y-1.5 text-xs">
-          <div class="flex items-center gap-3 p-2.5 bg-emerald-50 border border-emerald-200 rounded-xl">
-            <i data-lucide="map-pin" class="w-4 h-4 text-emerald-600 shrink-0"></i>
-            <div><p class="font-bold text-emerald-800">Origin: Nhava Sheva Port, Mumbai</p><p class="text-emerald-700">Departed Jan 22, 2025 · 14:00 IST</p></div>
+        <div class="space-y-2 text-xs">
+          <p class="font-bold text-slate-700">Live Logistics Status:</p>
+          <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl space-y-1.5">
+            <p class="text-emerald-700 font-bold">✓ Customs Cleared at JNPT, Mumbai</p>
+            <p class="text-blue-700 font-bold">🚢 In Transit — Red Sea Corridor</p>
+            <p class="text-slate-500 font-medium">Estimated Port Arrival: 8 days</p>
           </div>
-          <div class="ml-5 w-0.5 h-4 bg-slate-300"></div>
-          <div class="flex items-center gap-3 p-2.5 bg-blue-50 border border-blue-200 rounded-xl">
-            <i data-lucide="ship" class="w-4 h-4 text-blue-600 shrink-0 animate-pulse"></i>
-            <div><p class="font-bold text-blue-800">In Transit — Arabian Sea</p><p class="text-blue-700">Est. transit 8 days</p></div>
-          </div>
-          <div class="ml-5 w-0.5 h-4 bg-slate-300"></div>
-          <div class="flex items-center gap-3 p-2.5 bg-slate-50 border border-slate-200 rounded-xl">
-            <i data-lucide="flag" class="w-4 h-4 text-slate-400 shrink-0"></i>
-            <div><p class="font-bold text-slate-600">Destination: Jebel Ali Port, Dubai, UAE</p><p class="text-slate-500">ETA: Jan 30, 2025</p></div>
-          </div>
-        </div>
-        <div>
-          <p class="text-xs font-bold text-slate-700 mb-2">Shipment Documents:</p>
-          <div class="space-y-1.5">
-            ${['Bill of Lading (Clean On-Board)','Packing List','Certificate of Origin','Phytosanitary Certificate'].map(doc=>`
-              <button onclick="showNotify('Downloading ${doc}...')" class="w-full flex items-center gap-2 text-left px-3 py-2 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-lg text-xs font-medium text-slate-700 transition">
-                <i data-lucide="file-down" class="w-3.5 h-3.5 text-brand shrink-0"></i>${doc}
-              </button>`).join('')}
-          </div>
-        </div>
-        <div class="bg-amber-50 border border-amber-200 rounded-xl p-3 text-xs text-amber-900">
-          🔒 <b>$1,380 USD</b> held in escrow. Will release automatically upon buyer delivery confirmation.
         </div>
       </div>
       <div class="px-6 py-4 border-t border-slate-100 bg-white">
-        <button onclick="closeDrawer()" class="w-full py-2.5 border border-slate-200 text-slate-600 text-xs font-bold rounded-xl hover:bg-slate-50 transition">Close</button>
+        <button onclick="closeDrawer()" class="w-full py-2.5 bg-slate-100 text-slate-700 text-xs font-bold rounded-xl hover:bg-slate-200">Close Tracker</button>
       </div>`,
 
-    // G: COMPLETED DEAL + RATING
+    // 7. Completed Deal
     'completed': () => `
       <div class="flex items-center justify-between px-6 py-4 border-b border-slate-100 bg-white sticky top-0 z-10">
-        <div><h3 class="font-extrabold text-slate-900">Deal Summary</h3><p class="text-xs text-slate-500 mt-0.5">CM-2024-1044 · Buyer #NL-6612</p></div>
+        <div><h3 class="font-extrabold text-slate-900">Completed Order Archive</h3><p class="text-xs text-slate-500 mt-0.5">CM-2024-1044 · Buyer #RU-0512</p></div>
         <button onclick="closeDrawer()" class="text-slate-400 hover:text-slate-700"><i data-lucide="x" class="w-5 h-5"></i></button>
       </div>
-      <div class="p-6 space-y-4 flex-1">
-        <div class="bg-emerald-50 border border-emerald-300 rounded-xl p-3 text-xs text-emerald-900 font-semibold flex items-center gap-2">
-          <i data-lucide="check-circle-2" class="w-5 h-5 text-emerald-600 shrink-0"></i>Deal completed & payment released · Dec 10, 2024
+      <div class="p-6 space-y-4 flex-1 text-xs">
+        <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-3 text-emerald-900 font-semibold">
+          ✓ Order Completed & 100% Escrow Funds Settled to HDFC Bank Forex Account.
         </div>
-        <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 text-xs space-y-1.5">
-          <div class="flex justify-between"><span class="text-slate-500">Product:</span><span class="font-bold text-slate-800">Coir Pith Grow Blocks</span></div>
-          <div class="flex justify-between"><span class="text-slate-500">Quantity:</span><span class="font-bold text-slate-800">500 blocks</span></div>
-          <div class="flex justify-between"><span class="text-slate-500">Final Value:</span><span class="font-bold text-slate-800">$520 USD</span></div>
-          <div class="flex justify-between"><span class="text-slate-500">Payment Released:</span><span class="font-bold text-emerald-600">✓ Dec 10, 2024</span></div>
-          <div class="flex justify-between"><span class="text-slate-500">B/L Number:</span><span class="font-mono font-bold text-slate-800">ONEYINDM24120010</span></div>
-        </div>
-        <div>
-          <p class="text-xs font-bold text-slate-700 mb-2">Deal Timeline:</p>
-          <div class="space-y-1">
-            ${[['Nov 20','RFQ Received'],['Nov 21','Quote Sent'],['Nov 23','Contract Signed'],['Nov 30','Production Complete'],['Dec 2','Escrow Funded'],['Dec 3','Shipped (Nhava Sheva)'],['Dec 10','Delivered & Confirmed'],['Dec 10','Payment Released ✓']].map(([dt,ev])=>`
-              <div class="flex items-center gap-2 text-xs">
-                <span class="text-emerald-500 font-bold">✓</span>
-                <span class="text-slate-600">${ev}</span>
-                <span class="ml-auto text-slate-400 text-[10px]">${dt}</span>
-              </div>`).join('')}
-          </div>
-        </div>
-        <div class="bg-blue-50 border border-blue-200 rounded-xl p-3 text-xs space-y-1">
-          <p class="font-bold text-slate-700">Buyer Rating Received:</p>
-          <p class="text-amber-500 text-lg">⭐⭐⭐⭐⭐</p>
-          <p class="text-slate-600 italic">"Excellent quality coir, arrived on time, documentation was perfect."</p>
-          <p class="text-slate-400 text-[10px]">— Buyer #NL-6612 · Dec 11, 2024</p>
-        </div>
-        <div>
-          <p class="text-xs font-bold text-slate-700 mb-2">Rate this deal (your experience):</p>
-          <div class="flex gap-1 mb-2" id="star-row">
-            ${[1,2,3,4,5].map(n=>`<span class="star-btn text-2xl" data-n="${n}" onclick="setStars(${n})">★</span>`).join('')}
-          </div>
-          <textarea id="deal-review-note" rows="2" placeholder="Optional note..." class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs outline-none resize-none"></textarea>
-          <button onclick="drawerSuccess('Thank you for your rating!')" class="mt-2 w-full py-2 bg-slate-800 hover:bg-slate-900 text-white text-xs font-bold rounded-xl transition">Submit Rating</button>
+        <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 space-y-1.5">
+          <div class="flex justify-between"><span class="text-slate-500">Product:</span><b>Hybrid Maize Seeds (1,000 KG)</b></div>
+          <div class="flex justify-between"><span class="text-slate-500">Gross Settlement:</span><b class="text-slate-900">₹2,42,000</b></div>
+          <div class="flex justify-between"><span class="text-slate-500">Buyer Feedback:</span><span class="text-amber-500 font-bold">★★★★★ (5.0)</span></div>
         </div>
       </div>
-      <div class="px-6 py-4 border-t border-slate-100 bg-white flex gap-3">
-        <button onclick="closeDrawer()" class="px-4 py-2.5 border border-slate-200 text-slate-600 text-xs font-bold rounded-xl hover:bg-slate-50 transition">Close</button>
-        <button onclick="showNotify('Downloading deal report CM-2024-1044.pdf...')" class="flex-1 py-2.5 bg-slate-800 hover:bg-slate-900 text-white text-xs font-bold rounded-xl transition">Download Deal Report</button>
+      <div class="px-6 py-4 border-t border-slate-100 bg-white">
+        <button onclick="showNotify('Downloading Certificate of Completion & Final Tax Invoice...'); closeDrawer();" class="w-full py-2.5 bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold rounded-xl">Download Export Certificate & Invoice</button>
       </div>`,
 
-    // H: CREATE EXPORT OFFER (from catalog card)
+    // 8. Create Export Offer
     'export-offer': () => {
-      const p = CATALOG_DATA.find(x=>x.id===contextId) || CATALOG_DATA[0];
+      const p = CATALOG_DATA.find(x => x.id === contextId) || CATALOG_DATA[0];
       return `
       <div class="flex items-center justify-between px-6 py-4 border-b border-slate-100 bg-white sticky top-0 z-10">
-        <div><h3 class="font-extrabold text-slate-900">${t('catalog.offer')}</h3><p class="text-xs text-slate-500 mt-0.5">${p.name} · ${p.id}</p></div>
+        <div><h3 class="font-extrabold text-slate-900">${t('catalog.offer')}</h3><p class="text-xs text-slate-500 mt-0.5">${p.name}</p></div>
         <button onclick="closeDrawer()" class="text-slate-400 hover:text-slate-700"><i data-lucide="x" class="w-5 h-5"></i></button>
       </div>
       <div class="p-6 space-y-4 flex-1">
-        <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs flex items-center gap-3">
-          <img src="${p.img}" class="w-12 h-12 rounded-lg object-cover shrink-0">
-          <div>
-            <p class="font-bold text-slate-800">${p.name}</p>
-            <p class="text-slate-500">HS: ${p.hs} · ${p.category}</p>
-            <p class="text-slate-500">Base price: ${fmtMoney(p.priceInr)} / ${p.unit} · MOQ: ${p.moq} ${p.unit}</p>
-          </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div><label class="block text-xs font-bold text-slate-700 mb-1">Export FOB Unit Price (₹)</label><input type="number" value="${p.priceInr}" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm outline-none font-bold"></div>
+          <div><label class="block text-xs font-bold text-slate-700 mb-1">Minimum Order Qty</label><input type="number" value="${p.moq}" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm outline-none"></div>
         </div>
-        <div class="grid grid-cols-2 gap-4">
-          <div>
-            <label class="block text-xs font-bold text-slate-700 mb-1">Export Price (₹ per ${p.unit}) *</label>
-            <input type="number" value="${p.priceInr}" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm outline-none">
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-slate-700 mb-1">Available Stock (${p.unit}) *</label>
-            <input type="number" placeholder="e.g. 100" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm outline-none">
-          </div>
-        </div>
-        <div class="grid grid-cols-2 gap-4">
-          <div>
-            <label class="block text-xs font-bold text-slate-700 mb-1">MOQ (${p.unit}) *</label>
-            <input type="number" value="${p.moq}" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm outline-none">
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-slate-700 mb-1">Lead Time *</label>
-            <select class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm outline-none">
-              <option>3–5 days</option><option>7 days</option><option selected>10–14 days</option><option>21 days</option><option>30 days</option>
-            </select>
-          </div>
-        </div>
-        <div>
-          <label class="block text-xs font-bold text-slate-700 mb-1">Incoterms *</label>
-          <select class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm outline-none">
-            <option>EXW Factory (Pune)</option><option selected>FOB Nhava Sheva</option><option>FOB Chennai</option><option>CIF Destination</option><option>DAP Destination</option>
-          </select>
-        </div>
-        <div>
-          <label class="block text-xs font-bold text-slate-700 mb-1">Certifications Included</label>
-          <div class="flex flex-wrap gap-2">
-            ${p.certs.map(c=>`<label class="flex items-center gap-1.5 text-xs cursor-pointer bg-emerald-50 border border-emerald-200 rounded-lg px-2.5 py-1.5"><input type="checkbox" checked class="accent-brand rounded">${c}</label>`).join('')}
-          </div>
-        </div>
-        <div>
-          <label class="block text-xs font-bold text-slate-700 mb-1">Samples Available?</label>
-          <div class="flex gap-3 text-xs">
-            <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="sample" checked class="accent-brand"> Yes — sample available</label>
-            <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="sample" class="accent-brand"> No — bulk only</label>
-          </div>
-        </div>
-        <div>
-          <label class="block text-xs font-bold text-slate-700 mb-1">Additional Notes</label>
-          <textarea rows="2" placeholder="Custom packaging, private label, export quotas..." class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs outline-none resize-none"></textarea>
-        </div>
+        <div><label class="block text-xs font-bold text-slate-700 mb-1">Packaging & Pallet Spec</label><input type="text" value="25kg export-grade multiwall bags on EUR pallets" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs outline-none"></div>
       </div>
       <div class="px-6 py-4 border-t border-slate-100 bg-white flex gap-3">
-        <button onclick="closeDrawer()" class="px-4 py-2.5 border border-slate-200 text-slate-600 text-xs font-bold rounded-xl hover:bg-slate-50 transition">Cancel</button>
-        <button onclick="drawerSuccess('Export offer published! Buyers can now send RFQs for ${p.name}.')" class="flex-1 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-xl transition">Publish Offer →</button>
+        <button onclick="closeDrawer()" class="px-4 py-2.5 border border-slate-200 text-slate-600 text-xs font-bold rounded-xl hover:bg-slate-50">Cancel</button>
+        <button onclick="drawerSuccess('Offer published to GlobalTrade international buyers network!')" class="flex-1 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-xl">Publish Offer →</button>
       </div>`;
     },
 
-    // I: ADD NEW SKU
+    // 9. Add New SKU
     'new-sku': () => `
       <div class="flex items-center justify-between px-6 py-4 border-b border-slate-100 bg-white sticky top-0 z-10">
         <div><h3 class="font-extrabold text-slate-900">${t('catalog.addSku')}</h3></div>
         <button onclick="closeDrawer()" class="text-slate-400 hover:text-slate-700"><i data-lucide="x" class="w-5 h-5"></i></button>
       </div>
-      <div class="p-6 space-y-4 flex-1">
-        <div>
-          <label class="block text-xs font-bold text-slate-700 mb-1">Product Name *</label>
-          <input type="text" id="ns-name" placeholder="e.g. Potassium Sulphate (SOP) Fertilizer" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm outline-none">
+      <div class="p-6 space-y-4 flex-1 overflow-y-auto scrollbar-thin">
+        <div><label class="block text-xs font-bold text-slate-700 mb-1">Product Name</label><input type="text" id="ns-name" placeholder="e.g. Potassium Humate Organic Soil Conditioner" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm outline-none"></div>
+        <div class="grid grid-cols-2 gap-3">
+          <div><label class="block text-xs font-bold text-slate-700 mb-1">SKU</label><input type="text" placeholder="IMG-AG-005" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm outline-none"></div>
+          <div><label class="block text-xs font-bold text-slate-700 mb-1">ITC-HS Code</label><input type="text" value="3105.90.00" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm font-mono outline-none"></div>
         </div>
-        <div class="grid grid-cols-2 gap-4">
-          <div>
-            <label class="block text-xs font-bold text-slate-700 mb-1">SKU Code *</label>
-            <input type="text" placeholder="IAE-XXX-001" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm outline-none">
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-slate-700 mb-1">ITC-HS Code *</label>
-            Произошла ошибка при генерации. Попробуй ещё раз._
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Category</label>
+          <select id="ns-cat" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm outline-none">
+            <option value="Fertilizers">Fertilizers</option><option value="Seeds">Seeds</option><option value="Organic Inputs">Organic Inputs</option><option value="Growing Media">Growing Media</option>
+          </select>
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div><label class="block text-xs font-bold text-slate-700 mb-1">Price per MT (₹ INR)</label><input type="number" id="ns-price" placeholder="38000" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm outline-none"></div>
+          <div><label class="block text-xs font-bold text-slate-700 mb-1">MOQ</label><input type="number" id="ns-moq" placeholder="10" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm outline-none"></div>
+        </div>
+      </div>
+      <div class="px-6 py-4 border-t border-slate-100 bg-white">
+        <button onclick="drawerAddSku()" class="w-full py-3 bg-brand hover:bg-brand-hover text-white font-bold rounded-xl text-sm">Save & Publish to Catalog</button>
+      </div>`
+  };
+
+  const html = drawerMap[type] ? drawerMap[type]() : '';
+  content.innerHTML = html;
+  overlay.classList.remove('hidden');
+  setTimeout(() => overlay.classList.remove('opacity-0'), 10);
+  drawer.classList.add('open');
+  lucide.createIcons();
+}
+
+function closeDrawer(){
+  const overlay = document.getElementById('drawer-overlay');
+  const drawer = document.getElementById('side-drawer');
+  overlay.classList.add('opacity-0');
+  drawer.classList.remove('open');
+  setTimeout(() => overlay.classList.add('hidden'), 250);
+}
+
+function drawerSuccess(msg){
+  closeDrawer();
+  showNotify(msg);
+}
+
+function drawerAddSku(){
+  const name = document.getElementById('ns-name')?.value.trim();
+  const cat = document.getElementById('ns-cat')?.value || 'Fertilizers';
+  const price = parseFloat(document.getElementById('ns-price')?.value) || 38000;
+  const moq = parseInt(document.getElementById('ns-moq')?.value) || 10;
+
+  if(name){
+    CATALOG_DATA.unshift({
+      id: 'IMG-AG-00' + (CATALOG_DATA.length + 1),
+      name,
+      category: cat,
+      hs: '3105.90.00',
+      unit: 'MT',
+      priceInr: price,
+      moq: moq,
+      certs: ['ISO 9001', 'Quality Approved'],
+      iconSvg: SVG_ICONS.fertilizer,
+      bgCls: 'bg-emerald-50'
+    });
+  }
+  closeDrawer();
+  renderCatalog();
+  showNotify('New agro SKU published to catalog!');
+}
+
+// ============================================================
+//  MODALS
+// ============================================================
+function showNotify(msg){
+  document.getElementById('notify-msg').textContent = msg;
+  document.getElementById('notify-modal').classList.remove('hidden');
+  lucide.createIcons();
+}
+function closeNotify(){ document.getElementById('notify-modal').classList.add('hidden'); }
+function openCompliance(){ document.getElementById('compliance-modal').classList.remove('hidden'); lucide.createIcons(); }
+function closeCompliance(){ document.getElementById('compliance-modal').classList.add('hidden'); }
+
+// ============================================================
+//  INIT
+// ============================================================
+window.addEventListener('DOMContentLoaded', () => {
+  lucide.createIcons();
+  goStep(1);
+});
+</script>
+</body>
+</html>
