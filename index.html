@@ -537,7 +537,6 @@ const RATES = {
   CNY: { s:'¥', r:0.078 }
 };
 
-// SVG Graphic Card Generator (Guaranteed instant rendering, zero blank images)
 function getProductSvgBanner(iconName, bgGradient, tagText, subText) {
   const iconPaths = {
     'wheat': '<path d="M2 22 16 8"/><path d="M3.47 12.53 5 11l1.53 1.53a3.5 3.5 0 0 1 0 4.94L5 19l-1.53-1.53a3.5 3.5 0 0 1 0-4.94Z"/><path d="M7.47 8.53 9 7l1.53 1.53a3.5 3.5 0 0 1 0 4.94L9 15l-1.53-1.53a3.5 3.5 0 0 1 0-4.94Z"/><path d="M11.47 4.53 13 3l1.53 1.53a3.5 3.5 0 0 1 0 4.94L13 11l-1.53-1.53a3.5 3.5 0 0 1 0-4.94Z"/><path d="M20 2h2v2a4 4 0 0 1-4 4h-2V6a4 4 0 0 1 4-4Z"/>',
@@ -568,7 +567,6 @@ function getProductSvgBanner(iconName, bgGradient, tagText, subText) {
   `;
 }
 
-// Multi-language Product Database
 const CATALOG_DATA = [
   {
     id: 'IF-1121-ST',
@@ -934,6 +932,8 @@ const CHAT_THREADS = {
 };
 
 let ACTIVE_CHAT_DEAL_ID = null;
+let CURRENT_DRAWER_TYPE = null;
+let CURRENT_DRAWER_CONTEXT = null;
 const STATUS_LIST = ['ALL','RFQ','QUOTE_SENT','CONTRACT','PRODUCTION','ESCROW_HELD','SHIPPED','COMPLETED'];
 
 const T = {
@@ -942,7 +942,7 @@ ru: {
   'reg.title':'Регистрация в Alfa-Global','reg.subtitle':'Создайте корпоративный аккаунт экспортёра',
   'reg.email':'Корпоративный Email','reg.phone':'Номер телефона','reg.password':'Создайте пароль',
   'reg.continue':'Продолжить регистрацию','reg.otpSent':'Код подтверждения отправлен на почту и телефон.',
-  'reg.otp':'Одноразовый код (OTP)','reg.terms':'Я принимаю Условия платформы и Политику трансграничной передачи данных.','reg.kyb_consent':'Согласен на автоматическую проверку через реестры (KYB).','reg.finish':'Завершить регистрацию','common.back':'← Назад','common.close':'Закрыть',
+  'reg.otp':'Одноразовый код (OTP)','reg.terms':'Я принимаю Условия платформы и Политику трансграничной передачи данных.','reg.kyb_consent':'Согласен на автоматическую проверку через реестры (KYB).','reg.finish':'Завершить регистрацию','common.back':'← Назад','common.close':'Закрыть','common.cancel':'Отмена',
   'kyb.stepTag':'Шаг 2 / Верификация поставщика','kyb.title':'Юридические данные и экспортные реквизиты','kyb.subtitle':'Сведения проверяются автоматически через API налоговых и таможенных органов.','kyb.pending':'Ожидает верификации','kyb.companyName':'Юридическое наименование','kyb.nameHint':'Как в учредительных документах','kyb.country':'Страна юрисдикции','kyb.gstin':'GSTIN (Штат 27)','kyb.taxBadge':'ℹ Налог','kyb.valid':'✓ Валиден','kyb.iec':'DGFT IEC / PAN','kyb.customsBadge':'ℹ Таможня','kyb.dgftOk':'✓ DGFT','kyb.council':'Экспортный совет','kyb.adcode':'AD Code & Bank IFSC','kyb.valutaBadge':'Для валютного контроля','kyb.port':'Базовый порт отгрузки','kyb.factory':'Адрес фабрики / производства','kyb.doc':'Сертификаты качества и лицензии','kyb.docStatus':'(2.8 MB · Проверено через реестр)','kyb.back':'← Назад к регистрации','kyb.submit':'Подтвердить и открыть каталог',
   'kyb.whyTitle':'Зачем заполнять эти данные?','kyb.whyDesc':'Alfa-Global обеспечивает прямые расчеты между покупателями и зарубежными фабриками без посредников.',
   'kyb.r1Title':'1. Валютный контроль банка','kyb.r1Desc':'AD-код и банковский IFSC позволяют моментально открывать паспорта сделок без задержек.',
@@ -969,14 +969,24 @@ ru: {
   'step2.title':'2. KYB-проверка','step2.sub':'Налоговые и ВЭД коды',
   'step3.title':'3. Каталог','step3.sub':'Управление товарами',
   'step4.title':'4. Центр заказов','step4.sub':'Сделки и эскроу-счета',
-  'step5.title':'5. Комната сделки','step5.sub':'E-Sign и чат'
+  'step5.title':'5. Комната сделки','step5.sub':'E-Sign и чат',
+  'dr.specTitle':'Спецификация и характеристики','dr.descLabel':'Описание','dr.featuresLabel':'Особенности','dr.charLabel':'Характеристики','dr.brandLabel':'Бренд:','dr.countryLabel':'Страна:','dr.colorLabel':'Цвет:','dr.matLabel':'Материал:','dr.scopeLabel':'Применение:','dr.warrantyLabel':'Гарантия:','dr.instrLabel':'Инструкции:','dr.logisticsLabel':'Доставка и логистика','dr.pkgLabel':'Упаковка:','dr.methodLabel':'Метод:','dr.portLabel':'Порт:','dr.dimsLabel':'Габариты и вес','dr.width':'Ширина','dr.height':'Высота','dr.length':'Длина','dr.grossWeight':'Вес брутто','dr.closeSpec':'Закрыть спецификацию',
+  'dr.newSkuTitle':'Добавить новый товар в каталог','dr.newSkuSub':'Полная экспортная спецификация','dr.sec1':'1. Основная информация','dr.sec2':'2. Цены и коммерческие условия','dr.sec3':'3. Описание и логистика','dr.prodNameLabel':'Полное наименование','dr.prodNamePh':'например, Рис басмати пропаренный 1121','dr.hsLabel':'Код ТНВЭД (HS Code)','dr.skuLabel':'Артикул (SKU)','dr.catLabel':'Категория','dr.pminLabel':'Цена Мин','dr.pmaxLabel':'Цена Макс','dr.moqLabel':'MOQ (Мин. заказ)','dr.advLabel':'Аванс (%)','dr.postLabel':'По B/L (%)','dr.incoLabel':'Incoterms','dr.publishBtn':'Опубликовать в каталоге',
+  'dr.rfqReqTitle':'Запрос покупателя:','dr.rfqReqText':'100 тонн риса 1121, CIF Новороссийск, фасовка в мешки по 25 кг с фитосанитарным актом.','dr.pricePerTon':'Цена за тонну','dr.volumeTon':'Объем (т)','dr.sendQuoteBtn':'Отправить КП →','dr.discussChat':'Обсудить детали в чате',
+  'dr.quoteActiveTitle':'Активное предложение','dr.product':'Товар:','dr.qty':'Количество:','dr.totalVal':'Итого:','dr.terms':'Условия:','dr.adjustPrice':'Скорректировать цены',
+  'dr.contractConfirmTitle':'Согласование контракта и E-Sign','dr.contractCheckbox':'Подтверждаю условия и готов перейти в Deal Room для подписания смарт-контракта.','dr.openDealRoomBtn':'Открыть Deal Room и подписать →','dr.openBuyerChat':'Открыть чат с покупателем',
+  'dr.prodProgressTitle':'Ход производства','dr.batchReadiness':'Готовность партии','dr.updateStageBtn':'Обновить этап',
+  'dr.uploadBlTitle':'Загрузка коносамента (B/L)','dr.blLockedText':'заблокированы в банке. Загрузите B/L для выплаты 70% остатка.','dr.blNumber':'Номер B/L','dr.blScanLabel':'Скан оригинального коносамента (PDF)','dr.blDropText':'Нажмите для загрузки Clean On-Board B/L','dr.sendBlToBank':'Отправить B/L в банк',
+  'dr.trackingTitle':'Отслеживание груза','dr.customsPassed':'✓ Таможенная очистка в Мундре завершена','dr.inTransit':'🚢 В пути — Судно MSC Katrina','dr.etaText':'Прибытие в Новороссийск через 9 дней',
+  'dr.archiveTitle':'Архив завершенной сделки','dr.orderClosedText':'✓ Заказ закрыт, 100% средств выплачены на валютный счет.','dr.downloadClosingDocs':'Скачать закрывающие документы',
+  'msg.contractSigned':'Смарт-контракт успешно подписан! 30% аванса заблокированы на эскроу-счете.','msg.newSkuSuccess':'Новый товар опубликован в каталоге!','msg.quoteSentSuccess':'Коммерческое предложение направлено Buyer #RU-3129!','msg.prodUpdated':'Статус производства обновлен.','msg.blSentSuccess':'Коносамент отправлен. 70% средств разблокируются на ваш валютный счет.','msg.downloadingDocs':'Скачивание акта и налогового инвойса...'
 },
 en: {
   'profile.verified':'KYB Verified',
   'reg.title':'Registration at Alfa-Global','reg.subtitle':'Create corporate exporter account',
   'reg.email':'Corporate Email','reg.phone':'Phone Number','reg.password':'Create Password',
   'reg.continue':'Continue Registration','reg.otpSent':'Confirmation code sent to email & SMS.',
-  'reg.otp':'One-Time Code (OTP)','reg.terms':'I accept the Terms and Cross-Border Data Transfer Policy.','reg.kyb_consent':'I consent to automated registry validation (KYB).','reg.finish':'Finish Registration','common.back':'← Back','common.close':'Close',
+  'reg.otp':'One-Time Code (OTP)','reg.terms':'I accept the Terms and Cross-Border Data Transfer Policy.','reg.kyb_consent':'I consent to automated registry validation (KYB).','reg.finish':'Finish Registration','common.back':'← Back','common.close':'Close','common.cancel':'Cancel',
   'kyb.stepTag':'Step 2 / Supplier Verification','kyb.title':'Exporter Legal Identity & Regulatory Credentials','kyb.subtitle':'Data is verified automatically via tax & customs registry APIs.','kyb.pending':'Pending Verification','kyb.companyName':'Company Legal Name','kyb.nameHint':'As per incorporation documents','kyb.country':'Country of Jurisdiction','kyb.gstin':'GSTIN (State 27)','kyb.taxBadge':'ℹ Tax','kyb.valid':'✓ Valid','kyb.iec':'DGFT IEC / PAN','kyb.customsBadge':'ℹ Customs','kyb.dgftOk':'✓ DGFT','kyb.council':'Export Council','kyb.adcode':'AD Code & Bank IFSC','kyb.valutaBadge':'For FX Control','kyb.port':'Port of Origin','kyb.factory':'Factory / Facility Address','kyb.doc':'Quality Certificates & Licenses','kyb.docStatus':'(2.8 MB · Registry Verified)','kyb.back':'← Back to Registration','kyb.submit':'Verify & Open Catalog',
   'kyb.whyTitle':'Why complete this information?','kyb.whyDesc':'Alfa-Global enables direct settlements between buyers and foreign factories without middlemen.',
   'kyb.r1Title':'1. Bank FX Control','kyb.r1Desc':'AD Code & IFSC allow instant deal registration and currency clearance without customs delays.',
@@ -1003,14 +1013,24 @@ en: {
   'step2.title':'2. KYB Verify','step2.sub':'Tax & export codes',
   'step3.title':'3. Catalog','step3.sub':'Product management',
   'step4.title':'4. Orders Hub','step4.sub':'Deals & Escrow vault',
-  'step5.title':'5. Deal Room','step5.sub':'E-Sign & live chat'
+  'step5.title':'5. Deal Room','step5.sub':'E-Sign & live chat',
+  'dr.specTitle':'Specifications & Features','dr.descLabel':'Description','dr.featuresLabel':'Key Features','dr.charLabel':'Characteristics','dr.brandLabel':'Brand:','dr.countryLabel':'Origin:','dr.colorLabel':'Color:','dr.matLabel':'Material:','dr.scopeLabel':'Application:','dr.warrantyLabel':'Warranty:','dr.instrLabel':'Instructions:','dr.logisticsLabel':'Logistics & Delivery','dr.pkgLabel':'Packaging:','dr.methodLabel':'Method:','dr.portLabel':'Port:','dr.dimsLabel':'Dimensions & Weight','dr.width':'Width','dr.height':'Height','dr.length':'Length','dr.grossWeight':'Gross Weight','dr.closeSpec':'Close Specification',
+  'dr.newSkuTitle':'Add New Product to Catalog','dr.newSkuSub':'Complete Export Specification Sheet','dr.sec1':'1. General Information','dr.sec2':'2. Pricing & Commercial Terms','dr.sec3':'3. Description & Logistics','dr.prodNameLabel':'Product Full Name','dr.prodNamePh':'e.g., 1121 Steam Basmati Rice 1 MT','dr.hsLabel':'HS Code','dr.skuLabel':'SKU Code','dr.catLabel':'Category','dr.pminLabel':'Min Price','dr.pmaxLabel':'Max Price','dr.moqLabel':'MOQ','dr.advLabel':'Advance (%)','dr.postLabel':'On B/L (%)','dr.incoLabel':'Incoterms','dr.publishBtn':'Publish to Catalog',
+  'dr.rfqReqTitle':'Buyer Inquiry:','dr.rfqReqText':'100 MT Basmati 1121, CIF Novorossiysk, 25 kg bags with phytosanitary clearance.','dr.pricePerTon':'Price per Ton','dr.volumeTon':'Volume (MT)','dr.sendQuoteBtn':'Send Commercial Quote →','dr.discussChat':'Discuss in Deal Chat',
+  'dr.quoteActiveTitle':'Active Commercial Quote','dr.product':'Product:','dr.qty':'Quantity:','dr.totalVal':'Total Value:','dr.terms':'Terms:','dr.adjustPrice':'Adjust Pricing',
+  'dr.contractConfirmTitle':'Contract Review & E-Sign','dr.contractCheckbox':'I confirm agreed commercial terms and proceed to Deal Room for electronic signing.','dr.openDealRoomBtn':'Open Deal Room to Sign →','dr.openBuyerChat':'Open Chat with Buyer',
+  'dr.prodProgressTitle':'Production & Packaging Progress','dr.batchReadiness':'Batch Readiness','dr.updateStageBtn':'Update Stage',
+  'dr.uploadBlTitle':'Bill of Lading (B/L) Upload','dr.blLockedText':'locked in bank vault. Upload B/L to trigger 70% balance payout.','dr.blNumber':'B/L Tracking Number','dr.blScanLabel':'Original Clean On-Board B/L (PDF)','dr.blDropText':'Click or drag Clean On-Board B/L scan here','dr.sendBlToBank':'Submit B/L to Bank',
+  'dr.trackingTitle':'Shipment Live Tracking','dr.customsPassed':'✓ Customs clearance completed at Mundra Port','dr.inTransit':'🚢 Vessel MSC Katrina in transit','dr.etaText':'Estimated Arrival at destination in 9 days',
+  'dr.archiveTitle':'Archived Completed Order','dr.orderClosedText':'✓ Deal closed successfully. 100% export revenue settled.','dr.downloadClosingDocs':'Download Tax Invoice & Documents',
+  'msg.contractSigned':'Smart contract e-signed! 30% advance escrow secured.','msg.newSkuSuccess':'New SKU published to catalog!','msg.quoteSentSuccess':'Commercial quote sent to Buyer #RU-3129!','msg.prodUpdated':'Production status updated.','msg.blSentSuccess':'B/L submitted. 70% funds will be released to your currency account.','msg.downloadingDocs':'Downloading closing certificates and invoices...'
 },
 hi: {
   'profile.verified':'KYB सत्यापित',
   'reg.title':'Alfa-Global में पंजीकरण','reg.subtitle':'निर्यातक कॉर्पोरेट खाता बनाएं',
   'reg.email':'कॉर्पोरेट ईमेल','reg.phone':'फ़ोन नंबर','reg.password':'पासवर्ड बनाएं',
   'reg.continue':'पंजीकरण जारी रखें','reg.otpSent':'ओटीपी ईमेल और एसएमएस पर भेजा गया।',
-  'reg.otp':'वन-टाइम पासवर्ड (OTP)','reg.terms':'मैं शर्तों और डेटा नीति को स्वीकार करता हूं।','reg.kyb_consent':'मैं राष्ट्रीय रजिस्ट्री (KYB) सत्यापन से सहमत हूं।','reg.finish':'पंजीकरण पूरा करें','common.back':'← वापस','common.close':'बंद करें',
+  'reg.otp':'वन-टाइम पासवर्ड (OTP)','reg.terms':'मैं शर्तों और डेटा नीति को स्वीकार करता हूं।','reg.kyb_consent':'मैं राष्ट्रीय रजिस्ट्री (KYB) सत्यापन से सहमत हूं।','reg.finish':'पंजीकरण पूरा करें','common.back':'← वापस','common.close':'बंद करें','common.cancel':'रद्द करें',
   'kyb.stepTag':'चरण 2 / आपूर्तिकर्ता सत्यापन','kyb.title':'कानूनी पहचान एवं निर्यात क्रेडेंशियल्स','kyb.subtitle':'डेटा स्वचालित रूप से कर और सीमा शुल्क एपीआई के माध्यम से सत्यापित किया जाता है।','kyb.pending':'सत्यापन लंबित','kyb.companyName':'कंपनी का कानूनी नाम','kyb.nameHint':'पंजीकरण दस्तावेजों के अनुसार','kyb.country':'देश','kyb.gstin':'GSTIN (राज्य 27)','kyb.taxBadge':'ℹ कर','kyb.valid':'✓ वैध','kyb.iec':'DGFT IEC / PAN','kyb.customsBadge':'ℹ सीमा शुल्क','kyb.dgftOk':'✓ DGFT','kyb.council':'निर्यात परिषद','kyb.adcode':'AD Code & Bank IFSC','kyb.valutaBadge':'विदेशी मुद्रा नियंत्रण के लिए','kyb.port':'मूल बंदरगाह','kyb.factory':'कारखाना / सुविधा का पता','kyb.doc':'गुणवत्ता प्रमाण पत्र और लाइसेंस','kyb.docStatus':'(2.8 MB · सत्यापित)','kyb.back':'← पंजीकरण पर वापस','kyb.submit':'सत्यापित करें और कैटलॉग खोलें',
   'kyb.whyTitle':'यह जानकारी क्यों भरें?','kyb.whyDesc':'Alfa-Global खरीदारों और विदेशी कारखानों के बीच बिचौलियों के बिना सीधे भुगतान को सक्षम बनाता है।',
   'kyb.r1Title':'1. विदेशी मुद्रा नियंत्रण','kyb.r1Desc':'AD कोड और IFSC सौदे के तत्काल पंजीकरण और निकासी की अनुमति देते हैं।',
@@ -1037,14 +1057,24 @@ hi: {
   'step2.title':'2. KYB जांच','step2.sub':'कर और निर्यात कोड',
   'step3.title':'3. कैटलॉग','step3.sub':'उत्पाद प्रबंधन',
   'step4.title':'4. ऑर्डर हब','step4.sub':'सौदा और एस्क्रो',
-  'step5.title':'5. डील रूम','step5.sub':'ई-साइन और चैट'
+  'step5.title':'5. डील रूम','step5.sub':'ई-साइन और चैट',
+  'dr.specTitle':'विनिर्देश और विशेषताएं','dr.descLabel':'विवरण','dr.featuresLabel':'मुख्य विशेषताएं','dr.charLabel':'विशेषताएं','dr.brandLabel':'ब्रांड:','dr.countryLabel':'मूल देश:','dr.colorLabel':'रंग:','dr.matLabel':'सामग्री:','dr.scopeLabel':'उपयोग:','dr.warrantyLabel':'वारंटी:','dr.instrLabel':'निर्देश:','dr.logisticsLabel':'वितरण और रसद','dr.pkgLabel':'पैकेजिंग:','dr.methodLabel':'तरीका:','dr.portLabel':'बंदरगाह:','dr.dimsLabel':'आयाम और वजन','dr.width':'चौड़ाई','dr.height':'ऊंचाई','dr.length':'लंबाई','dr.grossWeight':'कुल वजन','dr.closeSpec':'विनिर्देश बंद करें',
+  'dr.newSkuTitle':'कैटलॉग में नया उत्पाद जोड़ें','dr.newSkuSub':'पूर्ण निर्यात विनिर्देश','dr.sec1':'1. सामान्य जानकारी','dr.sec2':'2. मूल्य निर्धारण और वाणिज्यिक शर्तें','dr.sec3':'3. विवरण और रसद','dr.prodNameLabel':'उत्पाद का पूरा नाम','dr.prodNamePh':'उदा. 1121 स्टीम बासमती चावल 1 टन','dr.hsLabel':'HS कोड','dr.skuLabel':'SKU कोड','dr.catLabel':'श्रेणी','dr.pminLabel':'न्यूनतम मूल्य','dr.pmaxLabel':'अधिकतम मूल्य','dr.moqLabel':'MOQ','dr.advLabel':'अग्रिम (%)','dr.postLabel':'B/L पर (%)','dr.incoLabel':'Incoterms','dr.publishBtn':'कैटलॉग में प्रकाशित करें',
+  'dr.rfqReqTitle':'खरीदार की पूछताछ:','dr.rfqReqText':'100 टन बासमती 1121, CIF नोवोरोस्सिएस्क, 25 किलो बैग।','dr.pricePerTon':'प्रति टन मूल्य','dr.volumeTon':'मात्रा (टन)','dr.sendQuoteBtn':'कोटेशन भेजें →','dr.discussChat':'चैट में चर्चा करें',
+  'dr.quoteActiveTitle':'सक्रिय वाणिज्यिक प्रस्ताव','dr.product':'उत्पाद:','dr.qty':'मात्रा:','dr.totalVal':'कुल मूल्य:','dr.terms':'शर्तें:','dr.adjustPrice':'मूल्य समायोजित करें',
+  'dr.contractConfirmTitle':'अनुबंध समीक्षा एवं ई-साइन','dr.contractCheckbox':'मैं वाणिज्यिक शर्तों की पुष्टि करता हूं और हस्ताक्षर के लिए तैयार हूं।','dr.openDealRoomBtn':'हस्ताक्षर के लिए डील रूम खोलें →','dr.openBuyerChat':'खरीदार के साथ चैट खोलें',
+  'dr.prodProgressTitle':'उत्पादन प्रगति','dr.batchReadiness':'बैच की तैयारी','dr.updateStageBtn':'चरण अपडेट करें',
+  'dr.uploadBlTitle':'बिल ऑफ लैडिंग (B/L) अपलोड','dr.blLockedText':'बैंक में सुरक्षित। 70% शेष राशि प्राप्त करने के लिए B/L अपलोड करें।','dr.blNumber':'B/L संख्या','dr.blScanLabel':'मूल B/L स्कैन (PDF)','dr.blDropText':'B/L स्कैन अपलोड करने के लिए यहां क्लिक करें','dr.sendBlToBank':'बैंक को B/L भेजें',
+  'dr.trackingTitle':'शिपमेंट ट्रैकिंग','dr.customsPassed':'✓ मुंद्रा बंदरगाह पर सीमा शुल्क पूरा हुआ','dr.inTransit':'🚢 मार्ग में जहाज MSC Katrina','dr.etaText':'9 दिनों में आगमन की उम्मीद',
+  'dr.archiveTitle':'पूर्ण किए गए सौदों का संग्रह','dr.orderClosedText':'✓ आदेश सफलतापूर्वक बंद हो गया। 100% राशि प्राप्त हुई।','dr.downloadClosingDocs':'दस्तावेज़ डाउनलोड करें',
+  'msg.contractSigned':'अनुबंध सफलतापूर्वक हस्ताक्षरित! 30% अग्रिम लॉक हो गया।','msg.newSkuSuccess':'नया उत्पाद कैटलॉग में प्रकाशित हुआ!','msg.quoteSentSuccess':'कोटेशन खरीदार को भेजा गया!','msg.prodUpdated':'उत्पादन स्थिति अपडेट की गई।','msg.blSentSuccess':'B/L भेजा गया। 70% राशि जारी की जाएगी।','msg.downloadingDocs':'चालान डाउनलोड हो रहे हैं...'
 },
 zh: {
   'profile.verified':'KYB 已认证',
   'reg.title':'注册 Alfa-Global','reg.subtitle':'创建出口商企业账户',
   'reg.email':'企业邮箱','reg.phone':'电话号码','reg.password':'设置密码',
   'reg.continue':'继续注册','reg.otpSent':'验证码已发送至邮箱和短信。',
-  'reg.otp':'动态验证码 (OTP)','reg.terms':'我接受平台条款和跨境数据传输政策。','reg.kyb_consent':'我同意国家注册中心 (KYB) 自动验证。','reg.finish':'完成注册','common.back':'← 返回','common.close':'关闭',
+  'reg.otp':'动态验证码 (OTP)','reg.terms':'我接受平台条款和跨境数据传输政策。','reg.kyb_consent':'我同意国家注册中心 (KYB) 自动验证。','reg.finish':'完成注册','common.back':'← 返回','common.close':'关闭','common.cancel':'取消',
   'kyb.stepTag':'第 2 步 / 供应商合规验证','kyb.title':'出口商法定资质与监管凭证','kyb.subtitle':'信息通过税务和海关 API 自动核验。','kyb.pending':'等待验证','kyb.companyName':'公司法定名称','kyb.nameHint':'与注册文件一致','kyb.country':'所属国籍','kyb.gstin':'GSTIN 税号 (27邦)','kyb.taxBadge':'ℹ 税务','kyb.valid':'✓ 有效','kyb.iec':'DGFT IEC / PAN','kyb.customsBadge':'ℹ 海关','kyb.dgftOk':'✓ DGFT','kyb.council':'出口促进委员会','kyb.adcode':'AD Code & Bank IFSC','kyb.valutaBadge':'外汇管制专用','kyb.port':'主要始发港','kyb.factory':'工厂 / 设施地址','kyb.doc':'质量认证与出口许可证','kyb.docStatus':'(2.8 MB · 已验证)','kyb.back':'← 返回注册','kyb.submit':'验证并打开商品目录',
   'kyb.whyTitle':'为什么要填写这些信息？','kyb.whyDesc':'Alfa-Global 支持买家与海外工厂之间的直接跨境结算，无需中介。',
   'kyb.r1Title':'1. 银行外汇管制','kyb.r1Desc':'AD 代码与 IFSC 允许快速开具交易护照并清关。',
@@ -1071,7 +1101,17 @@ zh: {
   'step2.title':'2. KYB 认证','step2.sub':'税务与外贸代码',
   'step3.title':'3. 商品目录','step3.sub':'产品管理',
   'step4.title':'4. 订单中心','step4.sub':'交易与资金托管',
-  'step5.title':'5. 交易室','step5.sub':'电子签章与沟通'
+  'step5.title':'5. 交易室','step5.sub':'电子签章与沟通',
+  'dr.specTitle':'规格与技术特性','dr.descLabel':'产品描述','dr.featuresLabel':'核心亮点','dr.charLabel':'详细特性','dr.brandLabel':'品牌：','dr.countryLabel':'产地：','dr.colorLabel':'颜色：','dr.matLabel':'材质：','dr.scopeLabel':'适用范围：','dr.warrantyLabel':'保修期：','dr.instrLabel':'保存及使用说明：','dr.logisticsLabel':'物流与包装','dr.pkgLabel':'包装形式：','dr.methodLabel':'运输方式：','dr.portLabel':'始发港：','dr.dimsLabel':'尺寸与重量','dr.width':'宽度','dr.height':'高度','dr.length':'长度','dr.grossWeight':'毛重','dr.closeSpec':'关闭规格详情',
+  'dr.newSkuTitle':'添加新商品至目录','dr.newSkuSub':'填写完整出口规格表单','dr.sec1':'1. 基础信息','dr.sec2':'2. 价格与贸易条款','dr.sec3':'3. 产品描述与物流','dr.prodNameLabel':'商品全称','dr.prodNamePh':'例如：1121 印度蒸谷香米 1吨','dr.hsLabel':'海关编码 (HS Code)','dr.skuLabel':'商品货号 (SKU)','dr.catLabel':'品类','dr.pminLabel':'最低价','dr.pmaxLabel':'最高价','dr.moqLabel':'起订量 (MOQ)','dr.advLabel':'预付款 (%)','dr.postLabel':'见提单付款 (%)','dr.incoLabel':'贸易术语 (Incoterms)','dr.publishBtn':'发布至商品目录',
+  'dr.rfqReqTitle':'买家采购意向：','dr.rfqReqText':'100 吨 1121 香米，CIF 新罗西斯克，25公斤装附植检证书。','dr.pricePerTon':'每吨单价','dr.volumeTon':'采购量 (吨)','dr.sendQuoteBtn':'发送商务报价 →','dr.discussChat':'在交易会话中沟通',
+  'dr.quoteActiveTitle':'当前生效报价','dr.product':'商品：','dr.qty':'数量：','dr.totalVal':'总计金额：','dr.terms':'贸易条件：','dr.adjustPrice':'调整报价',
+  'dr.contractConfirmTitle':'合同确认与电子签章','dr.contractCheckbox':'我已核对贸易条款，确认进入交易室签署智能合约。','dr.openDealRoomBtn':'前往交易室签署 →','dr.openBuyerChat':'与买家沟通',
+  'dr.prodProgressTitle':'生产与包装进度','dr.batchReadiness':'批次完成度','dr.updateStageBtn':'更新生产阶段',
+  'dr.uploadBlTitle':'上传海运提单 (B/L)','dr.blLockedText':'已在银行安全托管。上传正本提单以释放 70% 尾款。','dr.blNumber':'提单号 (B/L Number)','dr.blScanLabel':'正本已装船提单扫描件 (PDF)','dr.blDropText':'点击或拖拽上传清洁已装船提单','dr.sendBlToBank':'提交提单至银行核验',
+  'dr.trackingTitle':'货物实时在途追踪','dr.customsPassed':'✓ 蒙德拉港海关出口清关完成','dr.inTransit':'🚢 承运集装箱船 MSC Katrina 在途中','dr.etaText':'预计 9 天后抵达目的港',
+  'dr.archiveTitle':'已归档历史订单','dr.orderClosedText':'✓ 订单已圆满完成，100% 外汇货款已结算入账。','dr.downloadClosingDocs':'下载结算发票及凭证',
+  'msg.contractSigned':'智能合约签署成功！30% 预付款已安全锁定。','msg.newSkuSuccess':'新商品已成功发布至目录！','msg.quoteSentSuccess':'商业报价已发送给买家！','msg.prodUpdated':'生产进度已更新。','msg.blSentSuccess':'提单已提交银行，70% 尾款将释放至外汇账户。','msg.downloadingDocs':'正在生成并下载结算凭证...'
 }
 };
 
@@ -1201,13 +1241,20 @@ function changeLang(v){
   renderCatalog();
   renderOrders();
   renderFloatInbox();
+  if(CURRENT_DRAWER_TYPE){
+    renderDrawerContent(CURRENT_DRAWER_TYPE, CURRENT_DRAWER_CONTEXT);
+  }
   lucide.createIcons();
 }
+
 function changeCurrency(v){
   CURR = v;
   applyPrices();
   renderCatalog();
   renderOrders();
+  if(CURRENT_DRAWER_TYPE){
+    renderDrawerContent(CURRENT_DRAWER_TYPE, CURRENT_DRAWER_CONTEXT);
+  }
 }
 
 function downloadPI(){
@@ -1216,7 +1263,6 @@ function downloadPI(){
     : 'Generating Proforma Invoice PI-ALFA-2025-0312.pdf (HS 10063092, FOB Mundra)...');
 }
 
-// Catalog with guaranteed graphic SVGs and real-time currency
 function renderCatalog(){
   const grid = document.getElementById('catalog-grid');
   if(!grid) return;
@@ -1236,7 +1282,7 @@ function renderCatalog(){
   if(sort === 'moq_asc') items.sort((a,b) => a.moq - b.moq);
 
   if(!items.length){
-    grid.innerHTML = `<div class="col-span-4 py-12 text-center text-sm text-slate-400">Товаров не найдено.</div>`;
+    grid.innerHTML = `<div class="col-span-4 py-12 text-center text-sm text-slate-400">${t('catalog.searchPh')}</div>`;
     return;
   }
 
@@ -1343,7 +1389,7 @@ function signContract(){
   const icon = document.getElementById('sign-icon');
   if(icon) icon.textContent = '✓';
   lucide.createIcons();
-  showNotify(LANG === 'ru' ? 'Смарт-контракт успешно подписан! 30% аванса заблокированы на эскроу-счете.' : 'Smart contract e-signed! 30% advance escrow secured.');
+  showNotify(t('msg.contractSigned'));
 }
 
 function maskPrivacy(str){
@@ -1500,11 +1546,9 @@ function sendFloatMsg(e){
   inp.value = '';
 }
 
-// Drawer View with full India Mall specifications
-function openDrawer(type, contextId){
-  const overlay = document.getElementById('drawer-overlay');
-  const drawer = document.getElementById('side-drawer');
+function renderDrawerContent(type, contextId){
   const content = document.getElementById('drawer-content');
+  if(!content) return;
 
   const drawerMap = {
     'view-sku': () => {
@@ -1522,7 +1566,6 @@ function openDrawer(type, contextId){
       const prodScope = getLocalStr(p.scope);
       const prodWarranty = getLocalStr(p.warranty);
       const prodInstr = getLocalStr(p.specialInstr);
-      const prodState = getLocalStr(p.state);
       const prodPkg = getLocalStr(p.pkgDetails);
       const prodDel = getLocalStr(p.deliveryMethod);
       const prodLead = getLocalStr(p.leadTime);
@@ -1564,16 +1607,16 @@ function openDrawer(type, contextId){
           </div>
 
           <div class="border-t border-slate-200 pt-5 space-y-4">
-            <h3 class="text-sm font-extrabold text-slate-900">Спецификация и характеристики</h3>
+            <h3 class="text-sm font-extrabold text-slate-900">${t('dr.specTitle')}</h3>
             
             <div class="bg-slate-50 rounded-xl p-4 border border-slate-100 space-y-1">
-              <h4 class="font-bold text-slate-800 text-xs">Описание</h4>
+              <h4 class="font-bold text-slate-800 text-xs">${t('dr.descLabel')}</h4>
               <p class="text-slate-600 leading-relaxed">${prodDesc}</p>
             </div>
 
             ${featuresList.length ? `
               <div class="bg-slate-50 rounded-xl p-4 border border-slate-100 space-y-1">
-                <h4 class="font-bold text-slate-800 text-xs">Особенности</h4>
+                <h4 class="font-bold text-slate-800 text-xs">${t('dr.featuresLabel')}</h4>
                 <ul class="list-disc pl-5 space-y-1 text-slate-600">
                   ${featuresList.map(f => `<li>${f}</li>`).join('')}
                 </ul>
@@ -1581,41 +1624,41 @@ function openDrawer(type, contextId){
             ` : ''}
 
             <div class="border border-slate-200 rounded-xl p-4 space-y-2 bg-white">
-              <h4 class="font-bold text-slate-800 text-xs border-b border-slate-100 pb-2">Характеристики</h4>
+              <h4 class="font-bold text-slate-800 text-xs border-b border-slate-100 pb-2">${t('dr.charLabel')}</h4>
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-y-2 gap-x-4 text-[11px]">
-                <div><span class="text-slate-400 block">Бренд:</span> <b>${p.brand}</b></div>
-                <div><span class="text-slate-400 block">Страна производства:</span> <b>${p.country}</b></div>
-                <div><span class="text-slate-400 block">Цвет:</span> <b>${p.color}</b></div>
-                <div><span class="text-slate-400 block">Материал:</span> <b>${prodMat}</b></div>
-                <div><span class="text-slate-400 block">Применение:</span> <b>${prodScope}</b></div>
-                <div><span class="text-slate-400 block">Гарантия:</span> <b>${prodWarranty}</b></div>
-                <div class="sm:col-span-2"><span class="text-slate-400 block">Инструкции:</span> <b>${prodInstr}</b></div>
+                <div><span class="text-slate-400 block">${t('dr.brandLabel')}</span> <b>${p.brand}</b></div>
+                <div><span class="text-slate-400 block">${t('dr.countryLabel')}</span> <b>${p.country}</b></div>
+                <div><span class="text-slate-400 block">${t('dr.colorLabel')}</span> <b>${p.color}</b></div>
+                <div><span class="text-slate-400 block">${t('dr.matLabel')}</span> <b>${prodMat}</b></div>
+                <div><span class="text-slate-400 block">${t('dr.scopeLabel')}</span> <b>${prodScope}</b></div>
+                <div><span class="text-slate-400 block">${t('dr.warrantyLabel')}</span> <b>${prodWarranty}</b></div>
+                <div class="sm:col-span-2"><span class="text-slate-400 block">${t('dr.instrLabel')}</span> <b>${prodInstr}</b></div>
               </div>
             </div>
 
             <div class="border border-slate-200 rounded-xl p-4 space-y-2 bg-white text-[11px]">
-              <h4 class="font-bold text-slate-800 text-xs border-b border-slate-100 pb-2">Доставка и логистика</h4>
-              <p class="text-slate-600 mb-2"><b>Упаковка:</b> ${prodPkg}</p>
+              <h4 class="font-bold text-slate-800 text-xs border-b border-slate-100 pb-2">${t('dr.logisticsLabel')}</h4>
+              <p class="text-slate-600 mb-2"><b>${t('dr.pkgLabel')}</b> ${prodPkg}</p>
               <div class="grid grid-cols-2 gap-2">
-                <div><span class="text-slate-400">Метод:</span> <b>${prodDel}</b></div>
-                <div><span class="text-slate-400">Порт:</span> <b>${p.port}</b></div>
+                <div><span class="text-slate-400">${t('dr.methodLabel')}</span> <b>${prodDel}</b></div>
+                <div><span class="text-slate-400">${t('dr.portLabel')}</span> <b>${p.port}</b></div>
               </div>
             </div>
 
             <div class="border border-slate-200 rounded-xl p-4 space-y-3 bg-white text-[11px]">
-              <h4 class="font-bold text-slate-800 text-xs border-b border-slate-100 pb-2">Габариты и вес</h4>
+              <h4 class="font-bold text-slate-800 text-xs border-b border-slate-100 pb-2">${t('dr.dimsLabel')}</h4>
               <div class="grid grid-cols-4 gap-2 text-center">
-                <div class="p-2 bg-slate-50 rounded-lg"><span class="text-slate-400 block text-[10px]">Ширина</span><b>${p.dims?.w}</b></div>
-                <div class="p-2 bg-slate-50 rounded-lg"><span class="text-slate-400 block text-[10px]">Высота</span><b>${p.dims?.h}</b></div>
-                <div class="p-2 bg-slate-50 rounded-lg"><span class="text-slate-400 block text-[10px]">Длина</span><b>${p.dims?.l}</b></div>
-                <div class="p-2 bg-slate-50 rounded-lg"><span class="text-slate-400 block text-[10px]">Вес брутто</span><b>${p.dims?.weight}</b></div>
+                <div class="p-2 bg-slate-50 rounded-lg"><span class="text-slate-400 block text-[10px]">${t('dr.width')}</span><b>${p.dims?.w}</b></div>
+                <div class="p-2 bg-slate-50 rounded-lg"><span class="text-slate-400 block text-[10px]">${t('dr.height')}</span><b>${p.dims?.h}</b></div>
+                <div class="p-2 bg-slate-50 rounded-lg"><span class="text-slate-400 block text-[10px]">${t('dr.length')}</span><b>${p.dims?.l}</b></div>
+                <div class="p-2 bg-slate-50 rounded-lg"><span class="text-slate-400 block text-[10px]">${t('dr.grossWeight')}</span><b>${p.dims?.weight}</b></div>
               </div>
             </div>
 
           </div>
         </div>
         <div class="px-6 py-4 border-t border-slate-100 bg-white flex justify-end">
-          <button onclick="closeDrawer()" class="px-5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl text-xs" data-i18n="common.close">Закрыть</button>
+          <button onclick="closeDrawer()" class="px-5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl text-xs">${t('dr.closeSpec')}</button>
         </div>
       `;
     },
@@ -1623,23 +1666,23 @@ function openDrawer(type, contextId){
     'new-sku': () => `
       <div class="flex items-center justify-between px-6 py-4 border-b border-slate-100 bg-white sticky top-0 z-10">
         <div>
-          <h3 class="font-extrabold text-slate-900">Добавить новый товар в каталог</h3>
-          <p class="text-xs text-slate-500 mt-0.5">Полная экспортная спецификация</p>
+          <h3 class="font-extrabold text-slate-900">${t('dr.newSkuTitle')}</h3>
+          <p class="text-xs text-slate-500 mt-0.5">${t('dr.newSkuSub')}</p>
         </div>
         <button onclick="closeDrawer()" class="text-slate-400 hover:text-slate-700"><i data-lucide="x" class="w-5 h-5"></i></button>
       </div>
 
       <div class="p-6 space-y-6 flex-1 overflow-y-auto scrollbar-thin text-xs">
         <div class="space-y-3">
-          <h4 class="font-bold text-slate-900 uppercase text-[11px] tracking-wider text-alfa">1. Основная информация</h4>
-          <div><label class="block font-bold text-slate-700 mb-1">Полное наименование</label><input type="text" id="ns-name" placeholder="например, Рис басмати пропаренный 1121" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none"></div>
+          <h4 class="font-bold text-slate-900 uppercase text-[11px] tracking-wider text-alfa">${t('dr.sec1')}</h4>
+          <div><label class="block font-bold text-slate-700 mb-1">${t('dr.prodNameLabel')}</label><input type="text" id="ns-name" placeholder="${t('dr.prodNamePh')}" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none"></div>
           <div class="grid grid-cols-2 gap-3">
-            <div><label class="block font-bold text-slate-700 mb-1">Бренд</label><input type="text" id="ns-brand" placeholder="Indiafeast" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none"></div>
-            <div><label class="block font-bold text-slate-700 mb-1">Код ТНВЭД (HS Code)</label><input type="text" id="ns-hs" value="10063092" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg font-mono outline-none"></div>
+            <div><label class="block font-bold text-slate-700 mb-1">${t('dr.brandLabel')}</label><input type="text" id="ns-brand" placeholder="Indiafeast" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none"></div>
+            <div><label class="block font-bold text-slate-700 mb-1">${t('dr.hsLabel')}</label><input type="text" id="ns-hs" value="10063092" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg font-mono outline-none"></div>
           </div>
           <div class="grid grid-cols-2 gap-3">
-            <div><label class="block font-bold text-slate-700 mb-1">Артикул (SKU)</label><input type="text" id="ns-art" value="IF-1121-NEW" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg font-mono outline-none"></div>
-            <div><label class="block font-bold text-slate-700 mb-1">Категория</label>
+            <div><label class="block font-bold text-slate-700 mb-1">${t('dr.skuLabel')}</label><input type="text" id="ns-art" value="IF-1121-NEW" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg font-mono outline-none"></div>
+            <div><label class="block font-bold text-slate-700 mb-1">${t('dr.catLabel')}</label>
               <select id="ns-cat" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none">
                 <option value="Food, Grains & Spices">Food, Grains & Spices</option>
                 <option value="Agriculture & Agro Inputs">Agriculture & Agro Inputs</option>
@@ -1651,31 +1694,31 @@ function openDrawer(type, contextId){
         </div>
 
         <div class="space-y-3 pt-3 border-t border-slate-100">
-          <h4 class="font-bold text-slate-900 uppercase text-[11px] tracking-wider text-alfa">2. Цены и коммерческие условия</h4>
+          <h4 class="font-bold text-slate-900 uppercase text-[11px] tracking-wider text-alfa">${t('dr.sec2')}</h4>
           <div class="grid grid-cols-3 gap-3">
-            <div><label class="block font-bold text-slate-700 mb-1">Цена Мин (₽)</label><input type="number" id="ns-pmin" value="79737" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none"></div>
-            <div><label class="block font-bold text-slate-700 mb-1">Цена Макс (₽)</label><input type="number" id="ns-pmax" value="82395" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none"></div>
-            <div><label class="block font-bold text-slate-700 mb-1">MOQ</label><input type="number" id="ns-moq" value="26" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none"></div>
+            <div><label class="block font-bold text-slate-700 mb-1">${t('dr.pminLabel')} (₽)</label><input type="number" id="ns-pmin" value="79737" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none"></div>
+            <div><label class="block font-bold text-slate-700 mb-1">${t('dr.pmaxLabel')} (₽)</label><input type="number" id="ns-pmax" value="82395" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none"></div>
+            <div><label class="block font-bold text-slate-700 mb-1">${t('dr.moqLabel')}</label><input type="number" id="ns-moq" value="26" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none"></div>
           </div>
           <div class="grid grid-cols-3 gap-3">
-            <div><label class="block font-bold text-slate-700 mb-1">Аванс (%)</label><input type="text" id="ns-adv" value="30 %" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none"></div>
-            <div><label class="block font-bold text-slate-700 mb-1">По B/L (%)</label><input type="text" id="ns-post" value="70 %" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none"></div>
-            <div><label class="block font-bold text-slate-700 mb-1">Incoterms</label><select id="ns-inco" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none"><option selected>FOB</option><option>CIF</option></select></div>
+            <div><label class="block font-bold text-slate-700 mb-1">${t('dr.advLabel')}</label><input type="text" id="ns-adv" value="30 %" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none"></div>
+            <div><label class="block font-bold text-slate-700 mb-1">${t('dr.postLabel')}</label><input type="text" id="ns-post" value="70 %" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none"></div>
+            <div><label class="block font-bold text-slate-700 mb-1">${t('dr.incoLabel')}</label><select id="ns-inco" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none"><option selected>FOB</option><option>CIF</option></select></div>
           </div>
         </div>
 
         <div class="space-y-3 pt-3 border-t border-slate-100">
-          <h4 class="font-bold text-slate-900 uppercase text-[11px] tracking-wider text-alfa">3. Описание и логистика</h4>
-          <div><label class="block font-bold text-slate-700 mb-1">Описание продукта</label><textarea id="ns-desc" rows="2" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none resize-none">1121 Steam Basmati Rice — высший сорт длиннозерного риса.</textarea></div>
+          <h4 class="font-bold text-slate-900 uppercase text-[11px] tracking-wider text-alfa">${t('dr.sec3')}</h4>
+          <div><label class="block font-bold text-slate-700 mb-1">${t('dr.descLabel')}</label><textarea id="ns-desc" rows="2" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none resize-none">1121 Steam Basmati Rice.</textarea></div>
           <div class="grid grid-cols-2 gap-3">
-            <div><label class="block font-bold text-slate-700 mb-1">Порт отгрузки</label><input type="text" id="ns-port" value="Mundra" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none"></div>
-            <div><label class="block font-bold text-slate-700 mb-1">Детали упаковки</label><input type="text" id="ns-pkg" value="Мешки BOPP 25 кг" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none"></div>
+            <div><label class="block font-bold text-slate-700 mb-1">${t('dr.portLabel')}</label><input type="text" id="ns-port" value="Mundra" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none"></div>
+            <div><label class="block font-bold text-slate-700 mb-1">${t('dr.pkgLabel')}</label><input type="text" id="ns-pkg" value="BOPP 25 kg" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none"></div>
           </div>
         </div>
       </div>
 
       <div class="px-6 py-4 border-t border-slate-100 bg-white">
-        <button onclick="drawerAddSku()" class="w-full py-3 bg-alfa hover:bg-alfa-hover text-white font-bold rounded-xl text-sm">Опубликовать в каталоге</button>
+        <button onclick="drawerAddSku()" class="w-full py-3 bg-alfa hover:bg-alfa-hover text-white font-bold rounded-xl text-sm">${t('dr.publishBtn')}</button>
       </div>`,
 
     'rfq-quote': () => `
@@ -1685,143 +1728,154 @@ function openDrawer(type, contextId){
       </div>
       <div class="p-6 space-y-4 flex-1 text-xs">
         <div class="bg-amber-50 border border-amber-200 rounded-xl p-3 text-amber-900">
-          <b>Запрос покупателя:</b> 100 тонн риса 1121, CIF Новороссийск, фасовка в мешки по 25 кг с фитосанитарным актом.
+          <b>${t('dr.rfqReqTitle')}</b> ${t('dr.rfqReqText')}
         </div>
         <div class="grid grid-cols-2 gap-4">
-          <div><label class="block font-bold text-slate-700 mb-1">Цена за тонну (₽)</label><input type="number" value="81500" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm outline-none"></div>
-          <div><label class="block font-bold text-slate-700 mb-1">Объем (т)</label><input type="number" value="100" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm outline-none"></div>
+          <div><label class="block font-bold text-slate-700 mb-1">${t('dr.pricePerTon')} (₽)</label><input type="number" value="81500" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm outline-none"></div>
+          <div><label class="block font-bold text-slate-700 mb-1">${t('dr.volumeTon')}</label><input type="number" value="100" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm outline-none"></div>
         </div>
       </div>
       <div class="px-6 py-4 border-t border-slate-100 bg-white space-y-2">
         <div class="flex gap-3">
-          <button onclick="closeDrawer()" class="px-4 py-2.5 border border-slate-200 text-slate-600 text-xs font-bold rounded-xl hover:bg-slate-50">Отмена</button>
-          <button onclick="drawerSuccess('Коммерческое предложение направлено Buyer #RU-3129!')" class="flex-1 py-2.5 bg-alfa hover:bg-alfa-hover text-white text-xs font-bold rounded-xl">Отправить КП →</button>
+          <button onclick="closeDrawer()" class="px-4 py-2.5 border border-slate-200 text-slate-600 text-xs font-bold rounded-xl hover:bg-slate-50">${t('common.cancel')}</button>
+          <button onclick="drawerSuccess('${t('msg.quoteSentSuccess')}')" class="flex-1 py-2.5 bg-alfa hover:bg-alfa-hover text-white text-xs font-bold rounded-xl">${t('dr.sendQuoteBtn')}</button>
         </div>
         <button onclick="closeDrawer(); openFloatDealChat('RFQ-2025-0891');" class="w-full py-2 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl text-xs font-bold text-slate-700 flex items-center justify-center gap-1.5 transition">
-          <i data-lucide="message-square" class="w-3.5 h-3.5 text-slate-500"></i><span>Обсудить детали в чате</span>
+          <i data-lucide="message-square" class="w-3.5 h-3.5 text-slate-500"></i><span>${t('dr.discussChat')}</span>
         </button>
       </div>`,
 
     'view-quote': () => `
       <div class="flex items-center justify-between px-6 py-4 border-b border-slate-100 bg-white sticky top-0 z-10">
-        <div><h3 class="font-extrabold text-slate-900">Активное предложение</h3><p class="text-xs text-slate-500 mt-0.5">QT-2025-0445 · Buyer #RU-8842</p></div>
+        <div><h3 class="font-extrabold text-slate-900">${t('dr.quoteActiveTitle')}</h3><p class="text-xs text-slate-500 mt-0.5">QT-2025-0445 · Buyer #RU-8842</p></div>
         <button onclick="closeDrawer()" class="text-slate-400 hover:text-slate-700"><i data-lucide="x" class="w-5 h-5"></i></button>
       </div>
       <div class="p-6 space-y-4 flex-1 text-xs">
         <div class="bg-blue-50 border border-blue-200 rounded-xl p-4 space-y-2">
           <div class="grid grid-cols-2 gap-3">
-            <div><p class="text-slate-500 uppercase font-bold text-[10px]">Товар</p><p class="font-bold text-slate-800">Мячи тренировочные SYNCO</p></div>
-            <div><p class="text-slate-500 uppercase font-bold text-[10px]">Количество</p><p class="font-bold text-slate-800">5 000 шт</p></div>
-            <div><p class="text-slate-500 uppercase font-bold text-[10px]">Итого</p><p class="font-bold text-slate-800">${fmtMoney(705000)}</p></div>
-            <div><p class="text-slate-500 uppercase font-bold text-[10px]">Условия</p><p class="font-bold text-slate-800">FOB Nhava Sheva</p></div>
+            <div><p class="text-slate-500 uppercase font-bold text-[10px]">${t('dr.product')}</p><p class="font-bold text-slate-800">SYNCO Incredy 90g</p></div>
+            <div><p class="text-slate-500 uppercase font-bold text-[10px]">${t('dr.qty')}</p><p class="font-bold text-slate-800">5 000 pcs</p></div>
+            <div><p class="text-slate-500 uppercase font-bold text-[10px]">${t('dr.totalVal')}</p><p class="font-bold text-slate-800">${fmtMoney(705000)}</p></div>
+            <div><p class="text-slate-500 uppercase font-bold text-[10px]">${t('dr.terms')}</p><p class="font-bold text-slate-800">FOB Nhava Sheva</p></div>
           </div>
         </div>
       </div>
       <div class="px-6 py-4 border-t border-slate-100 bg-white flex gap-3">
-        <button onclick="closeDrawer()" class="px-4 py-2.5 border border-slate-200 text-slate-600 text-xs font-bold rounded-xl hover:bg-slate-50">Закрыть</button>
-        <button onclick="openDrawer('rfq-quote')" class="flex-1 py-2.5 bg-slate-800 hover:bg-slate-900 text-white text-xs font-bold rounded-xl">Скорректировать цены</button>
+        <button onclick="closeDrawer()" class="px-4 py-2.5 border border-slate-200 text-slate-600 text-xs font-bold rounded-xl hover:bg-slate-50">${t('common.close')}</button>
+        <button onclick="openDrawer('rfq-quote')" class="flex-1 py-2.5 bg-slate-800 hover:bg-slate-900 text-white text-xs font-bold rounded-xl">${t('dr.adjustPrice')}</button>
       </div>`,
 
     'sign-contract': () => `
       <div class="flex items-center justify-between px-6 py-4 border-b border-slate-100 bg-white sticky top-0 z-10">
-        <div><h3 class="font-extrabold text-slate-900">Согласование контракта и E-Sign</h3><p class="text-xs text-slate-500 mt-0.5">CT-2025-0312 · Buyer #RU-4471</p></div>
+        <div><h3 class="font-extrabold text-slate-900">${t('dr.contractConfirmTitle')}</h3><p class="text-xs text-slate-500 mt-0.5">CT-2025-0312 · Buyer #RU-4471</p></div>
         <button onclick="closeDrawer()" class="text-slate-400 hover:text-slate-700"><i data-lucide="x" class="w-5 h-5"></i></button>
       </div>
       <div class="p-6 space-y-4 flex-1 text-xs">
         <div class="bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-indigo-950 space-y-1">
-          <p class="font-bold">Рис басмати 1121 Indiafeast (26 тонн)</p>
-          <p>Сумма сделки: <b>${fmtMoney(2073162)}</b> (FOB Mundra). 30% аванс / 70% коносамент.</p>
+          <p class="font-bold">1121 Steam Basmati Rice Indiafeast (26 MT)</p>
+          <p>${t('deal.total')}: <b>${fmtMoney(2073162)}</b> (FOB Mundra). 30% / 70%.</p>
         </div>
         <label class="flex items-start gap-2.5 cursor-pointer bg-amber-50 border border-amber-200 rounded-xl p-3">
           <input type="checkbox" id="contract-agree" class="mt-0.5 rounded accent-alfa" onchange="document.getElementById('sign-now-btn').disabled = !this.checked; document.getElementById('sign-now-btn').className = this.checked ? 'flex-1 py-2.5 bg-alfa hover:bg-alfa-hover text-white text-xs font-bold rounded-xl transition cursor-pointer' : 'flex-1 py-2.5 bg-slate-300 text-white text-xs font-bold rounded-xl cursor-not-allowed'">
-          <span class="text-xs text-amber-900 font-medium">Подтверждаю условия и готов перейти в Deal Room для подписания смарт-контракта.</span>
+          <span class="text-xs text-amber-900 font-medium">${t('dr.contractCheckbox')}</span>
         </label>
       </div>
       <div class="px-6 py-4 border-t border-slate-100 bg-white space-y-2">
         <div class="flex gap-3">
-          <button onclick="closeDrawer()" class="px-4 py-2.5 border border-slate-200 text-slate-600 text-xs font-bold rounded-xl hover:bg-slate-50">Отмена</button>
-          <button id="sign-now-btn" disabled onclick="goStep(5); closeDrawer();" class="flex-1 py-2.5 bg-slate-300 text-white text-xs font-bold rounded-xl cursor-not-allowed">Открыть Deal Room и подписать →</button>
+          <button onclick="closeDrawer()" class="px-4 py-2.5 border border-slate-200 text-slate-600 text-xs font-bold rounded-xl hover:bg-slate-50">${t('common.cancel')}</button>
+          <button id="sign-now-btn" disabled onclick="goStep(5); closeDrawer();" class="flex-1 py-2.5 bg-slate-300 text-white text-xs font-bold rounded-xl cursor-not-allowed">${t('dr.openDealRoomBtn')}</button>
         </div>
         <button onclick="closeDrawer(); openFloatDealChat('CT-2025-0312');" class="w-full py-2 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl text-xs font-bold text-slate-700 flex items-center justify-center gap-1.5 transition">
-          <i data-lucide="message-square" class="w-3.5 h-3.5 text-slate-500"></i><span>Открыть чат с покупателем</span>
+          <i data-lucide="message-square" class="w-3.5 h-3.5 text-slate-500"></i><span>${t('dr.openBuyerChat')}</span>
         </button>
       </div>`,
 
     'production': () => `
       <div class="flex items-center justify-between px-6 py-4 border-b border-slate-100 bg-white sticky top-0 z-10">
-        <div><h3 class="font-extrabold text-slate-900">Ход производства</h3><p class="text-xs text-slate-500 mt-0.5">PR-2025-0278 · 10 000 упаковок</p></div>
+        <div><h3 class="font-extrabold text-slate-900">${t('dr.prodProgressTitle')}</h3><p class="text-xs text-slate-500 mt-0.5">PR-2025-0278 · 10 000 packs</p></div>
         <button onclick="closeDrawer()" class="text-slate-400 hover:text-slate-700"><i data-lucide="x" class="w-5 h-5"></i></button>
       </div>
       <div class="p-6 space-y-4 flex-1 text-xs">
-        <div class="flex items-center justify-between font-bold"><span>Готовность партии</span><span class="text-alfa">75%</span></div>
+        <div class="flex items-center justify-between font-bold"><span>${t('dr.batchReadiness')}</span><span class="text-alfa">75%</span></div>
         <div class="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden"><div class="bg-alfa h-2.5 rounded-full" style="width:75%"></div></div>
       </div>
       <div class="px-6 py-4 border-t border-slate-100 bg-white">
-        <button onclick="drawerSuccess('Статус производства обновлен.')" class="w-full py-2.5 bg-alfa hover:bg-alfa-hover text-white text-xs font-bold rounded-xl">Обновить этап</button>
+        <button onclick="drawerSuccess('${t('msg.prodUpdated')}')" class="w-full py-2.5 bg-alfa hover:bg-alfa-hover text-white text-xs font-bold rounded-xl">${t('dr.updateStageBtn')}</button>
       </div>`,
 
     'upload-bl': () => `
       <div class="flex items-center justify-between px-6 py-4 border-b border-slate-100 bg-white sticky top-0 z-10">
-        <div><h3 class="font-extrabold text-slate-900">Загрузка коносамента (B/L)</h3><p class="text-xs text-slate-500 mt-0.5">ES-2025-0201 · Генератор Cummins</p></div>
+        <div><h3 class="font-extrabold text-slate-900">${t('dr.uploadBlTitle')}</h3><p class="text-xs text-slate-500 mt-0.5">ES-2025-0201 · Cummins 320 kVA</p></div>
         <button onclick="closeDrawer()" class="text-slate-400 hover:text-slate-700"><i data-lucide="x" class="w-5 h-5"></i></button>
       </div>
       <div class="p-6 space-y-4 flex-1 text-xs">
         <div class="bg-purple-50 border border-purple-200 rounded-xl p-3 text-purple-900">
-          🔒 <b>${fmtMoney(5404424)}</b> заблокированы в банке. Загрузите B/L для выплаты 70% остатка.
+          🔒 <b>${fmtMoney(5404424)}</b> ${t('dr.blLockedText')}
         </div>
-        <div><label class="block font-bold text-slate-700 mb-1">Номер B/L</label><input type="text" value="MAEU-INNSA-2025-9921" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg font-mono outline-none"></div>
+        <div><label class="block font-bold text-slate-700 mb-1">${t('dr.blNumber')}</label><input type="text" value="MAEU-INNSA-2025-9921" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg font-mono outline-none"></div>
         <div>
-          <label class="block font-bold text-slate-700 mb-1">Скан оригинального коносамента (PDF)</label>
+          <label class="block font-bold text-slate-700 mb-1">${t('dr.blScanLabel')}</label>
           <div class="border-2 border-dashed border-slate-200 rounded-xl p-5 text-center bg-slate-50 hover:border-alfa cursor-pointer">
             <i data-lucide="upload-cloud" class="w-7 h-7 text-slate-400 mx-auto mb-1"></i>
-            <p class="text-xs font-medium text-slate-700">Нажмите для загрузки Clean On-Board B/L</p>
+            <p class="text-xs font-medium text-slate-700">${t('dr.blDropText')}</p>
           </div>
         </div>
       </div>
       <div class="px-6 py-4 border-t border-slate-100 bg-white space-y-2">
-        <button onclick="drawerSuccess('Коносамент отправлен. 70% средств разблокируются на ваш валютный счет.')" class="w-full py-2.5 bg-alfa hover:bg-alfa-hover text-white text-xs font-bold rounded-xl">Отправить B/L в банк</button>
+        <button onclick="drawerSuccess('${t('msg.blSentSuccess')}')" class="w-full py-2.5 bg-alfa hover:bg-alfa-hover text-white text-xs font-bold rounded-xl">${t('dr.sendBlToBank')}</button>
       </div>`,
 
     'shipment': () => `
       <div class="flex items-center justify-between px-6 py-4 border-b border-slate-100 bg-white sticky top-0 z-10">
-        <div><h3 class="font-extrabold text-slate-900">Отслеживание груза</h3><p class="text-xs text-slate-500 mt-0.5">SH-2025-0188 · Рис 52 тонны</p></div>
+        <div><h3 class="font-extrabold text-slate-900">${t('dr.trackingTitle')}</h3><p class="text-xs text-slate-500 mt-0.5">SH-2025-0188 · 52 MT</p></div>
         <button onclick="closeDrawer()" class="text-slate-400 hover:text-slate-700"><i data-lucide="x" class="w-5 h-5"></i></button>
       </div>
       <div class="p-6 space-y-3 flex-1 text-xs">
         <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl space-y-1.5">
-          <p class="text-emerald-700 font-bold">✓ Таможенная очистка в Мундре завершена</p>
-          <p class="text-blue-700 font-bold">🚢 В пути — Судно MSC Katrina</p>
-          <p class="text-slate-500">Прибытие в Новороссийск через 9 дней</p>
+          <p class="text-emerald-700 font-bold">${t('dr.customsPassed')}</p>
+          <p class="text-blue-700 font-bold">${t('dr.inTransit')}</p>
+          <p class="text-slate-500">${t('dr.etaText')}</p>
         </div>
       </div>
       <div class="px-6 py-4 border-t border-slate-100 bg-white">
-        <button onclick="closeDrawer()" class="w-full py-2.5 bg-slate-100 text-slate-700 text-xs font-bold rounded-xl hover:bg-slate-200">Закрыть</button>
+        <button onclick="closeDrawer()" class="w-full py-2.5 bg-slate-100 text-slate-700 text-xs font-bold rounded-xl hover:bg-slate-200">${t('common.close')}</button>
       </div>`,
 
     'completed': () => `
       <div class="flex items-center justify-between px-6 py-4 border-b border-slate-100 bg-white sticky top-0 z-10">
-        <div><h3 class="font-extrabold text-slate-900">Архив завершенной сделки</h3><p class="text-xs text-slate-500 mt-0.5">CM-2024-1044</p></div>
+        <div><h3 class="font-extrabold text-slate-900">${t('dr.archiveTitle')}</h3><p class="text-xs text-slate-500 mt-0.5">CM-2024-1044</p></div>
         <button onclick="closeDrawer()" class="text-slate-400 hover:text-slate-700"><i data-lucide="x" class="w-5 h-5"></i></button>
       </div>
       <div class="p-6 space-y-4 flex-1 text-xs">
         <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-3 text-emerald-900 font-semibold">
-          ✓ Заказ закрыт, 100% средств выплачены на валютный счет.
+          ${t('dr.orderClosedText')}
         </div>
       </div>
       <div class="px-6 py-4 border-t border-slate-100 bg-white">
-        <button onclick="showNotify('Скачивание акта и налогового инвойса...'); closeDrawer();" class="w-full py-2.5 bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold rounded-xl">Скачать закрывающие документы</button>
+        <button onclick="showNotify('${t('msg.downloadingDocs')}'); closeDrawer();" class="w-full py-2.5 bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold rounded-xl">${t('dr.downloadClosingDocs')}</button>
       </div>`
   };
 
   const html = drawerMap[type] ? drawerMap[type]() : '';
   content.innerHTML = html;
-  overlay.classList.remove('hidden');
-  setTimeout(() => overlay.classList.remove('opacity-0'), 10);
-  drawer.classList.add('open');
   lucide.createIcons();
 }
 
+function openDrawer(type, contextId){
+  CURRENT_DRAWER_TYPE = type;
+  CURRENT_DRAWER_CONTEXT = contextId;
+  const overlay = document.getElementById('drawer-overlay');
+  const drawer = document.getElementById('side-drawer');
+
+  renderDrawerContent(type, contextId);
+  overlay.classList.remove('hidden');
+  setTimeout(() => overlay.classList.remove('opacity-0'), 10);
+  drawer.classList.add('open');
+}
+
 function closeDrawer(){
+  CURRENT_DRAWER_TYPE = null;
+  CURRENT_DRAWER_CONTEXT = null;
   const overlay = document.getElementById('drawer-overlay');
   const drawer = document.getElementById('side-drawer');
   overlay.classList.add('opacity-0');
@@ -1846,9 +1900,9 @@ function drawerAddSku(){
   const adv = document.getElementById('ns-adv')?.value || '30 %';
   const post = document.getElementById('ns-post')?.value || '70 %';
   const inco = document.getElementById('ns-inco')?.value || 'FOB';
-  const desc = document.getElementById('ns-desc')?.value || 'Экспортная партия высшего качества.';
+  const desc = document.getElementById('ns-desc')?.value || 'Export quality.';
   const port = document.getElementById('ns-port')?.value || 'Mundra';
-  const pkg = document.getElementById('ns-pkg')?.value || 'Экспортная тара';
+  const pkg = document.getElementById('ns-pkg')?.value || 'BOPP 25 kg';
 
   if(name){
     CATALOG_DATA.unshift({
@@ -1895,7 +1949,7 @@ function drawerAddSku(){
   }
   closeDrawer();
   renderCatalog();
-  showNotify(LANG === 'ru' ? 'Новый товар опубликован в каталоге!' : 'New SKU published in catalog!');
+  showNotify(t('msg.newSkuSuccess'));
 }
 
 function showNotify(msg){
