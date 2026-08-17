@@ -129,11 +129,10 @@
   </button>
 </div>
 
-<!-- ======= HEADER (Alfa-Global English title) ======= -->
+<!-- ======= HEADER ======= -->
 <header class="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-sm">
   <div class="max-w-7xl mx-auto px-4 lg:px-8 h-16 flex items-center justify-between gap-4">
     <div class="flex items-center gap-3">
-      <!-- Alfa A Icon -->
       <div class="w-9 h-9 rounded-xl bg-alfa flex flex-col items-center justify-center text-white shadow-sm font-black text-lg select-none">
         <span class="leading-none mt-0.5">A</span>
         <div class="w-3.5 h-0.5 bg-white rounded-full mt-0.5"></div>
@@ -167,7 +166,7 @@
   </div>
 </header>
 
-<!-- ======= MAIN ======= -->
+<!-- ======= MAIN CONTENT ======= -->
 <main class="flex-1 max-w-7xl w-full mx-auto px-4 lg:px-8 py-6">
 
   <!-- Stepper -->
@@ -189,7 +188,7 @@
           <input type="email" value="export@indianmanufactories.in" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium outline-none focus:ring-2 focus:ring-alfa/40">
         </div>
         <div>
-          <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" data-i18n="reg.phone">Номер телефона (с кодом страны)</label>
+          <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" data-i18n="reg.phone">Номер телефона</label>
           <input type="tel" value="+91 98201 44820" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium outline-none focus:ring-2 focus:ring-alfa/40">
         </div>
         <div>
@@ -224,7 +223,6 @@
   <section id="step-2" class="hidden">
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
       
-      <!-- Main Form (8 cols) -->
       <div class="lg:col-span-8 bg-white rounded-2xl border border-slate-200 shadow-sm p-7">
         <div class="flex items-start justify-between pb-5 border-b border-slate-100 mb-6 gap-4">
           <div>
@@ -271,7 +269,7 @@
               </div>
               <div class="relative">
                 <input type="text" value="0319842109 / AABCU9603R" class="w-full px-3 py-2 pr-20 bg-slate-50 border border-slate-200 rounded-lg text-sm font-mono outline-none">
-                <span class="absolute right-2 top-2 text-[10px] font-bold text-emerald-600 bg-emerald-100 px-1.5 py-0.5 rounded">✓ DGFT</span>
+                <span class="absolute right-2 top-2 text-[10px] font-bold text-emerald-600 bg-emerald-100 px-1.5 py-0.5 rounded" data-i18n="kyb.dgftOk">✓ DGFT</span>
               </div>
             </div>
             <div>
@@ -319,7 +317,6 @@
         </form>
       </div>
 
-      <!-- Onboarding Side Panel -->
       <div class="lg:col-span-4 space-y-4">
         <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm space-y-4">
           <div class="flex items-center gap-2 text-alfa font-black text-sm">
@@ -376,10 +373,10 @@
         <label class="block text-xs font-bold text-slate-600 mb-1" data-i18n="catalog.category">Категория:</label>
         <select id="cat-cat" onchange="renderCatalog()" class="px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-xs outline-none cursor-pointer">
           <option value="" data-i18n="catalog.allCat">Все категории</option>
-          <option value="Food, Grains & Spices">Food, Grains & Spices</option>
-          <option value="Agriculture & Agro Inputs">Agriculture & Agro Inputs</option>
-          <option value="Consumer Goods & Houseware">Consumer Goods & Houseware</option>
-          <option value="Raw Materials & Commodities">Raw Materials & Commodities</option>
+          <option value="Food, Grains & Spices" data-i18n="cat.food">Food, Grains & Spices</option>
+          <option value="Agriculture & Agro Inputs" data-i18n="cat.agro">Agriculture & Agro Inputs</option>
+          <option value="Consumer Goods & Houseware" data-i18n="cat.consumer">Consumer Goods & Houseware</option>
+          <option value="Raw Materials & Commodities" data-i18n="cat.raw">Raw Materials & Commodities</option>
         </select>
       </div>
       <div>
@@ -439,7 +436,7 @@
       <div>
         <span class="text-xs font-bold text-alfa uppercase tracking-wider" data-i18n="deal.stepTag">Шаг 5 / Комната сделки</span>
         <h1 class="text-2xl font-extrabold text-slate-900 mt-0.5" data-i18n="deal.title">Согласование контракта и E-Sign</h1>
-        <p class="text-xs text-slate-500 mt-0.5">Сделка CT-2025-0312 · Покупатель #RU-4471</p>
+        <p class="text-xs text-slate-500 mt-0.5">CT-2025-0312 · Buyer #RU-4471</p>
       </div>
       <button onclick="goStep(4)" class="px-3 py-2 text-xs font-bold text-slate-600 border border-slate-200 rounded-xl hover:bg-slate-50 transition flex items-center gap-1.5">
         <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i><span data-i18n="deal.back">Назад к заказам</span>
@@ -531,13 +528,6 @@
 
 </main>
 
-<!-- ======= FOOTER ======= -->
-<footer class="bg-white border-t border-slate-200 py-4 mt-auto">
-  <div class="max-w-7xl mx-auto px-4 text-center">
-    <p class="text-xs text-slate-500 font-medium">© 2025 Alfa-Global · B2B Cross-Border Trade & Settlement System</p>
-  </div>
-</footer>
-
 <script>
 const RATES = {
   RUB: { s:'₽', r:1 },
@@ -547,20 +537,56 @@ const RATES = {
   CNY: { s:'¥', r:0.078 }
 };
 
-// Full specification schema matching the India Mall screenshot
+// SVG Graphic Card Generator (Guaranteed instant rendering, zero blank images)
+function getProductSvgBanner(iconName, bgGradient, tagText, subText) {
+  const iconPaths = {
+    'wheat': '<path d="M2 22 16 8"/><path d="M3.47 12.53 5 11l1.53 1.53a3.5 3.5 0 0 1 0 4.94L5 19l-1.53-1.53a3.5 3.5 0 0 1 0-4.94Z"/><path d="M7.47 8.53 9 7l1.53 1.53a3.5 3.5 0 0 1 0 4.94L9 15l-1.53-1.53a3.5 3.5 0 0 1 0-4.94Z"/><path d="M11.47 4.53 13 3l1.53 1.53a3.5 3.5 0 0 1 0 4.94L13 11l-1.53-1.53a3.5 3.5 0 0 1 0-4.94Z"/><path d="M20 2h2v2a4 4 0 0 1-4 4h-2V6a4 4 0 0 1 4-4Z"/>',
+    'circle-dot': '<circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="1"/>',
+    'utensils': '<path d="M18 2v6a3 3 0 0 1-3 3 3 3 0 0 1-3-3V2"/><path d="M15 2v18"/><path d="M6 2v20"/><path d="M9 2v4a3 3 0 0 1-6 0V2"/>',
+    'zap': '<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>',
+    'package': '<path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/>'
+  };
+  const path = iconPaths[iconName] || iconPaths['package'];
+
+  return `
+    <div class="w-full h-44 rounded-xl ${bgGradient} flex flex-col justify-between p-3.5 relative overflow-hidden select-none shadow-inner">
+      <div class="absolute -right-6 -bottom-6 w-32 h-32 rounded-full bg-white/10 blur-xl pointer-events-none"></div>
+      <div class="flex items-center justify-between z-10">
+        <span class="bg-black/40 text-white backdrop-blur-md text-[10px] font-mono font-bold px-2 py-0.5 rounded">${tagText}</span>
+        <span class="bg-white/90 text-slate-800 text-[10px] font-bold px-2 py-0.5 rounded shadow-sm">Grade A+</span>
+      </div>
+      <div class="flex items-center justify-center my-auto z-10">
+        <div class="w-16 h-16 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center text-white border border-white/30 shadow-lg">
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${path}</svg>
+        </div>
+      </div>
+      <div class="flex items-center justify-between z-10 text-white/90 text-[11px] font-bold">
+        <span class="tracking-wide">${subText}</span>
+        <span class="text-[10px] opacity-80">🇮🇳 Export Quality</span>
+      </div>
+    </div>
+  `;
+}
+
+// Multi-language Product Database
 const CATALOG_DATA = [
   {
     id: 'IF-1121-ST',
-    name: 'Рис басмати пропаренный длиннозерный 1121, 1 тонна Indiafeast',
+    name: {
+      ru: 'Рис басмати пропаренный длиннозерный 1121, 1 тонна Indiafeast',
+      en: '1121 Steam Extra Long Grain Basmati Rice, 1 Ton Indiafeast',
+      hi: '1121 स्टीम अतिरिक्त लंबा बासमती चावल, 1 टन Indiafeast',
+      zh: '1121 优质特长蒸谷印度香米 1吨 Indiafeast'
+    },
     brand: 'Indiafeast',
     category: 'Food, Grains & Spices',
-    group: 'Зерно, семена и злаки',
-    state: 'Новый',
+    group: { ru:'Зерно, семена и злаки', en:'Grains, Seeds & Cereals', hi:'अनाज, बीज और दालें', zh:'谷物、种子与谷类' },
+    state: { ru:'Новый', en:'New', hi:'नया', zh:'全新' },
     hs: '10063092',
-    unit: 'Тонна (1000 кг)',
-    unitShort: 'т',
-    calcBase: 'Тонна (1000 кг)',
-    qtyInUnit: '1 шт.',
+    unit: { ru:'Тонна (1000 кг)', en:'Metric Ton (1000 kg)', hi:'मीट्रिक टन (1000 किग्रा)', zh:'公吨 (1000公斤)' },
+    unitShort: { ru:'т', en:'MT', hi:'टन', zh:'吨' },
+    calcBase: { ru:'Тонна (1000 кг)', en:'Metric Ton', hi:'मीट्रिक टन', zh:'公吨' },
+    qtyInUnit: '1',
     priceMin: 79737,
     priceMax: 82395,
     oldPriceMin: 90000,
@@ -568,220 +594,341 @@ const CATALOG_DATA = [
     moq: 26,
     country: 'India',
     color: 'White',
-    material: 'Натуральный рис басмати сорта 1121, обработанный паром для сохранения аутентичного вкуса и структуры.',
-    scope: 'Используется для приготовления бирьяни, палао, гарниров и премиальных блюд в сегменте HoReCa.',
-    industry: 'Пищевая промышленность, Бакалея, Крупы и рис, Общественное питание',
-    specialInstr: 'Хранить в прохладном, сухом месте, защищенном от солнечных лучей. Рекомендуется слегка промыть.',
-    warranty: '36 месяцев',
-    desc: '1121 Steam Basmati Rice — экстрадлинный ароматный рис басмати, который при варке заметно удлиняется, оставаясь рассыпчатым. Паровая обработка укрепляет зерна и снижает риск слипания.',
-    features: [
-      'Экстрадлинное зерно с выраженным удлинением (средняя длина около 8,35 мм)',
-      'Мягкая, рассыпчатая текстура: зёрна не слипаются',
-      'Натуральный аромат и характерный вкус басмати',
-      'Высокая чистота и сортировка 100% для стабильного результата'
-    ],
+    material: {
+      ru:'Натуральный рис басмати сорта 1121, обработанный паром.',
+      en:'Natural 1121 Basmati rice, steam-processed to preserve authentic taste.',
+      hi:'प्राकृतिक 1121 बासमती चावल, प्रामाणिक स्वाद के लिए स्टीम्ड।',
+      zh:'天然 1121 印度香米，经过温和蒸汽处理，保留原粮香气。'
+    },
+    scope: {
+      ru:'Используется для приготовления бирьяни, гарниров и блюд HoReCa.',
+      en:'Used for Biryani, premium HoReCa cuisines and retail distribution.',
+      hi:'बिरयानी और प्रीमियम HoReCa व्यंजनों के लिए उपयुक्त।',
+      zh:'适用于高端餐饮、手抓饭 (Biryani) 及商超零售。'
+    },
+    industry: 'Food & Beverage / HoReCa',
+    specialInstr: {
+      ru:'Хранить в прохладном, сухом месте.',
+      en:'Store in a cool, dry place away from sunlight.',
+      hi:'ठंडी और सूखी जगह पर रखें।',
+      zh:'阴凉干燥处避光保存。'
+    },
+    warranty: { ru:'36 месяцев', en:'36 Months', hi:'36 महीने', zh:'36 个月' },
+    desc: {
+      ru:'1121 Steam Basmati Rice — экстрадлинный ароматный рис басмати с выраженным удлинением зёрен при варке.',
+      en:'1121 Steam Basmati Rice — extra long aromatic basmati grain with superior elongation and non-sticky texture.',
+      hi:'1121 स्टीम बासमती चावल — पकाने पर लंबा होने वाला सुगंधित और नॉन-स्टिकी प्रीमियम चावल।',
+      zh:'1121 Steam 印度特长香米，烹饪后米粒伸长显著且根根分明，香气馥郁。'
+    },
+    features: {
+      ru: ['Длина зерна: 8,35 мм', 'Не слипается при варке', '100% сортовая чистота', 'Сертификат APEDA'],
+      en: ['Grain length: 8.35 mm', 'Non-sticky after cooking', '100% sort purity', 'APEDA Export Certified'],
+      hi: ['अनाज की लंबाई: 8.35 मिमी', 'पकाने के बाद नॉन-स्टिकी', '100% शुद्धता', 'APEDA प्रमाणित'],
+      zh: ['米粒长度：8.35 毫米', '烹饪后清爽不黏连', '100% 纯种筛选', '获 APEDA 官方出口认证']
+    },
     specItems: [
-      { label: 'Вид риса', val: '1121 Steam Basmati (пропаренный длиннозерный)' },
-      { label: 'Чистота', val: '90–95%' },
-      { label: 'Средняя длина зерна', val: '8,35 мм' },
-      { label: 'Сортировка', val: '100%' },
-      { label: 'Полевые примеси', val: '5–10%' },
-      { label: 'Влажность', val: 'до 12,5%' },
-      { label: 'Битое зерно', val: 'до 1%' },
-      { label: 'Мелко битое зерно', val: 'до 2%' },
-      { label: 'Поврежденное зерно', val: 'до 1%' },
-      { label: 'Обесцвеченное зерно', val: 'до 1%' },
-      { label: 'Недозревшее зерно', val: 'до 2%' }
+      { label: { ru:'Вид риса', en:'Rice Variety', hi:'चावल की किस्म', zh:'大米品种' }, val: '1121 Steam Basmati' },
+      { label: { ru:'Чистота', en:'Purity', hi:'शुद्धता', zh:'纯度' }, val: '90–95%' },
+      { label: { ru:'Длина зерна', en:'Avg. Length', hi:'लंबाई', zh:'平均长度' }, val: '8.35 mm' },
+      { label: { ru:'Влажность', en:'Moisture', hi:'नमी', zh:'水分' }, val: 'Max 12.5%' },
+      { label: { ru:'Битое зерно', en:'Broken Grains', hi:'टूटे दाने', zh:'碎米率' }, val: '< 1%' }
     ],
-    pkgDetails: 'Доступен в упаковках 500 г, 1 кг, 5 кг, 10 кг, 20 кг, 25 кг и 50 кг. Мешки BOPP, джутовые или полипропиленовые.',
-    deliveryMethod: 'Морем',
-    port: 'Mundra',
-    dims: { w: '500 mm', h: '120 mm', l: '700 mm', weight: '25 кг' },
+    pkgDetails: {
+      ru:'Мешки BOPP 25 кг / 50 кг. Сертификат происхождения в комплекте.',
+      en:'25 kg / 50 kg BOPP bags. Phytosanitary & Certificate of Origin included.',
+      hi:'25 किग्रा / 50 किग्रा BOPP बैग। उत्पत्ति प्रमाण पत्र शामिल।',
+      zh:'25公斤 / 50公斤 BOPP编织袋包装，附带产地证及植检证。'
+    },
+    deliveryMethod: { ru:'Морем (FCL Контейнер)', en:'Sea Freight (FCL)', hi:'समुद्री माल (FCL)', zh:'海运集装箱整柜 (FCL)' },
+    port: 'Mundra (INMUN1)',
+    dims: { w: '500 mm', h: '120 mm', l: '700 mm', weight: '25 kg' },
     advance: '30 %',
     postPay: '70 %',
     incoterms: 'FOB',
-    sample: 'Да',
-    leadTime: '30 дней',
+    sample: { ru:'Да', en:'Yes', hi:'हाँ', zh:'提供' },
+    leadTime: { ru:'30 дней', en:'30 Days', hi:'30 दिन', zh:'30 天' },
     icon: 'wheat',
-    iconUrl: 'https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&w=400&q=80'
+    bgGradient: 'bg-gradient-to-br from-amber-600 to-orange-700'
   },
   {
     id: 'SYN-CR-090',
-    name: 'Тренировочный мяч Incredy весом 90 г SYNCO',
+    name: {
+      ru: 'Тренировочный мяч Incredy весом 90 г SYNCO',
+      en: 'Incredy 90g Professional Cricket Training Ball SYNCO',
+      hi: 'Incredy 90g पेशेवर क्रिकेट प्रशिक्षण गेंद SYNCO',
+      zh: 'SYNCO Incredy 90克专业训练板球'
+    },
     brand: 'SYNCO',
     category: 'Consumer Goods & Houseware',
-    group: 'Спортивные товары',
-    state: 'Новый',
+    group: { ru:'Спортивные товары', en:'Sports Equipment', hi:'खेल उपकरण', zh:'体育及运动器材' },
+    state: { ru:'Новый', en:'New', hi:'नया', zh:'全新' },
     hs: '95066990',
-    unit: 'шт.',
-    unitShort: 'шт',
-    calcBase: '1 шт.',
-    qtyInUnit: '1 шт.',
+    unit: { ru:'шт.', en:'pcs', hi:'पीस', zh:'件' },
+    unitShort: { ru:'шт', en:'pcs', hi:'पीस', zh:'件' },
+    calcBase: { ru:'1 шт.', en:'1 pc', hi:'1 पीस', zh:'1 件' },
+    qtyInUnit: '1',
     priceMin: 141,
     priceMax: 141,
     oldPriceMin: null,
     oldPriceMax: null,
     moq: 500,
     country: 'India',
-    color: 'Черный / Белый шов',
-    material: 'Высокопрочный синтетический полимер, полиуретановый сердечник.',
-    scope: 'Профессиональные тренировки и любительские матчи по крикету.',
-    industry: 'Спорт, Инвентарь для активного отдыха',
-    specialInstr: 'Беречь от открытого огня и длительного намокания.',
-    warranty: '12 месяцев',
-    desc: 'Incredy Ball — износостойкий мяч для интенсивных тренировок. Идеальный отскок и долговечный шов.',
-    features: ['Ручная прошивка', 'Стабильный отскок', 'Усиленный внутренний корд'],
+    color: 'Red / White Seam',
+    material: {
+      ru:'Синтетический износостойкий полимер, PU-сердечник.',
+      en:'Heavy-duty synthetic polymer with polyurethane foam core.',
+      hi:'पॉलीयुरेथेन कोर के साथ टिकाऊ सिंथेटिक पॉलिमर।',
+      zh:'耐磨合成聚合物面料，内置聚氨酯弹性球芯。'
+    },
+    scope: {
+      ru:'Профессиональные тренировки и любительские матчи.',
+      en:'Professional academy drills and league training sessions.',
+      hi:'पेशेवर प्रशिक्षण और अभ्यास मैच के लिए।',
+      zh:'专业板球学院训练及业余联赛比赛。'
+    },
+    industry: 'Sports & Recreation',
+    specialInstr: {
+      ru:'Беречь от открытого огня.',
+      en:'Keep away from direct heat and water exposure.',
+      hi:'गर्मी और पानी से दूर रखें।',
+      zh:'避免高温暴晒与长期浸水。'
+    },
+    warranty: { ru:'12 месяцев', en:'12 Months', hi:'12 महीने', zh:'12 个月' },
+    desc: {
+      ru:'Incredy Ball — износостойкий мяч для интенсивных тренировок. Идеальный отскок и долговечный шов.',
+      en:'Incredy Ball delivers realistic bounce, seam grip and extraordinary durability for all turf types.',
+      hi:'Incredy Ball सभी पिचों पर शानदार उछाल और स्थायित्व प्रदान करता है।',
+      zh:'Incredy 训练球具备真实的弹跳手感和精准的手缝握缝，极佳的耐用度。'
+    },
+    features: {
+      ru: ['Ручная прошивка', 'Стабильный отскок', 'Усиленный внутренний корд'],
+      en: ['Hand-stitched seam', 'Consistent bounce', 'Reinforced inner core'],
+      hi: ['हाथ से सिला हुआ', 'सटीक उछाल', 'मजबूत आंतरिक कोर'],
+      zh: ['手工缝线工艺', '弹性稳定一致', '加强型内核结构']
+    },
     specItems: [
-      { label: 'Вес', val: '90 грамм' },
-      { label: 'Диаметр', val: '71 мм' },
-      { label: 'Материал корда', val: 'Синтетический PU' }
+      { label: { ru:'Вес', en:'Weight', hi:'वजन', zh:'重量' }, val: '90 grams' },
+      { label: { ru:'Диаметр', en:'Diameter', hi:'व्यास', zh:'直径' }, val: '71 mm' }
     ],
-    pkgDetails: 'Индивидуальный блистер, коробка по 50 шт.',
-    deliveryMethod: 'Морем / Авиа',
-    port: 'Nhava Sheva',
-    dims: { w: '80 mm', h: '80 mm', l: '80 mm', weight: '90 г' },
+    pkgDetails: {
+      ru:'Индивидуальный блистер, коробка по 50 шт.',
+      en:'Individual blister pack, master carton 50 pcs.',
+      hi:'व्यक्तिगत ब्लिस्टर पैक, 50 पीस कार्टन।',
+      zh:'独立吸塑包装，每箱 50 件。'
+    },
+    deliveryMethod: { ru:'Морем / Авиа', en:'Sea / Air Freight', hi:'समुद्री / वायु', zh:'海运 / 空运' },
+    port: 'Nhava Sheva (INNSA1)',
+    dims: { w: '80 mm', h: '80 mm', l: '80 mm', weight: '90 g' },
     advance: '30 %',
     postPay: '70 %',
     incoterms: 'FOB',
-    sample: 'Да',
-    leadTime: '15 дней',
+    sample: { ru:'Да', en:'Yes', hi:'हाँ', zh:'提供' },
+    leadTime: { ru:'15 дней', en:'15 Days', hi:'15 दिन', zh:'15 天' },
     icon: 'circle-dot',
-    iconUrl: 'https://images.unsplash.com/photo-1593341646782-e0b495cffd6d?auto=format&fit=crop&w=400&q=80'
+    bgGradient: 'bg-gradient-to-br from-blue-600 to-indigo-800'
   },
   {
     id: 'CF-DOSA-200',
-    name: 'Смесь для мультизлаковой досы с овсом и коричневым рисом, 200 г, Conscious Food',
+    name: {
+      ru: 'Смесь для мультизлаковой досы, 200 г, Conscious Food',
+      en: 'Multi-Millet Dosa Organic Instant Mix 200g Conscious Food',
+      hi: 'मल्टी-मिलेट डोसा ऑर्गेनिक मिक्स 200g Conscious Food',
+      zh: 'Conscious Food 多谷物无麸质印度薄饼粉 200克'
+    },
     brand: 'Conscious Food',
     category: 'Food, Grains & Spices',
-    group: 'Бакалея и органические смеси',
-    state: 'Новый',
+    group: { ru:'Бакалея и смеси', en:'Organic Mixes & Grocery', hi:'ऑर्गेनिक मिक्स', zh:'有机冲调及预拌粉' },
+    state: { ru:'Новый', en:'New', hi:'नया', zh:'全新' },
     hs: '19012000',
-    unit: 'шт.',
-    unitShort: 'шт',
-    calcBase: '1 упаковка',
-    qtyInUnit: '1 шт.',
+    unit: { ru:'упак.', en:'pack', hi:'पैक', zh:'包' },
+    unitShort: { ru:'упак', en:'pack', hi:'पैक', zh:'包' },
+    calcBase: { ru:'1 упаковка', en:'1 pack', hi:'1 पैक', zh:'1 包' },
+    qtyInUnit: '1',
     priceMin: 91,
     priceMax: 118,
     oldPriceMin: null,
     oldPriceMax: null,
     moq: 1200,
     country: 'India',
-    color: 'Натуральный злаковый',
-    material: 'Овес цельнозерновой, коричневый рис, чечевица урад дал, специи.',
-    scope: 'Быстрое и здоровое питание, веганский рацион.',
-    industry: 'Продукты питания, Органическая бакалея',
-    specialInstr: 'Хранить в сухом прохладном месте после вскрытия.',
-    warranty: '18 месяцев',
-    desc: 'Органическая готовая смесь для приготовления традиционной хрустящей индийской досы с высоким содержанием клетчатки.',
-    features: ['100% органические ингредиенты', 'Без глютена и консервантов', 'Богат белком и клетчаткой'],
+    color: 'Natural Millet',
+    material: {
+      ru:'Овес, коричневый рис, чечевица урад дал, специи.',
+      en:'Whole oats, organic brown rice, urad dal, natural spices.',
+      hi:'साबुत जई, जैविक भूरा चावल, उड़द दाल, मसाले।',
+      zh:'全燕麦、有机糙米、黑扁豆、天然香料。'
+    },
+    scope: {
+      ru:'Здоровое и быстрое питание, веганский рацион.',
+      en:'Quick healthy vegan breakfasts and gluten-free diets.',
+      hi:'स्वस्थ नाश्ते और वीगन आहार के लिए।',
+      zh:'快速健康轻食、素食主义及无麸质营养早餐。'
+    },
+    industry: 'Organic FMCG',
+    specialInstr: {
+      ru:'Хранить в сухом прохладном месте.',
+      en:'Store in airtight container after opening.',
+      hi:'खोलने के बाद एयरटाइट कंटेनर में रखें।',
+      zh:'开封后请密封并置于阴凉干燥处。'
+    },
+    warranty: { ru:'18 месяцев', en:'18 Months', hi:'18 महीने', zh:'18 个月' },
+    desc: {
+      ru:'Органическая готовая смесь для хрустящей индийской досы с высоким содержанием клетчатки.',
+      en:'Certified organic instant mix for crisp, nutritious South Indian dosas.',
+      hi:'स्वादिष्ट और पौष्टिक दक्षिण भारतीय डोसा बनाने के लिए जैविक मिश्रण।',
+      zh:'获有机认证的预拌粉，可快速烹饪金黄酥脆的高膳食纤维南印度薄饼。'
+    },
+    features: {
+      ru: ['100% Органика', 'Без сахара и глютена', 'Сертификат NPOP/USDA'],
+      en: ['100% Certified Organic', 'No added sugars', 'USDA & NPOP Certified'],
+      hi: ['100% जैविक', 'कोई चीनी नहीं', 'USDA और NPOP प्रमाणित'],
+      zh: ['100% 有机认证原料', '不添加精制糖', '获 USDA 及 NPOP 双重有机认证']
+    },
     specItems: [
-      { label: 'Содержание овса', val: '40%' },
-      { label: 'Содержание риса', val: '35%' },
-      { label: 'Энергетическая ценность', val: '360 ккал / 100 г' }
+      { label: { ru:'Содержание овса', en:'Oats Ratio', hi:'जई का अनुपात', zh:'燕麦含量' }, val: '40%' },
+      { label: { ru:'Калорийность', en:'Energy', hi:'ऊर्जा', zh:'热量' }, val: '360 kcal / 100g' }
     ],
-    pkgDetails: 'Эко-пакет 200 г, транспортный короб 48 пачек.',
-    deliveryMethod: 'Морем (Рефрижератор / Сухой контейнер)',
-    port: 'Nhava Sheva',
-    dims: { w: '140 mm', h: '210 mm', l: '40 mm', weight: '215 г' },
+    pkgDetails: {
+      ru:'Эко-пакет 200 г, короб 48 шт.',
+      en:'200g Eco-pouch, master case 48 units.',
+      hi:'200 ग्राम इको-पाउच, 48 यूनिट कार्टन।',
+      zh:'200克环保自立袋，外箱每箱 48 包。'
+    },
+    deliveryMethod: { ru:'Морем (Сухой контейнер)', en:'Sea (Dry Box)', hi:'समुद्री माल', zh:'海运干货柜' },
+    port: 'Nhava Sheva (INNSA1)',
+    dims: { w: '140 mm', h: '210 mm', l: '40 mm', weight: '215 g' },
     advance: '30 %',
     postPay: '70 %',
     incoterms: 'CIF',
-    sample: 'Да',
-    leadTime: '10 дней',
+    sample: { ru:'Да', en:'Yes', hi:'हाँ', zh:'提供' },
+    leadTime: { ru:'10 дней', en:'10 Days', hi:'10 दिन', zh:'10 天' },
     icon: 'utensils',
-    iconUrl: 'https://images.unsplash.com/photo-1612927601601-6638404737ce?auto=format&fit=crop&w=400&q=80'
+    bgGradient: 'bg-gradient-to-br from-emerald-600 to-teal-800'
   },
   {
     id: 'CUM-GEN-320',
-    name: 'Дизельный генератор Cummins мощностью 320 кВА промышленный',
+    name: {
+      ru: 'Дизельный генератор Cummins мощностью 320 кВА промышленный',
+      en: 'Cummins 320 kVA Heavy-Duty Silent Diesel Generator Set',
+      hi: 'कमिंस 320 kVA औद्योगिक शांत डीजल जनरेटर',
+      zh: '康明斯 320 kVA 工业重型静音柴油发电机组'
+    },
     brand: 'Cummins',
     category: 'Raw Materials & Commodities',
-    group: 'Энергетическое оборудование',
-    state: 'Новый',
+    group: { ru:'Энергетическое оборудование', en:'Power Equipment', hi:'विद्युत उपकरण', zh:'动力与电力设备' },
+    state: { ru:'Новый', en:'New', hi:'नया', zh:'全新' },
     hs: '85021380',
-    unit: 'шт.',
-    unitShort: 'шт',
-    calcBase: '1 комплект',
-    qtyInUnit: '1 шт.',
+    unit: { ru:'шт.', en:'unit', hi:'यूनिट', zh:'台' },
+    unitShort: { ru:'шт', en:'unit', hi:'यूनिट', zh:'台' },
+    calcBase: { ru:'1 комплект', en:'1 set', hi:'1 सेट', zh:'1 台' },
+    qtyInUnit: '1',
     priceMin: 2702212,
     priceMax: 2702212,
     oldPriceMin: 2950000,
     oldPriceMax: 2950000,
     moq: 1,
     country: 'India',
-    color: 'Красный / Черный',
-    material: 'Сталь конструкционная, медь, чугунный блок цилиндров.',
-    scope: 'Резервное и постоянное электроснабжение фабрик, дата-центров и больниц.',
-    industry: 'Тяжелое машиностроение, Энергетика',
-    specialInstr: 'Монтаж сертифицированными инженерами по регламенту Cummins.',
-    warranty: '24 месяца или 2000 моточасов',
-    desc: 'Трехфазная дизель-генераторная установка тяжелого класса с турбонаддувом и цифровой панелью управления PowerCommand.',
-    features: ['Низкий удельный расход топлива', 'Шумозащитный всепогодный кожух IP54', 'Автоматический ввод резерва (АВР)'],
+    color: 'Industrial Red / Black',
+    material: {
+      ru:'Конструкционная сталь, медь, чугунный блок Cummins.',
+      en:'Cast iron engine block, heavy structural steel canopy, pure copper alternator.',
+      hi:'कास्ट आयरन इंजन ब्लॉक, तांबा अल्टरनेटर।',
+      zh:'铸铁发动机缸体、高强度降噪钢制防护罩、纯铜无刷发电机。'
+    },
+    scope: {
+      ru:'Резервное и постоянное электроснабжение фабрик и больниц.',
+      en:'Prime and standby power for manufacturing facilities and hospitals.',
+      hi:'कारखानों और अस्पतालों के लिए विश्वसनीय बैकअप पावर।',
+      zh:'工矿制造企业、数据中心及医疗机构的主用/备用电力保障。'
+    },
+    industry: 'Heavy Machinery & Energy',
+    specialInstr: {
+      ru:'Монтаж по регламенту Cummins.',
+      en:'Professional commissioning required.',
+      hi:'प्रमाणित इंजीनियरों द्वारा स्थापना।',
+      zh:'需由专业电气工程师依据原厂规范安装调试。'
+    },
+    warranty: { ru:'24 месяца или 2000 моточасов', en:'24 Months or 2000 Hours', hi:'24 महीने या 2000 घंटे', zh:'24 个月或 2000 运行工时' },
+    desc: {
+      ru:'Трехфазная дизель-генераторная установка тяжелого класса с турбонаддувом и панелью PowerCommand.',
+      en:'3-Phase turbocharged silent diesel generator equipped with digital PowerCommand controller.',
+      hi:'डिजिटल पावरकमांड कंट्रोलर से लैस 3-फेज टर्बोचार्ज्ड साइलेंट डीजल जनरेटर।',
+      zh:'三相四线涡轮增压重型静音柴油发电机组，配备 PowerCommand 全自动数字化控制屏。'
+    },
+    features: {
+      ru: ['Двигатель Cummins QSL9-G5', 'Шумозащитный кожух IP54', 'Автоматический ввод резерва (АВР)'],
+      en: ['Cummins QSL9-G5 Engine', 'Acoustic IP54 Weather Canopy', 'Automatic Transfer Switch (ATS) Ready'],
+      hi: ['Cummins QSL9-G5 इंजन', 'ध्वनिरोधी IP54 कवर', 'स्वचालित स्विच (ATS)'],
+      zh: ['原装康明斯 QSL9-G5 发动机', 'IP54 全天候防雨降噪箱体', '标配 ATS 自动切换接口']
+    },
     specItems: [
-      { label: 'Номинальная мощность', val: '320 кВА / 256 кВт' },
-      { label: 'Двигатель', val: 'Cummins QSL9-G5 (6 цилиндров)' },
-      { label: 'Напряжение', val: '400 / 230 В, 50 Гц' }
+      { label: { ru:'Мощность', en:'Power Output', hi:'रेटेड पावर', zh:'额定功率' }, val: '320 kVA / 256 kW' },
+      { label: { ru:'Напряжение', en:'Voltage', hi:'वोल्टेज', zh:'输出电压' }, val: '400V / 230V, 50Hz' }
     ],
-    pkgDetails: 'Усиленный деревянный контейнерный каркас для морских перевозок.',
-    deliveryMethod: 'Морем (Flat Rack / Open Top)',
-    port: 'Nhava Sheva',
-    dims: { w: '1100 mm', h: '1900 mm', l: '3900 mm', weight: '3450 кг' },
+    pkgDetails: {
+      ru:'Усиленный деревянный контейнерный каркас.',
+      en:'Heavy-duty seaworthy crating for Flat-Rack container.',
+      hi:'सुरक्षित समुद्री लकड़ी का ढांचा।',
+      zh:'符合海运标准的出口免熏蒸重型木箱包装。'
+    },
+    deliveryMethod: { ru:'Морем (Flat Rack)', en:'Sea (Flat Rack)', hi:'समुद्री माल', zh:'海运框架特种柜 (Flat Rack)' },
+    port: 'Nhava Sheva (INNSA1)',
+    dims: { w: '1100 mm', h: '1900 mm', l: '3900 mm', weight: '3450 kg' },
     advance: '50 %',
     postPay: '50 %',
     incoterms: 'FOB',
-    sample: 'Нет',
-    leadTime: '45 дней',
+    sample: { ru:'Нет', en:'No', hi:'नहीं', zh:'不提供' },
+    leadTime: { ru:'45 дней', en:'45 Days', hi:'45 दिन', zh:'45 天' },
     icon: 'zap',
-    iconUrl: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=400&q=80'
+    bgGradient: 'bg-gradient-to-br from-slate-700 to-slate-950'
   }
 ];
 
 const ORDERS_DATA = [
-  { id:'RFQ-2025-0891', product:'Рис басмати 1121 (100 тонн)', buyer:'Buyer #RU-3129', qty:'100 т', valInr:8150000, status:'RFQ', badgeCls:'bg-amber-100 text-amber-800', needsAction:true },
-  { id:'QT-2025-0445', product:'Мячи тренировочные SYNCO (5 000 шт)', buyer:'Buyer #RU-8842', qty:'5 000 шт', valInr:705000, status:'QUOTE_SENT', badgeCls:'bg-blue-100 text-blue-800', needsAction:false },
-  { id:'CT-2025-0312', product:'Рис басмати 1121 Indiafeast', buyer:'Buyer #RU-4471', qty:'26 т', valInr:2073162, status:'CONTRACT', badgeCls:'bg-indigo-100 text-indigo-800', needsAction:true },
-  { id:'PR-2025-0278', product:'Смесь для досы Conscious Food', buyer:'Buyer #RU-7654', qty:'10 000 шт', valInr:1180000, status:'PRODUCTION', badgeCls:'bg-sky-100 text-sky-800', needsAction:false },
-  { id:'ES-2025-0201', product:'Дизельный генератор Cummins 320 кВА', buyer:'Buyer #DE-5231', qty:'2 шт', valInr:5404424, status:'ESCROW_HELD', badgeCls:'bg-purple-100 text-purple-800', needsAction:true },
-  { id:'SH-2025-0188', product:'Рис басмати пропаренный (52 т)', buyer:'Buyer #RU-1198', qty:'52 т', valInr:4146000, status:'SHIPPED', badgeCls:'bg-teal-100 text-teal-800', needsAction:false },
-  { id:'CM-2024-1044', product:'Органические смеси суперфуд', buyer:'Buyer #RU-0512', qty:'2 000 шт', valInr:242000, status:'COMPLETED', badgeCls:'bg-emerald-100 text-emerald-800', needsAction:false }
+  { id:'RFQ-2025-0891', product:{ ru:'Рис басмати 1121 (100 тонн)', en:'Basmati 1121 (100 MT)', hi:'बासमती 1121 (100 टन)', zh:'1121 香米 (100吨)' }, buyer:'Buyer #RU-3129', qty:'100 т', valInr:8150000, status:'RFQ', badgeCls:'bg-amber-100 text-amber-800', needsAction:true },
+  { id:'QT-2025-0445', product:{ ru:'Мячи тренировочные (5 000 шт)', en:'Training Cricket Balls (5,000 pcs)', hi:'प्रशिक्षण गेंदें (5,000 पीस)', zh:'训练板球 (5,000件)' }, buyer:'Buyer #RU-8842', qty:'5 000 шт', valInr:705000, status:'QUOTE_SENT', badgeCls:'bg-blue-100 text-blue-800', needsAction:false },
+  { id:'CT-2025-0312', product:{ ru:'Рис басмати 1121 Indiafeast', en:'1121 Basmati Rice Indiafeast', hi:'1121 बासमती चावल Indiafeast', zh:'1121 印度香米 Indiafeast' }, buyer:'Buyer #RU-4471', qty:'26 т', valInr:2073162, status:'CONTRACT', badgeCls:'bg-indigo-100 text-indigo-800', needsAction:true },
+  { id:'PR-2025-0278', product:{ ru:'Смесь для досы Conscious Food', en:'Organic Dosa Mix (10,000 packs)', hi:'डोसा मिक्स (10,000 पैक)', zh:'多谷物薄饼粉 (10,000包)' }, buyer:'Buyer #RU-7654', qty:'10 000 шт', valInr:1180000, status:'PRODUCTION', badgeCls:'bg-sky-100 text-sky-800', needsAction:false },
+  { id:'ES-2025-0201', product:{ ru:'Генератор Cummins 320 кВА', en:'Cummins 320 kVA Generator', hi:'कमिंस 320 kVA जनरेटर', zh:'康明斯 320 kVA 发电机组' }, buyer:'Buyer #DE-5231', qty:'2 шт', valInr:5404424, status:'ESCROW_HELD', badgeCls:'bg-purple-100 text-purple-800', needsAction:true },
+  { id:'SH-2025-0188', product:{ ru:'Рис басмати пропаренный (52 т)', en:'Steamed Basmati Rice (52 MT)', hi:'स्टीम्ड बासमती (52 टन)', zh:'优质蒸谷香米 (52吨)' }, buyer:'Buyer #RU-1198', qty:'52 т', valInr:4146000, status:'SHIPPED', badgeCls:'bg-teal-100 text-teal-800', needsAction:false },
+  { id:'CM-2024-1044', product:{ ru:'Органические смеси суперфуд', en:'Organic Superfood Mixes', hi:'ऑर्गेनिक सुपरफूड मिक्स', zh:'有机营养冲调粉' }, buyer:'Buyer #RU-0512', qty:'2 000 шт', valInr:242000, status:'COMPLETED', badgeCls:'bg-emerald-100 text-emerald-800', needsAction:false }
 ];
 
 const CHAT_THREADS = {
   'RFQ-2025-0891': {
     dealId: 'RFQ-2025-0891',
     buyer: 'Buyer #RU-3129',
-    product: 'Рис басмати 1121 (100 т)',
+    productKey: 'Рис басмати 1121 (100 т)',
     status: 'RFQ',
     statusBadge: 'bg-amber-100 text-amber-800',
     stepTarget: 4,
     drawerType: 'rfq-quote',
     messages: [
-      { sender: 'Buyer #RU-3129', isMe: false, text: 'Просим предоставить FOB котировку на 100 т риса 1121 в порт Новороссийск.', time: '09:15' }
+      { sender: 'Buyer #RU-3129', isMe: false, textKey: 'fchat.rfqMsg', time: '09:15' }
     ]
   },
   'CT-2025-0312': {
     dealId: 'CT-2025-0312',
     buyer: 'Buyer #RU-4471',
-    product: 'Рис басмати 1121 (26 т)',
+    productKey: 'Рис басмати 1121 (26 т)',
     status: 'CONTRACT',
     statusBadge: 'bg-indigo-100 text-indigo-800',
     stepTarget: 5,
     drawerType: 'sign-contract',
     messages: [
-      { sender: 'Buyer #RU-4471', isMe: false, text: 'Подтверждаем FOB Mundra для 26 т. Подпишите контракт в Deal Room.', time: '10:45' },
-      { sender: 'Indian Manufactories Group (Вы)', isMe: true, text: 'Фасовка запущена, сертификаты APEDA готовы.', time: '10:48' }
+      { sender: 'Buyer #RU-4471', isMe: false, textKey: 'chat.msg1', time: '10:45' },
+      { sender: 'Indian Manufactories Group', isMe: true, textKey: 'chat.msg2', time: '10:48' }
     ]
   },
   'ES-2025-0201': {
     dealId: 'ES-2025-0201',
     buyer: 'Buyer #DE-5231',
-    product: 'Генератор Cummins 320 кВА',
+    productKey: 'Генератор Cummins 320 кВА',
     status: 'ESCROW_HELD',
     statusBadge: 'bg-purple-100 text-purple-800',
     stepTarget: 4,
     drawerType: 'upload-bl',
     messages: [
-      { sender: 'Buyer #DE-5231', isMe: false, text: 'Эскроу-депозит заблокирован в банке. Ждем загрузки B/L.', time: 'Вчера' }
+      { sender: 'Buyer #DE-5231', isMe: false, textKey: 'fchat.escrowMsg', time: '14:20' }
     ]
   }
 };
@@ -796,13 +943,14 @@ ru: {
   'reg.email':'Корпоративный Email','reg.phone':'Номер телефона','reg.password':'Создайте пароль',
   'reg.continue':'Продолжить регистрацию','reg.otpSent':'Код подтверждения отправлен на почту и телефон.',
   'reg.otp':'Одноразовый код (OTP)','reg.terms':'Я принимаю Условия платформы и Политику трансграничной передачи данных.','reg.kyb_consent':'Согласен на автоматическую проверку через реестры (KYB).','reg.finish':'Завершить регистрацию','common.back':'← Назад','common.close':'Закрыть',
-  'kyb.stepTag':'Шаг 2 / Верификация поставщика','kyb.title':'Юридические данные и экспортные реквизиты','kyb.subtitle':'Сведения проверяются автоматически через API налоговых и таможенных органов.','kyb.pending':'Ожидает верификации','kyb.companyName':'Юридическое наименование','kyb.nameHint':'Как в учредительных документах','kyb.country':'Страна юрисдикции','kyb.gstin':'GSTIN (Штат 27)','kyb.taxBadge':'ℹ Налог','kyb.valid':'✓ Валиден','kyb.iec':'DGFT IEC / PAN','kyb.customsBadge':'ℹ Таможня','kyb.council':'Экспортный совет','kyb.adcode':'AD Code & Bank IFSC','kyb.valutaBadge':'Для валютного контроля','kyb.port':'Базовый порт отгрузки','kyb.factory':'Адрес фабрики / производства','kyb.doc':'Сертификаты качества и лицензии','kyb.docStatus':'(2.8 MB · Проверено через реестр)','kyb.back':'← Назад к регистрации','kyb.submit':'Подтвердить и открыть каталог',
+  'kyb.stepTag':'Шаг 2 / Верификация поставщика','kyb.title':'Юридические данные и экспортные реквизиты','kyb.subtitle':'Сведения проверяются автоматически через API налоговых и таможенных органов.','kyb.pending':'Ожидает верификации','kyb.companyName':'Юридическое наименование','kyb.nameHint':'Как в учредительных документах','kyb.country':'Страна юрисдикции','kyb.gstin':'GSTIN (Штат 27)','kyb.taxBadge':'ℹ Налог','kyb.valid':'✓ Валиден','kyb.iec':'DGFT IEC / PAN','kyb.customsBadge':'ℹ Таможня','kyb.dgftOk':'✓ DGFT','kyb.council':'Экспортный совет','kyb.adcode':'AD Code & Bank IFSC','kyb.valutaBadge':'Для валютного контроля','kyb.port':'Базовый порт отгрузки','kyb.factory':'Адрес фабрики / производства','kyb.doc':'Сертификаты качества и лицензии','kyb.docStatus':'(2.8 MB · Проверено через реестр)','kyb.back':'← Назад к регистрации','kyb.submit':'Подтвердить и открыть каталог',
   'kyb.whyTitle':'Зачем заполнять эти данные?','kyb.whyDesc':'Alfa-Global обеспечивает прямые расчеты между покупателями и зарубежными фабриками без посредников.',
   'kyb.r1Title':'1. Валютный контроль банка','kyb.r1Desc':'AD-код и банковский IFSC позволяют моментально открывать паспорта сделок без задержек.',
   'kyb.r2Title':'2. Разблокировка Эскроу','kyb.r2Desc':'Валидация DGFT IEC подтверждает право экспорта, позволяя банку автоматически выплачивать 70% по B/L.',
   'kyb.r3Title':'3. Статус «KYB Verified»','kyb.r3Desc':'Проверенные поставщики получают в 3.8 раз больше прямых RFQ от корпоративных заказчиков.',
   'compliance.title':'Центр соответствия поставщика','compliance.sub':'Indian Manufactories Group Pvt. Ltd. — KYB Verified','compliance.gst':'GSTIN (Штат 27 — Maharashtra)','compliance.active':'✓ Активен','compliance.iec':'DGFT IEC / PAN','compliance.valid':'✓ Валидирован','compliance.council':'Экспортный совет','compliance.member':'✓ Член совета','compliance.bank':'AD-код и Валютный счет','compliance.linked':'✓ Привязан',
   'catalog.title':'Экспортный каталог','catalog.subtitle':'Управление ассортиментом','catalog.toOrders':'Центр заказов','catalog.addSku':'Добавить SKU','catalog.search':'Поиск','catalog.searchPh':'Название, бренд или артикул...','catalog.category':'Категория:','catalog.allCat':'Все категории','catalog.sort':'Сортировка:','catalog.sortAsc':'Цена: по возрастанию','catalog.sortDesc':'Цена: по убыванию','catalog.sortMoq':'MOQ: сначала меньший',
+  'cat.food':'Food, Grains & Spices','cat.agro':'Agriculture & Agro Inputs','cat.consumer':'Consumer Goods & Houseware','cat.raw':'Raw Materials & Commodities',
   'orders.title':'Центр заказов и сделок','orders.subtitle':'Мониторинг экспортных контрактов, таможенного оформления и эскроу-счетов','orders.backCat':'В Каталог','orders.filterLabel':'Фильтр:',
   'table.id':'ID сделки','table.product':'Товар','table.buyer':'Покупатель','table.value':'Сумма','table.status':'Статус','table.action':'Действие',
   'st.ALL':'Все','st.RFQ':'RFQ','st.QUOTE_SENT':'КП отправлено','st.CONTRACT':'Контракт','st.PRODUCTION':'Производство','st.ESCROW_HELD':'Эскроу','st.SHIPPED':'Отгружено','st.COMPLETED':'Завершено',
@@ -815,7 +963,7 @@ ru: {
   'deal.signBtn':'Подписать смарт-контракт (E-Sign)','deal.pi':'Скачать проформа-инвойс (PI)',
   'chat.title':'Защищенный чат сделки','chat.translate':'Автоперевод: RU ↔ EN','chat.privacy':'Privacy Guard ВКЛ',
   'chat.buyer':'Покупатель #RU-4471','chat.msg1':'Подтверждаем условия FOB Mundra для 26 тонн риса басмати 1121 в мешках BOPP по 25 кг. Пожалуйста, подпишите контракт для фиксации эскроу.','chat.supplier':'Indian Manufactories Group (Вы)','chat.msg2':'Фасовка запланирована на фабрике в Пуне. Сертификат качества APEDA и фитосанитарный акт приложим до отгрузки в порт.','chat.privacy_note':'<b>Privacy Guard:</b> Контактные телефоны, email и мессенджеры маскируются для защиты сделки.','chat.placeholder':'Введите сообщение...',
-  'fchat.title':'Сообщения по сделкам','fchat.sub':'Выберите активный диалог','fchat.toDeal':'К сделке →',
+  'fchat.title':'Сообщения по сделкам','fchat.sub':'Выберите диалог','fchat.toDeal':'К сделке →','fchat.rfqMsg':'Просим предоставить FOB котировку на 100 т риса 1121 в порт Новороссийск.','fchat.escrowMsg':'Эскроу-депозит заблокирован в банке. Ждем загрузки B/L.',
   'notify.title':'Уведомление',
   'step1.title':'1. Регистрация','step1.sub':'Email, тел. и пароль',
   'step2.title':'2. KYB-проверка','step2.sub':'Налоговые и ВЭД коды',
@@ -828,14 +976,15 @@ en: {
   'reg.title':'Registration at Alfa-Global','reg.subtitle':'Create corporate exporter account',
   'reg.email':'Corporate Email','reg.phone':'Phone Number','reg.password':'Create Password',
   'reg.continue':'Continue Registration','reg.otpSent':'Confirmation code sent to email & SMS.',
-  'reg.otp':'One-Time Code (OTP)','reg.terms':'I accept the Terms and Data Transfer Policy.','reg.kyb_consent':'I consent to automated registry validation (KYB).','reg.finish':'Finish Registration','common.back':'← Back','common.close':'Close',
-  'kyb.stepTag':'Step 2 / Supplier Verification','kyb.title':'Exporter Legal Identity & Regulatory Credentials','kyb.subtitle':'Data is verified automatically via tax & customs registry APIs.','kyb.pending':'Pending Verification','kyb.companyName':'Company Legal Name','kyb.nameHint':'As per legal registration','kyb.country':'Country','kyb.gstin':'GSTIN (State 27)','kyb.taxBadge':'ℹ Tax','kyb.valid':'✓ Valid','kyb.iec':'DGFT IEC / PAN','kyb.customsBadge':'ℹ Customs','kyb.council':'Export Council','kyb.adcode':'AD Code & Bank IFSC','kyb.valutaBadge':'For FX Control','kyb.port':'Port of Origin','kyb.factory':'Factory / Facility Address','kyb.doc':'Certificates & Export Licenses','kyb.docStatus':'(2.8 MB · Verified via registry)','kyb.back':'← Back to Registration','kyb.submit':'Verify & Open Catalog',
+  'reg.otp':'One-Time Code (OTP)','reg.terms':'I accept the Terms and Cross-Border Data Transfer Policy.','reg.kyb_consent':'I consent to automated registry validation (KYB).','reg.finish':'Finish Registration','common.back':'← Back','common.close':'Close',
+  'kyb.stepTag':'Step 2 / Supplier Verification','kyb.title':'Exporter Legal Identity & Regulatory Credentials','kyb.subtitle':'Data is verified automatically via tax & customs registry APIs.','kyb.pending':'Pending Verification','kyb.companyName':'Company Legal Name','kyb.nameHint':'As per incorporation documents','kyb.country':'Country of Jurisdiction','kyb.gstin':'GSTIN (State 27)','kyb.taxBadge':'ℹ Tax','kyb.valid':'✓ Valid','kyb.iec':'DGFT IEC / PAN','kyb.customsBadge':'ℹ Customs','kyb.dgftOk':'✓ DGFT','kyb.council':'Export Council','kyb.adcode':'AD Code & Bank IFSC','kyb.valutaBadge':'For FX Control','kyb.port':'Port of Origin','kyb.factory':'Factory / Facility Address','kyb.doc':'Quality Certificates & Licenses','kyb.docStatus':'(2.8 MB · Registry Verified)','kyb.back':'← Back to Registration','kyb.submit':'Verify & Open Catalog',
   'kyb.whyTitle':'Why complete this information?','kyb.whyDesc':'Alfa-Global enables direct settlements between buyers and foreign factories without middlemen.',
   'kyb.r1Title':'1. Bank FX Control','kyb.r1Desc':'AD Code & IFSC allow instant deal registration and currency clearance without customs delays.',
   'kyb.r2Title':'2. Escrow Release','kyb.r2Desc':'DGFT IEC validation confirms export authority, allowing automatic 70% payout on B/L release.',
   'kyb.r3Title':'3. "KYB Verified" Badge','kyb.r3Desc':'Verified exporters receive 3.8x more direct RFQs from corporate buyers.',
   'compliance.title':'Supplier Compliance Vault','compliance.sub':'Indian Manufactories Group Pvt. Ltd. — KYB Verified','compliance.gst':'GSTIN (State 27 — Maharashtra)','compliance.active':'✓ Active','compliance.iec':'DGFT IEC / PAN','compliance.valid':'✓ Validated','compliance.council':'Export Council','compliance.member':'✓ Council Member','compliance.bank':'AD Code & FX Account','compliance.linked':'✓ Linked',
   'catalog.title':'Export Catalog','catalog.subtitle':'Product Management','catalog.toOrders':'Orders Hub','catalog.addSku':'Add SKU','catalog.search':'Search','catalog.searchPh':'Name, brand or SKU...','catalog.category':'Category:','catalog.allCat':'All Categories','catalog.sort':'Sort:','catalog.sortAsc':'Price: Low to High','catalog.sortDesc':'Price: High to Low','catalog.sortMoq':'MOQ: Low to High',
+  'cat.food':'Food, Grains & Spices','cat.agro':'Agriculture & Agro Inputs','cat.consumer':'Consumer Goods & Houseware','cat.raw':'Raw Materials & Commodities',
   'orders.title':'Orders & Escrow Hub','orders.subtitle':'Monitor trade pipeline, customs release and escrow deposits','orders.backCat':'To Catalog','orders.filterLabel':'Filter:',
   'table.id':'Deal ID','table.product':'Product','table.buyer':'Buyer','table.value':'Value','table.status':'Status','table.action':'Action',
   'st.ALL':'All','st.RFQ':'RFQ','st.QUOTE_SENT':'Quote Sent','st.CONTRACT':'Contract','st.PRODUCTION':'Production','st.ESCROW_HELD':'Escrow Held','st.SHIPPED':'Shipped','st.COMPLETED':'Completed',
@@ -847,8 +996,8 @@ en: {
   'deal.sigLog':'Digital Signatures:','deal.sig1of2':'1/2 Completed','deal.buyerLabel':'Buyer #RU-4471:','deal.buyerSigned':'Signed (Verified)','deal.supplierLabel':'Indian Manufactories Group:','deal.awaiting':'Awaiting your signature',
   'deal.signBtn':'Sign Smart Contract (E-Sign)','deal.pi':'Download Proforma Invoice (PI)',
   'chat.title':'Encrypted Deal Chat','chat.translate':'Auto-Translate: RU ↔ EN','chat.privacy':'Privacy Guard ON',
-  'chat.buyer':'Buyer #RU-4471','chat.msg1':'We confirm FOB Mundra terms for 26 MT Basmati 1121. Please e-sign to lock escrow.','chat.supplier':'Indian Manufactories Group (You)','chat.msg2':'Production scheduled in Pune. APEDA certificates ready.','chat.privacy_note':'<b>Privacy Guard:</b> Contact details are masked to protect platform transactions.','chat.placeholder':'Type message...',
-  'fchat.title':'Deal Messages','fchat.sub':'Select active dialogue','fchat.toDeal':'To Deal →',
+  'chat.buyer':'Buyer #RU-4471','chat.msg1':'We confirm FOB Mundra terms for 26 MT Basmati 1121. Please e-sign to lock escrow.','chat.supplier':'Indian Manufactories Group (You)','chat.msg2':'Packaging scheduled in Pune. APEDA certificates and phytosanitary act ready.','chat.privacy_note':'<b>Privacy Guard:</b> Phone numbers and emails are masked to protect platform transactions.','chat.placeholder':'Type message...',
+  'fchat.title':'Deal Messages','fchat.sub':'Select active dialogue','fchat.toDeal':'To Deal →','fchat.rfqMsg':'Please provide FOB quote for 100 MT Basmati 1121 to Novorossiysk.','fchat.escrowMsg':'Escrow deposit locked in bank vault. Waiting for B/L upload.',
   'notify.title':'Notification',
   'step1.title':'1. Registration','step1.sub':'Email, phone & OTP',
   'step2.title':'2. KYB Verify','step2.sub':'Tax & export codes',
@@ -862,13 +1011,14 @@ hi: {
   'reg.email':'कॉर्पोरेट ईमेल','reg.phone':'फ़ोन नंबर','reg.password':'पासवर्ड बनाएं',
   'reg.continue':'पंजीकरण जारी रखें','reg.otpSent':'ओटीपी ईमेल और एसएमएस पर भेजा गया।',
   'reg.otp':'वन-टाइम पासवर्ड (OTP)','reg.terms':'मैं शर्तों और डेटा नीति को स्वीकार करता हूं।','reg.kyb_consent':'मैं राष्ट्रीय रजिस्ट्री (KYB) सत्यापन से सहमत हूं।','reg.finish':'पंजीकरण पूरा करें','common.back':'← वापस','common.close':'बंद करें',
-  'kyb.stepTag':'चरण 2 / आपूर्तिकर्ता सत्यापन','kyb.title':'कानूनी पहचान एवं निर्यात क्रेडेंशियल्स','kyb.subtitle':'डेटा स्वचालित रूप से कर और सीमा शुल्क एपीआई के माध्यम से सत्यापित किया जाता है।','kyb.pending':'सत्यापन लंबित','kyb.companyName':'कंपनी का कानूनी नाम','kyb.nameHint':'पंजीकरण दस्तावेजों के अनुसार','kyb.country':'देश','kyb.gstin':'GSTIN (राज्य 27)','kyb.taxBadge':'ℹ कर','kyb.valid':'✓ वैध','kyb.iec':'DGFT IEC / PAN','kyb.customsBadge':'ℹ सीमा शुल्क','kyb.council':'निर्यात परिषद','kyb.adcode':'AD Code & Bank IFSC','kyb.valutaBadge':'विदेशी मुद्रा नियंत्रण के लिए','kyb.port':'मूल बंदरगाह','kyb.factory':'कारखाना / सुविधा का पता','kyb.doc':'गुणवत्ता प्रमाण पत्र और लाइसेंस','kyb.docStatus':'(2.8 MB · सत्यापित)','kyb.back':'← पंजीकरण पर वापस','kyb.submit':'सत्यापित करें और कैटलॉग खोलें',
+  'kyb.stepTag':'चरण 2 / आपूर्तिकर्ता सत्यापन','kyb.title':'कानूनी पहचान एवं निर्यात क्रेडेंशियल्स','kyb.subtitle':'डेटा स्वचालित रूप से कर और सीमा शुल्क एपीआई के माध्यम से सत्यापित किया जाता है।','kyb.pending':'सत्यापन लंबित','kyb.companyName':'कंपनी का कानूनी नाम','kyb.nameHint':'पंजीकरण दस्तावेजों के अनुसार','kyb.country':'देश','kyb.gstin':'GSTIN (राज्य 27)','kyb.taxBadge':'ℹ कर','kyb.valid':'✓ वैध','kyb.iec':'DGFT IEC / PAN','kyb.customsBadge':'ℹ सीमा शुल्क','kyb.dgftOk':'✓ DGFT','kyb.council':'निर्यात परिषद','kyb.adcode':'AD Code & Bank IFSC','kyb.valutaBadge':'विदेशी मुद्रा नियंत्रण के लिए','kyb.port':'मूल बंदरगाह','kyb.factory':'कारखाना / सुविधा का पता','kyb.doc':'गुणवत्ता प्रमाण पत्र और लाइसेंस','kyb.docStatus':'(2.8 MB · सत्यापित)','kyb.back':'← पंजीकरण पर वापस','kyb.submit':'सत्यापित करें और कैटलॉग खोलें',
   'kyb.whyTitle':'यह जानकारी क्यों भरें?','kyb.whyDesc':'Alfa-Global खरीदारों और विदेशी कारखानों के बीच बिचौलियों के बिना सीधे भुगतान को सक्षम बनाता है।',
   'kyb.r1Title':'1. विदेशी मुद्रा नियंत्रण','kyb.r1Desc':'AD कोड और IFSC सौदे के तत्काल पंजीकरण और निकासी की अनुमति देते हैं।',
   'kyb.r2Title':'2. एस्क्रो अनलॉक','kyb.r2Desc':'DGFT IEC सत्यापन निर्यात अधिकार की पुष्टि करता है, जिससे B/L पर 70% भुगतान अनलॉक होता है।',
   'kyb.r3Title':'3. "KYB Verified" स्थिति','kyb.r3Desc':'सत्यापित आपूर्तिकर्ताओं को कॉर्पोरेट ग्राहकों से 3.8 गुना अधिक RFQ प्राप्त होते हैं।',
   'compliance.title':'आपूर्तिकर्ता अनुपालन केंद्र','compliance.sub':'Indian Manufactories Group Pvt. Ltd. — KYB Verified','compliance.gst':'GSTIN (राज्य 27 — महाराष्ट्र)','compliance.active':'✓ सक्रिय','compliance.iec':'DGFT IEC / PAN','compliance.valid':'✓ सत्यापित','compliance.council':'निर्यात परिषद','compliance.member':'✓ परिषद सदस्य','compliance.bank':'AD कोड और विदेशी मुद्रा खाता','compliance.linked':'✓ लिंक किया गया',
   'catalog.title':'निर्यात कैटलॉग','catalog.subtitle':'उत्पाद प्रबंधन','catalog.toOrders':'ऑर्डर हब','catalog.addSku':'SKU जोड़ें','catalog.search':'खोज','catalog.searchPh':'नाम, ब्रांड या SKU...','catalog.category':'श्रेणी:','catalog.allCat':'सभी श्रेणियां','catalog.sort':'क्रमबद्ध करें:','catalog.sortAsc':'मूल्य: कम से अधिक','catalog.sortDesc':'मूल्य: अधिक से कम','catalog.sortMoq':'MOQ: कम से अधिक',
+  'cat.food':'Food, Grains & Spices','cat.agro':'Agriculture & Agro Inputs','cat.consumer':'Consumer Goods & Houseware','cat.raw':'Raw Materials & Commodities',
   'orders.title':'ऑर्डर और एस्क्रो हब','orders.subtitle':'व्यापार पाइपलाइन, सीमा शुल्क और एस्क्रो जमा की निगरानी','orders.backCat':'कैटलॉग में वापस','orders.filterLabel':'फ़िल्टर:',
   'table.id':'सौदा ID','table.product':'उत्पाद','table.buyer':'खरीदार','table.value':'मूल्य','table.status':'स्थिति','table.action':'कार्रवाई',
   'st.ALL':'सभी','st.RFQ':'RFQ','st.QUOTE_SENT':'कोटेशन भेजा','st.CONTRACT':'अनुबंध','st.PRODUCTION':'उत्पादन','st.ESCROW_HELD':'एस्क्रो','st.SHIPPED':'भेज दिया गया','st.COMPLETED':'पूर्ण',
@@ -881,7 +1031,7 @@ hi: {
   'deal.signBtn':'स्मार्ट अनुबंध पर हस्ताक्षर करें (E-Sign)','deal.pi':'प्रोफार्मा चालान डाउनलोड करें (PI)',
   'chat.title':'सुरक्षित सौदा चैट','chat.translate':'ऑटो-अनुवाद: RU ↔ EN ↔ HI','chat.privacy':'Privacy Guard सक्रिय',
   'chat.buyer':'खरीदार #RU-4471','chat.msg1':'हम 26 टन बासमती 1121 के लिए FOB Mundra शर्तों की पुष्टि करते हैं। कृपया अनुबंध पर हस्ताक्षर करें।','chat.supplier':'Indian Manufactories Group (आप)','chat.msg2':'पुणे के कारखाने में पैकिंग शुरू हो गई है। प्रमाणपत्र तैयार हैं।','chat.privacy_note':'<b>Privacy Guard:</b> सुरक्षा के लिए संपर्क विवरण छिपाए जाते हैं।','chat.placeholder':'संदेश टाइप करें...',
-  'fchat.title':'सौदों के संदेश','fchat.sub':'सक्रिय चैट चुनें','fchat.toDeal':'सौदा खोलें →',
+  'fchat.title':'सौदों के संदेश','fchat.sub':'सक्रिय चैट चुनें','fchat.toDeal':'सौदा खोलें →','fchat.rfqMsg':'कृपया 100 टन बासमती 1121 के लिए FOB कोटेशन प्रदान करें।','fchat.escrowMsg':'बैंक में एस्क्रो जमा लॉक है। B/L अपलोड की प्रतीक्षा है।',
   'notify.title':'सूचना',
   'step1.title':'1. पंजीकरण','step1.sub':'ईमेल और पासवर्ड',
   'step2.title':'2. KYB जांच','step2.sub':'कर और निर्यात कोड',
@@ -895,13 +1045,14 @@ zh: {
   'reg.email':'企业邮箱','reg.phone':'电话号码','reg.password':'设置密码',
   'reg.continue':'继续注册','reg.otpSent':'验证码已发送至邮箱和短信。',
   'reg.otp':'动态验证码 (OTP)','reg.terms':'我接受平台条款和跨境数据传输政策。','reg.kyb_consent':'我同意国家注册中心 (KYB) 自动验证。','reg.finish':'完成注册','common.back':'← 返回','common.close':'关闭',
-  'kyb.stepTag':'第 2 步 / 供应商合规验证','kyb.title':'出口商法定资质与监管凭证','kyb.subtitle':'信息通过税务和海关 API 自动核验。','kyb.pending':'等待验证','kyb.companyName':'公司法定名称','kyb.nameHint':'与注册文件一致','kyb.country':'所属国籍','kyb.gstin':'GSTIN 税号 (27邦)','kyb.taxBadge':'ℹ 税务','kyb.valid':'✓ 有效','kyb.iec':'DGFT IEC / PAN','kyb.customsBadge':'ℹ 海关','kyb.council':'出口促进委员会','kyb.adcode':'AD Code & Bank IFSC','kyb.valutaBadge':'外汇管制专用','kyb.port':'主要始发港','kyb.factory':'工厂 / 设施地址','kyb.doc':'质量认证与出口许可证','kyb.docStatus':'(2.8 MB · 已验证)','kyb.back':'← 返回注册','kyb.submit':'验证并打开商品目录',
+  'kyb.stepTag':'第 2 步 / 供应商合规验证','kyb.title':'出口商法定资质与监管凭证','kyb.subtitle':'信息通过税务和海关 API 自动核验。','kyb.pending':'等待验证','kyb.companyName':'公司法定名称','kyb.nameHint':'与注册文件一致','kyb.country':'所属国籍','kyb.gstin':'GSTIN 税号 (27邦)','kyb.taxBadge':'ℹ 税务','kyb.valid':'✓ 有效','kyb.iec':'DGFT IEC / PAN','kyb.customsBadge':'ℹ 海关','kyb.dgftOk':'✓ DGFT','kyb.council':'出口促进委员会','kyb.adcode':'AD Code & Bank IFSC','kyb.valutaBadge':'外汇管制专用','kyb.port':'主要始发港','kyb.factory':'工厂 / 设施地址','kyb.doc':'质量认证与出口许可证','kyb.docStatus':'(2.8 MB · 已验证)','kyb.back':'← 返回注册','kyb.submit':'验证并打开商品目录',
   'kyb.whyTitle':'为什么要填写这些信息？','kyb.whyDesc':'Alfa-Global 支持买家与海外工厂之间的直接跨境结算，无需中介。',
   'kyb.r1Title':'1. 银行外汇管制','kyb.r1Desc':'AD 代码与 IFSC 允许快速开具交易护照并清关。',
   'kyb.r2Title':'2. 托管账户释放','kyb.r2Desc':'DGFT IEC 验证出口资格，支持凭提单自动释放 70% 尾款。',
   'kyb.r3Title':'3. "KYB Verified" 标识','kyb.r3Desc':'认证供应商可从企业买家处获得多达 3.8 倍的直发 RFQ。',
   'compliance.title':'供应商合规中心','compliance.sub':'Indian Manufactories Group Pvt. Ltd. — KYB Verified','compliance.gst':'GSTIN (马哈拉施特拉邦 27)','compliance.active':'✓ 有效','compliance.iec':'DGFT IEC / PAN','compliance.valid':'✓ 已核验','compliance.council':'出口委员会','compliance.member':'✓ 会员','compliance.bank':'AD 代码与外汇账户','compliance.linked':'✓ 已关联',
   'catalog.title':'出口商品目录','catalog.subtitle':'产品管理','catalog.toOrders':'订单中心','catalog.addSku':'添加 SKU','catalog.search':'搜索','catalog.searchPh':'名称、品牌或货号...','catalog.category':'品类：','catalog.allCat':'全部品类','catalog.sort':'排序：','catalog.sortAsc':'价格：从低到高','catalog.sortDesc':'价格：从高到低','catalog.sortMoq':'起订量：从低到高',
+  'cat.food':'Food, Grains & Spices','cat.agro':'Agriculture & Agro Inputs','cat.consumer':'Consumer Goods & Houseware','cat.raw':'Raw Materials & Commodities',
   'orders.title':'订单与托管中心','orders.subtitle':'监控出口合同、海关清关与银行资金托管','orders.backCat':'返回目录','orders.filterLabel':'筛选：',
   'table.id':'交易 ID','table.product':'商品','table.buyer':'买家','table.value':'金额','table.status':'状态','table.action':'操作',
   'st.ALL':'全部','st.RFQ':'RFQ 询价','st.QUOTE_SENT':'已发报价','st.CONTRACT':'合同阶段','st.PRODUCTION':'生产中','st.ESCROW_HELD':'资金托管','st.SHIPPED':'已发运','st.COMPLETED':'已完成',
@@ -914,7 +1065,7 @@ zh: {
   'deal.signBtn':'签署智能合约 (E-Sign)','deal.pi':'下载形式发票 (PI)',
   'chat.title':'交易加密会话','chat.translate':'自动翻译：RU ↔ EN ↔ ZH','chat.privacy':'隐私保护已开启',
   'chat.buyer':'买家 #RU-4471','chat.msg1':'我们确认 26 吨 1121 印度香米的 FOB Mundra 条款。请签署合同以锁定托管资金。','chat.supplier':'Indian Manufactories Group (您)','chat.msg2':'浦那工厂正在组织包装，APEDA 认证和植物检疫证书已备齐。','chat.privacy_note':'<b>隐私保护：</b> 电话与邮箱已自动隐藏，保障交易安全。','chat.placeholder':'输入消息...',
-  'fchat.title':'交易消息','fchat.sub':'选择对话','fchat.toDeal':'前往交易 →',
+  'fchat.title':'交易消息','fchat.sub':'选择对话','fchat.toDeal':'前往交易 →','fchat.rfqMsg':'请提供 100 吨 1121 印度香米至新罗西斯克的 FOB 报价。','fchat.escrowMsg':'托管资金已锁定在银行。等待上传提单。',
   'notify.title':'通知',
   'step1.title':'1. 注册','step1.sub':'邮箱与密码',
   'step2.title':'2. KYB 认证','step2.sub':'税务与外贸代码',
@@ -930,6 +1081,7 @@ let CURR_STEP = 1;
 let STATUS_FILTER = 'ALL';
 
 function t(key){ return (T[LANG] && T[LANG][key]) || (T['ru'] && T['ru'][key]) || key; }
+function getLocalStr(obj){ if(!obj) return ''; if(typeof obj === 'string') return obj; return obj[LANG] || obj['ru'] || obj['en'] || ''; }
 
 function fmtMoney(rub){
   const cfg = RATES[CURR];
@@ -1046,15 +1198,16 @@ function changeLang(v){
   LANG = v;
   applyI18n();
   renderStepper();
-  if(CURR_STEP === 3) renderCatalog();
-  if(CURR_STEP === 4) renderOrders();
+  renderCatalog();
+  renderOrders();
+  renderFloatInbox();
   lucide.createIcons();
 }
 function changeCurrency(v){
   CURR = v;
   applyPrices();
-  if(CURR_STEP === 3) renderCatalog();
-  if(CURR_STEP === 4) renderOrders();
+  renderCatalog();
+  renderOrders();
 }
 
 function downloadPI(){
@@ -1063,7 +1216,7 @@ function downloadPI(){
     : 'Generating Proforma Invoice PI-ALFA-2025-0312.pdf (HS 10063092, FOB Mundra)...');
 }
 
-// Catalog with icon fallbacks and clear spec cards
+// Catalog with guaranteed graphic SVGs and real-time currency
 function renderCatalog(){
   const grid = document.getElementById('catalog-grid');
   if(!grid) return;
@@ -1072,7 +1225,8 @@ function renderCatalog(){
   const sort = document.getElementById('cat-sort')?.value || 'price_asc';
 
   let items = [...CATALOG_DATA].filter(c => {
-    const matchS = c.name.toLowerCase().includes(search) || c.id.toLowerCase().includes(search) || c.brand.toLowerCase().includes(search);
+    const nameStr = getLocalStr(c.name).toLowerCase();
+    const matchS = nameStr.includes(search) || c.id.toLowerCase().includes(search) || c.brand.toLowerCase().includes(search);
     const matchC = !cat || c.category === cat;
     return matchS && matchC;
   });
@@ -1082,7 +1236,7 @@ function renderCatalog(){
   if(sort === 'moq_asc') items.sort((a,b) => a.moq - b.moq);
 
   if(!items.length){
-    grid.innerHTML = `<div class="col-span-4 py-12 text-center text-sm text-slate-400">Позиций не найдено.</div>`;
+    grid.innerHTML = `<div class="col-span-4 py-12 text-center text-sm text-slate-400">Товаров не найдено.</div>`;
     return;
   }
 
@@ -1095,24 +1249,21 @@ function renderCatalog(){
       ? `${fmtMoney(p.oldPriceMin)} – ${fmtMoney(p.oldPriceMax)}`
       : null;
 
+    const unitShortStr = getLocalStr(p.unitShort);
+    const prodName = getLocalStr(p.name);
+    const bannerHtml = getProductSvgBanner(p.icon, p.bgGradient, 'HS ' + p.hs, p.brand);
+
     return `
       <div onclick="openDrawer('view-sku', '${p.id}')" class="bg-white rounded-2xl border border-slate-200 shadow-sm p-3.5 flex flex-col justify-between hover:border-alfa hover:shadow-md transition cursor-pointer group">
         <div>
-          <!-- Image with fallback Lucide Icon Badge -->
-          <div class="h-44 rounded-xl bg-slate-50 overflow-hidden mb-3 border border-slate-100 flex items-center justify-center relative">
-            <img src="${p.iconUrl}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-            <div class="absolute bottom-2 left-2 w-7 h-7 rounded-lg bg-white/90 backdrop-blur shadow flex items-center justify-center text-slate-700">
-              <i data-lucide="${p.icon || 'package'}" class="w-4 h-4 text-alfa"></i>
-            </div>
-            <span class="absolute top-2 left-2 bg-slate-900/80 text-white text-[10px] font-mono font-bold px-2 py-0.5 rounded">HS ${p.hs}</span>
-          </div>
+          <div class="mb-3">${bannerHtml}</div>
           <div class="space-y-1">
             <div class="flex items-baseline gap-1.5 flex-wrap">
               <span class="text-base font-black text-slate-900 leading-tight">${priceRange}</span>
-              <span class="text-xs font-semibold text-slate-500">/ ${p.unitShort || 'шт'}</span>
+              <span class="text-xs font-semibold text-slate-500">/ ${unitShortStr}</span>
             </div>
             ${oldPriceStr ? `<p class="text-[11px] text-slate-400 line-through">${oldPriceStr}</p>` : ''}
-            <h3 class="font-bold text-slate-800 text-xs leading-snug line-clamp-2 mt-1.5">${p.name}</h3>
+            <h3 class="font-bold text-slate-800 text-xs leading-snug line-clamp-2 mt-1.5">${prodName}</h3>
           </div>
         </div>
         <div class="mt-3 pt-2.5 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500">
@@ -1150,6 +1301,7 @@ function renderOrders(){
   }
   tbody.innerHTML = rows.map(o => {
     const actionLabel = t('act.'+o.status);
+    const prodTitle = getLocalStr(o.product);
     const drawerMap = {
       'RFQ': 'rfq-quote',
       'QUOTE_SENT': 'view-quote',
@@ -1166,7 +1318,7 @@ function renderOrders(){
 
     return `<tr class="hover:bg-slate-50 transition">
       <td class="px-5 py-3.5 text-xs font-mono font-bold text-alfa">${o.id}</td>
-      <td class="px-5 py-3.5 text-sm font-semibold text-slate-800">${o.product}</td>
+      <td class="px-5 py-3.5 text-sm font-semibold text-slate-800">${prodTitle}</td>
       <td class="px-5 py-3.5 text-xs text-slate-500 font-mono">${o.buyer}</td>
       <td class="px-5 py-3.5 text-sm font-bold text-slate-900">${fmtMoney(o.valInr)}</td>
       <td class="px-5 py-3.5"><span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold ${o.badgeCls}">${t('st.'+o.status)}</span></td>
@@ -1247,18 +1399,19 @@ function renderFloatInbox(){
   const list = document.getElementById('fc-threads-list');
   const threads = Object.values(CHAT_THREADS);
 
-  list.innerHTML = threads.map(t => {
-    const lastMsg = t.messages[t.messages.length - 1];
+  list.innerHTML = threads.map(tData => {
+    const lastMsg = tData.messages[tData.messages.length - 1];
+    const msgText = lastMsg.textKey ? t(lastMsg.textKey) : lastMsg.text;
     return `
-      <div onclick="selectChatThread('${t.dealId}')" class="p-3.5 hover:bg-slate-50 cursor-pointer transition flex items-start gap-3">
+      <div onclick="selectChatThread('${tData.dealId}')" class="p-3.5 hover:bg-slate-50 cursor-pointer transition flex items-start gap-3">
         <div class="w-8 h-8 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center shrink-0 font-bold text-xs text-slate-700">💬</div>
         <div class="flex-1 min-w-0">
           <div class="flex items-center justify-between gap-1 mb-0.5">
-            <span class="font-bold text-xs text-slate-900 truncate">${t.buyer}</span>
-            <span class="text-[10px] px-1.5 py-0.5 rounded font-bold shrink-0 ${t.statusBadge}">${t.status}</span>
+            <span class="font-bold text-xs text-slate-900 truncate">${tData.buyer}</span>
+            <span class="text-[10px] px-1.5 py-0.5 rounded font-bold shrink-0 ${tData.statusBadge}">${tData.status}</span>
           </div>
-          <p class="text-[11px] font-semibold text-alfa truncate mb-0.5">${t.dealId} · ${t.product}</p>
-          <p class="text-[11px] text-slate-500 truncate">${lastMsg ? lastMsg.text : '...'}</p>
+          <p class="text-[11px] font-semibold text-alfa truncate mb-0.5">${tData.dealId} · ${tData.productKey}</p>
+          <p class="text-[11px] text-slate-500 truncate">${msgText}</p>
         </div>
       </div>
     `;
@@ -1276,10 +1429,10 @@ function selectChatThread(dealId){
   document.getElementById('fc-back-btn').classList.remove('hidden');
 
   document.getElementById('fc-header-title').textContent = thread.buyer;
-  document.getElementById('fc-header-sub').textContent = `${thread.dealId} · ${thread.product}`;
+  document.getElementById('fc-header-sub').textContent = `${thread.dealId} · ${thread.productKey}`;
 
   const contextText = document.getElementById('fc-context-text');
-  contextText.textContent = `Сделка: ${thread.dealId} (${thread.status})`;
+  contextText.textContent = `Deal: ${thread.dealId} (${thread.status})`;
 
   const actBtn = document.getElementById('fc-context-action');
   actBtn.textContent = t('fchat.toDeal');
@@ -1303,11 +1456,12 @@ function renderThreadMessages(){
   const body = document.getElementById('fc-msg-body');
   
   body.innerHTML = thread.messages.map(m => {
+    const textContent = m.textKey ? t(m.textKey) : m.text;
     if(m.isMe){
       return `
         <div class="flex justify-end">
           <div class="bg-alfa text-white p-2.5 rounded-xl max-w-[85%] space-y-0.5">
-            <p class="text-xs leading-relaxed">${m.text}</p>
+            <p class="text-xs leading-relaxed">${textContent}</p>
             <span class="text-[9px] text-white/70 block text-right">${m.time}</span>
           </div>
         </div>
@@ -1317,7 +1471,7 @@ function renderThreadMessages(){
         <div class="flex justify-start">
           <div class="bg-white border border-slate-200 text-slate-800 p-2.5 rounded-xl max-w-[85%] space-y-0.5">
             <span class="text-[10px] font-bold text-slate-500 block">${m.sender}</span>
-            <p class="text-xs leading-relaxed">${m.text}</p>
+            <p class="text-xs leading-relaxed">${textContent}</p>
             <span class="text-[9px] text-slate-400 block text-right">${m.time}</span>
           </div>
         </div>
@@ -1346,179 +1500,145 @@ function sendFloatMsg(e){
   inp.value = '';
 }
 
-// Full product sheet & new SKU with full spec fields
+// Drawer View with full India Mall specifications
 function openDrawer(type, contextId){
   const overlay = document.getElementById('drawer-overlay');
   const drawer = document.getElementById('side-drawer');
   const content = document.getElementById('drawer-content');
 
   const drawerMap = {
-    // Exact view matching Screenshot 1 (Rice Basmati Indiafeast full view)
     'view-sku': () => {
       const p = CATALOG_DATA.find(x => x.id === contextId) || CATALOG_DATA[0];
       const priceRange = p.priceMin === p.priceMax
         ? `${fmtMoney(p.priceMin)}`
         : `${fmtMoney(p.priceMin)} – ${fmtMoney(p.priceMax)}`;
       const oldPrice = p.oldPriceMin ? `${fmtMoney(p.oldPriceMin)} – ${fmtMoney(p.oldPriceMax)}` : '';
+      const prodName = getLocalStr(p.name);
+      const prodGroup = getLocalStr(p.group);
+      const prodDesc = getLocalStr(p.desc);
+      const prodUnit = getLocalStr(p.unit);
+      const prodCalc = getLocalStr(p.calcBase);
+      const prodMat = getLocalStr(p.material);
+      const prodScope = getLocalStr(p.scope);
+      const prodWarranty = getLocalStr(p.warranty);
+      const prodInstr = getLocalStr(p.specialInstr);
+      const prodState = getLocalStr(p.state);
+      const prodPkg = getLocalStr(p.pkgDetails);
+      const prodDel = getLocalStr(p.deliveryMethod);
+      const prodLead = getLocalStr(p.leadTime);
+      const prodSample = getLocalStr(p.sample);
+      const bannerHtml = getProductSvgBanner(p.icon, p.bgGradient, 'HS ' + p.hs, p.brand);
+      const featuresList = (p.features && p.features[LANG]) || p.features?.ru || [];
 
       return `
         <div class="flex items-center justify-between px-6 py-4 border-b border-slate-100 bg-white sticky top-0 z-10">
-          <div class="text-[11px] text-slate-400 font-medium">
-            Главная / Товары / ${p.category} / <span class="text-slate-800 font-bold">${p.group || p.category}</span>
+          <div class="text-[11px] text-slate-400 font-medium truncate">
+            Catalog / ${p.category} / <span class="text-slate-800 font-bold">${prodGroup}</span>
           </div>
           <button onclick="closeDrawer()" class="text-slate-400 hover:text-slate-700"><i data-lucide="x" class="w-5 h-5"></i></button>
         </div>
 
         <div class="p-6 space-y-6 flex-1 text-xs text-slate-700">
-          <!-- Top Product Hero Header -->
           <div class="flex flex-col sm:flex-row gap-6">
-            <div class="sm:w-1/2 bg-slate-50 rounded-2xl p-4 border border-slate-100 flex items-center justify-center relative">
-              <img src="${p.iconUrl}" class="w-full h-64 object-cover rounded-xl shadow-sm">
-              <div class="absolute bottom-6 left-6 w-8 h-8 rounded-xl bg-white shadow flex items-center justify-center">
-                <i data-lucide="${p.icon || 'wheat'}" class="w-5 h-5 text-alfa"></i>
-              </div>
-            </div>
+            <div class="sm:w-1/2">${bannerHtml}</div>
             <div class="sm:w-1/2 space-y-3">
-              <h2 class="text-lg font-black text-slate-900 leading-snug">${p.name}</h2>
-              <p class="text-[11px] text-slate-500 font-mono">Артикул: <b>${p.id}</b> · Код ТНВЭД: <b>${p.hs}</b></p>
+              <h2 class="text-lg font-black text-slate-900 leading-snug">${prodName}</h2>
+              <p class="text-[11px] text-slate-500 font-mono">SKU: <b>${p.id}</b> · HS: <b>${p.hs}</b></p>
               <div>
                 <span class="text-2xl font-black text-slate-900">${priceRange}</span>
                 ${oldPrice ? `<span class="text-xs text-slate-400 line-through ml-2">${oldPrice}</span>` : ''}
               </div>
-              <p class="text-[10px] text-slate-400 leading-tight">Данное предложение не является офертой. Сумма рассчитана по курсу платформы на 2025 год.</p>
               
-              <!-- Quick Spec Table -->
               <div class="border-t border-slate-200 pt-3 space-y-1.5 text-[11px]">
-                <div class="flex justify-between py-1 border-b border-slate-100"><span class="text-slate-500">Бренд</span><span class="font-bold text-slate-900">${p.brand}</span></div>
-                <div class="flex justify-between py-1 border-b border-slate-100"><span class="text-slate-500">Минимальный объем поставки (MOQ)</span><span class="font-bold text-slate-900">${p.moq} ${p.unitShort || ''}</span></div>
-                <div class="flex justify-between py-1 border-b border-slate-100"><span class="text-slate-500">Основа расчёта цены</span><span class="font-bold text-slate-900">${p.calcBase || p.unit}</span></div>
-                <div class="flex justify-between py-1 border-b border-slate-100"><span class="text-slate-500">Единица измерения</span><span class="font-bold text-slate-900">${p.unit}</span></div>
-                <div class="flex justify-between py-1 border-b border-slate-100"><span class="text-slate-500">Количество в единице</span><span class="font-bold text-slate-900">${p.qtyInUnit || '1 шт.'}</span></div>
-                <div class="flex justify-between py-1 border-b border-slate-100"><span class="text-slate-500">Образец доступен</span><span class="font-bold text-slate-900">${p.sample}</span></div>
-                <div class="flex justify-between py-1 border-b border-slate-100"><span class="text-slate-500">Срок подготовки</span><span class="font-bold text-slate-900">${p.leadTime}</span></div>
-                <div class="flex justify-between py-1 border-b border-slate-100"><span class="text-slate-500">Аванс</span><span class="font-bold text-slate-900">${p.advance}</span></div>
-                <div class="flex justify-between py-1 border-b border-slate-100"><span class="text-slate-500">По факту</span><span class="font-bold text-slate-900">${p.postPay}</span></div>
+                <div class="flex justify-between py-1 border-b border-slate-100"><span class="text-slate-500">Brand</span><span class="font-bold text-slate-900">${p.brand}</span></div>
+                <div class="flex justify-between py-1 border-b border-slate-100"><span class="text-slate-500">MOQ</span><span class="font-bold text-slate-900">${p.moq} ${getLocalStr(p.unitShort)}</span></div>
+                <div class="flex justify-between py-1 border-b border-slate-100"><span class="text-slate-500">Price Base</span><span class="font-bold text-slate-900">${prodCalc}</span></div>
+                <div class="flex justify-between py-1 border-b border-slate-100"><span class="text-slate-500">Unit</span><span class="font-bold text-slate-900">${prodUnit}</span></div>
+                <div class="flex justify-between py-1 border-b border-slate-100"><span class="text-slate-500">Sample Available</span><span class="font-bold text-slate-900">${prodSample}</span></div>
+                <div class="flex justify-between py-1 border-b border-slate-100"><span class="text-slate-500">Lead Time</span><span class="font-bold text-slate-900">${prodLead}</span></div>
+                <div class="flex justify-between py-1 border-b border-slate-100"><span class="text-slate-500">Advance</span><span class="font-bold text-slate-900">${p.advance}</span></div>
+                <div class="flex justify-between py-1 border-b border-slate-100"><span class="text-slate-500">On B/L</span><span class="font-bold text-slate-900">${p.postPay}</span></div>
                 <div class="flex justify-between py-1"><span class="text-slate-500">Incoterms</span><span class="font-bold text-slate-900">${p.incoterms}</span></div>
               </div>
             </div>
           </div>
 
-          <!-- Section: Информация о продукте -->
           <div class="border-t border-slate-200 pt-5 space-y-4">
-            <h3 class="text-sm font-extrabold text-slate-900">Информация о продукте</h3>
+            <h3 class="text-sm font-extrabold text-slate-900">Спецификация и характеристики</h3>
             
-            <!-- Описание -->
             <div class="bg-slate-50 rounded-xl p-4 border border-slate-100 space-y-1">
               <h4 class="font-bold text-slate-800 text-xs">Описание</h4>
-              <p class="text-slate-600 leading-relaxed">${p.desc || ''}</p>
+              <p class="text-slate-600 leading-relaxed">${prodDesc}</p>
             </div>
 
-            <!-- Особенности -->
-            ${p.features && p.features.length ? `
+            ${featuresList.length ? `
               <div class="bg-slate-50 rounded-xl p-4 border border-slate-100 space-y-1">
                 <h4 class="font-bold text-slate-800 text-xs">Особенности</h4>
                 <ul class="list-disc pl-5 space-y-1 text-slate-600">
-                  ${p.features.map(f => `<li>${f}</li>`).join('')}
+                  ${featuresList.map(f => `<li>${f}</li>`).join('')}
                 </ul>
               </div>
             ` : ''}
 
-            <!-- Характеристики -->
             <div class="border border-slate-200 rounded-xl p-4 space-y-2 bg-white">
               <h4 class="font-bold text-slate-800 text-xs border-b border-slate-100 pb-2">Характеристики</h4>
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-y-2 gap-x-4 text-[11px]">
                 <div><span class="text-slate-400 block">Бренд:</span> <b>${p.brand}</b></div>
                 <div><span class="text-slate-400 block">Страна производства:</span> <b>${p.country}</b></div>
-                <div><span class="text-slate-400 block">Цвет:</span> <b>${p.color || 'Стандарт'}</b></div>
-                <div><span class="text-slate-400 block">Материал / состав:</span> <b>${p.material || 'Оригинальный состав'}</b></div>
-                <div><span class="text-slate-400 block">Область применения:</span> <b>${p.scope || 'Универсальное B2B применение'}</b></div>
-                <div><span class="text-slate-400 block">Отрасли:</span> <b>${p.industry || p.category}</b></div>
-                <div class="sm:col-span-2"><span class="text-slate-400 block">Особые инструкции:</span> <b>${p.specialInstr || 'Хранить в сухом месте'}</b></div>
-                <div><span class="text-slate-400 block">Гарантийный период:</span> <b>${p.warranty || '12 месяцев'}</b></div>
+                <div><span class="text-slate-400 block">Цвет:</span> <b>${p.color}</b></div>
+                <div><span class="text-slate-400 block">Материал:</span> <b>${prodMat}</b></div>
+                <div><span class="text-slate-400 block">Применение:</span> <b>${prodScope}</b></div>
+                <div><span class="text-slate-400 block">Гарантия:</span> <b>${prodWarranty}</b></div>
+                <div class="sm:col-span-2"><span class="text-slate-400 block">Инструкции:</span> <b>${prodInstr}</b></div>
               </div>
             </div>
 
-            <!-- Спецификация -->
-            ${p.specItems && p.specItems.length ? `
-              <div class="border border-slate-200 rounded-xl p-4 space-y-2 bg-white">
-                <h4 class="font-bold text-slate-800 text-xs border-b border-slate-100 pb-2">Спецификация</h4>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-y-1.5 gap-x-4 text-[11px]">
-                  ${p.specItems.map(si => `
-                    <div class="flex justify-between border-b border-slate-50 py-0.5"><span class="text-slate-500">${si.label}:</span> <b class="text-slate-800">${si.val}</b></div>
-                  `).join('')}
-                </div>
-              </div>
-            ` : ''}
-
-            <!-- Товар -->
             <div class="border border-slate-200 rounded-xl p-4 space-y-2 bg-white text-[11px]">
-              <h4 class="font-bold text-slate-800 text-xs border-b border-slate-100 pb-2">Товар</h4>
+              <h4 class="font-bold text-slate-800 text-xs border-b border-slate-100 pb-2">Доставка и логистика</h4>
+              <p class="text-slate-600 mb-2"><b>Упаковка:</b> ${prodPkg}</p>
               <div class="grid grid-cols-2 gap-2">
-                <div><span class="text-slate-400">Состояние:</span> <b>${p.state || 'Новый'}</b></div>
-                <div><span class="text-slate-400">Категория:</span> <b>${p.category}</b></div>
-                <div><span class="text-slate-400">Группа:</span> <b>${p.group || p.category}</b></div>
-                <div><span class="text-slate-400">Артикул:</span> <b class="font-mono">${p.id}</b></div>
-                <div><span class="text-slate-400">Код ТНВЭД:</span> <b class="font-mono">${p.hs}</b></div>
+                <div><span class="text-slate-400">Метод:</span> <b>${prodDel}</b></div>
+                <div><span class="text-slate-400">Порт:</span> <b>${p.port}</b></div>
               </div>
             </div>
 
-            <!-- Доставка -->
-            <div class="border border-slate-200 rounded-xl p-4 space-y-2 bg-white text-[11px]">
-              <h4 class="font-bold text-slate-800 text-xs border-b border-slate-100 pb-2">Доставка</h4>
-              <p class="text-slate-600 mb-2"><b>Детали контейнера / упаковка:</b> ${p.pkgDetails || 'Экспортная фасовка'}</p>
-              <div class="grid grid-cols-2 gap-2">
-                <div><span class="text-slate-400">Метод доставки:</span> <b>${p.deliveryMethod || 'Морем'}</b></div>
-                <div><span class="text-slate-400">Порт отгрузки:</span> <b>${p.port || 'Mundra'}</b></div>
-              </div>
-            </div>
-
-            <!-- Массогабаритные характеристики -->
             <div class="border border-slate-200 rounded-xl p-4 space-y-3 bg-white text-[11px]">
-              <h4 class="font-bold text-slate-800 text-xs border-b border-slate-100 pb-2">Массогабаритные характеристики</h4>
-              <div class="flex items-center justify-between">
-                <div class="space-y-1">
-                  <p><span class="text-slate-400">Ширина:</span> <b>${p.dims?.w || '500 mm'}</b></p>
-                  <p><span class="text-slate-400">Высота:</span> <b>${p.dims?.h || '120 mm'}</b></p>
-                  <p><span class="text-slate-400">Длина:</span> <b>${p.dims?.l || '700 mm'}</b></p>
-                  <p><span class="text-slate-400">Вес (брутто):</span> <b>${p.dims?.weight || '25 кг'}</b></p>
-                </div>
-                <div class="w-20 h-20 bg-red-50 border border-alfa-mid rounded-xl flex flex-col items-center justify-center text-alfa font-black text-xs">
-                  <i data-lucide="box" class="w-8 h-8 mb-1"></i>
-                  <span>BOX</span>
-                </div>
+              <h4 class="font-bold text-slate-800 text-xs border-b border-slate-100 pb-2">Габариты и вес</h4>
+              <div class="grid grid-cols-4 gap-2 text-center">
+                <div class="p-2 bg-slate-50 rounded-lg"><span class="text-slate-400 block text-[10px]">Ширина</span><b>${p.dims?.w}</b></div>
+                <div class="p-2 bg-slate-50 rounded-lg"><span class="text-slate-400 block text-[10px]">Высота</span><b>${p.dims?.h}</b></div>
+                <div class="p-2 bg-slate-50 rounded-lg"><span class="text-slate-400 block text-[10px]">Длина</span><b>${p.dims?.l}</b></div>
+                <div class="p-2 bg-slate-50 rounded-lg"><span class="text-slate-400 block text-[10px]">Вес брутто</span><b>${p.dims?.weight}</b></div>
               </div>
             </div>
 
           </div>
         </div>
         <div class="px-6 py-4 border-t border-slate-100 bg-white flex justify-end">
-          <button onclick="closeDrawer()" class="px-5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl text-xs">Закрыть спецификацию</button>
+          <button onclick="closeDrawer()" class="px-5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl text-xs" data-i18n="common.close">Закрыть</button>
         </div>
       `;
     },
 
-    // New SKU with all fields matching Screenshot 1 & 2
     'new-sku': () => `
       <div class="flex items-center justify-between px-6 py-4 border-b border-slate-100 bg-white sticky top-0 z-10">
         <div>
-          <h3 class="font-extrabold text-slate-900">Добавить новый товар (Полная спецификация)</h3>
-          <p class="text-xs text-slate-500 mt-0.5">Заполните поля в соответствии с экспортными требованиями</p>
+          <h3 class="font-extrabold text-slate-900">Добавить новый товар в каталог</h3>
+          <p class="text-xs text-slate-500 mt-0.5">Полная экспортная спецификация</p>
         </div>
         <button onclick="closeDrawer()" class="text-slate-400 hover:text-slate-700"><i data-lucide="x" class="w-5 h-5"></i></button>
       </div>
 
       <div class="p-6 space-y-6 flex-1 overflow-y-auto scrollbar-thin text-xs">
-        
-        <!-- Основное -->
         <div class="space-y-3">
           <h4 class="font-bold text-slate-900 uppercase text-[11px] tracking-wider text-alfa">1. Основная информация</h4>
-          <div><label class="block font-bold text-slate-700 mb-1">Полное наименование товара</label><input type="text" id="ns-name" placeholder="например, Рис басмати пропаренный длиннозерный 1121, 1 тонна" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none"></div>
+          <div><label class="block font-bold text-slate-700 mb-1">Полное наименование</label><input type="text" id="ns-name" placeholder="например, Рис басмати пропаренный 1121" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none"></div>
           <div class="grid grid-cols-2 gap-3">
             <div><label class="block font-bold text-slate-700 mb-1">Бренд</label><input type="text" id="ns-brand" placeholder="Indiafeast" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none"></div>
             <div><label class="block font-bold text-slate-700 mb-1">Код ТНВЭД (HS Code)</label><input type="text" id="ns-hs" value="10063092" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg font-mono outline-none"></div>
           </div>
           <div class="grid grid-cols-2 gap-3">
-            <div><label class="block font-bold text-slate-700 mb-1">Артикул (SKU)</label><input type="text" id="ns-art" value="IF-1121-ST" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg font-mono outline-none"></div>
+            <div><label class="block font-bold text-slate-700 mb-1">Артикул (SKU)</label><input type="text" id="ns-art" value="IF-1121-NEW" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg font-mono outline-none"></div>
             <div><label class="block font-bold text-slate-700 mb-1">Категория</label>
               <select id="ns-cat" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none">
                 <option value="Food, Grains & Spices">Food, Grains & Spices</option>
@@ -1528,59 +1648,30 @@ function openDrawer(type, contextId){
               </select>
             </div>
           </div>
-          <div class="grid grid-cols-2 gap-3">
-            <div><label class="block font-bold text-slate-700 mb-1">Группа товара</label><input type="text" id="ns-group" value="Зерно, семена и злаки" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none"></div>
-            <div><label class="block font-bold text-slate-700 mb-1">Состояние</label><input type="text" id="ns-state" value="Новый" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none"></div>
-          </div>
         </div>
 
-        <!-- Коммерческие условия -->
         <div class="space-y-3 pt-3 border-t border-slate-100">
           <h4 class="font-bold text-slate-900 uppercase text-[11px] tracking-wider text-alfa">2. Цены и коммерческие условия</h4>
           <div class="grid grid-cols-3 gap-3">
             <div><label class="block font-bold text-slate-700 mb-1">Цена Мин (₽)</label><input type="number" id="ns-pmin" value="79737" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none"></div>
             <div><label class="block font-bold text-slate-700 mb-1">Цена Макс (₽)</label><input type="number" id="ns-pmax" value="82395" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none"></div>
-            <div><label class="block font-bold text-slate-700 mb-1">Ед. измерения</label><input type="text" id="ns-unit" value="Тонна (1000 кг)" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none"></div>
+            <div><label class="block font-bold text-slate-700 mb-1">MOQ</label><input type="number" id="ns-moq" value="26" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none"></div>
           </div>
           <div class="grid grid-cols-3 gap-3">
-            <div><label class="block font-bold text-slate-700 mb-1">MOQ (Миним. объем)</label><input type="number" id="ns-moq" value="26" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none"></div>
             <div><label class="block font-bold text-slate-700 mb-1">Аванс (%)</label><input type="text" id="ns-adv" value="30 %" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none"></div>
-            <div><label class="block font-bold text-slate-700 mb-1">По факту (%)</label><input type="text" id="ns-post" value="70 %" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none"></div>
-          </div>
-          <div class="grid grid-cols-3 gap-3">
-            <div><label class="block font-bold text-slate-700 mb-1">Incoterms</label><select id="ns-inco" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none"><option selected>FOB</option><option>CIF</option><option>EXW</option></select></div>
-            <div><label class="block font-bold text-slate-700 mb-1">Образец доступен</label><select id="ns-sample" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none"><option selected>Да</option><option>Нет</option></select></div>
-            <div><label class="block font-bold text-slate-700 mb-1">Срок подготовки</label><input type="text" id="ns-lead" value="30 дней" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none"></div>
+            <div><label class="block font-bold text-slate-700 mb-1">По B/L (%)</label><input type="text" id="ns-post" value="70 %" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none"></div>
+            <div><label class="block font-bold text-slate-700 mb-1">Incoterms</label><select id="ns-inco" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none"><option selected>FOB</option><option>CIF</option></select></div>
           </div>
         </div>
 
-        <!-- Описание и особенности -->
         <div class="space-y-3 pt-3 border-t border-slate-100">
-          <h4 class="font-bold text-slate-900 uppercase text-[11px] tracking-wider text-alfa">3. Описание и характеристики</h4>
-          <div><label class="block font-bold text-slate-700 mb-1">Описание продукта</label><textarea id="ns-desc" rows="2" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none resize-none">1121 Steam Basmati Rice — экстрадлинный ароматный рис басмати для HoReCa и ритейла.</textarea></div>
-          <div class="grid grid-cols-2 gap-3">
-            <div><label class="block font-bold text-slate-700 mb-1">Цвет</label><input type="text" id="ns-color" value="White" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none"></div>
-            <div><label class="block font-bold text-slate-700 mb-1">Гарантийный период</label><input type="text" id="ns-warranty" value="36 месяцев" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none"></div>
-          </div>
-          <div><label class="block font-bold text-slate-700 mb-1">Материал / состав</label><input type="text" id="ns-mat" value="Натуральный рис басмати сорта 1121" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none"></div>
-        </div>
-
-        <!-- Логистика и габариты -->
-        <div class="space-y-3 pt-3 border-t border-slate-100">
-          <h4 class="font-bold text-slate-900 uppercase text-[11px] tracking-wider text-alfa">4. Логистика и габариты</h4>
+          <h4 class="font-bold text-slate-900 uppercase text-[11px] tracking-wider text-alfa">3. Описание и логистика</h4>
+          <div><label class="block font-bold text-slate-700 mb-1">Описание продукта</label><textarea id="ns-desc" rows="2" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none resize-none">1121 Steam Basmati Rice — высший сорт длиннозерного риса.</textarea></div>
           <div class="grid grid-cols-2 gap-3">
             <div><label class="block font-bold text-slate-700 mb-1">Порт отгрузки</label><input type="text" id="ns-port" value="Mundra" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none"></div>
-            <div><label class="block font-bold text-slate-700 mb-1">Метод доставки</label><input type="text" id="ns-delivery" value="Морем" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none"></div>
-          </div>
-          <div><label class="block font-bold text-slate-700 mb-1">Детали упаковки</label><input type="text" id="ns-pkg" value="Мешки BOPP 25 кг / 50 кг" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none"></div>
-          <div class="grid grid-cols-4 gap-2">
-            <div><label class="block font-bold text-slate-700 mb-1">Ширина</label><input type="text" id="ns-w" value="500 mm" class="w-full px-2 py-1.5 bg-slate-50 border border-slate-200 rounded-lg outline-none"></div>
-            <div><label class="block font-bold text-slate-700 mb-1">Высота</label><input type="text" id="ns-h" value="120 mm" class="w-full px-2 py-1.5 bg-slate-50 border border-slate-200 rounded-lg outline-none"></div>
-            <div><label class="block font-bold text-slate-700 mb-1">Длина</label><input type="text" id="ns-l" value="700 mm" class="w-full px-2 py-1.5 bg-slate-50 border border-slate-200 rounded-lg outline-none"></div>
-            <div><label class="block font-bold text-slate-700 mb-1">Вес</label><input type="text" id="ns-weight" value="25 кг" class="w-full px-2 py-1.5 bg-slate-50 border border-slate-200 rounded-lg outline-none"></div>
+            <div><label class="block font-bold text-slate-700 mb-1">Детали упаковки</label><input type="text" id="ns-pkg" value="Мешки BOPP 25 кг" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none"></div>
           </div>
         </div>
-
       </div>
 
       <div class="px-6 py-4 border-t border-slate-100 bg-white">
@@ -1621,7 +1712,7 @@ function openDrawer(type, contextId){
           <div class="grid grid-cols-2 gap-3">
             <div><p class="text-slate-500 uppercase font-bold text-[10px]">Товар</p><p class="font-bold text-slate-800">Мячи тренировочные SYNCO</p></div>
             <div><p class="text-slate-500 uppercase font-bold text-[10px]">Количество</p><p class="font-bold text-slate-800">5 000 шт</p></div>
-            <div><p class="text-slate-500 uppercase font-bold text-[10px]">Итого</p><p class="font-bold text-slate-800">705 000 ₽</p></div>
+            <div><p class="text-slate-500 uppercase font-bold text-[10px]">Итого</p><p class="font-bold text-slate-800">${fmtMoney(705000)}</p></div>
             <div><p class="text-slate-500 uppercase font-bold text-[10px]">Условия</p><p class="font-bold text-slate-800">FOB Nhava Sheva</p></div>
           </div>
         </div>
@@ -1639,7 +1730,7 @@ function openDrawer(type, contextId){
       <div class="p-6 space-y-4 flex-1 text-xs">
         <div class="bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-indigo-950 space-y-1">
           <p class="font-bold">Рис басмати 1121 Indiafeast (26 тонн)</p>
-          <p>Сумма сделки: <b>2 073 162 ₽</b> (FOB Mundra). 30% аванс / 70% коносамент.</p>
+          <p>Сумма сделки: <b>${fmtMoney(2073162)}</b> (FOB Mundra). 30% аванс / 70% коносамент.</p>
         </div>
         <label class="flex items-start gap-2.5 cursor-pointer bg-amber-50 border border-amber-200 rounded-xl p-3">
           <input type="checkbox" id="contract-agree" class="mt-0.5 rounded accent-alfa" onchange="document.getElementById('sign-now-btn').disabled = !this.checked; document.getElementById('sign-now-btn').className = this.checked ? 'flex-1 py-2.5 bg-alfa hover:bg-alfa-hover text-white text-xs font-bold rounded-xl transition cursor-pointer' : 'flex-1 py-2.5 bg-slate-300 text-white text-xs font-bold rounded-xl cursor-not-allowed'">
@@ -1676,7 +1767,7 @@ function openDrawer(type, contextId){
       </div>
       <div class="p-6 space-y-4 flex-1 text-xs">
         <div class="bg-purple-50 border border-purple-200 rounded-xl p-3 text-purple-900">
-          🔒 <b>5 404 424 ₽</b> заблокированы в банке. Загрузите B/L для выплаты 70% остатка.
+          🔒 <b>${fmtMoney(5404424)}</b> заблокированы в банке. Загрузите B/L для выплаты 70% остатка.
         </div>
         <div><label class="block font-bold text-slate-700 mb-1">Номер B/L</label><input type="text" value="MAEU-INNSA-2025-9921" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg font-mono outline-none"></div>
         <div>
@@ -1749,76 +1840,62 @@ function drawerAddSku(){
   const hs = document.getElementById('ns-hs')?.value.trim() || '10063092';
   const art = document.getElementById('ns-art')?.value.trim() || 'SKU-' + Math.floor(Math.random()*1000);
   const cat = document.getElementById('ns-cat')?.value || 'Food, Grains & Spices';
-  const group = document.getElementById('ns-group')?.value || 'Зерно и крупы';
-  const state = document.getElementById('ns-state')?.value || 'Новый';
   const pmin = parseFloat(document.getElementById('ns-pmin')?.value) || 80000;
   const pmax = parseFloat(document.getElementById('ns-pmax')?.value) || 85000;
-  const unit = document.getElementById('ns-unit')?.value || 'Тонна (1000 кг)';
   const moq = parseFloat(document.getElementById('ns-moq')?.value) || 20;
   const adv = document.getElementById('ns-adv')?.value || '30 %';
   const post = document.getElementById('ns-post')?.value || '70 %';
   const inco = document.getElementById('ns-inco')?.value || 'FOB';
-  const sample = document.getElementById('ns-sample')?.value || 'Да';
-  const lead = document.getElementById('ns-lead')?.value || '30 дней';
   const desc = document.getElementById('ns-desc')?.value || 'Экспортная партия высшего качества.';
-  const color = document.getElementById('ns-color')?.value || 'Стандарт';
-  const warranty = document.getElementById('ns-warranty')?.value || '24 месяца';
-  const mat = document.getElementById('ns-mat')?.value || 'Натуральное сырье';
   const port = document.getElementById('ns-port')?.value || 'Mundra';
-  const delivery = document.getElementById('ns-delivery')?.value || 'Морем';
   const pkg = document.getElementById('ns-pkg')?.value || 'Экспортная тара';
-  const w = document.getElementById('ns-w')?.value || '500 mm';
-  const h = document.getElementById('ns-h')?.value || '120 mm';
-  const l = document.getElementById('ns-l')?.value || '700 mm';
-  const weight = document.getElementById('ns-weight')?.value || '25 кг';
 
   if(name){
     CATALOG_DATA.unshift({
       id: art,
-      name,
+      name: { ru: name, en: name, hi: name, zh: name },
       brand,
       category: cat,
-      group,
-      state,
+      group: { ru: 'Новые поступления', en: 'New Arrivals', hi: 'नया आगमन', zh: '最新到货' },
+      state: { ru: 'Новый', en: 'New', hi: 'नया', zh: '全新' },
       hs,
-      unit,
-      unitShort: 'т',
-      calcBase: unit,
-      qtyInUnit: '1 шт.',
+      unit: { ru: 'т', en: 'MT', hi: 'टन', zh: '吨' },
+      unitShort: { ru: 'т', en: 'MT', hi: 'टन', zh: '吨' },
+      calcBase: { ru: '1 тонна', en: '1 MT', hi: '1 टन', zh: '1 吨' },
+      qtyInUnit: '1',
       priceMin: pmin,
       priceMax: pmax,
       oldPriceMin: null,
       oldPriceMax: null,
       moq,
       country: 'India',
-      color,
-      material: mat,
-      scope: 'Экспортные поставки',
+      color: 'Standard',
+      material: { ru: 'Натуральное экспортное сырье', en: 'Natural Export Grade Material', hi: 'प्राकृतिक निर्यात सामग्री', zh: '天然出口级原料' },
+      scope: { ru: 'B2B поставки', en: 'B2B Wholesale', hi: 'थोक आपूर्ति', zh: 'B2B 批发' },
       industry: cat,
-      specialInstr: 'Хранить согласно ГОСТ/ISO',
-      warranty,
-      desc,
-      features: ['100% экспортный стандарт', 'Сертификат происхождения в комплекте'],
+      specialInstr: { ru: 'Хранить в сухом месте', en: 'Store in dry place', hi: 'सूखी जगह में रखें', zh: '干燥处存放' },
+      warranty: { ru: '24 месяца', en: '24 Months', hi: '24 महीने', zh: '24 个月' },
+      desc: { ru: desc, en: desc, hi: desc, zh: desc },
+      features: { ru: ['100% Экспортный стандарт'], en: ['100% Export Quality'], hi: ['100% निर्यात मानक'], zh: ['100% 出口标准'] },
       specItems: [
-        { label: 'Чистота', val: '95%' },
-        { label: 'Влажность', val: 'до 12.5%' }
+        { label: { ru: 'Чистота', en: 'Purity', hi: 'शुद्धता', zh: '纯度' }, val: '95%' }
       ],
-      pkgDetails: pkg,
-      deliveryMethod: delivery,
+      pkgDetails: { ru: pkg, en: pkg, hi: pkg, zh: pkg },
+      deliveryMethod: { ru: 'Морем', en: 'Sea Freight', hi: 'समुद्री माल', zh: '海运' },
       port,
-      dims: { w, h, l, weight },
+      dims: { w: '500 mm', h: '120 mm', l: '700 mm', weight: '25 kg' },
       advance: adv,
       postPay: post,
       incoterms: inco,
-      sample,
-      leadTime: lead,
-      icon: 'package-check',
-      iconUrl: 'https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&w=400&q=80'
+      sample: { ru: 'Да', en: 'Yes', hi: 'हाँ', zh: '提供' },
+      leadTime: { ru: '20 дней', en: '20 Days', hi: '20 दिन', zh: '20 天' },
+      icon: 'package',
+      bgGradient: 'bg-gradient-to-br from-rose-600 to-red-800'
     });
   }
   closeDrawer();
   renderCatalog();
-  showNotify(LANG === 'ru' ? 'Новый товар со всеми характеристиками опубликован в каталоге!' : 'New SKU with full specifications published!');
+  showNotify(LANG === 'ru' ? 'Новый товар опубликован в каталоге!' : 'New SKU published in catalog!');
 }
 
 function showNotify(msg){
