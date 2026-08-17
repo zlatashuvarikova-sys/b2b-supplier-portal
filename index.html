@@ -587,8 +587,6 @@ const CATALOG_DATA = [
     qtyInUnit: '1',
     priceMin: 79737,
     priceMax: 82395,
-    oldPriceMin: 90000,
-    oldPriceMax: 93000,
     moq: 26,
     country: 'India',
     color: 'White',
@@ -667,8 +665,6 @@ const CATALOG_DATA = [
     qtyInUnit: '1',
     priceMin: 141,
     priceMax: 141,
-    oldPriceMin: null,
-    oldPriceMax: null,
     moq: 500,
     country: 'India',
     color: 'Red / White Seam',
@@ -744,8 +740,6 @@ const CATALOG_DATA = [
     qtyInUnit: '1',
     priceMin: 91,
     priceMax: 118,
-    oldPriceMin: null,
-    oldPriceMax: null,
     moq: 1200,
     country: 'India',
     color: 'Natural Millet',
@@ -821,8 +815,6 @@ const CATALOG_DATA = [
     qtyInUnit: '1',
     priceMin: 2702212,
     priceMax: 2702212,
-    oldPriceMin: 2950000,
-    oldPriceMax: 2950000,
     moq: 1,
     country: 'India',
     color: 'Industrial Red / Black',
@@ -1201,15 +1193,17 @@ function goStep(n){
   const pb = document.getElementById('profile-btn');
   const chatFab = document.getElementById('float-chat-container');
 
-  if(n >= 2){
+  // Chat and profile are strictly shown starting from Step 3 (Catalog)
+  if(n >= 3){
     chatFab.classList.remove('hidden');
+    pb.classList.remove('hidden');
+    pb.classList.add('inline-flex');
   } else {
     chatFab.classList.add('hidden');
     document.getElementById('float-chat-box').classList.add('hidden');
+    pb.classList.add('hidden');
+    pb.classList.remove('inline-flex');
   }
-
-  if(n >= 3){ pb.classList.remove('hidden'); pb.classList.add('inline-flex'); }
-  else { pb.classList.add('hidden'); pb.classList.remove('inline-flex'); }
 
   renderStepper();
   applyI18n();
@@ -1291,10 +1285,6 @@ function renderCatalog(){
       ? `${fmtMoney(p.priceMin)}`
       : `${fmtMoney(p.priceMin)} – ${fmtMoney(p.priceMax)}`;
 
-    const oldPriceStr = p.oldPriceMin
-      ? `${fmtMoney(p.oldPriceMin)} – ${fmtMoney(p.oldPriceMax)}`
-      : null;
-
     const unitShortStr = getLocalStr(p.unitShort);
     const prodName = getLocalStr(p.name);
     const bannerHtml = getProductSvgBanner(p.icon, p.bgGradient, 'HS ' + p.hs, p.brand);
@@ -1308,7 +1298,6 @@ function renderCatalog(){
               <span class="text-base font-black text-slate-900 leading-tight">${priceRange}</span>
               <span class="text-xs font-semibold text-slate-500">/ ${unitShortStr}</span>
             </div>
-            ${oldPriceStr ? `<p class="text-[11px] text-slate-400 line-through">${oldPriceStr}</p>` : ''}
             <h3 class="font-bold text-slate-800 text-xs leading-snug line-clamp-2 mt-1.5">${prodName}</h3>
           </div>
         </div>
@@ -1556,7 +1545,6 @@ function renderDrawerContent(type, contextId){
       const priceRange = p.priceMin === p.priceMax
         ? `${fmtMoney(p.priceMin)}`
         : `${fmtMoney(p.priceMin)} – ${fmtMoney(p.priceMax)}`;
-      const oldPrice = p.oldPriceMin ? `${fmtMoney(p.oldPriceMin)} – ${fmtMoney(p.oldPriceMax)}` : '';
       const prodName = getLocalStr(p.name);
       const prodGroup = getLocalStr(p.group);
       const prodDesc = getLocalStr(p.desc);
@@ -1589,7 +1577,6 @@ function renderDrawerContent(type, contextId){
               <p class="text-[11px] text-slate-500 font-mono">SKU: <b>${p.id}</b> · HS: <b>${p.hs}</b></p>
               <div>
                 <span class="text-2xl font-black text-slate-900">${priceRange}</span>
-                ${oldPrice ? `<span class="text-xs text-slate-400 line-through ml-2">${oldPrice}</span>` : ''}
               </div>
               
               <div class="border-t border-slate-200 pt-3 space-y-1.5 text-[11px]">
@@ -1919,8 +1906,6 @@ function drawerAddSku(){
       qtyInUnit: '1',
       priceMin: pmin,
       priceMax: pmax,
-      oldPriceMin: null,
-      oldPriceMax: null,
       moq,
       country: 'India',
       color: 'Standard',
