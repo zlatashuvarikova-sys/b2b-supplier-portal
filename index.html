@@ -31,102 +31,26 @@
     body { background: #F3F4F6; }
     .scrollbar-thin::-webkit-scrollbar { width: 5px; height: 5px; }
     .scrollbar-thin::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 4px; }
-    #side-drawer { transition: transform 0.3s cubic-bezier(0.16,1,0.3,1); transform: translateX(100%); }
-    #side-drawer.open { transform: translateX(0); }
-    #drawer-overlay { transition: opacity 0.25s; }
   </style>
 </head>
 <body class="font-sans antialiased min-h-screen flex flex-col text-slate-800">
 
-<!-- ======= NOTIFY MODAL ======= -->
-<div id="notify-modal" class="hidden fixed inset-0 z-[70] flex items-center justify-center bg-slate-900/50 p-4">
-  <div class="bg-white rounded-2xl shadow-2xl w-full max-w-sm border border-slate-200">
-    <div class="flex items-center justify-between px-5 py-4 border-b border-slate-100">
-      <h3 class="font-bold text-slate-900" data-i18n="notify.title">Уведомление</h3>
-      <button onclick="closeNotify()" class="text-slate-400 hover:text-slate-600"><i data-lucide="x" class="w-4 h-4"></i></button>
+<!-- ======= SUCCESS MODAL ======= -->
+<div id="success-modal" class="hidden fixed inset-0 z-[70] flex items-center justify-center bg-slate-900/50 p-4">
+  <div class="bg-white rounded-2xl shadow-2xl w-full max-w-sm border border-slate-200 text-center">
+    <div class="pt-8 pb-4">
+      <div class="w-16 h-16 bg-emerald-100 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-emerald-200">
+        <i data-lucide="check-circle" class="w-8 h-8 text-emerald-600"></i>
+      </div>
+      <h3 class="font-extrabold text-slate-900 text-lg" data-i18n="success.title">Поздравляем!</h3>
+      <p class="text-sm text-slate-600 mt-2" data-i18n="success.message">Теперь вы можете принимать заказы от покупателей из России и других стран!</p>
     </div>
-    <p id="notify-msg" class="px-5 py-4 text-sm text-slate-600 leading-relaxed"></p>
-    <div class="px-5 pb-4 flex justify-end">
-      <button onclick="closeNotify()" class="px-5 py-2 bg-alfa text-white text-sm font-semibold rounded-xl hover:bg-alfa-hover transition">OK</button>
-    </div>
-  </div>
-</div>
-
-<!-- ======= COMPLIANCE MODAL ======= -->
-<div id="compliance-modal" class="hidden fixed inset-0 z-[60] flex items-center justify-center bg-slate-900/50 p-4">
-  <div class="bg-white rounded-2xl shadow-2xl w-full max-w-lg border border-slate-200">
-    <div class="flex items-center justify-between px-6 py-4 border-b border-slate-100">
-      <div>
-        <h3 class="font-bold text-slate-900 text-base" data-i18n="compliance.title">Центр соответствия поставщика</h3>
-        <p class="text-xs text-emerald-600 font-semibold mt-0.5" data-i18n="compliance.sub">Indian Manufactories Group Pvt. Ltd. — KYB Verified</p>
-      </div>
-      <button onclick="closeCompliance()" class="text-slate-400 hover:text-slate-600"><i data-lucide="x" class="w-5 h-5"></i></button>
-    </div>
-    <div class="p-5 space-y-2.5 max-h-[60vh] overflow-y-auto scrollbar-thin">
-      <div class="flex items-center justify-between bg-slate-50 rounded-xl px-4 py-3 border border-slate-100">
-        <div><p class="text-[10px] text-slate-500 font-bold uppercase" data-i18n="compliance.gst">GSTIN (Штат 27 — Maharashtra)</p><p class="text-sm font-mono font-bold text-slate-800">27AABCU9603R1ZM</p></div>
-        <span class="text-xs font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-full" data-i18n="compliance.active">✓ Активен</span>
-      </div>
-      <div class="flex items-center justify-between bg-slate-50 rounded-xl px-4 py-3 border border-slate-100">
-        <div><p class="text-[10px] text-slate-500 font-bold uppercase" data-i18n="compliance.iec">DGFT IEC / PAN</p><p class="text-sm font-mono font-bold text-slate-800">0319842109 · AABCU9603R</p></div>
-        <span class="text-xs font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-full" data-i18n="compliance.valid">✓ Валидирован</span>
-      </div>
-      <div class="flex items-center justify-between bg-slate-50 rounded-xl px-4 py-3 border border-slate-100">
-        <div><p class="text-[10px] text-slate-500 font-bold uppercase" data-i18n="compliance.council">Экспортный совет</p><p class="text-sm font-bold text-slate-800">APEDA & FIEO (A/2021/188843)</p></div>
-        <span class="text-xs font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-full" data-i18n="compliance.member">✓ Член совета</span>
-      </div>
-      <div class="flex items-center justify-between bg-slate-50 rounded-xl px-4 py-3 border border-slate-100">
-        <div><p class="text-[10px] text-slate-500 font-bold uppercase" data-i18n="compliance.bank">AD-код и Валютный счет</p><p class="text-sm font-bold text-slate-800">HDFC Bank · AD: 6300182 · JNPT INNSA1</p></div>
-        <span class="text-xs font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-full" data-i18n="compliance.linked">✓ Привязан</span>
-      </div>
-    </div>
-    <div class="px-5 pb-5 pt-3 flex justify-end border-t border-slate-100">
-      <button onclick="closeCompliance()" class="px-5 py-2 bg-slate-100 text-slate-700 text-sm font-semibold rounded-xl hover:bg-slate-200 transition" data-i18n="common.close">Закрыть</button>
+    <div class="px-6 pb-6 pt-4 border-t border-slate-100">
+      <button onclick="goToOrdersHub()" class="w-full py-3 bg-alfa hover:bg-alfa-hover text-white font-bold rounded-xl shadow-sm transition text-sm flex items-center justify-center gap-2">
+        <span data-i18n="success.button">Перейти в Orders Hub</span><i data-lucide="arrow-right" class="w-4 h-4"></i>
+      </button>
     </div>
   </div>
-</div>
-
-<!-- ======= SIDE DRAWER ======= -->
-<div id="drawer-overlay" class="hidden fixed inset-0 z-40 bg-slate-900/50 opacity-0" onclick="closeDrawer()"></div>
-<div id="side-drawer" class="fixed top-0 right-0 h-full w-full max-w-3xl bg-white z-50 shadow-2xl flex flex-col overflow-hidden">
-  <div id="drawer-content" class="flex flex-col h-full overflow-y-auto scrollbar-thin"></div>
-</div>
-
-<!-- ======= FLOATING MESSENGER ======= -->
-<div id="float-chat-container" class="hidden fixed bottom-6 right-6 z-40 flex flex-col items-end">
-  <div id="float-chat-box" class="hidden mb-3 w-[360px] sm:w-[420px] h-[540px] bg-white rounded-2xl shadow-2xl border border-slate-200 flex flex-col overflow-hidden">
-    <div class="px-4 py-3 bg-alfa-dark text-white flex items-center justify-between">
-      <div class="flex items-center gap-2">
-        <button id="fc-back-btn" onclick="renderFloatInbox()" class="hidden text-slate-300 hover:text-white mr-1"><i data-lucide="arrow-left" class="w-4 h-4"></i></button>
-        <div>
-          <h4 id="fc-header-title" class="text-xs font-bold leading-tight" data-i18n="fchat.title">Сообщения по сделкам</h4>
-          <p id="fc-header-sub" class="text-[10px] text-slate-400" data-i18n="fchat.sub">Выберите диалог</p>
-        </div>
-      </div>
-      <div class="flex items-center gap-2">
-        <span class="text-[10px] bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 px-2 py-0.5 rounded font-semibold flex items-center gap-1">
-          <i data-lucide="shield-check" class="w-2.5 h-2.5"></i>Privacy Guard
-        </span>
-        <button onclick="toggleFloatChat()" class="text-slate-400 hover:text-white"><i data-lucide="x" class="w-4 h-4"></i></button>
-      </div>
-    </div>
-    <div id="fc-threads-list" class="flex-1 overflow-y-auto divide-y divide-slate-100 scrollbar-thin"></div>
-    <div id="fc-active-chat" class="hidden flex-1 flex flex-col bg-slate-50 overflow-hidden">
-      <div id="fc-context-bar" class="px-3.5 py-2 bg-amber-50 border-b border-amber-200/70 text-[11px] text-amber-900 flex items-center justify-between shrink-0">
-        <span id="fc-context-text" class="truncate font-medium"></span>
-        <button id="fc-context-action" class="ml-2 font-bold text-alfa hover:underline shrink-0 text-[10px]" data-i18n="fchat.toDeal">К сделке →</button>
-      </div>
-      <div id="fc-msg-body" class="flex-1 overflow-y-auto p-3.5 space-y-2.5 text-xs scrollbar-thin"></div>
-      <form onsubmit="sendFloatMsg(event)" class="p-2.5 bg-white border-t border-slate-200 flex gap-1.5">
-        <input type="text" id="fc-input" data-i18n-placeholder="chat.placeholder" placeholder="Введите сообщение..." class="flex-1 px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-xl text-xs outline-none focus:ring-1 focus:ring-alfa/40">
-        <button type="submit" class="p-2 bg-alfa hover:bg-alfa-hover text-white rounded-xl transition"><i data-lucide="send" class="w-3.5 h-3.5"></i></button>
-      </form>
-    </div>
-  </div>
-  <button id="float-chat-btn" onclick="toggleFloatChat()" class="relative w-14 h-14 rounded-full bg-alfa hover:bg-alfa-hover text-white shadow-xl flex items-center justify-center transition-transform hover:scale-105 active:scale-95">
-    <i data-lucide="message-square" class="w-6 h-6"></i>
-    <span id="float-chat-badge" class="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-amber-400 text-slate-900 text-[10px] font-extrabold flex items-center justify-center border-2 border-white shadow-sm">3</span>
-  </button>
 </div>
 
 <!-- ======= HEADER ======= -->
@@ -137,32 +61,12 @@
         <span class="leading-none mt-0.5">A</span>
         <div class="w-3.5 h-0.5 bg-white rounded-full mt-0.5"></div>
       </div>
-      <div class="flex items-center">
-        <span class="text-xl font-black tracking-tight text-slate-900 leading-none">Alfa<span class="text-alfa">-Global</span></span>
-      </div>
+      <span class="text-xl font-black tracking-tight text-slate-900 leading-none">Alfa<span class="text-alfa">-Global</span></span>
     </div>
-    <div class="flex items-center gap-2.5">
-      <select id="curr-sel" onchange="changeCurrency(this.value)" class="text-xs font-semibold bg-slate-50 border border-slate-200 rounded-lg px-2 py-1.5 text-slate-700 outline-none cursor-pointer">
-        <option value="RUB" selected>₽ RUB</option>
-        <option value="INR">₹ INR</option>
-        <option value="USD">$ USD</option>
-        <option value="EUR">€ EUR</option>
-        <option value="CNY">¥ CNY</option>
-      </select>
-      <select id="lang-sel" onchange="changeLang(this.value)" class="text-xs font-semibold bg-slate-50 border border-slate-200 rounded-lg px-2 py-1.5 text-slate-700 outline-none cursor-pointer">
-        <option value="ru" selected>RU</option>
-        <option value="en">EN</option>
-        <option value="hi">HI (हिन्दी)</option>
-        <option value="zh">ZH (中文)</option>
-      </select>
-      <button id="profile-btn" onclick="openCompliance()" class="hidden items-center gap-2 bg-emerald-50 border border-emerald-200 rounded-xl px-3 py-1.5 hover:bg-emerald-100 transition">
-        <div class="w-7 h-7 rounded-full bg-emerald-600 text-white font-bold text-xs flex items-center justify-center">IMG</div>
-        <div class="text-left">
-          <p class="text-xs font-bold text-slate-900 leading-tight">Indian Manufactories Group</p>
-          <p class="text-[10px] text-emerald-700 font-semibold leading-tight flex items-center gap-1"><i data-lucide="shield-check" class="w-2.5 h-2.5"></i><span data-i18n="profile.verified">KYB Верифицирован</span></p>
-        </div>
-      </button>
-    </div>
+    <select id="lang-sel" onchange="changeLang(this.value)" class="text-xs font-semibold bg-slate-50 border border-slate-200 rounded-lg px-2 py-1.5 text-slate-700 outline-none cursor-pointer">
+      <option value="ru" selected>RU</option>
+      <option value="en">EN</option>
+    </select>
   </div>
 </header>
 
@@ -184,35 +88,31 @@
       </div>
       <div id="auth-a" class="space-y-4">
         <div>
-          <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" data-i18n="reg.email">Корпоративный Email</label>
-          <input type="email" value="export@indianmanufactories.in" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium outline-none focus:ring-2 focus:ring-alfa/40">
+          <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" data-i18n="reg.email">Email</label>
+          <input type="email" id="reg-email" value="export@indianmanufactories.in" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium outline-none focus:ring-2 focus:ring-alfa/40" required>
         </div>
         <div>
-          <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" data-i18n="reg.phone">Номер телефона</label>
-          <input type="tel" value="+91 98201 44820" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium outline-none focus:ring-2 focus:ring-alfa/40">
+          <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" data-i18n="reg.phone">Телефон</label>
+          <input type="tel" id="reg-phone" value="+91 98201 44820" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium outline-none focus:ring-2 focus:ring-alfa/40" required>
         </div>
         <div>
-          <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" data-i18n="reg.password">Создайте пароль</label>
-          <input type="password" value="••••••••••••" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium outline-none focus:ring-2 focus:ring-alfa/40">
+          <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" data-i18n="reg.password">Пароль</label>
+          <input type="password" id="reg-password" value="••••••••••••" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium outline-none focus:ring-2 focus:ring-alfa/40" required minlength="6">
         </div>
-        <button onclick="showOtp()" class="w-full py-3 bg-alfa hover:bg-alfa-hover text-white font-bold rounded-xl shadow-sm transition text-sm flex items-center justify-center gap-2">
-          <span data-i18n="reg.continue">Продолжить регистрацию</span><i data-lucide="arrow-right" class="w-4 h-4"></i>
+        <button type="button" onclick="showOtp()" class="w-full py-3 bg-alfa hover:bg-alfa-hover text-white font-bold rounded-xl shadow-sm transition text-sm flex items-center justify-center gap-2">
+          <span data-i18n="reg.continue">Продолжить</span><i data-lucide="arrow-right" class="w-4 h-4"></i>
         </button>
       </div>
       <div id="auth-b" class="hidden space-y-4">
-        <div class="bg-blue-50 border border-blue-200 rounded-xl p-3 text-xs text-blue-900" data-i18n="reg.otpSent">Код подтверждения отправлен на корпоративную почту и SMS.</div>
+        <div class="bg-blue-50 border border-blue-200 rounded-xl p-3 text-xs text-blue-900" data-i18n="reg.otpSent">Код отправлен на email и SMS.</div>
         <div>
-          <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" data-i18n="reg.otp">Одноразовый код (OTP)</label>
-          <input type="text" value="784920" maxlength="6" class="w-full px-3.5 py-2.5 bg-red-50/50 border border-alfa-mid rounded-xl text-center text-lg font-bold tracking-widest outline-none focus:ring-2 focus:ring-alfa/40 text-alfa font-mono">
-        </div>
-        <div class="bg-slate-50 border border-slate-100 rounded-xl p-3 space-y-2 text-xs text-slate-600">
-          <label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" checked class="mt-0.5 rounded accent-alfa"><span data-i18n="reg.terms">Я принимаю Условия платформы и Политику трансграничной передачи данных.</span></label>
-          <label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" checked class="mt-0.5 rounded accent-alfa"><span data-i18n="reg.kyb_consent">Согласен на автоматическую валидацию через государственные реестры (KYB).</span></label>
+          <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" data-i18n="reg.otp">Код подтверждения</label>
+          <input type="text" id="reg-otp" value="784920" maxlength="6" class="w-full px-3.5 py-2.5 bg-red-50/50 border border-alfa-mid rounded-xl text-center text-lg font-bold tracking-widest outline-none focus:ring-2 focus:ring-alfa/40 text-alfa font-mono" required>
         </div>
         <div class="flex gap-3">
-          <button onclick="backToEmailPass()" class="px-4 py-3 border border-slate-200 rounded-xl text-xs font-bold text-slate-600 hover:bg-slate-50 transition" data-i18n="common.back">← Назад</button>
-          <button onclick="goStep(2)" class="flex-1 py-3 bg-alfa hover:bg-alfa-hover text-white font-bold rounded-xl shadow-sm transition text-sm flex items-center justify-center gap-2">
-            <span data-i18n="reg.finish">Завершить регистрацию</span><i data-lucide="arrow-right" class="w-4 h-4"></i>
+          <button type="button" onclick="backToEmailPass()" class="px-4 py-3 border border-slate-200 rounded-xl text-xs font-bold text-slate-600 hover:bg-slate-50 transition" data-i18n="common.back">← Назад</button>
+          <button type="button" onclick="goStep(2)" class="flex-1 py-3 bg-alfa hover:bg-alfa-hover text-white font-bold rounded-xl shadow-sm transition text-sm flex items-center justify-center gap-2">
+            <span data-i18n="reg.finish">Готово</span><i data-lucide="arrow-right" class="w-4 h-4"></i>
           </button>
         </div>
       </div>
@@ -220,962 +120,243 @@
   </section>
 
   <!-- ===== STEP 2: KYB ===== -->
-  <section id="step-2" class="hidden">
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-      
-      <div class="lg:col-span-8 bg-white rounded-2xl border border-slate-200 shadow-sm p-7">
-        <div class="flex items-start justify-between pb-5 border-b border-slate-100 mb-6 gap-4">
-          <div>
-            <span class="text-xs font-bold text-alfa uppercase tracking-wider" data-i18n="kyb.stepTag">Шаг 2 / Верификация поставщика</span>
-            <h2 class="text-xl font-extrabold text-slate-900 mt-0.5" data-i18n="kyb.title">Юридические данные и экспортные реквизиты</h2>
-            <p class="text-xs text-slate-500 mt-1" data-i18n="kyb.subtitle">Сведения проверяются автоматически через API налоговых и таможенных органов.</p>
-          </div>
-          <span class="px-3 py-1 bg-amber-50 text-amber-700 border border-amber-200 rounded-full text-xs font-semibold flex items-center gap-1.5 shrink-0 mt-1">
-            <span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span><span data-i18n="kyb.pending">Ожидает верификации</span>
-          </span>
+  <section id="step-2" class="hidden max-w-2xl mx-auto">
+    <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-7">
+      <div class="pb-5 border-b border-slate-100 mb-6">
+        <span class="text-xs font-bold text-alfa uppercase tracking-wider" data-i18n="kyb.stepTag">Шаг 2 / Верификация</span>
+        <h2 class="text-xl font-extrabold text-slate-900 mt-2" data-i18n="kyb.title">Юридические данные и коды</h2>
+        <p class="text-xs text-slate-500 mt-1" data-i18n="kyb.subtitle">Автоматическая проверка через реестры</p>
+      </div>
+      <form onsubmit="handleKyb(event)" class="space-y-4">
+        <div>
+          <label class="block text-xs font-bold uppercase text-slate-600 mb-1" data-i18n="kyb.company">Компания</label>
+          <input type="text" id="kyb-company" value="Indian Manufactories Group Pvt. Ltd." class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm font-medium outline-none focus:ring-2 focus:ring-alfa/40" required>
         </div>
-        <form onsubmit="handleKyb(event)" class="space-y-4">
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <div class="sm:col-span-2">
-              <div class="flex items-center justify-between mb-1">
-                <label class="text-xs font-bold uppercase text-slate-600" data-i18n="kyb.companyName">Юридическое наименование</label>
-                <span class="text-[10px] text-slate-400" data-i18n="kyb.nameHint">Как в учредительных документах</span>
-              </div>
-              <input type="text" value="Indian Manufactories Group Pvt. Ltd." class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm font-medium outline-none">
-            </div>
-            <div>
-              <label class="block text-xs font-bold uppercase text-slate-600 mb-1" data-i18n="kyb.country">Страна юрисдикции</label>
-              <select class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm font-medium outline-none">
-                <option selected>🇮🇳 India</option><option>🇨🇳 China</option><option>🇹🇷 Turkey</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <div>
-              <div class="flex items-center justify-between mb-1">
-                <label class="text-xs font-bold uppercase text-slate-600" data-i18n="kyb.gstin">GSTIN (Штат 27)</label>
-                <span class="text-[10px] text-alfa font-bold" data-i18n="kyb.taxBadge">ℹ Налог</span>
-              </div>
-              <div class="relative">
-                <input type="text" value="27AABCU9603R1ZM" class="w-full px-3 py-2 pr-16 bg-slate-50 border border-slate-200 rounded-lg text-sm font-mono outline-none">
-                <span class="absolute right-2 top-2 text-[10px] font-bold text-emerald-600 bg-emerald-100 px-1.5 py-0.5 rounded" data-i18n="kyb.valid">✓ Валиден</span>
-              </div>
-            </div>
-            <div>
-              <div class="flex items-center justify-between mb-1">
-                <label class="text-xs font-bold uppercase text-slate-600" data-i18n="kyb.iec">DGFT IEC / PAN</label>
-                <span class="text-[10px] text-alfa font-bold" data-i18n="kyb.customsBadge">ℹ Таможня</span>
-              </div>
-              <div class="relative">
-                <input type="text" value="0319842109 / AABCU9603R" class="w-full px-3 py-2 pr-20 bg-slate-50 border border-slate-200 rounded-lg text-sm font-mono outline-none">
-                <span class="absolute right-2 top-2 text-[10px] font-bold text-emerald-600 bg-emerald-100 px-1.5 py-0.5 rounded" data-i18n="kyb.dgftOk">✓ DGFT</span>
-              </div>
-            </div>
-            <div>
-              <div class="flex items-center justify-between mb-1">
-                <label class="text-xs font-bold uppercase text-slate-600" data-i18n="kyb.council">Экспортный совет</label>
-                <span class="text-[10px] text-slate-400">APEDA / FIEO</span>
-              </div>
-              <input type="text" value="APEDA & FIEO (APEDA/MH/2021/188843)" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm font-medium outline-none">
-            </div>
-          </div>
-
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <div class="flex items-center justify-between mb-1">
-                <label class="text-xs font-bold uppercase text-slate-600" data-i18n="kyb.adcode">AD Code & Bank IFSC</label>
-                <span class="text-[10px] text-emerald-600 font-bold" data-i18n="kyb.valutaBadge">Для валютного контроля</span>
-              </div>
-              <input type="text" value="HDFC Bank · IFSC: HDFC0004021 · AD: 6300182" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs font-medium outline-none">
-            </div>
-            <div>
-              <label class="block text-xs font-bold uppercase text-slate-600 mb-1" data-i18n="kyb.port">Базовый порт отгрузки</label>
-              <input type="text" value="Nhava Sheva (JNPT / INNSA1), Navi Mumbai" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm font-medium outline-none">
-            </div>
-          </div>
-
+        <div class="grid grid-cols-2 gap-4">
           <div>
-            <label class="block text-xs font-bold uppercase text-slate-600 mb-1" data-i18n="kyb.factory">Адрес фабрики / производства</label>
-            <input type="text" value="Plot B-22, MIDC Industrial Area, Pune, Maharashtra 411019" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs font-medium outline-none">
+            <label class="block text-xs font-bold uppercase text-slate-600 mb-1" data-i18n="kyb.gstin">GSTIN</label>
+            <input type="text" id="kyb-gstin" value="27AABCU9603R1ZM" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm font-mono outline-none focus:ring-2 focus:ring-alfa/40" required>
+          </div>
+          <div>
+            <label class="block text-xs font-bold uppercase text-slate-600 mb-1" data-i18n="kyb.pan">PAN</label>
+            <input type="text" id="kyb-pan" value="AABCU9603R" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm font-mono outline-none focus:ring-2 focus:ring-alfa/40" required>
+          </div>
+        </div>
+        <div class="flex gap-3 pt-4 border-t border-slate-100">
+          <button type="button" onclick="goStep(1)" class="px-4 py-2 border border-slate-200 rounded-xl text-xs font-bold text-slate-600 hover:bg-slate-50 transition" data-i18n="common.back">← Назад</button>
+          <button type="submit" class="flex-1 py-2 bg-alfa hover:bg-alfa-hover text-white font-bold rounded-xl shadow-sm transition text-xs flex items-center justify-center gap-2">
+            <span data-i18n="kyb.next">Далее</span><i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ===== STEP 3: SUPPLIER CARD ===== -->
+  <section id="step-3" class="hidden">
+    <div class="max-w-5xl mx-auto space-y-6">
+      <!-- Form Section -->
+      <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-7">
+        <div class="pb-6 border-b border-slate-100 mb-6">
+          <span class="text-xs font-bold text-alfa uppercase tracking-wider" data-i18n="supplier.stepTag">Шаг 3 / Карточка поставщика</span>
+          <h1 class="text-2xl font-extrabold text-slate-900 mt-2" data-i18n="supplier.title">Профиль компании</h1>
+          <p class="text-xs text-slate-500 mt-1" data-i18n="supplier.subtitle">Информация, которую видят покупатели</p>
+        </div>
+
+        <form onsubmit="handleSupplierSubmit(event)" class="space-y-6">
+          <!-- Company Name -->
+          <div>
+            <label class="block text-xs font-bold uppercase text-slate-600 mb-2" data-i18n="supplier.companyName">Название компании</label>
+            <input type="text" id="supp-name" placeholder="e.g. Indian Manufactories Group" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-base font-bold outline-none focus:ring-2 focus:ring-alfa/40" required>
           </div>
 
+          <!-- Logo Upload -->
           <div>
-            <label class="block text-xs font-bold uppercase text-slate-600 mb-1" data-i18n="kyb.doc">Сертификаты качества и лицензии</label>
-            <div class="border-2 border-dashed border-slate-200 rounded-xl p-3.5 text-center bg-slate-50 hover:border-alfa transition cursor-pointer flex items-center justify-center gap-3">
-              <i data-lucide="file-check" class="w-6 h-6 text-emerald-500 shrink-0"></i>
-              <p class="text-xs font-medium text-slate-700 text-left">APEDA_IEC_ISO9001_NPOP_Certificates_2025.pdf <span class="text-emerald-600 font-bold block" data-i18n="kyb.docStatus">(2.8 MB · Проверено через реестр)</span></p>
+            <label class="block text-xs font-bold uppercase text-slate-600 mb-3" data-i18n="supplier.logo">Логотип</label>
+            <div class="flex items-center gap-4">
+              <div id="logo-preview" class="w-24 h-24 rounded-xl bg-gradient-to-br from-blue-100 to-blue-50 border-2 border-dashed border-blue-300 flex items-center justify-center flex-shrink-0">
+                <i data-lucide="building-2" class="w-10 h-10 text-blue-400"></i>
+              </div>
+              <div>
+                <p class="text-xs font-semibold text-slate-700 mb-2" data-i18n="supplier.logoHint">Загрузить логотип компании</p>
+                <label class="cursor-pointer inline-flex items-center px-4 py-2 border border-slate-300 rounded-lg text-xs font-bold text-slate-700 hover:bg-slate-50 transition">
+                  <i data-lucide="upload-cloud" class="w-4 h-4 mr-2"></i>
+                  <span data-i18n="supplier.upload">Выбрать файл</span>
+                  <input type="file" id="logo-input" accept="image/*" class="hidden" onchange="handleLogoUpload(event)">
+                </label>
+              </div>
             </div>
           </div>
 
-          <div class="flex items-center justify-between pt-3">
-            <button type="button" onclick="goStep(1)" class="text-xs font-semibold text-slate-500 hover:text-slate-800" data-i18n="kyb.back">← Назад к регистрации</button>
-            <button type="submit" class="py-2.5 px-6 bg-alfa hover:bg-alfa-hover text-white font-bold rounded-xl shadow-sm transition text-sm flex items-center gap-2">
-              <span data-i18n="kyb.submit">Подтвердить и открыть каталог</span><i data-lucide="check" class="w-4 h-4"></i>
+          <!-- Scope of Activity - Dropdown -->
+          <div>
+            <label for="supp-scope" class="block text-xs font-bold uppercase text-slate-600 mb-2" data-i18n="supplier.scope">Сфера деятельности</label>
+            <select id="supp-scope" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm outline-none focus:ring-2 focus:ring-alfa/40" required>
+              <option value="">Выберите отрасль</option>
+              <option value="food">Продовольственные товары, пищевые продукты</option>
+              <option value="textile">Текстиль, одежда</option>
+              <option value="leather">Изделия из кожи, обувь, сумки</option>
+              <option value="construction">Стройка и строительные товары</option>
+              <option value="electronics">Бытовая техника и электроника</option>
+              <option value="electrical">Электрика</option>
+              <option value="furniture">Мебель</option>
+              <option value="medicine">Медицина и БАДы</option>
+              <option value="beauty">Красота и уход</option>
+              <option value="horeca">Товары для HoReCa</option>
+            </select>
+          </div>
+
+          <!-- Description -->
+          <div>
+            <label for="supp-desc" class="block text-xs font-bold uppercase text-slate-600 mb-2" data-i18n="supplier.description">Описание компании</label>
+            <textarea id="supp-desc" rows="4" placeholder="Расскажите о компании, опыте, качестве товаров..." class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm outline-none focus:ring-2 focus:ring-alfa/40 resize-none" required></textarea>
+          </div>
+
+          <!-- Product Showcase -->
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <label class="block text-xs font-bold uppercase text-slate-600" data-i18n="supplier.showcase">Витрина товаров</label>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4" id="product-grid">
+              <!-- Demo products will be rendered here -->
+            </div>
+          </div>
+
+          <div class="flex gap-3 pt-4 border-t border-slate-100">
+            <button type="button" onclick="goStep(2)" class="px-4 py-2.5 border border-slate-200 rounded-xl text-xs font-bold text-slate-600 hover:bg-slate-50 transition" data-i18n="common.back">← Назад</button>
+            <button type="submit" class="flex-1 py-2.5 bg-alfa hover:bg-alfa-hover text-white font-bold rounded-xl shadow-sm transition text-sm flex items-center justify-center gap-2">
+              <span data-i18n="supplier.save">Сохранить карточку</span><i data-lucide="check" class="w-4 h-4"></i>
             </button>
           </div>
         </form>
       </div>
-
-      <div class="lg:col-span-4 space-y-4">
-        <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm space-y-4">
-          <div class="flex items-center gap-2 text-alfa font-black text-sm">
-            <i data-lucide="info" class="w-5 h-5"></i>
-            <span data-i18n="kyb.whyTitle">Зачем заполнять эти данные?</span>
-          </div>
-          <p class="text-xs text-slate-600 leading-relaxed" data-i18n="kyb.whyDesc">
-            Alfa-Global обеспечивает прямые расчеты между покупателями и зарубежными фабриками без посредников.
-          </p>
-          <div class="space-y-3 text-xs">
-            <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
-              <p class="font-bold text-slate-900 mb-0.5" data-i18n="kyb.r1Title">1. Валютный контроль банка</p>
-              <p class="text-slate-500" data-i18n="kyb.r1Desc">AD-код и банковский IFSC позволяют моментально открывать паспорта сделок без задержек.</p>
-            </div>
-            <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
-              <p class="font-bold text-slate-900 mb-0.5" data-i18n="kyb.r2Title">2. Разблокировка Эскроу</p>
-              <p class="text-slate-500" data-i18n="kyb.r2Desc">Валидация DGFT IEC подтверждает право экспорта, позволяя банку автоматически выплачивать 70% по B/L.</p>
-            </div>
-            <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
-              <p class="font-bold text-slate-900 mb-0.5" data-i18n="kyb.r3Title">3. Статус «KYB Verified»</p>
-              <p class="text-slate-500" data-i18n="kyb.r3Desc">Проверенные поставщики получают в 3.8 раз больше прямых RFQ от корпоративных заказчиков.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
     </div>
-  </section>
-
-  <!-- ===== STEP 3: CATALOG ===== -->
-  <section id="step-3" class="hidden space-y-5">
-    <div class="flex flex-wrap items-center justify-between gap-4">
-      <div>
-        <h1 class="text-2xl font-extrabold text-slate-900" data-i18n="catalog.title">Экспортный каталог</h1>
-        <p class="text-xs text-slate-500 mt-0.5 font-medium" data-i18n="catalog.subtitle">Управление ассортиментом</p>
-      </div>
-      <div class="flex gap-3">
-        <button onclick="goStep(4)" class="px-4 py-2 text-xs font-bold text-alfa border border-alfa rounded-xl hover:bg-alfa-light transition flex items-center gap-1.5">
-          <span data-i18n="catalog.toOrders">Центр заказов</span><i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-        </button>
-        <button onclick="openDrawer('new-sku')" class="px-4 py-2 bg-alfa hover:bg-alfa-hover text-white text-xs font-bold rounded-xl shadow-sm transition flex items-center gap-1.5">
-          <i data-lucide="plus" class="w-4 h-4"></i><span data-i18n="catalog.addSku">Добавить SKU</span>
-        </button>
-      </div>
-    </div>
-
-    <!-- Filters -->
-    <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-4 flex flex-wrap items-end gap-4">
-      <div class="flex-1 min-w-44">
-        <label class="block text-xs font-bold text-slate-600 mb-1" data-i18n="catalog.search">Поиск</label>
-        <input type="text" id="cat-search" oninput="renderCatalog()" data-i18n-placeholder="catalog.searchPh" placeholder="Название, бренд или артикул..." class="w-full px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-xs outline-none focus:ring-1 focus:ring-alfa/40">
-      </div>
-      <div>
-        <label class="block text-xs font-bold text-slate-600 mb-1" data-i18n="catalog.category">Категория:</label>
-        <select id="cat-cat" onchange="renderCatalog()" class="px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-xs outline-none cursor-pointer">
-          <option value="" data-i18n="catalog.allCat">Все категории</option>
-          <option value="Food, Grains & Spices" data-i18n="cat.food">Food, Grains & Spices</option>
-          <option value="Agriculture & Agro Inputs" data-i18n="cat.agro">Agriculture & Agro Inputs</option>
-          <option value="Consumer Goods & Houseware" data-i18n="cat.consumer">Consumer Goods & Houseware</option>
-          <option value="Raw Materials & Commodities" data-i18n="cat.raw">Raw Materials & Commodities</option>
-        </select>
-      </div>
-      <div>
-        <label class="block text-xs font-bold text-slate-600 mb-1" data-i18n="catalog.sort">Сортировка:</label>
-        <select id="cat-sort" onchange="renderCatalog()" class="px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-xs outline-none cursor-pointer">
-          <option value="price_asc" data-i18n="catalog.sortAsc">Цена: по возрастанию</option>
-          <option value="price_desc" data-i18n="catalog.sortDesc">Цена: по убыванию</option>
-          <option value="moq_asc" data-i18n="catalog.sortMoq">MOQ: сначала меньший</option>
-        </select>
-      </div>
-    </div>
-
-    <!-- Grid -->
-    <div id="catalog-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5"></div>
   </section>
 
   <!-- ===== STEP 4: ORDERS HUB ===== -->
-  <section id="step-4" class="hidden space-y-5">
-    <div class="flex items-center justify-between">
-      <div>
-        <h1 class="text-2xl font-extrabold text-slate-900" data-i18n="orders.title">Центр заказов и сделок</h1>
-        <p class="text-xs text-slate-500 mt-0.5" data-i18n="orders.subtitle">Мониторинг экспортных контрактов, таможенного оформления и эскроу-счетов</p>
+  <section id="step-4" class="hidden max-w-4xl mx-auto">
+    <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-8 text-center">
+      <div class="w-16 h-16 bg-emerald-100 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-emerald-200">
+        <i data-lucide="inbox" class="w-8 h-8 text-emerald-600"></i>
       </div>
-      <div class="flex gap-2">
-        <button onclick="goStep(3)" class="px-3 py-2 text-xs font-bold text-slate-600 border border-slate-200 rounded-xl hover:bg-slate-50 transition flex items-center gap-1.5">
-          <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i><span data-i18n="orders.backCat">В Каталог</span>
-        </button>
-      </div>
-    </div>
-
-    <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
-      <div class="p-4 border-b border-slate-100 flex flex-wrap items-center gap-2">
-        <span class="text-xs font-bold text-slate-600 uppercase tracking-wider mr-1" data-i18n="orders.filterLabel">Фильтр:</span>
-        <div class="flex flex-wrap gap-2" id="status-filters"></div>
-      </div>
-      <div class="overflow-x-auto">
-        <table class="w-full text-sm">
-          <thead class="bg-slate-50 text-[11px] font-bold uppercase tracking-wider text-slate-500 border-b border-slate-200">
-            <tr>
-              <th class="px-5 py-3 text-left" data-i18n="table.id">ID сделки</th>
-              <th class="px-5 py-3 text-left" data-i18n="table.product">Товар</th>
-              <th class="px-5 py-3 text-left" data-i18n="table.buyer">Покупатель</th>
-              <th class="px-5 py-3 text-left" data-i18n="table.value">Сумма</th>
-              <th class="px-5 py-3 text-left" data-i18n="table.status">Статус</th>
-              <th class="px-5 py-3 text-right" data-i18n="table.action">Действие</th>
-            </tr>
-          </thead>
-          <tbody id="orders-tbody" class="divide-y divide-slate-100"></tbody>
-        </table>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== STEP 5: DEAL ROOM ===== -->
-  <section id="step-5" class="hidden">
-    <div class="flex items-center justify-between mb-5">
-      <div>
-        <span class="text-xs font-bold text-alfa uppercase tracking-wider" data-i18n="deal.stepTag">Шаг 5 / Комната сделки</span>
-        <h1 class="text-2xl font-extrabold text-slate-900 mt-0.5" data-i18n="deal.title">Согласование контракта и E-Sign</h1>
-        <p class="text-xs text-slate-500 mt-0.5">CT-2025-0312 · Buyer #RU-4471</p>
-      </div>
-      <button onclick="goStep(4)" class="px-3 py-2 text-xs font-bold text-slate-600 border border-slate-200 rounded-xl hover:bg-slate-50 transition flex items-center gap-1.5">
-        <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i><span data-i18n="deal.back">Назад к заказам</span>
-      </button>
-    </div>
-
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-      <div class="lg:col-span-5 space-y-4">
-        <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5">
-          <h3 class="text-sm font-extrabold uppercase tracking-wider text-slate-700 pb-4 border-b border-slate-100 mb-4" data-i18n="deal.terms">Согласованные условия поставки</h3>
-          <div class="grid grid-cols-2 gap-4 text-center bg-slate-50 rounded-xl p-4 border border-slate-100 mb-4">
-            <div><p class="text-[10px] text-slate-500 uppercase font-bold" data-i18n="deal.product">Товар</p><p class="text-sm font-extrabold text-slate-900" data-i18n="deal.riceName">Рис басмати 1121</p></div>
-            <div><p class="text-[10px] text-slate-500 uppercase font-bold" data-i18n="deal.volume">Объем</p><p class="text-sm font-extrabold text-slate-900" data-i18n="deal.riceQty">26 тонн (1 FCL)</p></div>
-            <div><p class="text-[10px] text-slate-500 uppercase font-bold" data-i18n="deal.unitPrice">Цена за т (FOB)</p><p class="text-sm font-extrabold text-alfa price" data-inr="79737">79 737 ₽</p></div>
-            <div><p class="text-[10px] text-slate-500 uppercase font-bold" data-i18n="deal.total">Итого</p><p class="text-sm font-extrabold text-slate-900 price" data-inr="2073162">2 073 162 ₽</p></div>
-          </div>
-          <div class="space-y-2">
-            <div class="flex items-start gap-3 p-3 bg-emerald-50 border border-emerald-200 rounded-xl text-xs">
-              <i data-lucide="shield-check" class="w-5 h-5 text-emerald-600 shrink-0 mt-0.5"></i>
-              <div class="flex-1"><p class="font-bold text-emerald-900" data-i18n="deal.escrow30">30% Аванс в Эскроу</p><p class="text-emerald-700 text-[11px]" data-i18n="deal.escrow30desc">Заблокировано на эскроу-счете. Выплачивается при старте фасовки.</p></div>
-              <span class="px-2 py-0.5 bg-emerald-200 text-emerald-900 font-bold text-[10px] rounded shrink-0" data-i18n="deal.secured">Зафиксировано</span>
-            </div>
-            <div class="flex items-start gap-3 p-3 bg-slate-50 border border-slate-200 rounded-xl text-xs">
-              <i data-lucide="clock" class="w-5 h-5 text-slate-400 shrink-0 mt-0.5"></i>
-              <div class="flex-1"><p class="font-bold text-slate-800" data-i18n="deal.escrow70">70% по коносаменту (B/L)</p><p class="text-slate-500 text-[11px]" data-i18n="deal.escrow70desc">Разблокируется после погрузки в порту Mundra и валидации B/L.</p></div>
-              <span class="px-2 py-0.5 bg-slate-200 text-slate-700 font-semibold text-[10px] rounded shrink-0" data-i18n="deal.pending">Ожидает</span>
-            </div>
-          </div>
-
-          <div class="mt-5 pt-4 border-t border-slate-100">
-            <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs space-y-1.5 mb-4">
-              <div class="flex items-center justify-between">
-                <span class="font-bold text-slate-700" data-i18n="deal.sigLog">Электронные подписи:</span>
-                <span id="esign-badge" class="text-amber-600 font-semibold" data-i18n="deal.sig1of2">1/2 Подписано</span>
-              </div>
-              <div class="flex items-center justify-between text-[11px] text-slate-600">
-                <span><span data-i18n="deal.buyerLabel">Покупатель #RU-4471:</span> <b class="text-emerald-600" data-i18n="deal.buyerSigned">Подписан (КЭП)</b></span><span>✓</span>
-              </div>
-              <div class="flex items-center justify-between text-[11px] text-slate-600">
-                <span><span data-i18n="deal.supplierLabel">Indian Manufactories Group:</span> <b id="sign-state" class="text-amber-600" data-i18n="deal.awaiting">Ожидает вашей подписи</b></span><span id="sign-icon">⏳</span>
-              </div>
-            </div>
-            <button id="esign-btn" onclick="signContract()" class="w-full py-3 bg-alfa hover:bg-alfa-hover text-white font-bold rounded-xl shadow-sm transition text-sm flex items-center justify-center gap-2">
-              <i data-lucide="file-signature" class="w-4 h-4"></i><span data-i18n="deal.signBtn">Подписать смарт-контракт (E-Sign)</span>
-            </button>
-            <button onclick="downloadPI()" class="w-full mt-2 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl transition text-xs flex items-center justify-center gap-2">
-              <i data-lucide="download" class="w-3.5 h-3.5"></i><span data-i18n="deal.pi">Скачать проформа-инвойс (PI)</span>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <div class="lg:col-span-7 bg-white rounded-2xl border border-slate-200 shadow-sm flex flex-col" style="height:580px">
-        <div class="px-5 py-3.5 border-b border-slate-100 flex items-center justify-between">
-          <div class="flex items-center gap-2">
-            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
-            <span class="text-xs font-bold text-slate-900" data-i18n="chat.title">Защищенный чат сделки</span>
-          </div>
-          <div class="flex items-center gap-2">
-            <span class="text-[10px] font-semibold bg-slate-100 text-slate-600 px-2 py-0.5 rounded" data-i18n="chat.translate">Автоперевод: RU ↔ EN</span>
-            <span class="text-[10px] font-semibold bg-amber-50 text-amber-700 border border-amber-200 px-2 py-0.5 rounded flex items-center gap-1">
-              <i data-lucide="lock" class="w-2.5 h-2.5"></i><span data-i18n="chat.privacy">Privacy Guard ВКЛ</span>
-            </span>
-          </div>
-        </div>
-        <div id="chat-messages" class="flex-1 overflow-y-auto p-4 space-y-3 scrollbar-thin text-xs">
-          <div class="bg-slate-100 text-slate-800 p-3 rounded-xl max-w-[80%] space-y-1">
-            <span class="text-[10px] font-bold text-slate-500 block" data-i18n="chat.buyer">Покупатель #RU-4471</span>
-            <p data-i18n="chat.msg1">Подтверждаем условия FOB Mundra для 26 тонн риса басмати 1121 в мешках BOPP по 25 кг. Пожалуйста, подпишите контракт для фиксации эскроу.</p>
-            <span class="text-[9px] text-slate-400 block text-right">10:45</span>
-          </div>
-          <div class="bg-alfa-light text-alfa p-3 rounded-xl max-w-[80%] ml-auto space-y-1 border border-alfa-mid">
-            <span class="text-[10px] font-bold text-alfa block" data-i18n="chat.supplier">Indian Manufactories Group (Вы)</span>
-            <p data-i18n="chat.msg2">Фасовка запланирована на фабрике в Пуне. Сертификат качества APEDA и фитосанитарный акт приложим до отгрузки в порт.</p>
-            <span class="text-[9px] text-alfa/60 block text-right">10:48</span>
-          </div>
-          <div class="p-2.5 bg-amber-50 rounded-lg border border-amber-200 text-[11px] text-amber-800 flex items-start gap-2">
-            <i data-lucide="shield-alert" class="w-4 h-4 text-amber-600 shrink-0 mt-0.5"></i>
-            <span data-i18n="chat.privacy_note"><b>Privacy Guard:</b> Контактные телефоны, email и мессенджеры маскируются для защиты сделки.</span>
-          </div>
-        </div>
-        <form onsubmit="sendChatMsg(event)" class="p-3 border-t border-slate-100 flex gap-2">
-          <input type="text" id="chat-input" data-i18n-placeholder="chat.placeholder" placeholder="Введите сообщение покупателю..." class="flex-1 px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs outline-none focus:ring-1 focus:ring-alfa/40">
-          <button type="submit" class="p-2 bg-alfa hover:bg-alfa-hover text-white rounded-xl transition"><i data-lucide="send" class="w-4 h-4"></i></button>
-        </form>
-      </div>
+      <h1 class="text-2xl font-extrabold text-slate-900 mt-4" data-i18n="orders.title">Orders Hub</h1>
+      <p class="text-sm text-slate-500 mt-2" data-i18n="orders.empty">Заказы будут появляться здесь. Ваша карточка опубликована!</p>
     </div>
   </section>
 
 </main>
 
 <script>
-const RATES = {
-  RUB: { s:'₽', r:1 },
-  INR: { s:'₹', r:0.92 },
-  USD: { s:'$', r:0.0108 },
-  EUR: { s:'€', r:0.0102 },
-  CNY: { s:'¥', r:0.078 }
-};
-
-function getProductSvgBanner(iconName, bgGradient, tagText, subText) {
-  const iconPaths = {
-    'wheat': '<path d="M2 22 16 8"/><path d="M3.47 12.53 5 11l1.53 1.53a3.5 3.5 0 0 1 0 4.94L5 19l-1.53-1.53a3.5 3.5 0 0 1 0-4.94Z"/><path d="M7.47 8.53 9 7l1.53 1.53a3.5 3.5 0 0 1 0 4.94L9 15l-1.53-1.53a3.5 3.5 0 0 1 0-4.94Z"/><path d="M11.47 4.53 13 3l1.53 1.53a3.5 3.5 0 0 1 0 4.94L13 11l-1.53-1.53a3.5 3.5 0 0 1 0-4.94Z"/><path d="M20 2h2v2a4 4 0 0 1-4 4h-2V6a4 4 0 0 1 4-4Z"/>',
-    'circle-dot': '<circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="1"/>',
-    'utensils': '<path d="M18 2v6a3 3 0 0 1-3 3 3 3 0 0 1-3-3V2"/><path d="M15 2v18"/><path d="M6 2v20"/><path d="M9 2v4a3 3 0 0 1-6 0V2"/>',
-    'zap': '<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>',
-    'package': '<path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/>'
-  };
-  const path = iconPaths[iconName] || iconPaths['package'];
-
-  return `
-    <div class="w-full h-44 rounded-xl ${bgGradient} flex flex-col justify-between p-3.5 relative overflow-hidden select-none shadow-inner">
-      <div class="absolute -right-6 -bottom-6 w-32 h-32 rounded-full bg-white/10 blur-xl pointer-events-none"></div>
-      <div class="flex items-center justify-between z-10">
-        <span class="bg-black/40 text-white backdrop-blur-md text-[10px] font-mono font-bold px-2 py-0.5 rounded">${tagText}</span>
-        <span class="bg-white/90 text-slate-800 text-[10px] font-bold px-2 py-0.5 rounded shadow-sm">Grade A+</span>
-      </div>
-      <div class="flex items-center justify-center my-auto z-10">
-        <div class="w-16 h-16 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center text-white border border-white/30 shadow-lg">
-          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${path}</svg>
-        </div>
-      </div>
-      <div class="flex items-center justify-between z-10 text-white/90 text-[11px] font-bold">
-        <span class="tracking-wide">${subText}</span>
-        <span class="text-[10px] opacity-80">🇮🇳 Export Quality</span>
-      </div>
-    </div>
-  `;
-}
-
-const CATALOG_DATA = [
-  {
-    id: 'IF-1121-ST',
-    name: {
-      ru: 'Рис басмати пропаренный длиннозерный 1121, 1 тонна Indiafeast',
-      en: '1121 Steam Extra Long Grain Basmati Rice, 1 Ton Indiafeast',
-      hi: '1121 स्टीम अतिरिक्त लंबा बासमती चावल, 1 टन Indiafeast',
-      zh: '1121 优质特长蒸谷印度香米 1吨 Indiafeast'
-    },
-    brand: 'Indiafeast',
-    category: 'Food, Grains & Spices',
-    group: { ru:'Зерно, семена и злаки', en:'Grains, Seeds & Cereals', hi:'अनाज, बीज और दालें', zh:'谷物、种子与谷类' },
-    state: { ru:'Новый', en:'New', hi:'नया', zh:'全新' },
-    hs: '10063092',
-    unit: { ru:'Тонна (1000 кг)', en:'Metric Ton (1000 kg)', hi:'मीट्रिक टन (1000 किग्रा)', zh:'公吨 (1000公斤)' },
-    unitShort: { ru:'т', en:'MT', hi:'टन', zh:'吨' },
-    calcBase: { ru:'Тонна (1000 кг)', en:'Metric Ton', hi:'मीट्रिक टन', zh:'公吨' },
-    qtyInUnit: '1',
-    priceMin: 79737,
-    priceMax: 82395,
-    moq: 26,
-    country: 'India',
-    color: 'White',
-    material: {
-      ru:'Натуральный рис басмати сорта 1121, обработанный паром.',
-      en:'Natural 1121 Basmati rice, steam-processed to preserve authentic taste.',
-      hi:'प्राकृतिक 1121 बासमती चावल, प्रामाणिक स्वाद के लिए स्टीम्ड।',
-      zh:'天然 1121 印度香米，经过温和蒸汽处理，保留原粮香气。'
-    },
-    scope: {
-      ru:'Используется для приготовления бирьяни, гарниров и блюд HoReCa.',
-      en:'Used for Biryani, premium HoReCa cuisines and retail distribution.',
-      hi:'बिरयानी और प्रीमियम HoReCa व्यंजनों के लिए उपयुक्त।',
-      zh:'适用于高端餐饮、手抓饭 (Biryani) 及商超零售。'
-    },
-    industry: 'Food & Beverage / HoReCa',
-    specialInstr: {
-      ru:'Хранить в прохладном, сухом месте.',
-      en:'Store in a cool, dry place away from sunlight.',
-      hi:'ठंडी और सूखी जगह पर रखें।',
-      zh:'阴凉干燥处避光保存。'
-    },
-    warranty: { ru:'36 месяцев', en:'36 Months', hi:'36 महीने', zh:'36 个月' },
-    desc: {
-      ru:'1121 Steam Basmati Rice — экстрадлинный ароматный рис басмати с выраженным удлинением зёрен при варке.',
-      en:'1121 Steam Basmati Rice — extra long aromatic basmati grain with superior elongation and non-sticky texture.',
-      hi:'1121 स्टीम बासमती चावल — पकाने पर लंबा होने वाला सुगंधित और नॉन-स्टिकी प्रीमियम चावल।',
-      zh:'1121 Steam 印度特长香米，烹饪后米粒伸长显著且根根分明，香气馥郁。'
-    },
-    features: {
-      ru: ['Длина зерна: 8,35 мм', 'Не слипается при варке', '100% сортовая чистота', 'Сертификат APEDA'],
-      en: ['Grain length: 8.35 mm', 'Non-sticky after cooking', '100% sort purity', 'APEDA Export Certified'],
-      hi: ['अनाज की लंबाई: 8.35 मिमी', 'पकाने के बाद नॉन-स्टिकी', '100% शुद्धता', 'APEDA प्रमाणित'],
-      zh: ['米粒长度：8.35 毫米', '烹饪后清爽不黏连', '100% 纯种筛选', '获 APEDA 官方出口认证']
-    },
-    specItems: [
-      { label: { ru:'Вид риса', en:'Rice Variety', hi:'चावल की किस्म', zh:'大米品种' }, val: '1121 Steam Basmati' },
-      { label: { ru:'Чистота', en:'Purity', hi:'शुद्धता', zh:'纯度' }, val: '90–95%' },
-      { label: { ru:'Длина зерна', en:'Avg. Length', hi:'लंबाई', zh:'平均长度' }, val: '8.35 mm' },
-      { label: { ru:'Влажность', en:'Moisture', hi:'नमी', zh:'水分' }, val: 'Max 12.5%' },
-      { label: { ru:'Битое зерно', en:'Broken Grains', hi:'टूटे दाने', zh:'碎米率' }, val: '< 1%' }
-    ],
-    pkgDetails: {
-      ru:'Мешки BOPP 25 кг / 50 кг. Сертификат происхождения в комплекте.',
-      en:'25 kg / 50 kg BOPP bags. Phytosanitary & Certificate of Origin included.',
-      hi:'25 किग्रा / 50 किग्रा BOPP बैग। उत्पत्ति प्रमाण पत्र शामिल।',
-      zh:'25公斤 / 50公斤 BOPP编织袋包装，附带产地证及植检证。'
-    },
-    deliveryMethod: { ru:'Морем (FCL Контейнер)', en:'Sea Freight (FCL)', hi:'समुद्री माल (FCL)', zh:'海运集装箱整柜 (FCL)' },
-    port: 'Mundra (INMUN1)',
-    dims: { w: '500 mm', h: '120 mm', l: '700 mm', weight: '25 kg' },
-    advance: '30 %',
-    postPay: '70 %',
-    incoterms: 'FOB',
-    sample: { ru:'Да', en:'Yes', hi:'हाँ', zh:'提供' },
-    leadTime: { ru:'30 дней', en:'30 Days', hi:'30 दिन', zh:'30 天' },
-    icon: 'wheat',
-    bgGradient: 'bg-gradient-to-br from-amber-600 to-orange-700'
-  },
-  {
-    id: 'SYN-CR-090',
-    name: {
-      ru: 'Тренировочный мяч Incredy весом 90 г SYNCO',
-      en: 'Incredy 90g Professional Cricket Training Ball SYNCO',
-      hi: 'Incredy 90g पेशेवर क्रिकेट प्रशिक्षण गेंद SYNCO',
-      zh: 'SYNCO Incredy 90克专业训练板球'
-    },
-    brand: 'SYNCO',
-    category: 'Consumer Goods & Houseware',
-    group: { ru:'Спортивные товары', en:'Sports Equipment', hi:'खेल उपकरण', zh:'体育及运动器材' },
-    state: { ru:'Новый', en:'New', hi:'नया', zh:'全新' },
-    hs: '95066990',
-    unit: { ru:'шт.', en:'pcs', hi:'पीस', zh:'件' },
-    unitShort: { ru:'шт', en:'pcs', hi:'पीस', zh:'件' },
-    calcBase: { ru:'1 шт.', en:'1 pc', hi:'1 पीस', zh:'1 件' },
-    qtyInUnit: '1',
-    priceMin: 141,
-    priceMax: 141,
-    moq: 500,
-    country: 'India',
-    color: 'Red / White Seam',
-    material: {
-      ru:'Синтетический износостойкий полимер, PU-сердечник.',
-      en:'Heavy-duty synthetic polymer with polyurethane foam core.',
-      hi:'पॉलीयुरेथेन कोर के साथ टिकाऊ सिंथेटिक पॉलिमर।',
-      zh:'耐磨合成聚合物面料，内置聚氨酯弹性球芯。'
-    },
-    scope: {
-      ru:'Профессиональные тренировки и любительские матчи.',
-      en:'Professional academy drills and league training sessions.',
-      hi:'पेशेवर प्रशिक्षण और अभ्यास मैच के लिए।',
-      zh:'专业板球学院训练及业余联赛比赛。'
-    },
-    industry: 'Sports & Recreation',
-    specialInstr: {
-      ru:'Беречь от открытого огня.',
-      en:'Keep away from direct heat and water exposure.',
-      hi:'गर्मी और पानी से दूर रखें।',
-      zh:'避免高温暴晒与长期浸水。'
-    },
-    warranty: { ru:'12 месяцев', en:'12 Months', hi:'12 महीने', zh:'12 个月' },
-    desc: {
-      ru:'Incredy Ball — износостойкий мяч для интенсивных тренировок. Идеальный отскок и долговечный шов.',
-      en:'Incredy Ball delivers realistic bounce, seam grip and extraordinary durability for all turf types.',
-      hi:'Incredy Ball सभी पिचों पर शानदार उछाल और स्थायित्व प्रदान करता है।',
-      zh:'Incredy 训练球具备真实的弹跳手感和精准的手缝握缝，极佳的耐用度。'
-    },
-    features: {
-      ru: ['Ручная прошивка', 'Стабильный отскок', 'Усиленный внутренний корд'],
-      en: ['Hand-stitched seam', 'Consistent bounce', 'Reinforced inner core'],
-      hi: ['हाथ से सिला हुआ', 'सटीक उछाल', 'मजबूत आंतरिक कोर'],
-      zh: ['手工缝线工艺', '弹性稳定一致', '加强型内核结构']
-    },
-    specItems: [
-      { label: { ru:'Вес', en:'Weight', hi:'वजन', zh:'重量' }, val: '90 grams' },
-      { label: { ru:'Диаметр', en:'Diameter', hi:'व्यास', zh:'直径' }, val: '71 mm' }
-    ],
-    pkgDetails: {
-      ru:'Индивидуальный блистер, коробка по 50 шт.',
-      en:'Individual blister pack, master carton 50 pcs.',
-      hi:'व्यक्तिगत ब्लिस्टर पैक, 50 पीस कार्टन।',
-      zh:'独立吸塑包装，每箱 50 件。'
-    },
-    deliveryMethod: { ru:'Морем / Авиа', en:'Sea / Air Freight', hi:'समुद्री / वायु', zh:'海运 / 空运' },
-    port: 'Nhava Sheva (INNSA1)',
-    dims: { w: '80 mm', h: '80 mm', l: '80 mm', weight: '90 g' },
-    advance: '30 %',
-    postPay: '70 %',
-    incoterms: 'FOB',
-    sample: { ru:'Да', en:'Yes', hi:'हाँ', zh:'提供' },
-    leadTime: { ru:'15 дней', en:'15 Days', hi:'15 दिन', zh:'15 天' },
-    icon: 'circle-dot',
-    bgGradient: 'bg-gradient-to-br from-blue-600 to-indigo-800'
-  },
-  {
-    id: 'CF-DOSA-200',
-    name: {
-      ru: 'Смесь для мультизлаковой досы, 200 г, Conscious Food',
-      en: 'Multi-Millet Dosa Organic Instant Mix 200g Conscious Food',
-      hi: 'मल्टी-मिलेट डोसा ऑर्गेनिक मिक्स 200g Conscious Food',
-      zh: 'Conscious Food 多谷物无麸质印度薄饼粉 200克'
-    },
-    brand: 'Conscious Food',
-    category: 'Food, Grains & Spices',
-    group: { ru:'Бакалея и смеси', en:'Organic Mixes & Grocery', hi:'ऑर्गेनिक मिक्स', zh:'有机冲调及预拌粉' },
-    state: { ru:'Новый', en:'New', hi:'नया', zh:'全新' },
-    hs: '19012000',
-    unit: { ru:'упак.', en:'pack', hi:'पैक', zh:'包' },
-    unitShort: { ru:'упак', en:'pack', hi:'पैक', zh:'包' },
-    calcBase: { ru:'1 упаковка', en:'1 pack', hi:'1 पैक', zh:'1 包' },
-    qtyInUnit: '1',
-    priceMin: 91,
-    priceMax: 118,
-    moq: 1200,
-    country: 'India',
-    color: 'Natural Millet',
-    material: {
-      ru:'Овес, коричневый рис, чечевица урад дал, специи.',
-      en:'Whole oats, organic brown rice, urad dal, natural spices.',
-      hi:'साबुत जई, जैविक भूरा चावल, उड़द दाल, मसाले।',
-      zh:'全燕麦、有机糙米、黑扁豆、天然香料。'
-    },
-    scope: {
-      ru:'Здоровое и быстрое питание, веганский рацион.',
-      en:'Quick healthy vegan breakfasts and gluten-free diets.',
-      hi:'स्वस्थ नाश्ते और वीगन आहार के लिए।',
-      zh:'快速健康轻食、素食主义及无麸质营养早餐。'
-    },
-    industry: 'Organic FMCG',
-    specialInstr: {
-      ru:'Хранить в сухом прохладном месте.',
-      en:'Store in airtight container after opening.',
-      hi:'खोलने के बाद एयरटाइट कंटेनर में रखें।',
-      zh:'开封后请密封并置于阴凉干燥处。'
-    },
-    warranty: { ru:'18 месяцев', en:'18 Months', hi:'18 महीने', zh:'18 个月' },
-    desc: {
-      ru:'Органическая готовая смесь для хрустящей индийской досы с высоким содержанием клетчатки.',
-      en:'Certified organic instant mix for crisp, nutritious South Indian dosas.',
-      hi:'स्वादिष्ट और पौष्टिक दक्षिण भारतीय डोसा बनाने के लिए जैविक मिश्रण।',
-      zh:'获有机认证的预拌粉，可快速烹饪金黄酥脆的高膳食纤维南印度薄饼。'
-    },
-    features: {
-      ru: ['100% Органика', 'Без сахара и глютена', 'Сертификат NPOP/USDA'],
-      en: ['100% Certified Organic', 'No added sugars', 'USDA & NPOP Certified'],
-      hi: ['100% जैविक', 'कोई चीनी नहीं', 'USDA और NPOP प्रमाणित'],
-      zh: ['100% 有机认证原料', '不添加精制糖', '获 USDA 及 NPOP 双重有机认证']
-    },
-    specItems: [
-      { label: { ru:'Содержание овса', en:'Oats Ratio', hi:'जई का अनुपात', zh:'燕麦含量' }, val: '40%' },
-      { label: { ru:'Калорийность', en:'Energy', hi:'ऊर्जा', zh:'热量' }, val: '360 kcal / 100g' }
-    ],
-    pkgDetails: {
-      ru:'Эко-пакет 200 г, короб 48 шт.',
-      en:'200g Eco-pouch, master case 48 units.',
-      hi:'200 ग्राम इको-पाउच, 48 यूनिट कार्टन।',
-      zh:'200克环保自立袋，外箱每箱 48 包。'
-    },
-    deliveryMethod: { ru:'Морем (Сухой контейнер)', en:'Sea (Dry Box)', hi:'समुद्री माल', zh:'海运干货柜' },
-    port: 'Nhava Sheva (INNSA1)',
-    dims: { w: '140 mm', h: '210 mm', l: '40 mm', weight: '215 g' },
-    advance: '30 %',
-    postPay: '70 %',
-    incoterms: 'CIF',
-    sample: { ru:'Да', en:'Yes', hi:'हाँ', zh:'提供' },
-    leadTime: { ru:'10 дней', en:'10 Days', hi:'10 दिन', zh:'10 天' },
-    icon: 'utensils',
-    bgGradient: 'bg-gradient-to-br from-emerald-600 to-teal-800'
-  },
-  {
-    id: 'CUM-GEN-320',
-    name: {
-      ru: 'Дизельный генератор Cummins мощностью 320 кВА промышленный',
-      en: 'Cummins 320 kVA Heavy-Duty Silent Diesel Generator Set',
-      hi: 'कमिंस 320 kVA औद्योगिक शांत डीजल जनरेटर',
-      zh: '康明斯 320 kVA 工业重型静音柴油发电机组'
-    },
-    brand: 'Cummins',
-    category: 'Raw Materials & Commodities',
-    group: { ru:'Энергетическое оборудование', en:'Power Equipment', hi:'विद्युत उपकरण', zh:'动力与电力设备' },
-    state: { ru:'Новый', en:'New', hi:'नया', zh:'全新' },
-    hs: '85021380',
-    unit: { ru:'шт.', en:'unit', hi:'यूनिट', zh:'台' },
-    unitShort: { ru:'шт', en:'unit', hi:'यूनिट', zh:'台' },
-    calcBase: { ru:'1 комплект', en:'1 set', hi:'1 सेट', zh:'1 台' },
-    qtyInUnit: '1',
-    priceMin: 2702212,
-    priceMax: 2702212,
-    moq: 1,
-    country: 'India',
-    color: 'Industrial Red / Black',
-    material: {
-      ru:'Конструкционная сталь, медь, чугунный блок Cummins.',
-      en:'Cast iron engine block, heavy structural steel canopy, pure copper alternator.',
-      hi:'कास्ट आयरन इंजन ब्लॉक, तांबा अल्टरनेटर।',
-      zh:'铸铁发动机缸体、高强度降噪钢制防护罩、纯铜无刷发电机。'
-    },
-    scope: {
-      ru:'Резервное и постоянное электроснабжение фабрик и больниц.',
-      en:'Prime and standby power for manufacturing facilities and hospitals.',
-      hi:'कारखानों और अस्पतालों के लिए विश्वसनीय बैकअप पावर।',
-      zh:'工矿制造企业、数据中心及医疗机构的主用/备用电力保障。'
-    },
-    industry: 'Heavy Machinery & Energy',
-    specialInstr: {
-      ru:'Монтаж по регламенту Cummins.',
-      en:'Professional commissioning required.',
-      hi:'प्रमाणित इंजीनियरों द्वारा स्थापना।',
-      zh:'需由专业电气工程师依据原厂规范安装调试。'
-    },
-    warranty: { ru:'24 месяца или 2000 моточасов', en:'24 Months or 2000 Hours', hi:'24 महीने या 2000 घंटे', zh:'24 个月或 2000 运行工时' },
-    desc: {
-      ru:'Трехфазная дизель-генераторная установка тяжелого класса с турбонаддувом и панелью PowerCommand.',
-      en:'3-Phase turbocharged silent diesel generator equipped with digital PowerCommand controller.',
-      hi:'डिजिटल पावरकमांड कंट्रोलर से लैस 3-फेज टर्बोचार्ज्ड साइलेंट डीजल जनरेटर।',
-      zh:'三相四线涡轮增压重型静音柴油发电机组，配备 PowerCommand 全自动数字化控制屏。'
-    },
-    features: {
-      ru: ['Двигатель Cummins QSL9-G5', 'Шумозащитный кожух IP54', 'Автоматический ввод резерва (АВР)'],
-      en: ['Cummins QSL9-G5 Engine', 'Acoustic IP54 Weather Canopy', 'Automatic Transfer Switch (ATS) Ready'],
-      hi: ['Cummins QSL9-G5 इंजन', 'ध्वनिरोधी IP54 कवर', 'स्वचालित स्विच (ATS)'],
-      zh: ['原装康明斯 QSL9-G5 发动机', 'IP54 全天候防雨降噪箱体', '标配 ATS 自动切换接口']
-    },
-    specItems: [
-      { label: { ru:'Мощность', en:'Power Output', hi:'रेटेड पावर', zh:'额定功率' }, val: '320 kVA / 256 kW' },
-      { label: { ru:'Напряжение', en:'Voltage', hi:'वोल्टेज', zh:'输出电压' }, val: '400V / 230V, 50Hz' }
-    ],
-    pkgDetails: {
-      ru:'Усиленный деревянный контейнерный каркас.',
-      en:'Heavy-duty seaworthy crating for Flat-Rack container.',
-      hi:'सुरक्षित समुद्री लकड़ी का ढांचा।',
-      zh:'符合海运标准的出口免熏蒸重型木箱包装。'
-    },
-    deliveryMethod: { ru:'Морем (Flat Rack)', en:'Sea (Flat Rack)', hi:'समुद्री माल', zh:'海运框架特种柜 (Flat Rack)' },
-    port: 'Nhava Sheva (INNSA1)',
-    dims: { w: '1100 mm', h: '1900 mm', l: '3900 mm', weight: '3450 kg' },
-    advance: '50 %',
-    postPay: '50 %',
-    incoterms: 'FOB',
-    sample: { ru:'Нет', en:'No', hi:'नहीं', zh:'不提供' },
-    leadTime: { ru:'45 дней', en:'45 Days', hi:'45 दिन', zh:'45 天' },
-    icon: 'zap',
-    bgGradient: 'bg-gradient-to-br from-slate-700 to-slate-950'
-  }
-];
-
-const ORDERS_DATA = [
-  { id:'RFQ-2025-0891', product:{ ru:'Рис басмати 1121 (100 тонн)', en:'Basmati 1121 (100 MT)', hi:'बासमती 1121 (100 टन)', zh:'1121 香米 (100吨)' }, buyer:'Buyer #RU-3129', qty:'100 т', valInr:8150000, status:'RFQ', badgeCls:'bg-amber-100 text-amber-800', needsAction:true },
-  { id:'QT-2025-0445', product:{ ru:'Мячи тренировочные (5 000 шт)', en:'Training Cricket Balls (5,000 pcs)', hi:'प्रशिक्षण गेंदें (5,000 पीस)', zh:'训练板球 (5,000件)' }, buyer:'Buyer #RU-8842', qty:'5 000 шт', valInr:705000, status:'QUOTE_SENT', badgeCls:'bg-blue-100 text-blue-800', needsAction:false },
-  { id:'CT-2025-0312', product:{ ru:'Рис басмати 1121 Indiafeast', en:'1121 Basmati Rice Indiafeast', hi:'1121 बासमती चावल Indiafeast', zh:'1121 印度香米 Indiafeast' }, buyer:'Buyer #RU-4471', qty:'26 т', valInr:2073162, status:'CONTRACT', badgeCls:'bg-indigo-100 text-indigo-800', needsAction:true },
-  { id:'PR-2025-0278', product:{ ru:'Смесь для досы Conscious Food', en:'Organic Dosa Mix (10,000 packs)', hi:'डोसा मिक्स (10,000 पैक)', zh:'多谷物薄饼粉 (10,000包)' }, buyer:'Buyer #RU-7654', qty:'10 000 шт', valInr:1180000, status:'PRODUCTION', badgeCls:'bg-sky-100 text-sky-800', needsAction:false },
-  { id:'ES-2025-0201', product:{ ru:'Генератор Cummins 320 кВА', en:'Cummins 320 kVA Generator', hi:'कमिंस 320 kVA जनरेटर', zh:'康明斯 320 kVA 发电机组' }, buyer:'Buyer #DE-5231', qty:'2 шт', valInr:5404424, status:'ESCROW_HELD', badgeCls:'bg-purple-100 text-purple-800', needsAction:true },
-  { id:'SH-2025-0188', product:{ ru:'Рис басмати пропаренный (52 т)', en:'Steamed Basmati Rice (52 MT)', hi:'स्टीम्ड बासमती (52 टन)', zh:'优质蒸谷香米 (52吨)' }, buyer:'Buyer #RU-1198', qty:'52 т', valInr:4146000, status:'SHIPPED', badgeCls:'bg-teal-100 text-teal-800', needsAction:false },
-  { id:'CM-2024-1044', product:{ ru:'Органические смеси суперфуд', en:'Organic Superfood Mixes', hi:'ऑर्गेनिक सुपरफूड मिक्स', zh:'有机营养冲调粉' }, buyer:'Buyer #RU-0512', qty:'2 000 шт', valInr:242000, status:'COMPLETED', badgeCls:'bg-emerald-100 text-emerald-800', needsAction:false }
-];
-
-const CHAT_THREADS = {
-  'RFQ-2025-0891': {
-    dealId: 'RFQ-2025-0891',
-    buyer: 'Buyer #RU-3129',
-    productKey: 'Рис басмати 1121 (100 т)',
-    status: 'RFQ',
-    statusBadge: 'bg-amber-100 text-amber-800',
-    stepTarget: 4,
-    drawerType: 'rfq-quote',
-    messages: [
-      { sender: 'Buyer #RU-3129', isMe: false, textKey: 'fchat.rfqMsg', time: '09:15' }
-    ]
-  },
-  'CT-2025-0312': {
-    dealId: 'CT-2025-0312',
-    buyer: 'Buyer #RU-4471',
-    productKey: 'Рис басмати 1121 (26 т)',
-    status: 'CONTRACT',
-    statusBadge: 'bg-indigo-100 text-indigo-800',
-    stepTarget: 5,
-    drawerType: 'sign-contract',
-    messages: [
-      { sender: 'Buyer #RU-4471', isMe: false, textKey: 'chat.msg1', time: '10:45' },
-      { sender: 'Indian Manufactories Group', isMe: true, textKey: 'chat.msg2', time: '10:48' }
-    ]
-  },
-  'ES-2025-0201': {
-    dealId: 'ES-2025-0201',
-    buyer: 'Buyer #DE-5231',
-    productKey: 'Генератор Cummins 320 кВА',
-    status: 'ESCROW_HELD',
-    statusBadge: 'bg-purple-100 text-purple-800',
-    stepTarget: 4,
-    drawerType: 'upload-bl',
-    messages: [
-      { sender: 'Buyer #DE-5231', isMe: false, textKey: 'fchat.escrowMsg', time: '14:20' }
-    ]
-  }
-};
-
-let ACTIVE_CHAT_DEAL_ID = null;
-let CURRENT_DRAWER_TYPE = null;
-let CURRENT_DRAWER_CONTEXT = null;
-const STATUS_LIST = ['ALL','RFQ','QUOTE_SENT','CONTRACT','PRODUCTION','ESCROW_HELD','SHIPPED','COMPLETED'];
-
 const T = {
-ru: {
-  'profile.verified':'KYB Верифицирован',
-  'reg.title':'Регистрация в Alfa-Global','reg.subtitle':'Создайте корпоративный аккаунт экспортёра',
-  'reg.email':'Корпоративный Email','reg.phone':'Номер телефона','reg.password':'Создайте пароль',
-  'reg.continue':'Продолжить регистрацию','reg.otpSent':'Код подтверждения отправлен на почту и телефон.',
-  'reg.otp':'Одноразовый код (OTP)','reg.terms':'Я принимаю Условия платформы и Политику трансграничной передачи данных.','reg.kyb_consent':'Согласен на автоматическую проверку через реестры (KYB).','reg.finish':'Завершить регистрацию','common.back':'← Назад','common.close':'Закрыть','common.cancel':'Отмена',
-  'kyb.stepTag':'Шаг 2 / Верификация поставщика','kyb.title':'Юридические данные и экспортные реквизиты','kyb.subtitle':'Сведения проверяются автоматически через API налоговых и таможенных органов.','kyb.pending':'Ожидает верификации','kyb.companyName':'Юридическое наименование','kyb.nameHint':'Как в учредительных документах','kyb.country':'Страна юрисдикции','kyb.gstin':'GSTIN (Штат 27)','kyb.taxBadge':'ℹ Налог','kyb.valid':'✓ Валиден','kyb.iec':'DGFT IEC / PAN','kyb.customsBadge':'ℹ Таможня','kyb.dgftOk':'✓ DGFT','kyb.council':'Экспортный совет','kyb.adcode':'AD Code & Bank IFSC','kyb.valutaBadge':'Для валютного контроля','kyb.port':'Базовый порт отгрузки','kyb.factory':'Адрес фабрики / производства','kyb.doc':'Сертификаты качества и лицензии','kyb.docStatus':'(2.8 MB · Проверено через реестр)','kyb.back':'← Назад к регистрации','kyb.submit':'Подтвердить и открыть каталог',
-  'kyb.whyTitle':'Зачем заполнять эти данные?','kyb.whyDesc':'Alfa-Global обеспечивает прямые расчеты между покупателями и зарубежными фабриками без посредников.',
-  'kyb.r1Title':'1. Валютный контроль банка','kyb.r1Desc':'AD-код и банковский IFSC позволяют моментально открывать паспорта сделок без задержек.',
-  'kyb.r2Title':'2. Разблокировка Эскроу','kyb.r2Desc':'Валидация DGFT IEC подтверждает право экспорта, позволяя банку автоматически выплачивать 70% по B/L.',
-  'kyb.r3Title':'3. Статус «KYB Verified»','kyb.r3Desc':'Проверенные поставщики получают в 3.8 раз больше прямых RFQ от корпоративных заказчиков.',
-  'compliance.title':'Центр соответствия поставщика','compliance.sub':'Indian Manufactories Group Pvt. Ltd. — KYB Verified','compliance.gst':'GSTIN (Штат 27 — Maharashtra)','compliance.active':'✓ Активен','compliance.iec':'DGFT IEC / PAN','compliance.valid':'✓ Валидирован','compliance.council':'Экспортный совет','compliance.member':'✓ Член совета','compliance.bank':'AD-код и Валютный счет','compliance.linked':'✓ Привязан',
-  'catalog.title':'Экспортный каталог','catalog.subtitle':'Управление ассортиментом','catalog.toOrders':'Центр заказов','catalog.addSku':'Добавить SKU','catalog.search':'Поиск','catalog.searchPh':'Название, бренд или артикул...','catalog.category':'Категория:','catalog.allCat':'Все категории','catalog.sort':'Сортировка:','catalog.sortAsc':'Цена: по возрастанию','catalog.sortDesc':'Цена: по убыванию','catalog.sortMoq':'MOQ: сначала меньший',
-  'cat.food':'Food, Grains & Spices','cat.agro':'Agriculture & Agro Inputs','cat.consumer':'Consumer Goods & Houseware','cat.raw':'Raw Materials & Commodities',
-  'orders.title':'Центр заказов и сделок','orders.subtitle':'Мониторинг экспортных контрактов, таможенного оформления и эскроу-счетов','orders.backCat':'В Каталог','orders.filterLabel':'Фильтр:',
-  'table.id':'ID сделки','table.product':'Товар','table.buyer':'Покупатель','table.value':'Сумма','table.status':'Статус','table.action':'Действие',
-  'st.ALL':'Все','st.RFQ':'RFQ','st.QUOTE_SENT':'КП отправлено','st.CONTRACT':'Контракт','st.PRODUCTION':'Производство','st.ESCROW_HELD':'Эскроу','st.SHIPPED':'Отгружено','st.COMPLETED':'Завершено',
-  'act.RFQ':'Отправить КП','act.QUOTE_SENT':'Просмотр КП','act.CONTRACT':'Подписать контракт','act.PRODUCTION':'Ход производства','act.ESCROW_HELD':'Загрузить B/L','act.SHIPPED':'Отследить груз','act.COMPLETED':'Подробнее',
-  'deal.stepTag':'Шаг 5 / Комната сделки','deal.title':'Согласование контракта и E-Sign','deal.back':'Назад к заказам','deal.terms':'Согласованные условия поставки',
-  'deal.product':'Товар','deal.riceName':'Рис басмати 1121','deal.volume':'Объем','deal.riceQty':'26 тонн (1 FCL)','deal.unitPrice':'Цена за т (FOB)','deal.total':'Итого',
-  'deal.escrow30':'30% Аванс в Эскроу','deal.escrow30desc':'Заблокировано на эскроу-счете. Выплачивается при старте фасовки.','deal.secured':'Зафиксировано',
-  'deal.escrow70':'70% по коносаменту (B/L)','deal.escrow70desc':'Разблокируется после погрузки в порту Mundra и валидации B/L.','deal.pending':'Ожидает',
-  'deal.sigLog':'Электронные подписи:','deal.sig1of2':'1/2 Подписано','deal.buyerLabel':'Покупатель #RU-4471:','deal.buyerSigned':'Подписан (КЭП)','deal.supplierLabel':'Indian Manufactories Group:','deal.awaiting':'Ожидает вашей подписи',
-  'deal.signBtn':'Подписать смарт-контракт (E-Sign)','deal.pi':'Скачать проформа-инвойс (PI)',
-  'chat.title':'Защищенный чат сделки','chat.translate':'Автоперевод: RU ↔ EN','chat.privacy':'Privacy Guard ВКЛ',
-  'chat.buyer':'Покупатель #RU-4471','chat.msg1':'Подтверждаем условия FOB Mundra для 26 тонн риса басмати 1121 в мешках BOPP по 25 кг. Пожалуйста, подпишите контракт для фиксации эскроу.','chat.supplier':'Indian Manufactories Group (Вы)','chat.msg2':'Фасовка запланирована на фабрике в Пуне. Сертификат качества APEDA и фитосанитарный акт приложим до отгрузки в порт.','chat.privacy_note':'<b>Privacy Guard:</b> Контактные телефоны, email и мессенджеры маскируются для защиты сделки.','chat.placeholder':'Введите сообщение...',
-  'fchat.title':'Сообщения по сделкам','fchat.sub':'Выберите диалог','fchat.toDeal':'К сделке →','fchat.rfqMsg':'Просим предоставить FOB котировку на 100 т риса 1121 в порт Новороссийск.','fchat.escrowMsg':'Эскроу-депозит заблокирован в банке. Ждем загрузки B/L.',
-  'notify.title':'Уведомление',
-  'step1.title':'1. Регистрация','step1.sub':'Email, тел. и пароль',
-  'step2.title':'2. KYB-проверка','step2.sub':'Налоговые и ВЭД коды',
-  'step3.title':'3. Каталог','step3.sub':'Управление товарами',
-  'step4.title':'4. Центр заказов','step4.sub':'Сделки и эскроу-счета',
-  'step5.title':'5. Комната сделки','step5.sub':'E-Sign и чат',
-  'dr.specTitle':'Спецификация и характеристики','dr.descLabel':'Описание','dr.featuresLabel':'Особенности','dr.charLabel':'Характеристики','dr.brandLabel':'Бренд:','dr.countryLabel':'Страна:','dr.colorLabel':'Цвет:','dr.matLabel':'Материал:','dr.scopeLabel':'Применение:','dr.warrantyLabel':'Гарантия:','dr.instrLabel':'Инструкции:','dr.logisticsLabel':'Доставка и логистика','dr.pkgLabel':'Упаковка:','dr.methodLabel':'Метод:','dr.portLabel':'Порт:','dr.dimsLabel':'Габариты и вес','dr.width':'Ширина','dr.height':'Высота','dr.length':'Длина','dr.grossWeight':'Вес брутто','dr.closeSpec':'Закрыть спецификацию',
-  'dr.newSkuTitle':'Добавить новый товар в каталог','dr.newSkuSub':'Полная экспортная спецификация','dr.sec1':'1. Основная информация','dr.sec2':'2. Цены и коммерческие условия','dr.sec3':'3. Описание и логистика','dr.prodNameLabel':'Полное наименование','dr.prodNamePh':'например, Рис басмати пропаренный 1121','dr.hsLabel':'Код ТНВЭД (HS Code)','dr.skuLabel':'Артикул (SKU)','dr.catLabel':'Категория','dr.pminLabel':'Цена Мин','dr.pmaxLabel':'Цена Макс','dr.moqLabel':'MOQ (Мин. заказ)','dr.advLabel':'Аванс (%)','dr.postLabel':'По B/L (%)','dr.incoLabel':'Incoterms','dr.publishBtn':'Опубликовать в каталоге',
-  'dr.rfqReqTitle':'Запрос покупателя:','dr.rfqReqText':'100 тонн риса 1121, CIF Новороссийск, фасовка в мешки по 25 кг с фитосанитарным актом.','dr.pricePerTon':'Цена за тонну','dr.volumeTon':'Объем (т)','dr.sendQuoteBtn':'Отправить КП →','dr.discussChat':'Обсудить детали в чате',
-  'dr.quoteActiveTitle':'Активное предложение','dr.product':'Товар:','dr.qty':'Количество:','dr.totalVal':'Итого:','dr.terms':'Условия:','dr.adjustPrice':'Скорректировать цены',
-  'dr.contractConfirmTitle':'Согласование контракта и E-Sign','dr.contractCheckbox':'Подтверждаю условия и готов перейти в Deal Room для подписания смарт-контракта.','dr.openDealRoomBtn':'Открыть Deal Room и подписать →','dr.openBuyerChat':'Открыть чат с покупателем',
-  'dr.prodProgressTitle':'Ход производства','dr.batchReadiness':'Готовность партии','dr.updateStageBtn':'Обновить этап',
-  'dr.uploadBlTitle':'Загрузка коносамента (B/L)','dr.blLockedText':'заблокированы в банке. Загрузите B/L для выплаты 70% остатка.','dr.blNumber':'Номер B/L','dr.blScanLabel':'Скан оригинального коносамента (PDF)','dr.blDropText':'Нажмите для загрузки Clean On-Board B/L','dr.sendBlToBank':'Отправить B/L в банк',
-  'dr.trackingTitle':'Отслеживание груза','dr.customsPassed':'✓ Таможенная очистка в Мундре завершена','dr.inTransit':'🚢 В пути — Судно MSC Katrina','dr.etaText':'Прибытие в Новороссийск через 9 дней',
-  'dr.archiveTitle':'Архив завершенной сделки','dr.orderClosedText':'✓ Заказ закрыт, 100% средств выплачены на валютный счет.','dr.downloadClosingDocs':'Скачать закрывающие документы',
-  'msg.contractSigned':'Смарт-контракт успешно подписан! 30% аванса заблокированы на эскроу-счете.','msg.newSkuSuccess':'Новый товар опубликован в каталоге!','msg.quoteSentSuccess':'Коммерческое предложение направлено Buyer #RU-3129!','msg.prodUpdated':'Статус производства обновлен.','msg.blSentSuccess':'Коносамент отправлен. 70% средств разблокируются на ваш валютный счет.','msg.downloadingDocs':'Скачивание акта и налогового инвойса...'
-},
-en: {
-  'profile.verified':'KYB Verified',
-  'reg.title':'Registration at Alfa-Global','reg.subtitle':'Create corporate exporter account',
-  'reg.email':'Corporate Email','reg.phone':'Phone Number','reg.password':'Create Password',
-  'reg.continue':'Continue Registration','reg.otpSent':'Confirmation code sent to email & SMS.',
-  'reg.otp':'One-Time Code (OTP)','reg.terms':'I accept the Terms and Cross-Border Data Transfer Policy.','reg.kyb_consent':'I consent to automated registry validation (KYB).','reg.finish':'Finish Registration','common.back':'← Back','common.close':'Close','common.cancel':'Cancel',
-  'kyb.stepTag':'Step 2 / Supplier Verification','kyb.title':'Exporter Legal Identity & Regulatory Credentials','kyb.subtitle':'Data is verified automatically via tax & customs registry APIs.','kyb.pending':'Pending Verification','kyb.companyName':'Company Legal Name','kyb.nameHint':'As per incorporation documents','kyb.country':'Country of Jurisdiction','kyb.gstin':'GSTIN (State 27)','kyb.taxBadge':'ℹ Tax','kyb.valid':'✓ Valid','kyb.iec':'DGFT IEC / PAN','kyb.customsBadge':'ℹ Customs','kyb.dgftOk':'✓ DGFT','kyb.council':'Export Council','kyb.adcode':'AD Code & Bank IFSC','kyb.valutaBadge':'For FX Control','kyb.port':'Port of Origin','kyb.factory':'Factory / Facility Address','kyb.doc':'Quality Certificates & Licenses','kyb.docStatus':'(2.8 MB · Registry Verified)','kyb.back':'← Back to Registration','kyb.submit':'Verify & Open Catalog',
-  'kyb.whyTitle':'Why complete this information?','kyb.whyDesc':'Alfa-Global enables direct settlements between buyers and foreign factories without middlemen.',
-  'kyb.r1Title':'1. Bank FX Control','kyb.r1Desc':'AD Code & IFSC allow instant deal registration and currency clearance without customs delays.',
-  'kyb.r2Title':'2. Escrow Release','kyb.r2Desc':'DGFT IEC validation confirms export authority, allowing automatic 70% payout on B/L release.',
-  'kyb.r3Title':'3. "KYB Verified" Badge','kyb.r3Desc':'Verified exporters receive 3.8x more direct RFQs from corporate buyers.',
-  'compliance.title':'Supplier Compliance Vault','compliance.sub':'Indian Manufactories Group Pvt. Ltd. — KYB Verified','compliance.gst':'GSTIN (State 27 — Maharashtra)','compliance.active':'✓ Active','compliance.iec':'DGFT IEC / PAN','compliance.valid':'✓ Validated','compliance.council':'Export Council','compliance.member':'✓ Council Member','compliance.bank':'AD Code & FX Account','compliance.linked':'✓ Linked',
-  'catalog.title':'Export Catalog','catalog.subtitle':'Product Management','catalog.toOrders':'Orders Hub','catalog.addSku':'Add SKU','catalog.search':'Search','catalog.searchPh':'Name, brand or SKU...','catalog.category':'Category:','catalog.allCat':'All Categories','catalog.sort':'Sort:','catalog.sortAsc':'Price: Low to High','catalog.sortDesc':'Price: High to Low','catalog.sortMoq':'MOQ: Low to High',
-  'cat.food':'Food, Grains & Spices','cat.agro':'Agriculture & Agro Inputs','cat.consumer':'Consumer Goods & Houseware','cat.raw':'Raw Materials & Commodities',
-  'orders.title':'Orders & Escrow Hub','orders.subtitle':'Monitor trade pipeline, customs release and escrow deposits','orders.backCat':'To Catalog','orders.filterLabel':'Filter:',
-  'table.id':'Deal ID','table.product':'Product','table.buyer':'Buyer','table.value':'Value','table.status':'Status','table.action':'Action',
-  'st.ALL':'All','st.RFQ':'RFQ','st.QUOTE_SENT':'Quote Sent','st.CONTRACT':'Contract','st.PRODUCTION':'Production','st.ESCROW_HELD':'Escrow Held','st.SHIPPED':'Shipped','st.COMPLETED':'Completed',
-  'act.RFQ':'Send Quote','act.QUOTE_SENT':'View Quote','act.CONTRACT':'Sign Contract','act.PRODUCTION':'Production Progress','act.ESCROW_HELD':'Upload B/L','act.SHIPPED':'Track Shipment','act.COMPLETED':'Details',
-  'deal.stepTag':'Step 5 / Deal Room','deal.title':'Contract Negotiation & E-Sign','deal.back':'Back to Orders','deal.terms':'Agreed Commercial Terms',
-  'deal.product':'Product','deal.riceName':'Basmati Rice 1121','deal.volume':'Volume','deal.riceQty':'26 MT (1 FCL)','deal.unitPrice':'Unit Price (FOB)','deal.total':'Total',
-  'deal.escrow30':'30% Advance Escrow','deal.escrow30desc':'Locked in Platform Vault. Released upon packaging start.','deal.secured':'Secured',
-  'deal.escrow70':'70% on Bill of Lading (B/L)','deal.escrow70desc':'Triggered after Mundra customs loading + B/L validation.','deal.pending':'Pending',
-  'deal.sigLog':'Digital Signatures:','deal.sig1of2':'1/2 Completed','deal.buyerLabel':'Buyer #RU-4471:','deal.buyerSigned':'Signed (Verified)','deal.supplierLabel':'Indian Manufactories Group:','deal.awaiting':'Awaiting your signature',
-  'deal.signBtn':'Sign Smart Contract (E-Sign)','deal.pi':'Download Proforma Invoice (PI)',
-  'chat.title':'Encrypted Deal Chat','chat.translate':'Auto-Translate: RU ↔ EN','chat.privacy':'Privacy Guard ON',
-  'chat.buyer':'Buyer #RU-4471','chat.msg1':'We confirm FOB Mundra terms for 26 MT Basmati 1121. Please e-sign to lock escrow.','chat.supplier':'Indian Manufactories Group (You)','chat.msg2':'Packaging scheduled in Pune. APEDA certificates and phytosanitary act ready.','chat.privacy_note':'<b>Privacy Guard:</b> Phone numbers and emails are masked to protect platform transactions.','chat.placeholder':'Type message...',
-  'fchat.title':'Deal Messages','fchat.sub':'Select active dialogue','fchat.toDeal':'To Deal →','fchat.rfqMsg':'Please provide FOB quote for 100 MT Basmati 1121 to Novorossiysk.','fchat.escrowMsg':'Escrow deposit locked in bank vault. Waiting for B/L upload.',
-  'notify.title':'Notification',
-  'step1.title':'1. Registration','step1.sub':'Email, phone & OTP',
-  'step2.title':'2. KYB Verify','step2.sub':'Tax & export codes',
-  'step3.title':'3. Catalog','step3.sub':'Product management',
-  'step4.title':'4. Orders Hub','step4.sub':'Deals & Escrow vault',
-  'step5.title':'5. Deal Room','step5.sub':'E-Sign & live chat',
-  'dr.specTitle':'Specifications & Features','dr.descLabel':'Description','dr.featuresLabel':'Key Features','dr.charLabel':'Characteristics','dr.brandLabel':'Brand:','dr.countryLabel':'Origin:','dr.colorLabel':'Color:','dr.matLabel':'Material:','dr.scopeLabel':'Application:','dr.warrantyLabel':'Warranty:','dr.instrLabel':'Instructions:','dr.logisticsLabel':'Logistics & Delivery','dr.pkgLabel':'Packaging:','dr.methodLabel':'Method:','dr.portLabel':'Port:','dr.dimsLabel':'Dimensions & Weight','dr.width':'Width','dr.height':'Height','dr.length':'Length','dr.grossWeight':'Gross Weight','dr.closeSpec':'Close Specification',
-  'dr.newSkuTitle':'Add New Product to Catalog','dr.newSkuSub':'Complete Export Specification Sheet','dr.sec1':'1. General Information','dr.sec2':'2. Pricing & Commercial Terms','dr.sec3':'3. Description & Logistics','dr.prodNameLabel':'Product Full Name','dr.prodNamePh':'e.g., 1121 Steam Basmati Rice 1 MT','dr.hsLabel':'HS Code','dr.skuLabel':'SKU Code','dr.catLabel':'Category','dr.pminLabel':'Min Price','dr.pmaxLabel':'Max Price','dr.moqLabel':'MOQ','dr.advLabel':'Advance (%)','dr.postLabel':'On B/L (%)','dr.incoLabel':'Incoterms','dr.publishBtn':'Publish to Catalog',
-  'dr.rfqReqTitle':'Buyer Inquiry:','dr.rfqReqText':'100 MT Basmati 1121, CIF Novorossiysk, 25 kg bags with phytosanitary clearance.','dr.pricePerTon':'Price per Ton','dr.volumeTon':'Volume (MT)','dr.sendQuoteBtn':'Send Commercial Quote →','dr.discussChat':'Discuss in Deal Chat',
-  'dr.quoteActiveTitle':'Active Commercial Quote','dr.product':'Product:','dr.qty':'Quantity:','dr.totalVal':'Total Value:','dr.terms':'Terms:','dr.adjustPrice':'Adjust Pricing',
-  'dr.contractConfirmTitle':'Contract Review & E-Sign','dr.contractCheckbox':'I confirm agreed commercial terms and proceed to Deal Room for electronic signing.','dr.openDealRoomBtn':'Open Deal Room to Sign →','dr.openBuyerChat':'Open Chat with Buyer',
-  'dr.prodProgressTitle':'Production & Packaging Progress','dr.batchReadiness':'Batch Readiness','dr.updateStageBtn':'Update Stage',
-  'dr.uploadBlTitle':'Bill of Lading (B/L) Upload','dr.blLockedText':'locked in bank vault. Upload B/L to trigger 70% balance payout.','dr.blNumber':'B/L Tracking Number','dr.blScanLabel':'Original Clean On-Board B/L (PDF)','dr.blDropText':'Click or drag Clean On-Board B/L scan here','dr.sendBlToBank':'Submit B/L to Bank',
-  'dr.trackingTitle':'Shipment Live Tracking','dr.customsPassed':'✓ Customs clearance completed at Mundra Port','dr.inTransit':'🚢 Vessel MSC Katrina in transit','dr.etaText':'Estimated Arrival at destination in 9 days',
-  'dr.archiveTitle':'Archived Completed Order','dr.orderClosedText':'✓ Deal closed successfully. 100% export revenue settled.','dr.downloadClosingDocs':'Download Tax Invoice & Documents',
-  'msg.contractSigned':'Smart contract e-signed! 30% advance escrow secured.','msg.newSkuSuccess':'New SKU published to catalog!','msg.quoteSentSuccess':'Commercial quote sent to Buyer #RU-3129!','msg.prodUpdated':'Production status updated.','msg.blSentSuccess':'B/L submitted. 70% funds will be released to your currency account.','msg.downloadingDocs':'Downloading closing certificates and invoices...'
-},
-hi: {
-  'profile.verified':'KYB सत्यापित',
-  'reg.title':'Alfa-Global में पंजीकरण','reg.subtitle':'निर्यातक कॉर्पोरेट खाता बनाएं',
-  'reg.email':'कॉर्पोरेट ईमेल','reg.phone':'फ़ोन नंबर','reg.password':'पासवर्ड बनाएं',
-  'reg.continue':'पंजीकरण जारी रखें','reg.otpSent':'ओटीपी ईमेल और एसएमएस पर भेजा गया।',
-  'reg.otp':'वन-टाइम पासवर्ड (OTP)','reg.terms':'मैं शर्तों और डेटा नीति को स्वीकार करता हूं।','reg.kyb_consent':'मैं राष्ट्रीय रजिस्ट्री (KYB) सत्यापन से सहमत हूं।','reg.finish':'पंजीकरण पूरा करें','common.back':'← वापस','common.close':'बंद करें','common.cancel':'रद्द करें',
-  'kyb.stepTag':'चरण 2 / आपूर्तिकर्ता सत्यापन','kyb.title':'कानूनी पहचान एवं निर्यात क्रेडेंशियल्स','kyb.subtitle':'डेटा स्वचालित रूप से कर और सीमा शुल्क एपीआई के माध्यम से सत्यापित किया जाता है।','kyb.pending':'सत्यापन लंबित','kyb.companyName':'कंपनी का कानूनी नाम','kyb.nameHint':'पंजीकरण दस्तावेजों के अनुसार','kyb.country':'देश','kyb.gstin':'GSTIN (राज्य 27)','kyb.taxBadge':'ℹ कर','kyb.valid':'✓ वैध','kyb.iec':'DGFT IEC / PAN','kyb.customsBadge':'ℹ सीमा शुल्क','kyb.dgftOk':'✓ DGFT','kyb.council':'निर्यात परिषद','kyb.adcode':'AD Code & Bank IFSC','kyb.valutaBadge':'विदेशी मुद्रा नियंत्रण के लिए','kyb.port':'मूल बंदरगाह','kyb.factory':'कारखाना / सुविधा का पता','kyb.doc':'गुणवत्ता प्रमाण पत्र और लाइसेंस','kyb.docStatus':'(2.8 MB · सत्यापित)','kyb.back':'← पंजीकरण पर वापस','kyb.submit':'सत्यापित करें और कैटलॉग खोलें',
-  'kyb.whyTitle':'यह जानकारी क्यों भरें?','kyb.whyDesc':'Alfa-Global खरीदारों और विदेशी कारखानों के बीच बिचौलियों के बिना सीधे भुगतान को सक्षम बनाता है।',
-  'kyb.r1Title':'1. विदेशी मुद्रा नियंत्रण','kyb.r1Desc':'AD कोड और IFSC सौदे के तत्काल पंजीकरण और निकासी की अनुमति देते हैं।',
-  'kyb.r2Title':'2. एस्क्रो अनलॉक','kyb.r2Desc':'DGFT IEC सत्यापन निर्यात अधिकार की पुष्टि करता है, जिससे B/L पर 70% भुगतान अनलॉक होता है।',
-  'kyb.r3Title':'3. "KYB Verified" स्थिति','kyb.r3Desc':'सत्यापित आपूर्तिकर्ताओं को कॉर्पोरेट ग्राहकों से 3.8 गुना अधिक RFQ प्राप्त होते हैं।',
-  'compliance.title':'आपूर्तिकर्ता अनुपालन केंद्र','compliance.sub':'Indian Manufactories Group Pvt. Ltd. — KYB Verified','compliance.gst':'GSTIN (राज्य 27 — महाराष्ट्र)','compliance.active':'✓ सक्रिय','compliance.iec':'DGFT IEC / PAN','compliance.valid':'✓ सत्यापित','compliance.council':'निर्यात परिषद','compliance.member':'✓ परिषद सदस्य','compliance.bank':'AD कोड और विदेशी मुद्रा खाता','compliance.linked':'✓ लिंक किया गया',
-  'catalog.title':'निर्यात कैटलॉग','catalog.subtitle':'उत्पाद प्रबंधन','catalog.toOrders':'ऑर्डर हब','catalog.addSku':'SKU जोड़ें','catalog.search':'खोज','catalog.searchPh':'नाम, ब्रांड या SKU...','catalog.category':'श्रेणी:','catalog.allCat':'सभी श्रेणियां','catalog.sort':'क्रमबद्ध करें:','catalog.sortAsc':'मूल्य: कम से अधिक','catalog.sortDesc':'मूल्य: अधिक से कम','catalog.sortMoq':'MOQ: कम से अधिक',
-  'cat.food':'Food, Grains & Spices','cat.agro':'Agriculture & Agro Inputs','cat.consumer':'Consumer Goods & Houseware','cat.raw':'Raw Materials & Commodities',
-  'orders.title':'ऑर्डर और एस्क्रो हब','orders.subtitle':'व्यापार पाइपलाइन, सीमा शुल्क और एस्क्रो जमा की निगरानी','orders.backCat':'कैटलॉग में वापस','orders.filterLabel':'फ़िल्टर:',
-  'table.id':'सौदा ID','table.product':'उत्पाद','table.buyer':'खरीदार','table.value':'मूल्य','table.status':'स्थिति','table.action':'कार्रवाई',
-  'st.ALL':'सभी','st.RFQ':'RFQ','st.QUOTE_SENT':'कोटेशन भेजा','st.CONTRACT':'अनुबंध','st.PRODUCTION':'उत्पादन','st.ESCROW_HELD':'एस्क्रो','st.SHIPPED':'भेज दिया गया','st.COMPLETED':'पूर्ण',
-  'act.RFQ':'कोट भेजें','act.QUOTE_SENT':'कोट देखें','act.CONTRACT':'अनुबंध साइन करें','act.PRODUCTION':'उत्पादन प्रगति','act.ESCROW_HELD':'B/L अपलोड करें','act.SHIPPED':'ट्रैक शिपमेंट','act.COMPLETED':'विवरण',
-  'deal.stepTag':'चरण 5 / डील रूम','deal.title':'अनुबंध वार्ता एवं ई-साइन','deal.back':'ऑर्डर पर वापस','deal.terms':'सहमति वाणिज्यिक शर्तें',
-  'deal.product':'उत्पाद','deal.riceName':'बासमती चावल 1121','deal.volume':'मात्रा','deal.riceQty':'26 मीट्रिक टन (1 FCL)','deal.unitPrice':'इकाई मूल्य (FOB)','deal.total':'कुल',
-  'deal.escrow30':'30% अग्रिम एस्क्रो','deal.escrow30desc':'एस्क्रो में लॉक। पैकेजिंग शुरू होने पर जारी।','deal.secured':'सुरक्षित',
-  'deal.escrow70':'70% बिल ऑफ लैडिंग (B/L) पर','deal.escrow70desc':'मुंद्रा बंदरगाह पर लोडिंग और B/L सत्यापन के बाद जारी।','deal.pending':'लंबित',
-  'deal.sigLog':'डिजिटल हस्ताक्षर:','deal.sig1of2':'1/2 हस्ताक्षरित','deal.buyerLabel':'खरीदार #RU-4471:','deal.buyerSigned':'हस्ताक्षरित (सत्यापित)','deal.supplierLabel':'Indian Manufactories Group:','deal.awaiting':'आपके हस्ताक्षर की प्रतीक्षा है',
-  'deal.signBtn':'स्मार्ट अनुबंध पर हस्ताक्षर करें (E-Sign)','deal.pi':'प्रोफार्मा चालान डाउनलोड करें (PI)',
-  'chat.title':'सुरक्षित सौदा चैट','chat.translate':'ऑटो-अनुवाद: RU ↔ EN ↔ HI','chat.privacy':'Privacy Guard सक्रिय',
-  'chat.buyer':'खरीदार #RU-4471','chat.msg1':'हम 26 टन बासमती 1121 के लिए FOB Mundra शर्तों की पुष्टि करते हैं। कृपया अनुबंध पर हस्ताक्षर करें।','chat.supplier':'Indian Manufactories Group (आप)','chat.msg2':'पुणे के कारखाने में पैकिंग शुरू हो गई है। प्रमाणपत्र तैयार हैं।','chat.privacy_note':'<b>Privacy Guard:</b> सुरक्षा के लिए संपर्क विवरण छिपाए जाते हैं।','chat.placeholder':'संदेश टाइप करें...',
-  'fchat.title':'सौदों के संदेश','fchat.sub':'सक्रिय चैट चुनें','fchat.toDeal':'सौदा खोलें →','fchat.rfqMsg':'कृपया 100 टन बासमती 1121 के लिए FOB कोटेशन प्रदान करें।','fchat.escrowMsg':'बैंक में एस्क्रो जमा लॉक है। B/L अपलोड की प्रतीक्षा है।',
-  'notify.title':'सूचना',
-  'step1.title':'1. पंजीकरण','step1.sub':'ईमेल और पासवर्ड',
-  'step2.title':'2. KYB जांच','step2.sub':'कर और निर्यात कोड',
-  'step3.title':'3. कैटलॉग','step3.sub':'उत्पाद प्रबंधन',
-  'step4.title':'4. ऑर्डर हब','step4.sub':'सौदा और एस्क्रो',
-  'step5.title':'5. डील रूम','step5.sub':'ई-साइन और चैट',
-  'dr.specTitle':'विनिर्देश और विशेषताएं','dr.descLabel':'विवरण','dr.featuresLabel':'मुख्य विशेषताएं','dr.charLabel':'विशेषताएं','dr.brandLabel':'ब्रांड:','dr.countryLabel':'मूल देश:','dr.colorLabel':'रंग:','dr.matLabel':'सामग्री:','dr.scopeLabel':'उपयोग:','dr.warrantyLabel':'वारंटी:','dr.instrLabel':'निर्देश:','dr.logisticsLabel':'वितरण और रसद','dr.pkgLabel':'पैकेजिंग:','dr.methodLabel':'तरीका:','dr.portLabel':'बंदरगाह:','dr.dimsLabel':'आयाम और वजन','dr.width':'चौड़ाई','dr.height':'ऊंचाई','dr.length':'लंबाई','dr.grossWeight':'कुल वजन','dr.closeSpec':'विनिर्देश बंद करें',
-  'dr.newSkuTitle':'कैटलॉग में नया उत्पाद जोड़ें','dr.newSkuSub':'पूर्ण निर्यात विनिर्देश','dr.sec1':'1. सामान्य जानकारी','dr.sec2':'2. मूल्य निर्धारण और वाणिज्यिक शर्तें','dr.sec3':'3. विवरण और रसद','dr.prodNameLabel':'उत्पाद का पूरा नाम','dr.prodNamePh':'उदा. 1121 स्टीम बासमती चावल 1 टन','dr.hsLabel':'HS कोड','dr.skuLabel':'SKU कोड','dr.catLabel':'श्रेणी','dr.pminLabel':'न्यूनतम मूल्य','dr.pmaxLabel':'अधिकतम मूल्य','dr.moqLabel':'MOQ','dr.advLabel':'अग्रिम (%)','dr.postLabel':'B/L पर (%)','dr.incoLabel':'Incoterms','dr.publishBtn':'कैटलॉग में प्रकाशित करें',
-  'dr.rfqReqTitle':'खरीदार की पूछताछ:','dr.rfqReqText':'100 टन बासमती 1121, CIF नोवोरोस्सिएस्क, 25 किलो बैग।','dr.pricePerTon':'प्रति टन मूल्य','dr.volumeTon':'मात्रा (टन)','dr.sendQuoteBtn':'कोटेशन भेजें →','dr.discussChat':'चैट में चर्चा करें',
-  'dr.quoteActiveTitle':'सक्रिय वाणिज्यिक प्रस्ताव','dr.product':'उत्पाद:','dr.qty':'मात्रा:','dr.totalVal':'कुल मूल्य:','dr.terms':'शर्तें:','dr.adjustPrice':'मूल्य समायोजित करें',
-  'dr.contractConfirmTitle':'अनुबंध समीक्षा एवं ई-साइन','dr.contractCheckbox':'मैं वाणिज्यिक शर्तों की पुष्टि करता हूं और हस्ताक्षर के लिए तैयार हूं।','dr.openDealRoomBtn':'हस्ताक्षर के लिए डील रूम खोलें →','dr.openBuyerChat':'खरीदार के साथ चैट खोलें',
-  'dr.prodProgressTitle':'उत्पादन प्रगति','dr.batchReadiness':'बैच की तैयारी','dr.updateStageBtn':'चरण अपडेट करें',
-  'dr.uploadBlTitle':'बिल ऑफ लैडिंग (B/L) अपलोड','dr.blLockedText':'बैंक में सुरक्षित। 70% शेष राशि प्राप्त करने के लिए B/L अपलोड करें।','dr.blNumber':'B/L संख्या','dr.blScanLabel':'मूल B/L स्कैन (PDF)','dr.blDropText':'B/L स्कैन अपलोड करने के लिए यहां क्लिक करें','dr.sendBlToBank':'बैंक को B/L भेजें',
-  'dr.trackingTitle':'शिपमेंट ट्रैकिंग','dr.customsPassed':'✓ मुंद्रा बंदरगाह पर सीमा शुल्क पूरा हुआ','dr.inTransit':'🚢 मार्ग में जहाज MSC Katrina','dr.etaText':'9 दिनों में आगमन की उम्मीद',
-  'dr.archiveTitle':'पूर्ण किए गए सौदों का संग्रह','dr.orderClosedText':'✓ आदेश सफलतापूर्वक बंद हो गया। 100% राशि प्राप्त हुई।','dr.downloadClosingDocs':'दस्तावेज़ डाउनलोड करें',
-  'msg.contractSigned':'अनुबंध सफलतापूर्वक हस्ताक्षरित! 30% अग्रिम लॉक हो गया।','msg.newSkuSuccess':'नया उत्पाद कैटलॉग में प्रकाशित हुआ!','msg.quoteSentSuccess':'कोटेशन खरीदार को भेजा गया!','msg.prodUpdated':'उत्पादन स्थिति अपडेट की गई।','msg.blSentSuccess':'B/L भेजा गया। 70% राशि जारी की जाएगी।','msg.downloadingDocs':'चालान डाउनलोड हो रहे हैं...'
-},
-zh: {
-  'profile.verified':'KYB 已认证',
-  'reg.title':'注册 Alfa-Global','reg.subtitle':'创建出口商企业账户',
-  'reg.email':'企业邮箱','reg.phone':'电话号码','reg.password':'设置密码',
-  'reg.continue':'继续注册','reg.otpSent':'验证码已发送至邮箱和短信。',
-  'reg.otp':'动态验证码 (OTP)','reg.terms':'我接受平台条款和跨境数据传输政策。','reg.kyb_consent':'我同意国家注册中心 (KYB) 自动验证。','reg.finish':'完成注册','common.back':'← 返回','common.close':'关闭','common.cancel':'取消',
-  'kyb.stepTag':'第 2 步 / 供应商合规验证','kyb.title':'出口商法定资质与监管凭证','kyb.subtitle':'信息通过税务和海关 API 自动核验。','kyb.pending':'等待验证','kyb.companyName':'公司法定名称','kyb.nameHint':'与注册文件一致','kyb.country':'所属国籍','kyb.gstin':'GSTIN 税号 (27邦)','kyb.taxBadge':'ℹ 税务','kyb.valid':'✓ 有效','kyb.iec':'DGFT IEC / PAN','kyb.customsBadge':'ℹ 海关','kyb.dgftOk':'✓ DGFT','kyb.council':'出口促进委员会','kyb.adcode':'AD Code & Bank IFSC','kyb.valutaBadge':'外汇管制专用','kyb.port':'主要始发港','kyb.factory':'工厂 / 设施地址','kyb.doc':'质量认证与出口许可证','kyb.docStatus':'(2.8 MB · 已验证)','kyb.back':'← 返回注册','kyb.submit':'验证并打开商品目录',
-  'kyb.whyTitle':'为什么要填写这些信息？','kyb.whyDesc':'Alfa-Global 支持买家与海外工厂之间的直接跨境结算，无需中介。',
-  'kyb.r1Title':'1. 银行外汇管制','kyb.r1Desc':'AD 代码与 IFSC 允许快速开具交易护照并清关。',
-  'kyb.r2Title':'2. 托管账户释放','kyb.r2Desc':'DGFT IEC 验证出口资格，支持凭提单自动释放 70% 尾款。',
-  'kyb.r3Title':'3. "KYB Verified" 标识','kyb.r3Desc':'认证供应商可从企业买家处获得多达 3.8 倍的直发 RFQ。',
-  'compliance.title':'供应商合规中心','compliance.sub':'Indian Manufactories Group Pvt. Ltd. — KYB Verified','compliance.gst':'GSTIN (马哈拉施特拉邦 27)','compliance.active':'✓ 有效','compliance.iec':'DGFT IEC / PAN','compliance.valid':'✓ 已核验','compliance.council':'出口委员会','compliance.member':'✓ 会员','compliance.bank':'AD 代码与外汇账户','compliance.linked':'✓ 已关联',
-  'catalog.title':'出口商品目录','catalog.subtitle':'产品管理','catalog.toOrders':'订单中心','catalog.addSku':'添加 SKU','catalog.search':'搜索','catalog.searchPh':'名称、品牌或货号...','catalog.category':'品类：','catalog.allCat':'全部品类','catalog.sort':'排序：','catalog.sortAsc':'价格：从低到高','catalog.sortDesc':'价格：从高到低','catalog.sortMoq':'起订量：从低到高',
-  'cat.food':'Food, Grains & Spices','cat.agro':'Agriculture & Agro Inputs','cat.consumer':'Consumer Goods & Houseware','cat.raw':'Raw Materials & Commodities',
-  'orders.title':'订单与托管中心','orders.subtitle':'监控出口合同、海关清关与银行资金托管','orders.backCat':'返回目录','orders.filterLabel':'筛选：',
-  'table.id':'交易 ID','table.product':'商品','table.buyer':'买家','table.value':'金额','table.status':'状态','table.action':'操作',
-  'st.ALL':'全部','st.RFQ':'RFQ 询价','st.QUOTE_SENT':'已发报价','st.CONTRACT':'合同阶段','st.PRODUCTION':'生产中','st.ESCROW_HELD':'资金托管','st.SHIPPED':'已发运','st.COMPLETED':'已完成',
-  'act.RFQ':'发送报价','act.QUOTE_SENT':'查看报价','act.CONTRACT':'签署合同','act.PRODUCTION':'生产进度','act.ESCROW_HELD':'上传提单','act.SHIPPED':'货物追踪','act.COMPLETED':'详情',
-  'deal.stepTag':'第 5 步 / 交易室','deal.title':'合同协商与电子签章','deal.back':'返回订单','deal.terms':'已商定贸易条款',
-  'deal.product':'商品','deal.riceName':'1121 印度香米','deal.volume':'数量','deal.riceQty':'26 吨 (1 FCL)','deal.unitPrice':'单价 (FOB)','deal.total':'总计',
-  'deal.escrow30':'30% 预付款银行托管','deal.escrow30desc':'锁定在托管账户中。包装开始时释放。','deal.secured':'已锁定',
-  'deal.escrow70':'70% 提单 (B/L) 释放','deal.escrow70desc':'在蒙德拉港装船并验证提单后释放。','deal.pending':'待处理',
-  'deal.sigLog':'数字签署记录：','deal.sig1of2':'1/2 已签署','deal.buyerLabel':'买家 #RU-4471：','deal.buyerSigned':'已签署 (已认证)','deal.supplierLabel':'Indian Manufactories Group：','deal.awaiting':'等待您的签署',
-  'deal.signBtn':'签署智能合约 (E-Sign)','deal.pi':'下载形式发票 (PI)',
-  'chat.title':'交易加密会话','chat.translate':'自动翻译：RU ↔ EN ↔ ZH','chat.privacy':'隐私保护已开启',
-  'chat.buyer':'买家 #RU-4471','chat.msg1':'我们确认 26 吨 1121 印度香米的 FOB Mundra 条款。请签署合同以锁定托管资金。','chat.supplier':'Indian Manufactories Group (您)','chat.msg2':'浦那工厂正在组织包装，APEDA 认证和植物检疫证书已备齐。','chat.privacy_note':'<b>隐私保护：</b> 电话与邮箱已自动隐藏，保障交易安全。','chat.placeholder':'输入消息...',
-  'fchat.title':'交易消息','fchat.sub':'选择对话','fchat.toDeal':'前往交易 →','fchat.rfqMsg':'请提供 100 吨 1121 印度香米至新罗西斯克的 FOB 报价。','fchat.escrowMsg':'托管资金已锁定在银行。等待上传提单。',
-  'notify.title':'通知',
-  'step1.title':'1. 注册','step1.sub':'邮箱与密码',
-  'step2.title':'2. KYB 认证','step2.sub':'税务与外贸代码',
-  'step3.title':'3. 商品目录','step3.sub':'产品管理',
-  'step4.title':'4. 订单中心','step4.sub':'交易与资金托管',
-  'step5.title':'5. 交易室','step5.sub':'电子签章与沟通',
-  'dr.specTitle':'规格与技术特性','dr.descLabel':'产品描述','dr.featuresLabel':'核心亮点','dr.charLabel':'详细特性','dr.brandLabel':'品牌：','dr.countryLabel':'产地：','dr.colorLabel':'颜色：','dr.matLabel':'材质：','dr.scopeLabel':'适用范围：','dr.warrantyLabel':'保修期：','dr.instrLabel':'保存及使用说明：','dr.logisticsLabel':'物流与包装','dr.pkgLabel':'包装形式：','dr.methodLabel':'运输方式：','dr.portLabel':'始发港：','dr.dimsLabel':'尺寸与重量','dr.width':'宽度','dr.height':'高度','dr.length':'长度','dr.grossWeight':'毛重','dr.closeSpec':'关闭规格详情',
-  'dr.newSkuTitle':'添加新商品至目录','dr.newSkuSub':'填写完整出口规格表单','dr.sec1':'1. 基础信息','dr.sec2':'2. 价格与贸易条款','dr.sec3':'3. 产品描述与物流','dr.prodNameLabel':'商品全称','dr.prodNamePh':'例如：1121 印度蒸谷香米 1吨','dr.hsLabel':'海关编码 (HS Code)','dr.skuLabel':'商品货号 (SKU)','dr.catLabel':'品类','dr.pminLabel':'最低价','dr.pmaxLabel':'最高价','dr.moqLabel':'起订量 (MOQ)','dr.advLabel':'预付款 (%)','dr.postLabel':'见提单付款 (%)','dr.incoLabel':'贸易术语 (Incoterms)','dr.publishBtn':'发布至商品目录',
-  'dr.rfqReqTitle':'买家采购意向：','dr.rfqReqText':'100 吨 1121 香米，CIF 新罗西斯克，25公斤装附植检证书。','dr.pricePerTon':'每吨单价','dr.volumeTon':'采购量 (吨)','dr.sendQuoteBtn':'发送商务报价 →','dr.discussChat':'在交易会话中沟通',
-  'dr.quoteActiveTitle':'当前生效报价','dr.product':'商品：','dr.qty':'数量：','dr.totalVal':'总计金额：','dr.terms':'贸易条件：','dr.adjustPrice':'调整报价',
-  'dr.contractConfirmTitle':'合同确认与电子签章','dr.contractCheckbox':'我已核对贸易条款，确认进入交易室签署智能合约。','dr.openDealRoomBtn':'前往交易室签署 →','dr.openBuyerChat':'与买家沟通',
-  'dr.prodProgressTitle':'生产与包装进度','dr.batchReadiness':'批次完成度','dr.updateStageBtn':'更新生产阶段',
-  'dr.uploadBlTitle':'上传海运提单 (B/L)','dr.blLockedText':'已在银行安全托管。上传正本提单以释放 70% 尾款。','dr.blNumber':'提单号 (B/L Number)','dr.blScanLabel':'正本已装船提单扫描件 (PDF)','dr.blDropText':'点击或拖拽上传清洁已装船提单','dr.sendBlToBank':'提交提单至银行核验',
-  'dr.trackingTitle':'货物实时在途追踪','dr.customsPassed':'✓ 蒙德拉港海关出口清关完成','dr.inTransit':'🚢 承运集装箱船 MSC Katrina 在途中','dr.etaText':'预计 9 天后抵达目的港',
-  'dr.archiveTitle':'已归档历史订单','dr.orderClosedText':'✓ 订单已圆满完成，100% 外汇货款已结算入账。','dr.downloadClosingDocs':'下载结算发票及凭证',
-  'msg.contractSigned':'智能合约签署成功！30% 预付款已安全锁定。','msg.newSkuSuccess':'新商品已成功发布至目录！','msg.quoteSentSuccess':'商业报价已发送给买家！','msg.prodUpdated':'生产进度已更新。','msg.blSentSuccess':'提单已提交银行，70% 尾款将释放至外汇账户。','msg.downloadingDocs':'正在生成并下载结算凭证...'
-}
+  ru: {
+    'reg.title':'Регистрация в Alfa-Global','reg.subtitle':'Создайте аккаунт экспортёра',
+    'reg.email':'Email','reg.phone':'Телефон','reg.password':'Пароль',
+    'reg.continue':'Продолжить','reg.otpSent':'Код отправлен на email и SMS.',
+    'reg.otp':'Код подтверждения','reg.finish':'Готово','common.back':'← Назад',
+    'kyb.stepTag':'Шаг 2 / Верификация','kyb.title':'Юридические данные','kyb.subtitle':'Автоматическая проверка через реестры',
+    'kyb.company':'Компания','kyb.gstin':'GSTIN','kyb.pan':'PAN','kyb.next':'Далее',
+    'supplier.stepTag':'Шаг 3 / Карточка поставщика','supplier.title':'Профиль компании','supplier.subtitle':'Информация, которую видят покупатели',
+    'supplier.companyName':'Название компании','supplier.logo':'Логотип','supplier.logoHint':'Загрузить логотип компании','supplier.upload':'Выбрать файл',
+    'supplier.scope':'Сфера деятельности',
+    'supplier.description':'Описание компании',
+    'supplier.showcase':'Витрина товаров','supplier.save':'Сохранить карточку',
+    'success.title':'Поздравляем!','success.message':'Теперь вы можете принимать заказы от покупателей из России и других стран!','success.button':'Перейти в Orders Hub',
+    'orders.title':'Orders Hub','orders.empty':'Заказы будут появляться здесь. Ваша карточка опубликована!'
+  },
+  en: {
+    'reg.title':'Register at Alfa-Global','reg.subtitle':'Create exporter account',
+    'reg.email':'Email','reg.phone':'Phone','reg.password':'Password',
+    'reg.continue':'Continue','reg.otpSent':'Code sent to email and SMS.',
+    'reg.otp':'Confirmation code','reg.finish':'Done','common.back':'← Back',
+    'kyb.stepTag':'Step 2 / Verification','kyb.title':'Legal Information','kyb.subtitle':'Automatic verification via registries',
+    'kyb.company':'Company','kyb.gstin':'GSTIN','kyb.pan':'PAN','kyb.next':'Next',
+    'supplier.stepTag':'Step 3 / Supplier Card','supplier.title':'Company Profile','supplier.subtitle':'Information buyers see',
+    'supplier.companyName':'Company Name','supplier.logo':'Logo','supplier.logoHint':'Upload company logo','supplier.upload':'Choose file',
+    'supplier.scope':'Scope of Activity',
+    'supplier.description':'Company Description',
+    'supplier.showcase':'Product Showcase','supplier.save':'Save Supplier Card',
+    'success.title':'Congratulations!','success.message':'Now you can receive orders from customers in Russia and other countries!','success.button':'Go to Orders Hub',
+    'orders.title':'Orders Hub','orders.empty':'Orders will appear here. Your card is published!'
+  }
 };
 
 let LANG = 'ru';
-let CURR = 'RUB';
 let CURR_STEP = 1;
-let STATUS_FILTER = 'ALL';
+let supplierData = {};
 
-function t(key){ return (T[LANG] && T[LANG][key]) || (T['ru'] && T['ru'][key]) || key; }
-function getLocalStr(obj){ if(!obj) return ''; if(typeof obj === 'string') return obj; return obj[LANG] || obj['ru'] || obj['en'] || ''; }
+const demoProducts = [
+  { name: 'Pearl Sneakers', color: 'bg-gradient-to-br from-pink-200 to-rose-300' },
+  { name: 'Crimson Velocity', color: 'bg-gradient-to-br from-red-500 to-red-700' },
+  { name: 'Gradients Kicks', color: 'bg-gradient-to-br from-yellow-300 to-green-400' },
+  { name: null, color: 'bg-slate-100' }
+];
 
-function fmtMoney(rub){
-  const cfg = RATES[CURR];
-  const v = Math.round(rub * cfg.r);
-  if(CURR === 'RUB') return v.toLocaleString('ru-RU') + ' ₽';
-  if(CURR === 'INR') return '₹' + v.toLocaleString('en-IN');
-  return cfg.s + v.toLocaleString('en-US');
+// ===== UTILITIES =====
+function t(key) { 
+  const result = (T[LANG] && T[LANG][key]) || (T['ru'] && T['ru'][key]) || key;
+  return result;
 }
 
-function applyI18n(){
+function safeSelect(selector) {
+  const el = document.querySelector(selector);
+  if (!el) {
+    console.warn(`Element not found: ${selector}`);
+    return null;
+  }
+  return el;
+}
+
+function applyI18n() {
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const k = el.getAttribute('data-i18n');
-    el.innerHTML = t(k);
+    if (k) {
+      el.innerHTML = t(k);
+    }
   });
   document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
-    el.placeholder = t(el.getAttribute('data-i18n-placeholder'));
+    const k = el.getAttribute('data-i18n-placeholder');
+    if (k) {
+      el.placeholder = t(k);
+    }
   });
 }
 
-function applyPrices(){
-  document.querySelectorAll('.price[data-inr]').forEach(el => {
-    el.textContent = fmtMoney(parseFloat(el.dataset.inr));
-  });
-}
-
-function renderStepper(){
-  const stepper = document.getElementById('stepper');
+// ===== STEPPER =====
+function renderStepper() {
+  const stepper = safeSelect('#stepper');
+  if (!stepper) return;
+  
   stepper.innerHTML = '';
-  for(let i=1; i<=5; i++){
+  const stepLabels = ['Регистрация', 'Верификация', 'Карточка', 'Заказы'];
+  const stepLabelsEn = ['Registration', 'Verification', 'Card', 'Orders'];
+  
+  for (let i = 1; i <= 4; i++) {
     const done = i < CURR_STEP;
     const active = i === CURR_STEP;
-
+    
     const wrap = document.createElement('div');
     wrap.className = 'flex flex-col items-center flex-1 cursor-pointer';
-    wrap.onclick = () => { if(i <= Math.max(CURR_STEP, 3)) goStep(i); };
+    wrap.onclick = () => { if (i <= Math.max(CURR_STEP, 2)) goStep(i); };
 
     const circle = document.createElement('div');
     circle.className = `w-9 h-9 rounded-full text-xs font-black flex items-center justify-center border-2 shrink-0 transition ${
-      done   ? 'bg-emerald-100 border-emerald-500 text-emerald-800' :
+      done ? 'bg-emerald-100 border-emerald-500 text-emerald-800' :
       active ? 'bg-alfa border-alfa text-white shadow-md' :
-               'bg-white border-slate-300 text-slate-400'
+      'bg-white border-slate-300 text-slate-400'
     }`;
     circle.textContent = done ? '✓' : i;
 
     const label = document.createElement('div');
     label.className = 'mt-1 text-center';
-
     const title = document.createElement('p');
     title.className = `text-[11px] font-extrabold leading-tight ${active ? 'text-alfa' : done ? 'text-emerald-800' : 'text-slate-400'}`;
-    title.textContent = t(`step${i}.title`);
-
-    const sub = document.createElement('p');
-    sub.className = `text-[10px] leading-tight ${active ? 'text-slate-700 font-semibold' : 'text-slate-400'}`;
-    sub.textContent = t(`step${i}.sub`);
-
+    title.textContent = LANG === 'en' ? stepLabelsEn[i - 1] : stepLabels[i - 1];
     label.appendChild(title);
-    label.appendChild(sub);
     wrap.appendChild(circle);
     wrap.appendChild(label);
     stepper.appendChild(wrap);
 
-    if(i < 5){
+    if (i < 4) {
       const line = document.createElement('div');
       line.className = `h-0.5 flex-shrink-0 mt-4.5 ${i < CURR_STEP ? 'bg-emerald-400' : 'bg-slate-200'}`;
       line.style.width = '28px';
@@ -1184,770 +365,139 @@ function renderStepper(){
   }
 }
 
-function goStep(n){
+// ===== NAVIGATION =====
+function goStep(n) {
   CURR_STEP = n;
-  for(let i=1; i<=5; i++){
-    const s = document.getElementById('step-'+i);
-    if(s) s.classList.toggle('hidden', i !== n);
+  for (let i = 1; i <= 4; i++) {
+    const s = safeSelect(`#step-${i}`);
+    if (s) s.classList.toggle('hidden', i !== n);
   }
-  const pb = document.getElementById('profile-btn');
-  const chatFab = document.getElementById('float-chat-container');
-
-  // Chat and profile are strictly shown starting from Step 3 (Catalog)
-  if(n >= 3){
-    chatFab.classList.remove('hidden');
-    pb.classList.remove('hidden');
-    pb.classList.add('inline-flex');
-  } else {
-    chatFab.classList.add('hidden');
-    document.getElementById('float-chat-box').classList.add('hidden');
-    pb.classList.add('hidden');
-    pb.classList.remove('inline-flex');
-  }
-
   renderStepper();
   applyI18n();
-  applyPrices();
-  if(n === 3) renderCatalog();
-  if(n === 4) renderOrders();
+  if (n === 3) renderProductShowcase();
   lucide.createIcons();
-  window.scrollTo({top:0, behavior:'smooth'});
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-function showOtp(){
-  document.getElementById('auth-a').classList.add('hidden');
-  document.getElementById('auth-b').classList.remove('hidden');
-  lucide.createIcons();
+// ===== STEP 1: REGISTRATION =====
+function showOtp() {
+  const authA = safeSelect('#auth-a');
+  const authB = safeSelect('#auth-b');
+  if (authA) authA.classList.add('hidden');
+  if (authB) authB.classList.remove('hidden');
 }
-function backToEmailPass(){
-  document.getElementById('auth-b').classList.add('hidden');
-  document.getElementById('auth-a').classList.remove('hidden');
+
+function backToEmailPass() {
+  const authA = safeSelect('#auth-a');
+  const authB = safeSelect('#auth-b');
+  if (authB) authB.classList.add('hidden');
+  if (authA) authA.classList.remove('hidden');
 }
-function handleKyb(e){
+
+// ===== STEP 2: KYB =====
+function handleKyb(e) {
   e.preventDefault();
+  const company = safeSelect('#kyb-company')?.value || '';
+  if (!company) {
+    alert('Заполните название компании');
+    return;
+  }
   goStep(3);
 }
 
-function changeLang(v){
+// ===== STEP 3: SUPPLIER CARD =====
+function renderProductShowcase() {
+  const grid = safeSelect('#product-grid');
+  if (!grid) return;
+  
+  grid.innerHTML = demoProducts.map((prod, idx) => {
+    if (prod.name === null) {
+      return `
+        <div class="aspect-square rounded-xl ${prod.color} border-2 border-dashed border-slate-300 flex flex-col items-center justify-center cursor-pointer hover:border-alfa hover:bg-slate-50 transition">
+          <i data-lucide="plus" class="w-8 h-8 text-slate-400 mb-2"></i>
+          <p class="text-[10px] font-bold text-slate-500 text-center px-2" data-i18n="supplier.showcase">Витрина товаров</p>
+        </div>
+      `;
+    }
+    return `
+      <div class="space-y-2">
+        <div class="aspect-square rounded-lg ${prod.color} flex items-end justify-center pb-2 shadow-sm">
+          <div class="w-12 h-12 bg-white/40 rounded-full"></div>
+        </div>
+        <input type="text" id="prod-name-${idx}" value="${prod.name}" placeholder="Название товара" class="w-full px-2 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-xs outline-none focus:ring-1 focus:ring-alfa/40">
+      </div>
+    `;
+  }).join('');
+  lucide.createIcons();
+}
+
+function handleLogoUpload(e) {
+  const file = e.target?.files?.[0];
+  if (!file) return;
+  
+  const reader = new FileReader();
+  reader.onload = (evt) => {
+    const logoPreview = safeSelect('#logo-preview');
+    if (logoPreview && evt.target?.result) {
+      logoPreview.innerHTML = `<img src="${evt.target.result}" class="w-full h-full object-cover rounded-[10px]">`;
+    }
+  };
+  reader.readAsDataURL(file);
+}
+
+function handleSupplierSubmit(e) {
+  e.preventDefault();
+  
+  // Валидация
+  const name = safeSelect('#supp-name')?.value || '';
+  const scope = safeSelect('#supp-scope')?.value || '';
+  const desc = safeSelect('#supp-desc')?.value || '';
+  
+  if (!name || !scope || !desc) {
+    alert('Заполните все обязательные поля');
+    return;
+  }
+  
+  // Сохранить данные
+  supplierData = {
+    name,
+    scope,
+    desc,
+    products: demoProducts.slice(0, 3).map((p, i) => ({
+      name: safeSelect(`#prod-name-${i}`)?.value || p.name,
+      color: p.color
+    }))
+  };
+  
+  // Открыть модалку
+  const modal = safeSelect('#success-modal');
+  if (modal) {
+    modal.classList.remove('hidden');
+    lucide.createIcons();
+  }
+}
+
+// ===== STEP 4: ORDERS HUB =====
+function goToOrdersHub() {
+  const modal = safeSelect('#success-modal');
+  if (modal) modal.classList.add('hidden');
+  goStep(4);
+}
+
+// ===== LANGUAGE =====
+function changeLang(v) {
   LANG = v;
   applyI18n();
   renderStepper();
-  renderCatalog();
-  renderOrders();
-  renderFloatInbox();
-  if(CURRENT_DRAWER_TYPE){
-    renderDrawerContent(CURRENT_DRAWER_TYPE, CURRENT_DRAWER_CONTEXT);
-  }
+  if (CURR_STEP === 3) renderProductShowcase();
   lucide.createIcons();
 }
 
-function changeCurrency(v){
-  CURR = v;
-  applyPrices();
-  renderCatalog();
-  renderOrders();
-  if(CURRENT_DRAWER_TYPE){
-    renderDrawerContent(CURRENT_DRAWER_TYPE, CURRENT_DRAWER_CONTEXT);
-  }
-}
-
-function downloadPI(){
-  showNotify(LANG === 'ru' 
-    ? 'Генерация Проформа-инвойса PI-ALFA-2025-0312.pdf с кодом ТН ВЭД 10063092 и портом Mundra...'
-    : 'Generating Proforma Invoice PI-ALFA-2025-0312.pdf (HS 10063092, FOB Mundra)...');
-}
-
-function renderCatalog(){
-  const grid = document.getElementById('catalog-grid');
-  if(!grid) return;
-  const search = (document.getElementById('cat-search')?.value || '').toLowerCase();
-  const cat = document.getElementById('cat-cat')?.value || '';
-  const sort = document.getElementById('cat-sort')?.value || 'price_asc';
-
-  let items = [...CATALOG_DATA].filter(c => {
-    const nameStr = getLocalStr(c.name).toLowerCase();
-    const matchS = nameStr.includes(search) || c.id.toLowerCase().includes(search) || c.brand.toLowerCase().includes(search);
-    const matchC = !cat || c.category === cat;
-    return matchS && matchC;
-  });
-
-  if(sort === 'price_asc') items.sort((a,b) => a.priceMin - b.priceMin);
-  if(sort === 'price_desc') items.sort((a,b) => b.priceMin - a.priceMin);
-  if(sort === 'moq_asc') items.sort((a,b) => a.moq - b.moq);
-
-  if(!items.length){
-    grid.innerHTML = `<div class="col-span-4 py-12 text-center text-sm text-slate-400">${t('catalog.searchPh')}</div>`;
-    return;
-  }
-
-  grid.innerHTML = items.map(p => {
-    const priceRange = p.priceMin === p.priceMax
-      ? `${fmtMoney(p.priceMin)}`
-      : `${fmtMoney(p.priceMin)} – ${fmtMoney(p.priceMax)}`;
-
-    const unitShortStr = getLocalStr(p.unitShort);
-    const prodName = getLocalStr(p.name);
-    const bannerHtml = getProductSvgBanner(p.icon, p.bgGradient, 'HS ' + p.hs, p.brand);
-
-    return `
-      <div onclick="openDrawer('view-sku', '${p.id}')" class="bg-white rounded-2xl border border-slate-200 shadow-sm p-3.5 flex flex-col justify-between hover:border-alfa hover:shadow-md transition cursor-pointer group">
-        <div>
-          <div class="mb-3">${bannerHtml}</div>
-          <div class="space-y-1">
-            <div class="flex items-baseline gap-1.5 flex-wrap">
-              <span class="text-base font-black text-slate-900 leading-tight">${priceRange}</span>
-              <span class="text-xs font-semibold text-slate-500">/ ${unitShortStr}</span>
-            </div>
-            <h3 class="font-bold text-slate-800 text-xs leading-snug line-clamp-2 mt-1.5">${prodName}</h3>
-          </div>
-        </div>
-        <div class="mt-3 pt-2.5 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500">
-          <span class="flex items-center gap-1 font-medium"><i data-lucide="globe" class="w-3.5 h-3.5 text-slate-400"></i>${p.country}</span>
-          <span class="font-mono text-[10px] text-slate-400 font-bold">${p.id}</span>
-        </div>
-      </div>
-    `;
-  }).join('');
-  lucide.createIcons();
-}
-
-function renderFilters(){
-  const c = document.getElementById('status-filters');
-  if(!c) return;
-  c.innerHTML = '';
-  STATUS_LIST.forEach(s => {
-    const b = document.createElement('button');
-    const active = s === STATUS_FILTER;
-    b.className = `px-3 py-1 text-xs font-bold rounded-full transition ${active ? 'bg-alfa text-white shadow-sm' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}`;
-    b.textContent = t('st.'+s);
-    b.onclick = () => { STATUS_FILTER = s; renderOrders(); renderFilters(); };
-    c.appendChild(b);
-  });
-}
-
-function renderOrders(){
-  renderFilters();
-  const tbody = document.getElementById('orders-tbody');
-  if(!tbody) return;
-  const rows = STATUS_FILTER === 'ALL' ? ORDERS_DATA : ORDERS_DATA.filter(o => o.status === STATUS_FILTER);
-  if(!rows.length){
-    tbody.innerHTML = `<tr><td colspan="6" class="px-5 py-8 text-center text-sm text-slate-400">Сделок нет.</td></tr>`;
-    return;
-  }
-  tbody.innerHTML = rows.map(o => {
-    const actionLabel = t('act.'+o.status);
-    const prodTitle = getLocalStr(o.product);
-    const drawerMap = {
-      'RFQ': 'rfq-quote',
-      'QUOTE_SENT': 'view-quote',
-      'CONTRACT': 'sign-contract',
-      'PRODUCTION': 'production',
-      'ESCROW_HELD': 'upload-bl',
-      'SHIPPED': 'shipment',
-      'COMPLETED': 'completed'
-    };
-    const drawerType = drawerMap[o.status] || 'rfq-quote';
-    const btnCls = o.needsAction
-      ? 'px-3 py-1.5 bg-alfa hover:bg-alfa-hover text-white text-xs font-bold rounded-xl transition shadow-sm'
-      : 'px-3 py-1.5 bg-slate-800 hover:bg-slate-900 text-white text-xs font-bold rounded-xl transition';
-
-    return `<tr class="hover:bg-slate-50 transition">
-      <td class="px-5 py-3.5 text-xs font-mono font-bold text-alfa">${o.id}</td>
-      <td class="px-5 py-3.5 text-sm font-semibold text-slate-800">${prodTitle}</td>
-      <td class="px-5 py-3.5 text-xs text-slate-500 font-mono">${o.buyer}</td>
-      <td class="px-5 py-3.5 text-sm font-bold text-slate-900">${fmtMoney(o.valInr)}</td>
-      <td class="px-5 py-3.5"><span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold ${o.badgeCls}">${t('st.'+o.status)}</span></td>
-      <td class="px-5 py-3.5 text-right">
-        <button onclick="openDrawer('${drawerType}')" class="${btnCls}">${actionLabel} →</button>
-      </td>
-    </tr>`;
-  }).join('');
-}
-
-function signContract(){
-  const btn = document.getElementById('esign-btn');
-  if(btn){
-    btn.disabled = true;
-    btn.className = 'w-full py-3 bg-emerald-600 text-white font-bold rounded-xl text-sm flex items-center justify-center gap-2 cursor-default';
-    btn.innerHTML = '<i data-lucide="check-check" class="w-4 h-4"></i><span>Контракт подписан обеими сторонами ✓</span>';
-  }
-  const badge = document.getElementById('esign-badge');
-  if(badge){ badge.textContent = '2/2 Завершено — Эскроу заблокирован'; badge.className = 'text-emerald-600 font-semibold'; }
-  const state = document.getElementById('sign-state');
-  if(state){ state.innerHTML = '<b class="text-emerald-600">Подписано (КЭП)</b>'; }
-  const icon = document.getElementById('sign-icon');
-  if(icon) icon.textContent = '✓';
-  lucide.createIcons();
-  showNotify(t('msg.contractSigned'));
-}
-
-function maskPrivacy(str){
-  return str.replace(/(\+?\d[\d\s\-]{7,})/g, '[🔒 Телефон скрыт]')
-            .replace(/[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}/g, '[🔒 Email скрыт]')
-            .replace(/@[\w]+/g, '[🔒 Контакт скрыт]');
-}
-
-function sendChatMsg(e){
-  e.preventDefault();
-  const inp = document.getElementById('chat-input');
-  let txt = inp.value.trim();
-  if(!txt) return;
-  txt = maskPrivacy(txt);
-  const msgs = document.getElementById('chat-messages');
-  const d = document.createElement('div');
-  d.className = 'flex justify-end';
-  d.innerHTML = `<div class="bg-alfa-light text-alfa p-3 rounded-xl max-w-[80%] border border-alfa-mid">
-    <span class="text-[10px] font-bold block mb-0.5">Indian Manufactories Group (${LANG==='ru'?'Вы':'You'})</span>
-    <p class="text-xs">${txt}</p>
-    <span class="text-[9px] opacity-60 block text-right mt-0.5">${LANG==='ru'?'Только что':'Just now'}</span>
-  </div>`;
-  msgs.appendChild(d);
-  msgs.scrollTop = msgs.scrollHeight;
-  inp.value = '';
-}
-
-function toggleFloatChat(){
-  const box = document.getElementById('float-chat-box');
-  const isHidden = box.classList.contains('hidden');
-  if(isHidden){
-    box.classList.remove('hidden');
-    renderFloatInbox();
-  } else {
-    box.classList.add('hidden');
-  }
-}
-
-function openFloatDealChat(dealId){
-  const box = document.getElementById('float-chat-box');
-  box.classList.remove('hidden');
-  selectChatThread(dealId);
-}
-
-function renderFloatInbox(){
-  ACTIVE_CHAT_DEAL_ID = null;
-  document.getElementById('fc-threads-list').classList.remove('hidden');
-  document.getElementById('fc-active-chat').classList.add('hidden');
-  document.getElementById('fc-back-btn').classList.add('hidden');
-  document.getElementById('fc-header-title').textContent = t('fchat.title');
-  document.getElementById('fc-header-sub').textContent = t('fchat.sub');
-
-  const list = document.getElementById('fc-threads-list');
-  const threads = Object.values(CHAT_THREADS);
-
-  list.innerHTML = threads.map(tData => {
-    const lastMsg = tData.messages[tData.messages.length - 1];
-    const msgText = lastMsg.textKey ? t(lastMsg.textKey) : lastMsg.text;
-    return `
-      <div onclick="selectChatThread('${tData.dealId}')" class="p-3.5 hover:bg-slate-50 cursor-pointer transition flex items-start gap-3">
-        <div class="w-8 h-8 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center shrink-0 font-bold text-xs text-slate-700">💬</div>
-        <div class="flex-1 min-w-0">
-          <div class="flex items-center justify-between gap-1 mb-0.5">
-            <span class="font-bold text-xs text-slate-900 truncate">${tData.buyer}</span>
-            <span class="text-[10px] px-1.5 py-0.5 rounded font-bold shrink-0 ${tData.statusBadge}">${tData.status}</span>
-          </div>
-          <p class="text-[11px] font-semibold text-alfa truncate mb-0.5">${tData.dealId} · ${tData.productKey}</p>
-          <p class="text-[11px] text-slate-500 truncate">${msgText}</p>
-        </div>
-      </div>
-    `;
-  }).join('');
-  lucide.createIcons();
-}
-
-function selectChatThread(dealId){
-  ACTIVE_CHAT_DEAL_ID = dealId;
-  const thread = CHAT_THREADS[dealId];
-  if(!thread) return;
-
-  document.getElementById('fc-threads-list').classList.add('hidden');
-  document.getElementById('fc-active-chat').classList.remove('hidden');
-  document.getElementById('fc-back-btn').classList.remove('hidden');
-
-  document.getElementById('fc-header-title').textContent = thread.buyer;
-  document.getElementById('fc-header-sub').textContent = `${thread.dealId} · ${thread.productKey}`;
-
-  const contextText = document.getElementById('fc-context-text');
-  contextText.textContent = `Deal: ${thread.dealId} (${thread.status})`;
-
-  const actBtn = document.getElementById('fc-context-action');
-  actBtn.textContent = t('fchat.toDeal');
-  actBtn.onclick = () => {
-    if(thread.stepTarget === 5){
-      goStep(5);
-    } else {
-      goStep(4);
-      openDrawer(thread.drawerType);
-    }
-    toggleFloatChat();
-  };
-
-  renderThreadMessages();
-  lucide.createIcons();
-}
-
-function renderThreadMessages(){
-  const thread = CHAT_THREADS[ACTIVE_CHAT_DEAL_ID];
-  if(!thread) return;
-  const body = document.getElementById('fc-msg-body');
-  
-  body.innerHTML = thread.messages.map(m => {
-    const textContent = m.textKey ? t(m.textKey) : m.text;
-    if(m.isMe){
-      return `
-        <div class="flex justify-end">
-          <div class="bg-alfa text-white p-2.5 rounded-xl max-w-[85%] space-y-0.5">
-            <p class="text-xs leading-relaxed">${textContent}</p>
-            <span class="text-[9px] text-white/70 block text-right">${m.time}</span>
-          </div>
-        </div>
-      `;
-    } else {
-      return `
-        <div class="flex justify-start">
-          <div class="bg-white border border-slate-200 text-slate-800 p-2.5 rounded-xl max-w-[85%] space-y-0.5">
-            <span class="text-[10px] font-bold text-slate-500 block">${m.sender}</span>
-            <p class="text-xs leading-relaxed">${textContent}</p>
-            <span class="text-[9px] text-slate-400 block text-right">${m.time}</span>
-          </div>
-        </div>
-      `;
-    }
-  }).join('');
-  body.scrollTop = body.scrollHeight;
-}
-
-function sendFloatMsg(e){
-  e.preventDefault();
-  if(!ACTIVE_CHAT_DEAL_ID) return;
-  const inp = document.getElementById('fc-input');
-  let txt = inp.value.trim();
-  if(!txt) return;
-  txt = maskPrivacy(txt);
-
-  CHAT_THREADS[ACTIVE_CHAT_DEAL_ID].messages.push({
-    sender: 'Indian Manufactories Group (' + (LANG==='ru'?'Вы':'You') + ')',
-    isMe: true,
-    text: txt,
-    time: LANG==='ru'?'Только что':'Just now'
-  });
-
-  renderThreadMessages();
-  inp.value = '';
-}
-
-function renderDrawerContent(type, contextId){
-  const content = document.getElementById('drawer-content');
-  if(!content) return;
-
-  const drawerMap = {
-    'view-sku': () => {
-      const p = CATALOG_DATA.find(x => x.id === contextId) || CATALOG_DATA[0];
-      const priceRange = p.priceMin === p.priceMax
-        ? `${fmtMoney(p.priceMin)}`
-        : `${fmtMoney(p.priceMin)} – ${fmtMoney(p.priceMax)}`;
-      const prodName = getLocalStr(p.name);
-      const prodGroup = getLocalStr(p.group);
-      const prodDesc = getLocalStr(p.desc);
-      const prodUnit = getLocalStr(p.unit);
-      const prodCalc = getLocalStr(p.calcBase);
-      const prodMat = getLocalStr(p.material);
-      const prodScope = getLocalStr(p.scope);
-      const prodWarranty = getLocalStr(p.warranty);
-      const prodInstr = getLocalStr(p.specialInstr);
-      const prodPkg = getLocalStr(p.pkgDetails);
-      const prodDel = getLocalStr(p.deliveryMethod);
-      const prodLead = getLocalStr(p.leadTime);
-      const prodSample = getLocalStr(p.sample);
-      const bannerHtml = getProductSvgBanner(p.icon, p.bgGradient, 'HS ' + p.hs, p.brand);
-      const featuresList = (p.features && p.features[LANG]) || p.features?.ru || [];
-
-      return `
-        <div class="flex items-center justify-between px-6 py-4 border-b border-slate-100 bg-white sticky top-0 z-10">
-          <div class="text-[11px] text-slate-400 font-medium truncate">
-            Catalog / ${p.category} / <span class="text-slate-800 font-bold">${prodGroup}</span>
-          </div>
-          <button onclick="closeDrawer()" class="text-slate-400 hover:text-slate-700"><i data-lucide="x" class="w-5 h-5"></i></button>
-        </div>
-
-        <div class="p-6 space-y-6 flex-1 text-xs text-slate-700">
-          <div class="flex flex-col sm:flex-row gap-6">
-            <div class="sm:w-1/2">${bannerHtml}</div>
-            <div class="sm:w-1/2 space-y-3">
-              <h2 class="text-lg font-black text-slate-900 leading-snug">${prodName}</h2>
-              <p class="text-[11px] text-slate-500 font-mono">SKU: <b>${p.id}</b> · HS: <b>${p.hs}</b></p>
-              <div>
-                <span class="text-2xl font-black text-slate-900">${priceRange}</span>
-              </div>
-              
-              <div class="border-t border-slate-200 pt-3 space-y-1.5 text-[11px]">
-                <div class="flex justify-between py-1 border-b border-slate-100"><span class="text-slate-500">Brand</span><span class="font-bold text-slate-900">${p.brand}</span></div>
-                <div class="flex justify-between py-1 border-b border-slate-100"><span class="text-slate-500">MOQ</span><span class="font-bold text-slate-900">${p.moq} ${getLocalStr(p.unitShort)}</span></div>
-                <div class="flex justify-between py-1 border-b border-slate-100"><span class="text-slate-500">Price Base</span><span class="font-bold text-slate-900">${prodCalc}</span></div>
-                <div class="flex justify-between py-1 border-b border-slate-100"><span class="text-slate-500">Unit</span><span class="font-bold text-slate-900">${prodUnit}</span></div>
-                <div class="flex justify-between py-1 border-b border-slate-100"><span class="text-slate-500">Sample Available</span><span class="font-bold text-slate-900">${prodSample}</span></div>
-                <div class="flex justify-between py-1 border-b border-slate-100"><span class="text-slate-500">Lead Time</span><span class="font-bold text-slate-900">${prodLead}</span></div>
-                <div class="flex justify-between py-1 border-b border-slate-100"><span class="text-slate-500">Advance</span><span class="font-bold text-slate-900">${p.advance}</span></div>
-                <div class="flex justify-between py-1 border-b border-slate-100"><span class="text-slate-500">On B/L</span><span class="font-bold text-slate-900">${p.postPay}</span></div>
-                <div class="flex justify-between py-1"><span class="text-slate-500">Incoterms</span><span class="font-bold text-slate-900">${p.incoterms}</span></div>
-              </div>
-            </div>
-          </div>
-
-          <div class="border-t border-slate-200 pt-5 space-y-4">
-            <h3 class="text-sm font-extrabold text-slate-900">${t('dr.specTitle')}</h3>
-            
-            <div class="bg-slate-50 rounded-xl p-4 border border-slate-100 space-y-1">
-              <h4 class="font-bold text-slate-800 text-xs">${t('dr.descLabel')}</h4>
-              <p class="text-slate-600 leading-relaxed">${prodDesc}</p>
-            </div>
-
-            ${featuresList.length ? `
-              <div class="bg-slate-50 rounded-xl p-4 border border-slate-100 space-y-1">
-                <h4 class="font-bold text-slate-800 text-xs">${t('dr.featuresLabel')}</h4>
-                <ul class="list-disc pl-5 space-y-1 text-slate-600">
-                  ${featuresList.map(f => `<li>${f}</li>`).join('')}
-                </ul>
-              </div>
-            ` : ''}
-
-            <div class="border border-slate-200 rounded-xl p-4 space-y-2 bg-white">
-              <h4 class="font-bold text-slate-800 text-xs border-b border-slate-100 pb-2">${t('dr.charLabel')}</h4>
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-y-2 gap-x-4 text-[11px]">
-                <div><span class="text-slate-400 block">${t('dr.brandLabel')}</span> <b>${p.brand}</b></div>
-                <div><span class="text-slate-400 block">${t('dr.countryLabel')}</span> <b>${p.country}</b></div>
-                <div><span class="text-slate-400 block">${t('dr.colorLabel')}</span> <b>${p.color}</b></div>
-                <div><span class="text-slate-400 block">${t('dr.matLabel')}</span> <b>${prodMat}</b></div>
-                <div><span class="text-slate-400 block">${t('dr.scopeLabel')}</span> <b>${prodScope}</b></div>
-                <div><span class="text-slate-400 block">${t('dr.warrantyLabel')}</span> <b>${prodWarranty}</b></div>
-                <div class="sm:col-span-2"><span class="text-slate-400 block">${t('dr.instrLabel')}</span> <b>${prodInstr}</b></div>
-              </div>
-            </div>
-
-            <div class="border border-slate-200 rounded-xl p-4 space-y-2 bg-white text-[11px]">
-              <h4 class="font-bold text-slate-800 text-xs border-b border-slate-100 pb-2">${t('dr.logisticsLabel')}</h4>
-              <p class="text-slate-600 mb-2"><b>${t('dr.pkgLabel')}</b> ${prodPkg}</p>
-              <div class="grid grid-cols-2 gap-2">
-                <div><span class="text-slate-400">${t('dr.methodLabel')}</span> <b>${prodDel}</b></div>
-                <div><span class="text-slate-400">${t('dr.portLabel')}</span> <b>${p.port}</b></div>
-              </div>
-            </div>
-
-            <div class="border border-slate-200 rounded-xl p-4 space-y-3 bg-white text-[11px]">
-              <h4 class="font-bold text-slate-800 text-xs border-b border-slate-100 pb-2">${t('dr.dimsLabel')}</h4>
-              <div class="grid grid-cols-4 gap-2 text-center">
-                <div class="p-2 bg-slate-50 rounded-lg"><span class="text-slate-400 block text-[10px]">${t('dr.width')}</span><b>${p.dims?.w}</b></div>
-                <div class="p-2 bg-slate-50 rounded-lg"><span class="text-slate-400 block text-[10px]">${t('dr.height')}</span><b>${p.dims?.h}</b></div>
-                <div class="p-2 bg-slate-50 rounded-lg"><span class="text-slate-400 block text-[10px]">${t('dr.length')}</span><b>${p.dims?.l}</b></div>
-                <div class="p-2 bg-slate-50 rounded-lg"><span class="text-slate-400 block text-[10px]">${t('dr.grossWeight')}</span><b>${p.dims?.weight}</b></div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-        <div class="px-6 py-4 border-t border-slate-100 bg-white flex justify-end">
-          <button onclick="closeDrawer()" class="px-5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl text-xs">${t('dr.closeSpec')}</button>
-        </div>
-      `;
-    },
-
-    'new-sku': () => `
-      <div class="flex items-center justify-between px-6 py-4 border-b border-slate-100 bg-white sticky top-0 z-10">
-        <div>
-          <h3 class="font-extrabold text-slate-900">${t('dr.newSkuTitle')}</h3>
-          <p class="text-xs text-slate-500 mt-0.5">${t('dr.newSkuSub')}</p>
-        </div>
-        <button onclick="closeDrawer()" class="text-slate-400 hover:text-slate-700"><i data-lucide="x" class="w-5 h-5"></i></button>
-      </div>
-
-      <div class="p-6 space-y-6 flex-1 overflow-y-auto scrollbar-thin text-xs">
-        <div class="space-y-3">
-          <h4 class="font-bold text-slate-900 uppercase text-[11px] tracking-wider text-alfa">${t('dr.sec1')}</h4>
-          <div><label class="block font-bold text-slate-700 mb-1">${t('dr.prodNameLabel')}</label><input type="text" id="ns-name" placeholder="${t('dr.prodNamePh')}" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none"></div>
-          <div class="grid grid-cols-2 gap-3">
-            <div><label class="block font-bold text-slate-700 mb-1">${t('dr.brandLabel')}</label><input type="text" id="ns-brand" placeholder="Indiafeast" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none"></div>
-            <div><label class="block font-bold text-slate-700 mb-1">${t('dr.hsLabel')}</label><input type="text" id="ns-hs" value="10063092" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg font-mono outline-none"></div>
-          </div>
-          <div class="grid grid-cols-2 gap-3">
-            <div><label class="block font-bold text-slate-700 mb-1">${t('dr.skuLabel')}</label><input type="text" id="ns-art" value="IF-1121-NEW" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg font-mono outline-none"></div>
-            <div><label class="block font-bold text-slate-700 mb-1">${t('dr.catLabel')}</label>
-              <select id="ns-cat" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none">
-                <option value="Food, Grains & Spices">Food, Grains & Spices</option>
-                <option value="Agriculture & Agro Inputs">Agriculture & Agro Inputs</option>
-                <option value="Consumer Goods & Houseware">Consumer Goods & Houseware</option>
-                <option value="Raw Materials & Commodities">Raw Materials & Commodities</option>
-              </select>
-            </div>
-          </div>
-        </div>
-
-        <div class="space-y-3 pt-3 border-t border-slate-100">
-          <h4 class="font-bold text-slate-900 uppercase text-[11px] tracking-wider text-alfa">${t('dr.sec2')}</h4>
-          <div class="grid grid-cols-3 gap-3">
-            <div><label class="block font-bold text-slate-700 mb-1">${t('dr.pminLabel')} (₽)</label><input type="number" id="ns-pmin" value="79737" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none"></div>
-            <div><label class="block font-bold text-slate-700 mb-1">${t('dr.pmaxLabel')} (₽)</label><input type="number" id="ns-pmax" value="82395" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none"></div>
-            <div><label class="block font-bold text-slate-700 mb-1">${t('dr.moqLabel')}</label><input type="number" id="ns-moq" value="26" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none"></div>
-          </div>
-          <div class="grid grid-cols-3 gap-3">
-            <div><label class="block font-bold text-slate-700 mb-1">${t('dr.advLabel')}</label><input type="text" id="ns-adv" value="30 %" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none"></div>
-            <div><label class="block font-bold text-slate-700 mb-1">${t('dr.postLabel')}</label><input type="text" id="ns-post" value="70 %" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none"></div>
-            <div><label class="block font-bold text-slate-700 mb-1">${t('dr.incoLabel')}</label><select id="ns-inco" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none"><option selected>FOB</option><option>CIF</option></select></div>
-          </div>
-        </div>
-
-        <div class="space-y-3 pt-3 border-t border-slate-100">
-          <h4 class="font-bold text-slate-900 uppercase text-[11px] tracking-wider text-alfa">${t('dr.sec3')}</h4>
-          <div><label class="block font-bold text-slate-700 mb-1">${t('dr.descLabel')}</label><textarea id="ns-desc" rows="2" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none resize-none">1121 Steam Basmati Rice.</textarea></div>
-          <div class="grid grid-cols-2 gap-3">
-            <div><label class="block font-bold text-slate-700 mb-1">${t('dr.portLabel')}</label><input type="text" id="ns-port" value="Mundra" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none"></div>
-            <div><label class="block font-bold text-slate-700 mb-1">${t('dr.pkgLabel')}</label><input type="text" id="ns-pkg" value="BOPP 25 kg" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none"></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="px-6 py-4 border-t border-slate-100 bg-white">
-        <button onclick="drawerAddSku()" class="w-full py-3 bg-alfa hover:bg-alfa-hover text-white font-bold rounded-xl text-sm">${t('dr.publishBtn')}</button>
-      </div>`,
-
-    'rfq-quote': () => `
-      <div class="flex items-center justify-between px-6 py-4 border-b border-slate-100 bg-white sticky top-0 z-10">
-        <div><h3 class="font-extrabold text-slate-900">${t('act.RFQ')}</h3><p class="text-xs text-slate-500 mt-0.5">RFQ-2025-0891 · Buyer #RU-3129 · 100 т</p></div>
-        <button onclick="closeDrawer()" class="text-slate-400 hover:text-slate-700"><i data-lucide="x" class="w-5 h-5"></i></button>
-      </div>
-      <div class="p-6 space-y-4 flex-1 text-xs">
-        <div class="bg-amber-50 border border-amber-200 rounded-xl p-3 text-amber-900">
-          <b>${t('dr.rfqReqTitle')}</b> ${t('dr.rfqReqText')}
-        </div>
-        <div class="grid grid-cols-2 gap-4">
-          <div><label class="block font-bold text-slate-700 mb-1">${t('dr.pricePerTon')} (₽)</label><input type="number" value="81500" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm outline-none"></div>
-          <div><label class="block font-bold text-slate-700 mb-1">${t('dr.volumeTon')}</label><input type="number" value="100" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm outline-none"></div>
-        </div>
-      </div>
-      <div class="px-6 py-4 border-t border-slate-100 bg-white space-y-2">
-        <div class="flex gap-3">
-          <button onclick="closeDrawer()" class="px-4 py-2.5 border border-slate-200 text-slate-600 text-xs font-bold rounded-xl hover:bg-slate-50">${t('common.cancel')}</button>
-          <button onclick="drawerSuccess('${t('msg.quoteSentSuccess')}')" class="flex-1 py-2.5 bg-alfa hover:bg-alfa-hover text-white text-xs font-bold rounded-xl">${t('dr.sendQuoteBtn')}</button>
-        </div>
-        <button onclick="closeDrawer(); openFloatDealChat('RFQ-2025-0891');" class="w-full py-2 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl text-xs font-bold text-slate-700 flex items-center justify-center gap-1.5 transition">
-          <i data-lucide="message-square" class="w-3.5 h-3.5 text-slate-500"></i><span>${t('dr.discussChat')}</span>
-        </button>
-      </div>`,
-
-    'view-quote': () => `
-      <div class="flex items-center justify-between px-6 py-4 border-b border-slate-100 bg-white sticky top-0 z-10">
-        <div><h3 class="font-extrabold text-slate-900">${t('dr.quoteActiveTitle')}</h3><p class="text-xs text-slate-500 mt-0.5">QT-2025-0445 · Buyer #RU-8842</p></div>
-        <button onclick="closeDrawer()" class="text-slate-400 hover:text-slate-700"><i data-lucide="x" class="w-5 h-5"></i></button>
-      </div>
-      <div class="p-6 space-y-4 flex-1 text-xs">
-        <div class="bg-blue-50 border border-blue-200 rounded-xl p-4 space-y-2">
-          <div class="grid grid-cols-2 gap-3">
-            <div><p class="text-slate-500 uppercase font-bold text-[10px]">${t('dr.product')}</p><p class="font-bold text-slate-800">SYNCO Incredy 90g</p></div>
-            <div><p class="text-slate-500 uppercase font-bold text-[10px]">${t('dr.qty')}</p><p class="font-bold text-slate-800">5 000 pcs</p></div>
-            <div><p class="text-slate-500 uppercase font-bold text-[10px]">${t('dr.totalVal')}</p><p class="font-bold text-slate-800">${fmtMoney(705000)}</p></div>
-            <div><p class="text-slate-500 uppercase font-bold text-[10px]">${t('dr.terms')}</p><p class="font-bold text-slate-800">FOB Nhava Sheva</p></div>
-          </div>
-        </div>
-      </div>
-      <div class="px-6 py-4 border-t border-slate-100 bg-white flex gap-3">
-        <button onclick="closeDrawer()" class="px-4 py-2.5 border border-slate-200 text-slate-600 text-xs font-bold rounded-xl hover:bg-slate-50">${t('common.close')}</button>
-        <button onclick="openDrawer('rfq-quote')" class="flex-1 py-2.5 bg-slate-800 hover:bg-slate-900 text-white text-xs font-bold rounded-xl">${t('dr.adjustPrice')}</button>
-      </div>`,
-
-    'sign-contract': () => `
-      <div class="flex items-center justify-between px-6 py-4 border-b border-slate-100 bg-white sticky top-0 z-10">
-        <div><h3 class="font-extrabold text-slate-900">${t('dr.contractConfirmTitle')}</h3><p class="text-xs text-slate-500 mt-0.5">CT-2025-0312 · Buyer #RU-4471</p></div>
-        <button onclick="closeDrawer()" class="text-slate-400 hover:text-slate-700"><i data-lucide="x" class="w-5 h-5"></i></button>
-      </div>
-      <div class="p-6 space-y-4 flex-1 text-xs">
-        <div class="bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-indigo-950 space-y-1">
-          <p class="font-bold">1121 Steam Basmati Rice Indiafeast (26 MT)</p>
-          <p>${t('deal.total')}: <b>${fmtMoney(2073162)}</b> (FOB Mundra). 30% / 70%.</p>
-        </div>
-        <label class="flex items-start gap-2.5 cursor-pointer bg-amber-50 border border-amber-200 rounded-xl p-3">
-          <input type="checkbox" id="contract-agree" class="mt-0.5 rounded accent-alfa" onchange="document.getElementById('sign-now-btn').disabled = !this.checked; document.getElementById('sign-now-btn').className = this.checked ? 'flex-1 py-2.5 bg-alfa hover:bg-alfa-hover text-white text-xs font-bold rounded-xl transition cursor-pointer' : 'flex-1 py-2.5 bg-slate-300 text-white text-xs font-bold rounded-xl cursor-not-allowed'">
-          <span class="text-xs text-amber-900 font-medium">${t('dr.contractCheckbox')}</span>
-        </label>
-      </div>
-      <div class="px-6 py-4 border-t border-slate-100 bg-white space-y-2">
-        <div class="flex gap-3">
-          <button onclick="closeDrawer()" class="px-4 py-2.5 border border-slate-200 text-slate-600 text-xs font-bold rounded-xl hover:bg-slate-50">${t('common.cancel')}</button>
-          <button id="sign-now-btn" disabled onclick="goStep(5); closeDrawer();" class="flex-1 py-2.5 bg-slate-300 text-white text-xs font-bold rounded-xl cursor-not-allowed">${t('dr.openDealRoomBtn')}</button>
-        </div>
-        <button onclick="closeDrawer(); openFloatDealChat('CT-2025-0312');" class="w-full py-2 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl text-xs font-bold text-slate-700 flex items-center justify-center gap-1.5 transition">
-          <i data-lucide="message-square" class="w-3.5 h-3.5 text-slate-500"></i><span>${t('dr.openBuyerChat')}</span>
-        </button>
-      </div>`,
-
-    'production': () => `
-      <div class="flex items-center justify-between px-6 py-4 border-b border-slate-100 bg-white sticky top-0 z-10">
-        <div><h3 class="font-extrabold text-slate-900">${t('dr.prodProgressTitle')}</h3><p class="text-xs text-slate-500 mt-0.5">PR-2025-0278 · 10 000 packs</p></div>
-        <button onclick="closeDrawer()" class="text-slate-400 hover:text-slate-700"><i data-lucide="x" class="w-5 h-5"></i></button>
-      </div>
-      <div class="p-6 space-y-4 flex-1 text-xs">
-        <div class="flex items-center justify-between font-bold"><span>${t('dr.batchReadiness')}</span><span class="text-alfa">75%</span></div>
-        <div class="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden"><div class="bg-alfa h-2.5 rounded-full" style="width:75%"></div></div>
-      </div>
-      <div class="px-6 py-4 border-t border-slate-100 bg-white">
-        <button onclick="drawerSuccess('${t('msg.prodUpdated')}')" class="w-full py-2.5 bg-alfa hover:bg-alfa-hover text-white text-xs font-bold rounded-xl">${t('dr.updateStageBtn')}</button>
-      </div>`,
-
-    'upload-bl': () => `
-      <div class="flex items-center justify-between px-6 py-4 border-b border-slate-100 bg-white sticky top-0 z-10">
-        <div><h3 class="font-extrabold text-slate-900">${t('dr.uploadBlTitle')}</h3><p class="text-xs text-slate-500 mt-0.5">ES-2025-0201 · Cummins 320 kVA</p></div>
-        <button onclick="closeDrawer()" class="text-slate-400 hover:text-slate-700"><i data-lucide="x" class="w-5 h-5"></i></button>
-      </div>
-      <div class="p-6 space-y-4 flex-1 text-xs">
-        <div class="bg-purple-50 border border-purple-200 rounded-xl p-3 text-purple-900">
-          🔒 <b>${fmtMoney(5404424)}</b> ${t('dr.blLockedText')}
-        </div>
-        <div><label class="block font-bold text-slate-700 mb-1">${t('dr.blNumber')}</label><input type="text" value="MAEU-INNSA-2025-9921" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg font-mono outline-none"></div>
-        <div>
-          <label class="block font-bold text-slate-700 mb-1">${t('dr.blScanLabel')}</label>
-          <div class="border-2 border-dashed border-slate-200 rounded-xl p-5 text-center bg-slate-50 hover:border-alfa cursor-pointer">
-            <i data-lucide="upload-cloud" class="w-7 h-7 text-slate-400 mx-auto mb-1"></i>
-            <p class="text-xs font-medium text-slate-700">${t('dr.blDropText')}</p>
-          </div>
-        </div>
-      </div>
-      <div class="px-6 py-4 border-t border-slate-100 bg-white space-y-2">
-        <button onclick="drawerSuccess('${t('msg.blSentSuccess')}')" class="w-full py-2.5 bg-alfa hover:bg-alfa-hover text-white text-xs font-bold rounded-xl">${t('dr.sendBlToBank')}</button>
-      </div>`,
-
-    'shipment': () => `
-      <div class="flex items-center justify-between px-6 py-4 border-b border-slate-100 bg-white sticky top-0 z-10">
-        <div><h3 class="font-extrabold text-slate-900">${t('dr.trackingTitle')}</h3><p class="text-xs text-slate-500 mt-0.5">SH-2025-0188 · 52 MT</p></div>
-        <button onclick="closeDrawer()" class="text-slate-400 hover:text-slate-700"><i data-lucide="x" class="w-5 h-5"></i></button>
-      </div>
-      <div class="p-6 space-y-3 flex-1 text-xs">
-        <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl space-y-1.5">
-          <p class="text-emerald-700 font-bold">${t('dr.customsPassed')}</p>
-          <p class="text-blue-700 font-bold">${t('dr.inTransit')}</p>
-          <p class="text-slate-500">${t('dr.etaText')}</p>
-        </div>
-      </div>
-      <div class="px-6 py-4 border-t border-slate-100 bg-white">
-        <button onclick="closeDrawer()" class="w-full py-2.5 bg-slate-100 text-slate-700 text-xs font-bold rounded-xl hover:bg-slate-200">${t('common.close')}</button>
-      </div>`,
-
-    'completed': () => `
-      <div class="flex items-center justify-between px-6 py-4 border-b border-slate-100 bg-white sticky top-0 z-10">
-        <div><h3 class="font-extrabold text-slate-900">${t('dr.archiveTitle')}</h3><p class="text-xs text-slate-500 mt-0.5">CM-2024-1044</p></div>
-        <button onclick="closeDrawer()" class="text-slate-400 hover:text-slate-700"><i data-lucide="x" class="w-5 h-5"></i></button>
-      </div>
-      <div class="p-6 space-y-4 flex-1 text-xs">
-        <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-3 text-emerald-900 font-semibold">
-          ${t('dr.orderClosedText')}
-        </div>
-      </div>
-      <div class="px-6 py-4 border-t border-slate-100 bg-white">
-        <button onclick="showNotify('${t('msg.downloadingDocs')}'); closeDrawer();" class="w-full py-2.5 bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold rounded-xl">${t('dr.downloadClosingDocs')}</button>
-      </div>`
-  };
-
-  const html = drawerMap[type] ? drawerMap[type]() : '';
-  content.innerHTML = html;
-  lucide.createIcons();
-}
-
-function openDrawer(type, contextId){
-  CURRENT_DRAWER_TYPE = type;
-  CURRENT_DRAWER_CONTEXT = contextId;
-  const overlay = document.getElementById('drawer-overlay');
-  const drawer = document.getElementById('side-drawer');
-
-  renderDrawerContent(type, contextId);
-  overlay.classList.remove('hidden');
-  setTimeout(() => overlay.classList.remove('opacity-0'), 10);
-  drawer.classList.add('open');
-}
-
-function closeDrawer(){
-  CURRENT_DRAWER_TYPE = null;
-  CURRENT_DRAWER_CONTEXT = null;
-  const overlay = document.getElementById('drawer-overlay');
-  const drawer = document.getElementById('side-drawer');
-  overlay.classList.add('opacity-0');
-  drawer.classList.remove('open');
-  setTimeout(() => overlay.classList.add('hidden'), 250);
-}
-
-function drawerSuccess(msg){
-  closeDrawer();
-  showNotify(msg);
-}
-
-function drawerAddSku(){
-  const name = document.getElementById('ns-name')?.value.trim();
-  const brand = document.getElementById('ns-brand')?.value.trim() || 'Custom Brand';
-  const hs = document.getElementById('ns-hs')?.value.trim() || '10063092';
-  const art = document.getElementById('ns-art')?.value.trim() || 'SKU-' + Math.floor(Math.random()*1000);
-  const cat = document.getElementById('ns-cat')?.value || 'Food, Grains & Spices';
-  const pmin = parseFloat(document.getElementById('ns-pmin')?.value) || 80000;
-  const pmax = parseFloat(document.getElementById('ns-pmax')?.value) || 85000;
-  const moq = parseFloat(document.getElementById('ns-moq')?.value) || 20;
-  const adv = document.getElementById('ns-adv')?.value || '30 %';
-  const post = document.getElementById('ns-post')?.value || '70 %';
-  const inco = document.getElementById('ns-inco')?.value || 'FOB';
-  const desc = document.getElementById('ns-desc')?.value || 'Export quality.';
-  const port = document.getElementById('ns-port')?.value || 'Mundra';
-  const pkg = document.getElementById('ns-pkg')?.value || 'BOPP 25 kg';
-
-  if(name){
-    CATALOG_DATA.unshift({
-      id: art,
-      name: { ru: name, en: name, hi: name, zh: name },
-      brand,
-      category: cat,
-      group: { ru: 'Новые поступления', en: 'New Arrivals', hi: 'नया आगमन', zh: '最新到货' },
-      state: { ru: 'Новый', en: 'New', hi: 'नया', zh: '全新' },
-      hs,
-      unit: { ru: 'т', en: 'MT', hi: 'टन', zh: '吨' },
-      unitShort: { ru: 'т', en: 'MT', hi: 'टन', zh: '吨' },
-      calcBase: { ru: '1 тонна', en: '1 MT', hi: '1 टन', zh: '1 吨' },
-      qtyInUnit: '1',
-      priceMin: pmin,
-      priceMax: pmax,
-      moq,
-      country: 'India',
-      color: 'Standard',
-      material: { ru: 'Натуральное экспортное сырье', en: 'Natural Export Grade Material', hi: 'प्राकृतिक निर्यात सामग्री', zh: '天然出口级原料' },
-      scope: { ru: 'B2B поставки', en: 'B2B Wholesale', hi: 'थोक आपूर्ति', zh: 'B2B 批发' },
-      industry: cat,
-      specialInstr: { ru: 'Хранить в сухом месте', en: 'Store in dry place', hi: 'सूखी जगह में रखें', zh: '干燥处存放' },
-      warranty: { ru: '24 месяца', en: '24 Months', hi: '24 महीने', zh: '24 个月' },
-      desc: { ru: desc, en: desc, hi: desc, zh: desc },
-      features: { ru: ['100% Экспортный стандарт'], en: ['100% Export Quality'], hi: ['100% निर्यात मानक'], zh: ['100% 出口标准'] },
-      specItems: [
-        { label: { ru: 'Чистота', en: 'Purity', hi: 'शुद्धता', zh: '纯度' }, val: '95%' }
-      ],
-      pkgDetails: { ru: pkg, en: pkg, hi: pkg, zh: pkg },
-      deliveryMethod: { ru: 'Морем', en: 'Sea Freight', hi: 'समुद्री माल', zh: '海运' },
-      port,
-      dims: { w: '500 mm', h: '120 mm', l: '700 mm', weight: '25 kg' },
-      advance: adv,
-      postPay: post,
-      incoterms: inco,
-      sample: { ru: 'Да', en: 'Yes', hi: 'हाँ', zh: '提供' },
-      leadTime: { ru: '20 дней', en: '20 Days', hi: '20 दिन', zh: '20 天' },
-      icon: 'package',
-      bgGradient: 'bg-gradient-to-br from-rose-600 to-red-800'
-    });
-  }
-  closeDrawer();
-  renderCatalog();
-  showNotify(t('msg.newSkuSuccess'));
-}
-
-function showNotify(msg){
-  document.getElementById('notify-msg').textContent = msg;
-  document.getElementById('notify-modal').classList.remove('hidden');
-  lucide.createIcons();
-}
-function closeNotify(){ document.getElementById('notify-modal').classList.add('hidden'); }
-function openCompliance(){ document.getElementById('compliance-modal').classList.remove('hidden'); lucide.createIcons(); }
-function closeCompliance(){ document.getElementById('compliance-modal').classList.add('hidden'); }
-
+// ===== INIT =====
 window.addEventListener('DOMContentLoaded', () => {
   lucide.createIcons();
+  renderStepper();
+  applyI18n();
   goStep(1);
 });
 </script>
