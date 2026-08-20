@@ -31,29 +31,28 @@
     body { background: #F3F4F6; }
     .scrollbar-thin::-webkit-scrollbar { width: 5px; height: 5px; }
     .scrollbar-thin::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 4px; }
+    #side-drawer { transition: transform 0.3s cubic-bezier(0.16,1,0.3,1); transform: translateX(100%); }
+    #side-drawer.open { transform: translateX(0); }
+    #drawer-overlay { transition: opacity 0.25s; }
   </style>
 </head>
 <body class="font-sans antialiased min-h-screen flex flex-col text-slate-800">
 
-<!-- ======= SUCCESS MODAL ======= -->
-<div id="success-modal" class="hidden fixed inset-0 z-[70] flex items-center justify-center bg-slate-900/50 p-4">
-  <div class="bg-white rounded-2xl shadow-2xl w-full max-w-sm border border-slate-200 text-center">
-    <div class="pt-8 pb-4">
-      <div class="w-16 h-16 bg-emerald-100 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-emerald-200">
-        <i data-lucide="check-circle" class="w-8 h-8 text-emerald-600"></i>
-      </div>
-      <h3 class="font-extrabold text-slate-900 text-lg" data-i18n="success.title">Поздравляем!</h3>
-      <p class="text-sm text-slate-600 mt-2" data-i18n="success.message">Теперь вы можете принимать заказы от покупателей из России и других стран!</p>
+<!-- NOTIFY MODAL -->
+<div id="notify-modal" class="hidden fixed inset-0 z-[70] flex items-center justify-center bg-slate-900/50 p-4">
+  <div class="bg-white rounded-2xl shadow-2xl w-full max-w-sm border border-slate-200">
+    <div class="flex items-center justify-between px-5 py-4 border-b border-slate-100">
+      <h3 class="font-bold text-slate-900" data-i18n="notify.title">Уведомление</h3>
+      <button onclick="closeNotify()" class="text-slate-400 hover:text-slate-600"><i data-lucide="x" class="w-4 h-4"></i></button>
     </div>
-    <div class="px-6 pb-6 pt-4 border-t border-slate-100">
-      <button onclick="goToOrdersHub()" class="w-full py-3 bg-alfa hover:bg-alfa-hover text-white font-bold rounded-xl shadow-sm transition text-sm flex items-center justify-center gap-2">
-        <span data-i18n="success.button">Перейти в Orders Hub</span><i data-lucide="arrow-right" class="w-4 h-4"></i>
-      </button>
+    <p id="notify-msg" class="px-5 py-4 text-sm text-slate-600 leading-relaxed"></p>
+    <div class="px-5 pb-4 flex justify-end">
+      <button onclick="closeNotify()" class="px-5 py-2 bg-alfa text-white text-sm font-semibold rounded-xl hover:bg-alfa-hover transition">OK</button>
     </div>
   </div>
 </div>
 
-<!-- ======= HEADER ======= -->
+<!-- HEADER -->
 <header class="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-sm">
   <div class="max-w-7xl mx-auto px-4 lg:px-8 h-16 flex items-center justify-between gap-4">
     <div class="flex items-center gap-3">
@@ -70,13 +69,13 @@
   </div>
 </header>
 
-<!-- ======= MAIN CONTENT ======= -->
+<!-- MAIN CONTENT -->
 <main class="flex-1 max-w-7xl w-full mx-auto px-4 lg:px-8 py-6">
 
   <!-- Stepper -->
   <div class="flex items-start gap-0 mb-8 max-w-4xl mx-auto select-none" id="stepper"></div>
 
-  <!-- ===== STEP 1: REGISTRATION ===== -->
+  <!-- STEP 1: REGISTRATION -->
   <section id="step-1" class="max-w-md mx-auto">
     <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-8">
       <div class="text-center mb-6">
@@ -88,159 +87,162 @@
       </div>
       <div id="auth-a" class="space-y-4">
         <div>
-          <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" data-i18n="reg.email">Email</label>
-          <input type="email" id="reg-email" value="export@indianmanufactories.in" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium outline-none focus:ring-2 focus:ring-alfa/40" required>
+          <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" data-i18n="reg.email">Корпоративный Email</label>
+          <input type="email" value="export@indianmanufactories.in" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium outline-none focus:ring-2 focus:ring-alfa/40">
         </div>
         <div>
-          <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" data-i18n="reg.phone">Телефон</label>
-          <input type="tel" id="reg-phone" value="+91 98201 44820" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium outline-none focus:ring-2 focus:ring-alfa/40" required>
+          <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" data-i18n="reg.phone">Номер телефона</label>
+          <input type="tel" value="+91 98201 44820" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium outline-none focus:ring-2 focus:ring-alfa/40">
         </div>
         <div>
-          <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" data-i18n="reg.password">Пароль</label>
-          <input type="password" id="reg-password" value="••••••••••••" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium outline-none focus:ring-2 focus:ring-alfa/40" required minlength="6">
+          <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" data-i18n="reg.password">Создайте пароль</label>
+          <input type="password" value="••••••••••••" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium outline-none focus:ring-2 focus:ring-alfa/40">
         </div>
-        <button type="button" onclick="showOtp()" class="w-full py-3 bg-alfa hover:bg-alfa-hover text-white font-bold rounded-xl shadow-sm transition text-sm flex items-center justify-center gap-2">
-          <span data-i18n="reg.continue">Продолжить</span><i data-lucide="arrow-right" class="w-4 h-4"></i>
+        <button onclick="showOtp()" class="w-full py-3 bg-alfa hover:bg-alfa-hover text-white font-bold rounded-xl shadow-sm transition text-sm flex items-center justify-center gap-2">
+          <span data-i18n="reg.continue">Продолжить регистрацию</span><i data-lucide="arrow-right" class="w-4 h-4"></i>
         </button>
       </div>
       <div id="auth-b" class="hidden space-y-4">
-        <div class="bg-blue-50 border border-blue-200 rounded-xl p-3 text-xs text-blue-900" data-i18n="reg.otpSent">Код отправлен на email и SMS.</div>
+        <div class="bg-blue-50 border border-blue-200 rounded-xl p-3 text-xs text-blue-900" data-i18n="reg.otpSent">Код подтверждения отправлен на корпоративную почту и SMS.</div>
         <div>
-          <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" data-i18n="reg.otp">Код подтверждения</label>
-          <input type="text" id="reg-otp" value="784920" maxlength="6" class="w-full px-3.5 py-2.5 bg-red-50/50 border border-alfa-mid rounded-xl text-center text-lg font-bold tracking-widest outline-none focus:ring-2 focus:ring-alfa/40 text-alfa font-mono" required>
+          <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" data-i18n="reg.otp">Одноразовый код (OTP)</label>
+          <input type="text" value="784920" maxlength="6" class="w-full px-3.5 py-2.5 bg-red-50/50 border border-alfa-mid rounded-xl text-center text-lg font-bold tracking-widest outline-none focus:ring-2 focus:ring-alfa/40 text-alfa font-mono">
+        </div>
+        <div class="bg-slate-50 border border-slate-100 rounded-xl p-3 space-y-2 text-xs text-slate-600">
+          <label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" checked class="mt-0.5 rounded accent-alfa"><span data-i18n="reg.terms">Я принимаю Условия платформы и Политику трансграничной передачи данных.</span></label>
+          <label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" checked class="mt-0.5 rounded accent-alfa"><span data-i18n="reg.kyb_consent">Согласен на автоматическую валидацию через государственные реестры (KYB).</span></label>
         </div>
         <div class="flex gap-3">
-          <button type="button" onclick="backToEmailPass()" class="px-4 py-3 border border-slate-200 rounded-xl text-xs font-bold text-slate-600 hover:bg-slate-50 transition" data-i18n="common.back">← Назад</button>
-          <button type="button" onclick="goStep(2)" class="flex-1 py-3 bg-alfa hover:bg-alfa-hover text-white font-bold rounded-xl shadow-sm transition text-sm flex items-center justify-center gap-2">
-            <span data-i18n="reg.finish">Готово</span><i data-lucide="arrow-right" class="w-4 h-4"></i>
+          <button onclick="backToEmailPass()" class="px-4 py-3 border border-slate-200 rounded-xl text-xs font-bold text-slate-600 hover:bg-slate-50 transition" data-i18n="common.back">← Назад</button>
+          <button onclick="goStep(2)" class="flex-1 py-3 bg-alfa hover:bg-alfa-hover text-white font-bold rounded-xl shadow-sm transition text-sm flex items-center justify-center gap-2">
+            <span data-i18n="reg.finish">Завершить регистрацию</span><i data-lucide="arrow-right" class="w-4 h-4"></i>
           </button>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ===== STEP 2: KYB ===== -->
+  <!-- STEP 2: KYB -->
   <section id="step-2" class="hidden max-w-2xl mx-auto">
     <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-7">
       <div class="pb-5 border-b border-slate-100 mb-6">
-        <span class="text-xs font-bold text-alfa uppercase tracking-wider" data-i18n="kyb.stepTag">Шаг 2 / Верификация</span>
-        <h2 class="text-xl font-extrabold text-slate-900 mt-2" data-i18n="kyb.title">Юридические данные и коды</h2>
-        <p class="text-xs text-slate-500 mt-1" data-i18n="kyb.subtitle">Автоматическая проверка через реестры</p>
+        <span class="text-xs font-bold text-alfa uppercase tracking-wider" data-i18n="kyb.stepTag">Шаг 2 / Верификация поставщика</span>
+        <h2 class="text-xl font-extrabold text-slate-900 mt-0.5" data-i18n="kyb.title">Юридические данные и экспортные реквизиты</h2>
       </div>
       <form onsubmit="handleKyb(event)" class="space-y-4">
-        <div>
-          <label class="block text-xs font-bold uppercase text-slate-600 mb-1" data-i18n="kyb.company">Компания</label>
-          <input type="text" id="kyb-company" value="Indian Manufactories Group Pvt. Ltd." class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm font-medium outline-none focus:ring-2 focus:ring-alfa/40" required>
-        </div>
-        <div class="grid grid-cols-2 gap-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label class="block text-xs font-bold uppercase text-slate-600 mb-1" data-i18n="kyb.gstin">GSTIN</label>
-            <input type="text" id="kyb-gstin" value="27AABCU9603R1ZM" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm font-mono outline-none focus:ring-2 focus:ring-alfa/40" required>
+            <label class="block text-xs font-bold uppercase text-slate-600 mb-1" data-i18n="kyb.companyName">Юридическое наименование</label>
+            <input type="text" value="Indian Manufactories Group Pvt. Ltd." class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm font-medium outline-none">
           </div>
           <div>
-            <label class="block text-xs font-bold uppercase text-slate-600 mb-1" data-i18n="kyb.pan">PAN</label>
-            <input type="text" id="kyb-pan" value="AABCU9603R" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm font-mono outline-none focus:ring-2 focus:ring-alfa/40" required>
+            <label class="block text-xs font-bold uppercase text-slate-600 mb-1" data-i18n="kyb.country">Страна юрисдикции</label>
+            <select class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm font-medium outline-none">
+              <option selected>🇮🇳 India</option><option>🇨🇳 China</option><option>🇹🇷 Turkey</option>
+            </select>
           </div>
         </div>
-        <div class="flex gap-3 pt-4 border-t border-slate-100">
-          <button type="button" onclick="goStep(1)" class="px-4 py-2 border border-slate-200 rounded-xl text-xs font-bold text-slate-600 hover:bg-slate-50 transition" data-i18n="common.back">← Назад</button>
-          <button type="submit" class="flex-1 py-2 bg-alfa hover:bg-alfa-hover text-white font-bold rounded-xl shadow-sm transition text-xs flex items-center justify-center gap-2">
-            <span data-i18n="kyb.next">Далее</span><i data-lucide="arrow-right" class="w-4 h-4"></i>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-bold uppercase text-slate-600 mb-1" data-i18n="kyb.gstin">GSTIN (Штат 27)</label>
+            <input type="text" value="27AABCU9603R1ZM" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm font-mono outline-none">
+          </div>
+          <div>
+            <label class="block text-xs font-bold uppercase text-slate-600 mb-1" data-i18n="kyb.iec">DGFT IEC / PAN</label>
+            <input type="text" value="0319842109 / AABCU9603R" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm font-mono outline-none">
+          </div>
+        </div>
+        <div class="flex gap-3">
+          <button type="button" onclick="goStep(1)" class="text-xs font-semibold text-slate-500 hover:text-slate-800" data-i18n="kyb.back">← Назад к регистрации</button>
+          <button type="submit" class="ml-auto py-2.5 px-6 bg-alfa hover:bg-alfa-hover text-white font-bold rounded-xl shadow-sm transition text-sm flex items-center gap-2">
+            <span data-i18n="kyb.submit">Подтвердить и открыть каталог</span><i data-lucide="check" class="w-4 h-4"></i>
           </button>
         </div>
       </form>
     </div>
   </section>
 
-  <!-- ===== STEP 3: SUPPLIER CARD ===== -->
-  <section id="step-3" class="hidden">
-    <div class="max-w-5xl mx-auto space-y-6">
-      <!-- Form Section -->
-      <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-7">
-        <div class="pb-6 border-b border-slate-100 mb-6">
-          <span class="text-xs font-bold text-alfa uppercase tracking-wider" data-i18n="supplier.stepTag">Шаг 3 / Карточка поставщика</span>
-          <h1 class="text-2xl font-extrabold text-slate-900 mt-2" data-i18n="supplier.title">Профиль компании</h1>
-          <p class="text-xs text-slate-500 mt-1" data-i18n="supplier.subtitle">Информация, которую видят покупатели</p>
+  <!-- STEP 3: SUPPLIER CARD -->
+  <section id="step-3" class="hidden max-w-2xl mx-auto">
+    <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-7">
+      <div class="pb-5 border-b border-slate-100 mb-6">
+        <h2 class="text-xl font-extrabold text-slate-900" data-i18n="catalog.step3Title">Карточка поставщика</h2>
+        <p class="text-xs text-slate-500 mt-1" data-i18n="catalog.step3Subtitle">Заполните основную информацию о вашей компании</p>
+      </div>
+
+      <form onsubmit="handleStep3(event)" class="space-y-4">
+        <!-- Company Name -->
+        <div>
+          <label class="block text-xs font-bold uppercase text-slate-600 mb-1" data-i18n="catalog.companyNameLabel">Название компании</label>
+          <input type="text" id="s3-company" value="Indian Manufactories Group" required class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm font-medium outline-none focus:ring-2 focus:ring-alfa/40">
         </div>
 
-        <form onsubmit="handleSupplierSubmit(event)" class="space-y-6">
-          <!-- Company Name -->
-          <div>
-            <label class="block text-xs font-bold uppercase text-slate-600 mb-2" data-i18n="supplier.companyName">Название компании</label>
-            <input type="text" id="supp-name" placeholder="e.g. Indian Manufactories Group" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-base font-bold outline-none focus:ring-2 focus:ring-alfa/40" required>
+        <!-- Logo Upload -->
+        <div>
+          <label class="block text-xs font-bold uppercase text-slate-600 mb-1" data-i18n="catalog.logoLabel">Логотип компании</label>
+          <div class="border-2 border-dashed border-slate-200 rounded-xl p-4 text-center bg-slate-50 hover:border-alfa transition cursor-pointer">
+            <i data-lucide="image" class="w-6 h-6 text-slate-400 mx-auto mb-2"></i>
+            <p class="text-xs text-slate-600 font-medium" data-i18n="catalog.logoHint">Нажмите для загрузки (PNG, JPG)</p>
           </div>
+        </div>
 
-          <!-- Logo Upload -->
-          <div>
-            <label class="block text-xs font-bold uppercase text-slate-600 mb-3" data-i18n="supplier.logo">Логотип</label>
-            <div class="flex items-center gap-4">
-              <div id="logo-preview" class="w-24 h-24 rounded-xl bg-gradient-to-br from-blue-100 to-blue-50 border-2 border-dashed border-blue-300 flex items-center justify-center flex-shrink-0">
-                <i data-lucide="building-2" class="w-10 h-10 text-blue-400"></i>
-              </div>
-              <div>
-                <p class="text-xs font-semibold text-slate-700 mb-2" data-i18n="supplier.logoHint">Загрузить логотип компании</p>
-                <label class="cursor-pointer inline-flex items-center px-4 py-2 border border-slate-300 rounded-lg text-xs font-bold text-slate-700 hover:bg-slate-50 transition">
-                  <i data-lucide="upload-cloud" class="w-4 h-4 mr-2"></i>
-                  <span data-i18n="supplier.upload">Выбрать файл</span>
-                  <input type="file" id="logo-input" accept="image/*" class="hidden" onchange="handleLogoUpload(event)">
-                </label>
-              </div>
-            </div>
-          </div>
+        <!-- Description -->
+        <div>
+          <label class="block text-xs font-bold uppercase text-slate-600 mb-1" data-i18n="catalog.descLabel">Описание компании</label>
+          <textarea id="s3-desc" rows="3" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm font-medium outline-none focus:ring-2 focus:ring-alfa/40 resize-none">We are a leading exporter of food grains and agricultural products from India.</textarea>
+        </div>
 
-          <!-- Scope of Activity - Dropdown -->
-          <div>
-            <label for="supp-scope" class="block text-xs font-bold uppercase text-slate-600 mb-2" data-i18n="supplier.scope">Сфера деятельности</label>
-            <select id="supp-scope" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm outline-none focus:ring-2 focus:ring-alfa/40" required>
-              <option value="">Выберите отрасль</option>
-              <option value="food">Продовольственные товары, пищевые продукты</option>
-              <option value="textile">Текстиль, одежда</option>
-              <option value="leather">Изделия из кожи, обувь, сумки</option>
-              <option value="construction">Стройка и строительные товары</option>
-              <option value="electronics">Бытовая техника и электроника</option>
-              <option value="electrical">Электрика</option>
-              <option value="furniture">Мебель</option>
-              <option value="medicine">Медицина и БАДы</option>
-              <option value="beauty">Красота и уход</option>
-              <option value="horeca">Товары для HoReCa</option>
-            </select>
-          </div>
+        <!-- Industry Select (10 options) -->
+        <div>
+          <label class="block text-xs font-bold uppercase text-slate-600 mb-1" data-i18n="catalog.industryLabel">Сфера деятельности</label>
+          <select id="s3-industry" required class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm font-medium outline-none focus:ring-2 focus:ring-alfa/40">
+            <option value="">-- Выберите сферу деятельности --</option>
+            <option value="food" data-i18n="industry.food">Продовольственные товары, пищевые продукты</option>
+            <option value="textiles" data-i18n="industry.textiles">Текстиль, одежда</option>
+            <option value="leather" data-i18n="industry.leather">Изделия из кожи, обувь, сумки</option>
+            <option value="construction" data-i18n="industry.construction">Стройка и строительные товары</option>
+            <option value="appliances" data-i18n="industry.appliances">Бытовая техника и электроника</option>
+            <option value="electrical" data-i18n="industry.electrical">Электрика</option>
+            <option value="furniture" data-i18n="industry.furniture">Мебель</option>
+            <option value="medicine" data-i18n="industry.medicine">Медицина и БАДы</option>
+            <option value="beauty" data-i18n="industry.beauty">Красота и уход</option>
+            <option value="horeca" data-i18n="industry.horeca">Товары для HoReCa</option>
+          </select>
+        </div>
 
-          <!-- Description -->
-          <div>
-            <label for="supp-desc" class="block text-xs font-bold uppercase text-slate-600 mb-2" data-i18n="supplier.description">Описание компании</label>
-            <textarea id="supp-desc" rows="4" placeholder="Расскажите о компании, опыте, качестве товаров..." class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm outline-none focus:ring-2 focus:ring-alfa/40 resize-none" required></textarea>
+        <!-- Product Showcase -->
+        <div class="border-t border-slate-100 pt-5 mt-5">
+          <h3 class="text-sm font-extrabold text-slate-900 mb-4" data-i18n="catalog.showcaseTitle">Витрина товаров (демо)</h3>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            <div class="bg-gradient-to-br from-amber-500 to-orange-600 rounded-lg p-3 h-28 flex items-center justify-center text-white text-center text-xs font-bold">Rice 1121</div>
+            <div class="bg-gradient-to-br from-blue-500 to-indigo-600 rounded-lg p-3 h-28 flex items-center justify-center text-white text-center text-xs font-bold">Cricket Balls</div>
+            <div class="bg-gradient-to-br from-emerald-500 to-teal-600 rounded-lg p-3 h-28 flex items-center justify-center text-white text-center text-xs font-bold">Dosa Mix</div>
+            <div class="bg-gradient-to-br from-slate-600 to-slate-800 rounded-lg p-3 h-28 flex items-center justify-center text-white text-center text-xs font-bold">Generator</div>
           </div>
+        </div>
 
-          <!-- Product Showcase -->
-          <div>
-            <div class="flex items-center justify-between mb-4">
-              <label class="block text-xs font-bold uppercase text-slate-600" data-i18n="supplier.showcase">Витрина товаров</label>
-            </div>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4" id="product-grid">
-              <!-- Demo products will be rendered here -->
-            </div>
-          </div>
-
-          <div class="flex gap-3 pt-4 border-t border-slate-100">
-            <button type="button" onclick="goStep(2)" class="px-4 py-2.5 border border-slate-200 rounded-xl text-xs font-bold text-slate-600 hover:bg-slate-50 transition" data-i18n="common.back">← Назад</button>
-            <button type="submit" class="flex-1 py-2.5 bg-alfa hover:bg-alfa-hover text-white font-bold rounded-xl shadow-sm transition text-sm flex items-center justify-center gap-2">
-              <span data-i18n="supplier.save">Сохранить карточку</span><i data-lucide="check" class="w-4 h-4"></i>
-            </button>
-          </div>
-        </form>
-      </div>
+        <!-- Buttons -->
+        <div class="pt-5 border-t border-slate-100 flex gap-3">
+          <button type="button" onclick="goStep(2)" class="px-4 py-3 border border-slate-200 rounded-xl text-xs font-bold text-slate-600 hover:bg-slate-50 transition" data-i18n="common.back">← Назад</button>
+          <button type="submit" class="ml-auto py-3 px-6 bg-alfa hover:bg-alfa-hover text-white font-bold rounded-xl shadow-sm transition text-sm flex items-center gap-2">
+            <span data-i18n="catalog.confirmBtn">Подтвердить</span><i data-lucide="check" class="w-4 h-4"></i>
+          </button>
+        </div>
+      </form>
     </div>
   </section>
 
-  <!-- ===== STEP 4: ORDERS HUB ===== -->
-  <section id="step-4" class="hidden max-w-4xl mx-auto">
+  <!-- STEP 4: SUCCESS MESSAGE -->
+  <section id="step-4" class="hidden max-w-md mx-auto">
     <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-8 text-center">
-      <div class="w-16 h-16 bg-emerald-100 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-emerald-200">
-        <i data-lucide="inbox" class="w-8 h-8 text-emerald-600"></i>
+      <div class="w-16 h-16 bg-emerald-100 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-emerald-300">
+        <i data-lucide="check-circle" class="w-8 h-8 text-emerald-600"></i>
       </div>
-      <h1 class="text-2xl font-extrabold text-slate-900 mt-4" data-i18n="orders.title">Orders Hub</h1>
-      <p class="text-sm text-slate-500 mt-2" data-i18n="orders.empty">Заказы будут появляться здесь. Ваша карточка опубликована!</p>
+      <h2 class="text-xl font-extrabold text-slate-900 mb-2" data-i18n="catalog.successTitle">Карточка поставщика создана!</h2>
+      <p class="text-sm text-slate-600 mb-6" data-i18n="catalog.successText">Вы готовы начать продавать на Alfa-Global. Перейдите в Orders Hub для управления сделками и эскроу.</p>
+      <button onclick="goStep(4)" class="w-full py-3 bg-alfa hover:bg-alfa-hover text-white font-bold rounded-xl shadow-sm transition text-sm flex items-center justify-center gap-2">
+        <span data-i18n="catalog.toOrdersHub">Перейти в Orders Hub</span><i data-lucide="arrow-right" class="w-4 h-4"></i>
+      </button>
     </div>
   </section>
 
@@ -249,114 +251,157 @@
 <script>
 const T = {
   ru: {
-    'reg.title':'Регистрация в Alfa-Global','reg.subtitle':'Создайте аккаунт экспортёра',
-    'reg.email':'Email','reg.phone':'Телефон','reg.password':'Пароль',
-    'reg.continue':'Продолжить','reg.otpSent':'Код отправлен на email и SMS.',
-    'reg.otp':'Код подтверждения','reg.finish':'Готово','common.back':'← Назад',
-    'kyb.stepTag':'Шаг 2 / Верификация','kyb.title':'Юридические данные','kyb.subtitle':'Автоматическая проверка через реестры',
-    'kyb.company':'Компания','kyb.gstin':'GSTIN','kyb.pan':'PAN','kyb.next':'Далее',
-    'supplier.stepTag':'Шаг 3 / Карточка поставщика','supplier.title':'Профиль компании','supplier.subtitle':'Информация, которую видят покупатели',
-    'supplier.companyName':'Название компании','supplier.logo':'Логотип','supplier.logoHint':'Загрузить логотип компании','supplier.upload':'Выбрать файл',
-    'supplier.scope':'Сфера деятельности',
-    'supplier.description':'Описание компании',
-    'supplier.showcase':'Витрина товаров','supplier.save':'Сохранить карточку',
-    'success.title':'Поздравляем!','success.message':'Теперь вы можете принимать заказы от покупателей из России и других стран!','success.button':'Перейти в Orders Hub',
-    'orders.title':'Orders Hub','orders.empty':'Заказы будут появляться здесь. Ваша карточка опубликована!'
+    'reg.title': 'Регистрация в Alfa-Global',
+    'reg.subtitle': 'Создайте корпоративный аккаунт экспортёра',
+    'reg.email': 'Корпоративный Email',
+    'reg.phone': 'Номер телефона',
+    'reg.password': 'Создайте пароль',
+    'reg.continue': 'Продолжить регистрацию',
+    'reg.otpSent': 'Код подтверждения отправлен на корпоративную почту и SMS.',
+    'reg.otp': 'Одноразовый код (OTP)',
+    'reg.terms': 'Я принимаю Условия платформы и Политику трансграничной передачи данных.',
+    'reg.kyb_consent': 'Согласен на автоматическую валидацию через государственные реестры (KYB).',
+    'reg.finish': 'Завершить регистрацию',
+    'common.back': '← Назад',
+    'kyb.stepTag': 'Шаг 2 / Верификация поставщика',
+    'kyb.title': 'Юридические данные и экспортные реквизиты',
+    'kyb.companyName': 'Юридическое наименование',
+    'kyb.country': 'Страна юрисдикции',
+    'kyb.gstin': 'GSTIN (Штат 27)',
+    'kyb.iec': 'DGFT IEC / PAN',
+    'kyb.back': '← Назад к регистрации',
+    'kyb.submit': 'Подтвердить и открыть каталог',
+    'catalog.step3Title': 'Карточка поставщика',
+    'catalog.step3Subtitle': 'Заполните основную информацию о вашей компании',
+    'catalog.companyNameLabel': 'Название компании',
+    'catalog.logoLabel': 'Логотип компании',
+    'catalog.logoHint': 'Нажмите для загрузки (PNG, JPG)',
+    'catalog.descLabel': 'Описание компании',
+    'catalog.industryLabel': 'Сфера деятельности',
+    'catalog.showcaseTitle': 'Витрина товаров (демо)',
+    'catalog.confirmBtn': 'Подтвердить',
+    'catalog.successTitle': 'Карточка поставщика создана!',
+    'catalog.successText': 'Вы готовы начать продавать на Alfa-Global. Перейдите в Orders Hub для управления сделками и эскроу.',
+    'catalog.toOrdersHub': 'Перейти в Orders Hub',
+    'notify.title': 'Уведомление',
+    'industry.food': 'Продовольственные товары, пищевые продукты',
+    'industry.textiles': 'Текстиль, одежда',
+    'industry.leather': 'Изделия из кожи, обувь, сумки',
+    'industry.construction': 'Стройка и строительные товары',
+    'industry.appliances': 'Бытовая техника и электроника',
+    'industry.electrical': 'Электрика',
+    'industry.furniture': 'Мебель',
+    'industry.medicine': 'Медицина и БАДы',
+    'industry.beauty': 'Красота и уход',
+    'industry.horeca': 'Товары для HoReCa',
   },
   en: {
-    'reg.title':'Register at Alfa-Global','reg.subtitle':'Create exporter account',
-    'reg.email':'Email','reg.phone':'Phone','reg.password':'Password',
-    'reg.continue':'Continue','reg.otpSent':'Code sent to email and SMS.',
-    'reg.otp':'Confirmation code','reg.finish':'Done','common.back':'← Back',
-    'kyb.stepTag':'Step 2 / Verification','kyb.title':'Legal Information','kyb.subtitle':'Automatic verification via registries',
-    'kyb.company':'Company','kyb.gstin':'GSTIN','kyb.pan':'PAN','kyb.next':'Next',
-    'supplier.stepTag':'Step 3 / Supplier Card','supplier.title':'Company Profile','supplier.subtitle':'Information buyers see',
-    'supplier.companyName':'Company Name','supplier.logo':'Logo','supplier.logoHint':'Upload company logo','supplier.upload':'Choose file',
-    'supplier.scope':'Scope of Activity',
-    'supplier.description':'Company Description',
-    'supplier.showcase':'Product Showcase','supplier.save':'Save Supplier Card',
-    'success.title':'Congratulations!','success.message':'Now you can receive orders from customers in Russia and other countries!','success.button':'Go to Orders Hub',
-    'orders.title':'Orders Hub','orders.empty':'Orders will appear here. Your card is published!'
+    'reg.title': 'Registration at Alfa-Global',
+    'reg.subtitle': 'Create corporate exporter account',
+    'reg.email': 'Corporate Email',
+    'reg.phone': 'Phone Number',
+    'reg.password': 'Create Password',
+    'reg.continue': 'Continue Registration',
+    'reg.otpSent': 'Confirmation code sent to email and SMS.',
+    'reg.otp': 'One-Time Code (OTP)',
+    'reg.terms': 'I accept the Terms and Cross-Border Data Transfer Policy.',
+    'reg.kyb_consent': 'I consent to automated registry validation (KYB).',
+    'reg.finish': 'Finish Registration',
+    'common.back': '← Back',
+    'kyb.stepTag': 'Step 2 / Supplier Verification',
+    'kyb.title': 'Exporter Legal Identity & Regulatory Credentials',
+    'kyb.companyName': 'Company Legal Name',
+    'kyb.country': 'Country of Jurisdiction',
+    'kyb.gstin': 'GSTIN (State 27)',
+    'kyb.iec': 'DGFT IEC / PAN',
+    'kyb.back': '← Back to Registration',
+    'kyb.submit': 'Verify & Open Catalog',
+    'catalog.step3Title': 'Supplier Profile Card',
+    'catalog.step3Subtitle': 'Complete your company profile information',
+    'catalog.companyNameLabel': 'Company Name',
+    'catalog.logoLabel': 'Company Logo',
+    'catalog.logoHint': 'Click to upload (PNG, JPG)',
+    'catalog.descLabel': 'Company Description',
+    'catalog.industryLabel': 'Industry / Scope',
+    'catalog.showcaseTitle': 'Product Showcase (Demo)',
+    'catalog.confirmBtn': 'Confirm',
+    'catalog.successTitle': 'Supplier Card Created!',
+    'catalog.successText': 'You are ready to start selling on Alfa-Global. Go to Orders Hub to manage deals and escrow accounts.',
+    'catalog.toOrdersHub': 'Go to Orders Hub',
+    'notify.title': 'Notification',
+    'industry.food': 'Food, Grains & Spices',
+    'industry.textiles': 'Textiles & Apparel',
+    'industry.leather': 'Leather, Footwear & Bags',
+    'industry.construction': 'Construction & Building Materials',
+    'industry.appliances': 'Appliances & Electronics',
+    'industry.electrical': 'Electrical Equipment',
+    'industry.furniture': 'Furniture',
+    'industry.medicine': 'Medicine & Dietary Supplements',
+    'industry.beauty': 'Beauty & Personal Care',
+    'industry.horeca': 'HoReCa Supplies',
   }
 };
 
 let LANG = 'ru';
 let CURR_STEP = 1;
-let supplierData = {};
 
-const demoProducts = [
-  { name: 'Pearl Sneakers', color: 'bg-gradient-to-br from-pink-200 to-rose-300' },
-  { name: 'Crimson Velocity', color: 'bg-gradient-to-br from-red-500 to-red-700' },
-  { name: 'Gradients Kicks', color: 'bg-gradient-to-br from-yellow-300 to-green-400' },
-  { name: null, color: 'bg-slate-100' }
-];
-
-// ===== UTILITIES =====
-function t(key) { 
-  const result = (T[LANG] && T[LANG][key]) || (T['ru'] && T['ru'][key]) || key;
-  return result;
-}
-
-function safeSelect(selector) {
-  const el = document.querySelector(selector);
-  if (!el) {
-    console.warn(`Element not found: ${selector}`);
-    return null;
-  }
-  return el;
-}
+function t(key) { return (T[LANG] && T[LANG][key]) || (T['ru'] && T['ru'][key]) || key; }
 
 function applyI18n() {
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const k = el.getAttribute('data-i18n');
-    if (k) {
-      el.innerHTML = t(k);
-    }
+    el.textContent = t(k);
   });
   document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
-    const k = el.getAttribute('data-i18n-placeholder');
-    if (k) {
-      el.placeholder = t(k);
-    }
+    el.placeholder = t(el.getAttribute('data-i18n-placeholder'));
   });
 }
 
-// ===== STEPPER =====
 function renderStepper() {
-  const stepper = safeSelect('#stepper');
-  if (!stepper) return;
-  
+  const stepper = document.getElementById('stepper');
   stepper.innerHTML = '';
-  const stepLabels = ['Регистрация', 'Верификация', 'Карточка', 'Заказы'];
-  const stepLabelsEn = ['Registration', 'Verification', 'Card', 'Orders'];
-  
-  for (let i = 1; i <= 4; i++) {
+  const steps = [
+    { title: 'Регистрация', sub: 'Email и пароль', enTitle: 'Registration', enSub: 'Email & Password' },
+    { title: 'KYB-проверка', sub: 'Налоговые коды', enTitle: 'KYB Verify', enSub: 'Tax codes' },
+    { title: 'Карточка поставщика', sub: 'Профиль компании', enTitle: 'Profile Card', enSub: 'Company info' },
+    { title: 'Orders Hub', sub: 'Сделки', enTitle: 'Orders Hub', enSub: 'Deals' }
+  ];
+
+  for(let i=1; i<=4; i++) {
     const done = i < CURR_STEP;
     const active = i === CURR_STEP;
-    
+    const step = steps[i-1];
+
     const wrap = document.createElement('div');
     wrap.className = 'flex flex-col items-center flex-1 cursor-pointer';
-    wrap.onclick = () => { if (i <= Math.max(CURR_STEP, 2)) goStep(i); };
+    wrap.onclick = () => { if(i <= Math.max(CURR_STEP, 3)) goStep(i); };
 
     const circle = document.createElement('div');
     circle.className = `w-9 h-9 rounded-full text-xs font-black flex items-center justify-center border-2 shrink-0 transition ${
-      done ? 'bg-emerald-100 border-emerald-500 text-emerald-800' :
+      done   ? 'bg-emerald-100 border-emerald-500 text-emerald-800' :
       active ? 'bg-alfa border-alfa text-white shadow-md' :
-      'bg-white border-slate-300 text-slate-400'
+               'bg-white border-slate-300 text-slate-400'
     }`;
     circle.textContent = done ? '✓' : i;
 
     const label = document.createElement('div');
     label.className = 'mt-1 text-center';
+
     const title = document.createElement('p');
     title.className = `text-[11px] font-extrabold leading-tight ${active ? 'text-alfa' : done ? 'text-emerald-800' : 'text-slate-400'}`;
-    title.textContent = LANG === 'en' ? stepLabelsEn[i - 1] : stepLabels[i - 1];
+    title.textContent = LANG === 'ru' ? step.title : step.enTitle;
+
+    const sub = document.createElement('p');
+    sub.className = `text-[10px] leading-tight ${active ? 'text-slate-700 font-semibold' : 'text-slate-400'}`;
+    sub.textContent = LANG === 'ru' ? step.sub : step.enSub;
+
     label.appendChild(title);
+    label.appendChild(sub);
     wrap.appendChild(circle);
     wrap.appendChild(label);
     stepper.appendChild(wrap);
 
-    if (i < 4) {
+    if(i < 4) {
       const line = document.createElement('div');
       line.className = `h-0.5 flex-shrink-0 mt-4.5 ${i < CURR_STEP ? 'bg-emerald-400' : 'bg-slate-200'}`;
       line.style.width = '28px';
@@ -365,141 +410,60 @@ function renderStepper() {
   }
 }
 
-// ===== NAVIGATION =====
 function goStep(n) {
   CURR_STEP = n;
-  for (let i = 1; i <= 4; i++) {
-    const s = safeSelect(`#step-${i}`);
-    if (s) s.classList.toggle('hidden', i !== n);
+  for(let i=1; i<=4; i++) {
+    const s = document.getElementById('step-'+i);
+    if(s) s.classList.toggle('hidden', i !== n);
   }
   renderStepper();
   applyI18n();
-  if (n === 3) renderProductShowcase();
   lucide.createIcons();
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  window.scrollTo({top:0, behavior:'smooth'});
 }
 
-// ===== STEP 1: REGISTRATION =====
 function showOtp() {
-  const authA = safeSelect('#auth-a');
-  const authB = safeSelect('#auth-b');
-  if (authA) authA.classList.add('hidden');
-  if (authB) authB.classList.remove('hidden');
+  document.getElementById('auth-a').classList.add('hidden');
+  document.getElementById('auth-b').classList.remove('hidden');
 }
 
 function backToEmailPass() {
-  const authA = safeSelect('#auth-a');
-  const authB = safeSelect('#auth-b');
-  if (authB) authB.classList.add('hidden');
-  if (authA) authA.classList.remove('hidden');
+  document.getElementById('auth-b').classList.add('hidden');
+  document.getElementById('auth-a').classList.remove('hidden');
 }
 
-// ===== STEP 2: KYB =====
 function handleKyb(e) {
   e.preventDefault();
-  const company = safeSelect('#kyb-company')?.value || '';
-  if (!company) {
-    alert('Заполните название компании');
-    return;
-  }
   goStep(3);
 }
 
-// ===== STEP 3: SUPPLIER CARD =====
-function renderProductShowcase() {
-  const grid = safeSelect('#product-grid');
-  if (!grid) return;
-  
-  grid.innerHTML = demoProducts.map((prod, idx) => {
-    if (prod.name === null) {
-      return `
-        <div class="aspect-square rounded-xl ${prod.color} border-2 border-dashed border-slate-300 flex flex-col items-center justify-center cursor-pointer hover:border-alfa hover:bg-slate-50 transition">
-          <i data-lucide="plus" class="w-8 h-8 text-slate-400 mb-2"></i>
-          <p class="text-[10px] font-bold text-slate-500 text-center px-2" data-i18n="supplier.showcase">Витрина товаров</p>
-        </div>
-      `;
-    }
-    return `
-      <div class="space-y-2">
-        <div class="aspect-square rounded-lg ${prod.color} flex items-end justify-center pb-2 shadow-sm">
-          <div class="w-12 h-12 bg-white/40 rounded-full"></div>
-        </div>
-        <input type="text" id="prod-name-${idx}" value="${prod.name}" placeholder="Название товара" class="w-full px-2 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-xs outline-none focus:ring-1 focus:ring-alfa/40">
-      </div>
-    `;
-  }).join('');
-  lucide.createIcons();
-}
-
-function handleLogoUpload(e) {
-  const file = e.target?.files?.[0];
-  if (!file) return;
-  
-  const reader = new FileReader();
-  reader.onload = (evt) => {
-    const logoPreview = safeSelect('#logo-preview');
-    if (logoPreview && evt.target?.result) {
-      logoPreview.innerHTML = `<img src="${evt.target.result}" class="w-full h-full object-cover rounded-[10px]">`;
-    }
-  };
-  reader.readAsDataURL(file);
-}
-
-function handleSupplierSubmit(e) {
+function handleStep3(e) {
   e.preventDefault();
-  
-  // Валидация
-  const name = safeSelect('#supp-name')?.value || '';
-  const scope = safeSelect('#supp-scope')?.value || '';
-  const desc = safeSelect('#supp-desc')?.value || '';
-  
-  if (!name || !scope || !desc) {
-    alert('Заполните все обязательные поля');
-    return;
-  }
-  
-  // Сохранить данные
-  supplierData = {
-    name,
-    scope,
-    desc,
-    products: demoProducts.slice(0, 3).map((p, i) => ({
-      name: safeSelect(`#prod-name-${i}`)?.value || p.name,
-      color: p.color
-    }))
-  };
-  
-  // Открыть модалку
-  const modal = safeSelect('#success-modal');
-  if (modal) {
-    modal.classList.remove('hidden');
-    lucide.createIcons();
-  }
-}
-
-// ===== STEP 4: ORDERS HUB =====
-function goToOrdersHub() {
-  const modal = safeSelect('#success-modal');
-  if (modal) modal.classList.add('hidden');
   goStep(4);
 }
 
-// ===== LANGUAGE =====
 function changeLang(v) {
   LANG = v;
   applyI18n();
   renderStepper();
-  if (CURR_STEP === 3) renderProductShowcase();
   lucide.createIcons();
 }
 
-// ===== INIT =====
+function showNotify(msg) {
+  document.getElementById('notify-msg').textContent = msg;
+  document.getElementById('notify-modal').classList.remove('hidden');
+  lucide.createIcons();
+}
+
+function closeNotify() {
+  document.getElementById('notify-modal').classList.add('hidden');
+}
+
 window.addEventListener('DOMContentLoaded', () => {
   lucide.createIcons();
-  renderStepper();
-  applyI18n();
   goStep(1);
 });
 </script>
+
 </body>
 </html>
